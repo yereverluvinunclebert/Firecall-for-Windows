@@ -1,0 +1,8 @@
+2022-01-05 12:13:44.629 Dean:    sometimes the email settings are incorrectly set by idiot admins on the server side
+2022-01-05 12:13:12.312 Dean:    and you never know what they might be trying to do
+2022-01-05 12:13:02.379 Dean:    I have encountered some interesting combinations
+2022-01-05 12:12:43.461 Dean:    it will be down to the user to select what has been enabled for his server
+2022-01-05 12:12:04.602 Dean:    I am not going to limit the port selections
+2022-01-05 12:11:53.116 Dean:    
+2022-01-05 12:11:44.051 Dean:    just testing it
+2022-01-05 12:11:38.061 Dean:    I have added a SMTP config dropdown and selection

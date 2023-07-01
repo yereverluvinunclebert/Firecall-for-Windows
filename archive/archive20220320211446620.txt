@@ -1,0 +1,7 @@
+2022-01-04 20:33:51.568 Dean:    it is a basic email client
+2022-01-04 20:33:32.137 Dean:    that has no wizard just a simple add account tool
+2022-01-04 20:33:21.078 Dean:    so I use Sylpheed another Windows email client
+2022-01-04 20:32:53.249 Dean:    or set up test accounts to poll Smtp servers that are malconfigured in some way
+2022-01-04 20:32:22.864 Dean:    so you cannot add details for the future
+2022-01-04 20:32:07.993 Dean:    Sometimes the wizard won't let you leave until the account details are polling correctly
+2022-01-04 20:31:17.448 Dean:    thunderbird is not bad but the new account wizard can be a pain

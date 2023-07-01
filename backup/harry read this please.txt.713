@@ -1,0 +1,348 @@
+2021-10-03 12:33:00.290 Dean:    I will have to handle the extra CR
+2021-10-03 12:32:47.930 Dean:    jFC does it better
+2021-10-03 12:32:41.550 Dean:    e
+2021-10-03 12:32:40.460 Dean:    same as herw
+2021-10-03 11:44:14.660 Dean:    jFC handles it properly
+2021-10-03 11:43:42.092 JS Fire Call:    info jFC
+2021-10-03 11:43:36.160 JS Fire Call:    just doing a copy/paste from cintanotes
+2021-10-03 11:43:13.001 JS Fire Call:    o Usage of the Win API, isValidURL.
+2021-10-03 11:43:13.002 JS Fire Call:    o VB6 listbox limitations - setting individual colours of lines is not possible
+2021-10-03 11:43:13.003 JS Fire Call:       updating all fields in a listbox is slow.
+2021-10-03 11:43:13.004 JS Fire Call:    o Using a WINAPI LockWindowUpdate to lock a listbox control during an poll preventing flicker.
+2021-10-03 11:43:13.005 JS Fire Call:    o Adding horizontal scrollbars to a listbox using API.
+2021-10-03 11:43:13.006 JS Fire Call:    o The difference between UNIX type EOL or a Windows EOL and input i/o inability to recognise and handle unix CrLf.
+2021-10-03 11:43:13.007 JS Fire Call:    o Using Scripting.FileSystemObject FSO to open and read files allowing handling of unix style EOL CrLf.
+2021-10-03 11:43:13.008 JS Fire Call:    o Multiplying two real constants, 65 and 1000, causes an overflow, VB6 handling the two numbers internally as integers as they are both below 32768 when VB6 encounters them.
+2021-10-03 11:43:13.009 JS Fire Call:    o Use of the clipboard in VB6.
+2021-10-03 11:43:13.010 JS Fire Call:    o Copying folders using Win APIs <
+2021-10-03 11:43:13.011 JS Fire Call:    o Using shape controls and rotating them in code using COS, SIN
+2021-10-03 11:43:13.012 JS Fire Call:    o Resizing images using scaleX,  vbHimetric, pBox.ScaleMode
+2021-10-03 11:43:13.013 JS Fire Call:    o Timer semi-independence of the main routine, partial in-process threading?
+2021-10-03 11:43:13.014 JS Fire Call:    o VB6 timers have lowest priority and will compete badly with any code operating in the main UI thread.
+2021-10-03 11:43:13.015 JS Fire Call:    o Initiating timers in code using SetTimer, KillTimer exceeding the VB6 time limit of 65355 ms
+2021-10-03 11:43:13.016 JS Fire Call:    o Use of callback routines, asynch in nature, running in a separate thread
+2021-10-03 11:43:13.017 JS Fire Call:    o Callback timers are therefore aynchronous in nature and run at a higher priority than VB6 timers.
+2021-10-03 11:43:13.018 JS Fire Call:    o callback timers have no marshalling and may have limit to their functionality as they run in a separate context.
+2021-10-03 11:43:13.019 JS Fire Call:    o Use of .tag as a quick and dirty way to pass single params to timers.
+2021-10-03 11:43:13.020 JS Fire Call:    o Using VB6 collections as a message queuing system
+2021-10-03 11:43:13.021 JS Fire Call:    o Creating timestamps unixTimeInSecs DateDiff("s", "1/1/1970")
+2021-10-03 11:43:13.022 JS Fire Call:    o Use of the GetTimeZoneInformation API
+2021-10-03 11:43:13.023 JS Fire Call:    o Use of the getlastinputinfo API and tickcount to determine last user interaction.
+2021-10-03 11:43:13.024 JS Fire Call:    o Quicksorting arrays.
+2021-10-03 11:43:13.025 JS Fire Call:    o Passing multiple parameters using a ParamArray
+2021-10-03 11:43:13.026 JS Fire Call:    o Use of Rubberduck to tidy my code.
+2021-10-03 11:43:13.027 JS Fire Call:    o use of instrRev in place of my usual lastIndexOf
+2021-10-03 11:42:56.408 JS Fire Call:    so it has to kick off and send all the recent responses it has not yet encountered
+2021-10-03 11:42:25.019 JS Fire Call:    just fired up jFC
+2021-10-03 11:42:04.839 JS Fire Call:    Awake response. Request time: Mon, 30 Aug 2021 08:32:09 GMT
+2021-10-03 11:42:04.712 JS Fire Call:    Awake response. Request time: Mon, 30 Aug 2021 11:20:57 GMT
+2021-10-03 11:42:04.572 JS Fire Call:    Awake response. Request time: Mon, 30 Aug 2021 15:53:07 GMT
+2021-10-03 11:42:04.415 JS Fire Call:    Awake response. Request time: Mon, 30 Aug 2021 15:56:02 GMT
+2021-10-03 11:42:04.259 JS Fire Call:    Awake response. Request time: Tue, 31 Aug 2021 16:21:15 GMT
+2021-10-03 11:42:04.134 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:04.006 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:03.866 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:03.732 JS Fire Call:    Awake response. Request time: Wed, 01 Sep 2021 21:24:18 GMT
+2021-10-03 11:42:03.530 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:03.362 JS Fire Call:    Awake response. Request time: Tue, 07 Sep 2021 12:46:12 GMT
+2021-10-03 11:42:03.224 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:03.083 JS Fire Call:    Awake response. Request time: Tue, 07 Sep 2021 13:14:03 GMT
+2021-10-03 11:42:02.953 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:02.809 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:02.684 JS Fire Call:    Awake response. Request time: Tue, 07 Sep 2021 14:00:22 GMT
+2021-10-03 11:42:02.554 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:02.389 JS Fire Call:    Awake response. Request time: Thu, 09 Sep 2021 20:27:09 GMT
+2021-10-03 11:42:02.133 JS Fire Call:    Awake response. Request time: Sat, 11 Sep 2021 16:36:26 GMT
+2021-10-03 11:42:01.984 JS Fire Call:    Awake response. Request time: Tue, 14 Sep 2021 14:41:51 GMT
+2021-10-03 11:42:01.840 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:01.706 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:01.571 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:01.432 JS Fire Call:    Awake response. Request time: Thu, 16 Sep 2021 16:19:50 GMT
+2021-10-03 11:42:01.284 JS Fire Call:    Awake response. Request time: Sun, 19 Sep 2021 15:16:09 GMT
+2021-10-03 11:42:01.148 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:42:01.005 JS Fire Call:    Awake response. Request time: Tue, 28 Sep 2021 10:50:32 GMT
+2021-10-03 11:42:00.250 JS Fire Call:    Awake response. Request time: Mon, 30 Aug 2021 08:32:09 GMT
+2021-10-03 11:42:00.129 JS Fire Call:    Awake response. Request time: Mon, 30 Aug 2021 11:20:57 GMT
+2021-10-03 11:41:59.979 JS Fire Call:    Awake response. Request time: Mon, 30 Aug 2021 15:53:07 GMT
+2021-10-03 11:41:59.829 JS Fire Call:    Awake response. Request time: Mon, 30 Aug 2021 15:56:02 GMT
+2021-10-03 11:41:59.685 JS Fire Call:    Awake response. Request time: Tue, 31 Aug 2021 16:21:15 GMT
+2021-10-03 11:41:59.532 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:59.327 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:59.182 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:59.061 JS Fire Call:    Awake response. Request time: Wed, 01 Sep 2021 21:24:18 GMT
+2021-10-03 11:41:58.841 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:56.377 JS Fire Call:    Awake response. Request time: Tue, 07 Sep 2021 12:46:12 GMT
+2021-10-03 11:41:56.222 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:56.105 JS Fire Call:    Awake response. Request time: Tue, 07 Sep 2021 13:14:03 GMT
+2021-10-03 11:41:55.978 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:55.787 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:55.622 JS Fire Call:    Awake response. Request time: Tue, 07 Sep 2021 14:00:22 GMT
+2021-10-03 11:41:55.468 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:55.316 JS Fire Call:    Awake response. Request time: Thu, 09 Sep 2021 20:27:09 GMT
+2021-10-03 11:41:54.911 JS Fire Call:    Awake response. Request time: Sat, 11 Sep 2021 16:36:26 GMT
+2021-10-03 11:41:54.690 JS Fire Call:    Awake response. Request time: Tue, 14 Sep 2021 14:41:51 GMT
+2021-10-03 11:41:54.538 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:54.400 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:54.245 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:54.126 JS Fire Call:    Awake response. Request time: Thu, 16 Sep 2021 16:19:50 GMT
+2021-10-03 11:41:54.005 JS Fire Call:    Awake response. Request time: Sun, 19 Sep 2021 15:16:09 GMT
+2021-10-03 11:41:53.525 JS Fire Call:    Ping response. Refresh Interval:15  OS:Windows  Version:2.2
+2021-10-03 11:41:53.392 JS Fire Call:    Awake response. Request time: Tue, 28 Sep 2021 10:50:32 GMT
+2021-10-03 11:40:57.430 Dean:    worth recommending
+2021-10-03 11:40:51.950 Dean:    but it is a very good app in itself
+2021-10-03 11:40:32.250 Dean:    and when I paste from it, the extra LF appear
+2021-10-03 11:40:10.650 Dean:    no way to configure how it stores data re: EoL
+2021-10-03 11:39:43.000 Dean:    very useful
+2021-10-03 11:39:38.160 Dean:    auto saves &c
+2021-10-03 11:39:31.640 Dean:    goes away instantly
+2021-10-03 11:39:25.470 Dean:    does not get in the way
+2021-10-03 11:39:19.580 Dean:    very quick to open
+2021-10-03 11:38:58.880 Dean:    preliminary docs &c
+2021-10-03 11:38:37.130 Dean:    or insert into other apps
+2021-10-03 11:38:22.470 Dean:    I store all my important info that I am not yet ready to structure into files
+2021-10-03 11:37:54.830 Dean:    allowing storage under catgories/tags &c
+2021-10-03 11:37:31.390 Dean:    cintanotes is a very good note taking application
+2021-10-03 11:12:50.590 Dean:     Windspeed is 9 knots, force 3, direction S
+2021-10-03 11:12:50.540 Dean:     
+2021-10-03 11:12:50.420 Dean:     Humidity: 77 % 
+2021-10-03 11:12:50.310 Dean:     Temperature: 13.00 C
+2021-10-03 11:12:50.260 Dean:     Pressure: 995 mb
+2021-10-03 11:12:50.230 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2021-10-03 11:12:50.190 Dean:     Sun Oct 03 2021 10:50:00 GMT+0100 (GMT Daylight Time) 
+2021-10-03 11:12:21.200 Dean:    at your leisure of course
+2021-10-03 11:12:15.520 Dean:    it would be most helpful
+2021-10-03 11:12:09.200 Dean:    ?
+2021-10-03 11:12:05.930 Dean:    could you load cintanotes on your PC, dump some text into that and see what it does when copying/pasteing into jFC
+2021-10-03 11:11:24.180 Dean:    do you do any of that?
+2021-10-03 11:11:16.800 Dean:    I may have to identify and strip certain crlf when I encounter them
+2021-10-03 11:10:36.820 Dean:    re: the blank lines
+2021-10-03 11:10:31.150 Dean:    
+2021-10-03 11:10:11.960 Dean:    loves them
+2021-10-03 11:10:07.730 Dean:    and she is dancing and singing
+2021-10-03 11:10:00.700 Dean:    playing them non stop now 
+2021-10-03 11:09:49.380 Dean:    all 1940s songs and tunes
+2021-10-03 11:09:35.510 Dean:    We have found some musical programs that mum loves
+2021-10-03 11:09:34.010 Dean:    
+2021-10-03 11:09:09.110 Dean:    especially when copying multiple lines
+2021-10-03 11:08:58.820 Dean:    the program does feel snappier
+2021-10-03 11:08:47.060 Dean:    so the program is now operating too quickly
+2021-10-03 11:08:28.340 Dean:    program's requests
+2021-10-03 11:08:28.340 Dean:    the stream method of writing output is happening so fast that the o/s may not be quick enough to carry out the 
+2021-10-03 11:07:28.410 Dean:    I can see the end
+2021-10-03 11:05:24.540 Dean:    one step closer to implementing utf8
+2021-10-03 11:05:14.490 Dean:    
+2021-10-03 11:05:09.020 Dean:    but that fixes the file write error I am encountering
+2021-10-03 11:04:53.550 Dean:    I will add a get-out to the loop just in case it locks forever
+2021-10-03 11:04:28.090 Dean:    and loops until it is closed
+2021-10-03 11:04:20.280 Dean:    and that test is called and captures occasions when the file is still open
+2021-10-03 11:03:38.150 Dean:    not had to do that ever before
+2021-10-03 11:03:30.010 Dean:    so, I have added a while/wend loop to test if the file is open or closed just before I attempt the next write
+2021-10-03 11:02:48.800 Dean:    is certainly taking longer to close the file than the program is taking to issue open/close commands
+2021-10-03 11:02:48.800 Dean:    so it seems to be taking a while to write the new stream to the file and close it, the task being perfroemd by the o/s 
+2021-10-03 11:01:49.390 Dean:    and in the IDE if I simply proceed with the same line immediately the error occurs it works
+2021-10-03 11:01:22.190 Dean:    3004
+2021-10-03 11:01:19.120 Dean:    and it occasionally and randomly fails with a 30004 error
+2021-10-03 11:01:00.620 Dean:    I am now writing test files using the new utf8 method
+2021-10-03 11:00:34.180 Dean:    one at a time, in a loop
+2021-10-03 11:00:25.750 Dean:    and sends each line to the same routine
+2021-10-03 11:00:12.030 Dean:    when I have multiple lines the program breaks the chunk into lines
+2021-10-03 10:59:42.290 Dean:    I have a function that takes input and writes it to the file line by line
+2021-10-03 10:59:15.220 Dean:    I have the bug cornered and killed
+2021-10-03 10:59:07.250 Dean:    
+2021-10-03 10:59:05.340 Dean:     Windspeed is 9 knots, force 3, direction SSW
+2021-10-03 10:59:05.290 Dean:     
+2021-10-03 10:59:05.240 Dean:     Humidity: 77 % 
+2021-10-03 10:59:05.200 Dean:     Temperature: 13.00 C
+2021-10-03 10:59:05.160 Dean:     Pressure: 995 mb
+2021-10-03 10:59:05.110 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2021-10-03 10:59:05.070 Dean:     Sun Oct 03 2021 10:20:00 GMT+0100 (GMT Daylight Time) 
+2021-10-03 10:31:24.770 Dean:    from certain pastes
+2021-10-03 10:31:14.820 Dean:    I may have to strip some type of crlf
+2021-10-03 10:30:56.360 Dean:    it happens regardless
+2021-10-03 10:30:50.540 Dean:    that has nothing to do with the new method of reading/writing
+2021-10-03 10:30:30.560 Dean:    copy/paste
+2021-10-03 10:30:21.340 Dean:    I am testing from various places
+2021-10-03 10:30:07.630 Dean:    that is why it was only using crlf for a day
+2021-10-03 10:29:48.090 Dean:    only occurs when copying from Cintanotes and nowhere else
+2021-10-03 10:29:11.610 Dean:    if I only append crlf those spaces do not appear
+2021-10-03 10:28:55.970 Dean:    that is the result of copying from cintanotes and appending vbcrlf
+2021-10-03 10:28:35.690 Dean:    yes
+2021-10-03 10:28:29.240 Dean:    o use of instrRev in place of my usual lastIndexOf
+2021-10-03 10:27:44.380 Dean:    o Use of Rubberduck to tidy my code.
+2021-10-03 10:21:58.300 Dean:    whiffling through the tulgey wood and burbled as it came.
+2021-10-03 10:21:58.300 Dean:    tumtum tree, and stood awhile in thought, and as in uffish thought he stood, the Jabberwock with eyes of flame came 
+2021-10-03 10:21:58.300 Dean:    the frumious bandersnatch. He took his vorpal sword in hand, long time the manxome foe he sought, so rested he by the 
+2021-10-03 10:21:58.300 Dean:    outgrabe. Beware the jabberwock my son,  the jaws that bite, the claws that snatch, Beware the Jubjub bird and shun, 
+2021-10-03 10:21:58.300 Dean:    Twas Brilling and the Slithy Toves, Did gyre and gimble in the wabe. All mimsy were the borogroves, and the mome raths 
+2021-10-03 10:21:47.970 Dean:    
+2021-10-03 10:21:44.980 Dean:    trying to iron out this bug that occurs when writing the utf8 file
+2021-10-03 10:19:14.010 Dean:    I will be copying and paste-ing a lot today
+2021-10-03 10:18:55.050 Dean:    
+2021-10-03 10:18:32.710 Dean:    Any interesting things to tell me?
+2021-10-03 10:17:45.600 Dean:     Windspeed is 7 knots, force 3, direction SSW
+2021-10-03 10:17:43.730 Dean:     
+2021-10-03 10:17:43.700 Dean:     Humidity: 82 % 
+2021-10-03 10:17:43.660 Dean:     Temperature: 12.00 C
+2021-10-03 10:17:35.370 Dean:     Pressure: 994 mb
+2021-10-03 10:17:35.330 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2021-10-03 10:17:35.290 Dean:     Sun Oct 03 2021 09:50:00 GMT+0100 (GMT Daylight Time) 
+2021-10-03 10:17:18.240 Dean:    Weather Report Requested!
+2021-10-03 10:17:04.600 Dean:    Are you alright?
+2021-10-03 10:16:48.240 Dean:    Good Morning!
+2021-10-02 23:27:10.751 Dean:    final testing
+2021-10-02 23:10:39.639 Dean:    GoodNigit Harry!
+2021-10-02 23:10:31.051 Dean:    Coulkd be useful to when we go multi-user!
+2021-10-02 23:09:28.488 Dean:    as well as the texts
+2021-10-02 23:09:09.372 Dean:    you could synch the MAC/PC versions of jFC
+2021-10-02 23:08:47.809 Dean:    if you stored a copy of your settings on the exchange location
+2021-10-02 23:08:15.202 Dean:    so that it does not generate a series of responses to old PINGs and AWAKEs
+2021-10-02 23:07:43.422 Dean:    one good thing about writing the settings to an INI is that you can easily copy them to the windows box
+2021-10-02 23:06:10.034 Dean:    and I have managed to make things work to a certain extent with utf8
+2021-10-02 23:05:50.126 Dean:    not so hungover now
+2021-10-02 23:05:15.708 Dean:    Well, I'm off to bed
+2021-10-02 22:23:38.180 Dean:     
+2021-10-02 22:23:38.110 Dean:     Heavy Rain  
+2021-10-02 22:23:38.040 Dean:     Windspeed is 10 knots, force 3, direction W 
+2021-10-02 22:23:37.970 Dean:     Mostly cloudy at 600,900 ft.
+2021-10-02 22:23:37.900 Dean:     Humidity: 94 % 
+2021-10-02 22:23:37.770 Dean:     Temperature: 14.00 C
+2021-10-02 22:23:37.710 Dean:     Pressure: 985 mb
+2021-10-02 22:23:37.630 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2021-10-02 22:23:37.550 Dean:     Sat Oct 02 2021 21:50:00 GMT+0100 (GMT Daylight Time) 
+2021-10-02 22:23:28.810 Dean:    I just need to find out what the bugs are
+2021-10-02 22:23:17.150 Dean:    but it is in place now
+2021-10-02 22:23:08.250 Dean:    and if I want it, I have to go right round the all the houses
+2021-10-02 22:22:48.010 Dean:    basically VB6 does not have utf8 support by default
+2021-10-02 22:08:05.060 Dean:    and I will document what I have done and why
+2021-10-02 22:07:52.010 Dean:    the reading seems OK
+2021-10-02 22:07:43.020 Dean:    
+2021-10-02 22:07:40.880 Dean:    or find what I am doing wrong
+2021-10-02 22:07:33.220 Dean:    or a workaround
+2021-10-02 22:07:21.800 Dean:    and add some controlling code to it
+2021-10-02 22:07:03.480 Dean:    but I need to understand why
+2021-10-02 22:06:53.440 Dean:    as I am not using it to write the output file
+2021-10-02 22:06:41.800 Dean:    it does not matter at the moment
+2021-10-02 22:06:27.800 Dean:    that earlier caused a corruption
+2021-10-02 22:06:19.800 Dean:    as I am on occasion receiving that same error
+2021-10-02 22:06:04.630 Dean:    there are still problems to be dealt with
+2021-10-02 22:05:43.250 Dean:    and it also is quicker
+2021-10-02 22:05:36.410 Dean:    and hopefully excludes the possibility of non utf8 chars causing a problem
+2021-10-02 22:05:15.750 Dean:    but it works
+2021-10-02 22:05:03.050 Dean:    it is very messy
+2021-10-02 22:04:49.660 Dean:    and has side effects such as our earlier corruption
+2021-10-02 22:04:21.040 Dean:    it is much more complicated than a normal open/read/write close
+2021-10-02 22:04:01.970 Dean:    
+2021-10-02 22:03:59.870 Dean:    it has taken a long while to understand the peculiarities of the method
+2021-10-02 22:03:38.830 Dean:    and then I can write the file
+2021-10-02 22:03:32.000 Dean:    the resulting stream is BOM free
+2021-10-02 22:03:19.270 Dean:    where the BOM is excluded by the position param setting it to 3
+2021-10-02 22:03:00.640 Dean:    and then copy the stream in memory to another stream
+2021-10-02 22:02:45.590 Dean:    I have to write to a utf8 stream with the BOM
+2021-10-02 22:02:31.110 Dean:    when writing it is more complex
+2021-10-02 22:02:17.850 Dean:    and that gets rid of all spurious chars when reading
+2021-10-02 22:01:57.730 Dean:    there is a position param that has to be set to 2 on a read
+2021-10-02 22:01:34.240 Dean:    and interprets the first few chars as such
+2021-10-02 22:01:20.170 Dean:    and with default read params expects the first two bytes as a BOM
+2021-10-02 22:00:54.230 Dean:    as I read all the lines using a new method which tries to write a BOM when writing a file
+2021-10-02 22:00:17.470 Dean:    and that was a problem for a while
+2021-10-02 22:00:00.890 Dean:    I am reading all files using the new method
+2021-10-02 21:57:53.730 Dean:    123
+2021-10-02 21:57:09.300 Dean:    testing
+2021-10-02 21:05:26.740 Dean:    if you want me to corrupt a timestamp to test, just say!
+2021-10-02 20:57:30.040 Dean:    and I cannot remember if it only affects Mac
+2021-10-02 20:57:07.090 Dean:    the cacheing is an o/s thing
+2021-10-02 20:34:52.260 Dean:    to that file only
+2021-10-02 20:34:43.950 Dean:    and the corruption may be limited
+2021-10-02 20:34:30.780 Dean:    I think I will only write the file with utf8 suffix
+2021-10-02 20:33:53.510 Dean:    and then I can start to test
+2021-10-02 20:33:45.100 Dean:    I have a button that can be pressed to switch from the normal mode to utf8
+2021-10-02 20:33:01.670 Dean:    I sent you a settings.ini file
+2021-10-02 20:32:52.600 Dean:    or write the data elsewhere
+2021-10-02 20:32:43.580 Dean:    I think you need to cater for that event occurring again
+2021-10-02 20:32:24.180 Dean:    otherwise would not let you?
+2021-10-02 20:32:08.600 Dean:    thank goodness for that
+2021-10-02 20:11:12.410 Dean:    aggressive cacheing you cannot control is a real pain
+2021-10-02 20:10:43.820 Dean:    but if I were you I'd transfer to Windows
+2021-10-02 20:10:19.930 Dean:    not able to diagnose why at the moment
+2021-10-02 20:10:05.380 Dean:    then it continued
+2021-10-02 20:09:53.960 Dean:    and an error occurred when writing the stream
+2021-10-02 20:09:38.980 Dean:    Reason for the corruption : I was testing writing using the new method
+2021-10-02 20:09:17.640 Dean:    
+2021-10-02 20:08:22.490 Dean:    and then reboot the MAc
+2021-10-02 20:08:16.610 Dean:    I'd switch to Windows for the time being
+2021-10-02 20:07:45.130 Dean:    <><>settings.ini
+2021-10-02 20:07:15.620 Dean:    you can write a JSON file or be compatible with mine so that it reads the INI
+2021-10-02 20:06:44.300 Dean:    I am writing the .ini file
+2021-10-02 20:06:25.240 Dean:    causes more trouble than it is worth
+2021-10-02 20:06:13.560 Dean:    Time to dump the prefs I think
+2021-10-02 19:49:56.730 Dean:    Are you having problems removing or refreshing the value?
+2021-10-02 19:37:39.960 Dean:    hard to refresh when cached
+2021-10-02 19:37:27.600 Dean:    those bloody prefs
+2021-10-02 19:37:01.590 Dean:    so it has the corrupt timestamp or incorrect time stored
+2021-10-02 19:36:28.630 Dean:    I assume you will guard against this happening? it must have failed at that timestamp and failed to proceed further
+2021-10-02 19:35:01.820 Dean:    I see
+2021-10-02 19:32:36.100 Dean:    Can you tell me where you think the invalid timestamp is?
+2021-10-02 19:32:09.270 Dean:    That way, you always have a failsafe to prevent multiple responses
+2021-10-02 19:31:30.200 Dean:    I think you need to do what I do and store the timestamps for each type and only respond to the most recent
+2021-10-02 19:30:03.160 Dean:    timestamps are all correct at the moment as far as I can see
+2021-10-02 19:28:57.220 Dean:    all looks good at this end
+2021-10-02 19:27:33.000 Dean:    surely
+2021-10-02 19:27:25.480 Dean:    it shouldn't do that though
+2021-10-02 19:24:46.660 Dean:    That was strange
+2021-10-02 19:21:02.760 Dean:    be
+2021-10-02 19:21:01.290 Dean:    seems to going crazy
+2021-10-02 19:20:30.680 Dean:    had not sent any pings
+2021-10-02 19:20:15.420 Dean:    I just received some ping /awake responses
+2021-10-02 19:20:00.390 Dean:    I am testing
+2021-10-02 16:45:03.500 Dean:    reintroducing the utf8 code
+2021-10-02 16:44:52.320 Dean:    
+2021-10-02 15:17:15.010 Dean:    so, it'll be a while before I have one
+2021-10-02 15:16:56.040 Dean:    and have too much technology that is not replaceable
+2021-10-02 15:16:33.930 Dean:    modern EVs are difficult to service deliberately
+2021-10-02 15:16:05.200 Dean:    my bike has proven that to me
+2021-10-02 15:15:53.310 Dean:    light, small, easy and quick to charge
+2021-10-02 15:15:39.310 Dean:    a very good idea would be to start to create small one person cars suitable for the majority of travel
+2021-10-02 15:15:10.740 Dean:    not happy about electric car manufacturing and infrastructure
+2021-10-02 15:14:47.260 Dean:    hmmmm
+2021-10-02 10:11:05.440 Dean:    What's the weather like today?
+2021-10-02 10:11:02.940 Dean:    Hello!
+2021-10-01 16:34:10.750 Dean:    a small chnage today, nothing interesting
+2021-10-01 16:33:59.740 Dean:    off out myself
+2021-10-01 14:59:51.820 Dean:    That's a clever kite
+2021-10-01 14:37:55.410 Dean:    no kite flying since...
+2021-10-01 14:37:33.210 Dean:    it was called Kitty, of course
+2021-10-01 14:37:22.570 Dean:    lost my favourite kite in a strong wind even when using a 150lb string
+2021-10-01 14:36:41.750 Dean:    I used to love kites when in my 20s
+2021-10-01 13:08:30.960 Dean:    but in the process, I am learning new (to me ) technologies and methods
+2021-10-01 13:07:59.060 Dean:    but possible
+2021-10-01 13:07:42.630 Dean:    but modern capabilities are tricky to replicate
+2021-10-01 13:07:21.460 Dean:    everything is possible
+2021-10-01 13:07:16.110 Dean:    none of this stuff is simple when working with an old utility like VB6
+2021-10-01 13:06:54.410 Dean:    until I am ready to slide it all into place
+2021-10-01 13:06:38.780 Dean:    I think I will work on the the same file type with a utf8 suffix on the end for the output
+2021-10-01 13:05:50.230 Dean:    and see how that goes
+2021-10-01 13:05:39.300 Dean:    I will add the UTF8 stuff back in step by step now I know what the issues are
+2021-10-01 12:46:17.140 Dean:    prior to that? email and the YWE forum.
+2021-10-01 12:44:23.230 Dean:    and jFC
+2021-10-01 12:44:15.720 Dean:    before fcw
+2021-10-01 12:44:07.550 Dean:    kryptocat
+2021-10-01 12:43:58.140 Dean:    certainly 2010
+2021-10-01 12:43:46.550 Dean:    or 2009
+2021-10-01 12:43:15.230 Dean:    2010
+2021-10-01 12:43:13.380 Dean:    so when did we start?
+2021-10-01 12:41:37.390 Dean:    and it took me a while to get that far
+2021-10-01 12:41:21.850 Dean:    that is dated 2010 when we had the first real version
+2021-10-01 12:41:04.310 Dean:    and if I look at the clock calendar, my first widget
+2021-10-01 12:39:08.350 Dean:    I was at Windlesham in Sussex for 12 years
+2021-10-01 12:38:48.540 Dean:    and we were talknin well before that
+2021-10-01 12:38:39.090 Dean:    I have been here in Norfolk for 7.5 years
+2021-10-01 12:38:10.210 Dean:    true!
+2021-10-01 12:36:07.940 Dean:    how long have we been conversing now?
+2021-10-01 12:35:57.020 Dean:    not to grow any older!
+2021-10-01 11:04:11.820 Dean:    my bloody birthday
+2021-09-30 22:24:43.770 Dean:    in 8 hrs
+2021-09-30 22:24:38.820 Dean:    Popping out for a while, should be back soon.
+2021-09-30 22:24:29.680 Dean:    I'm off to bed
+2021-09-30 22:22:40.080 Dean:    harry read this please.txtutf8
+2021-09-30 22:22:27.440 Dean:    with a utf8 suffix
+2021-09-30 22:22:20.800 Dean:    can you please look at the harry file

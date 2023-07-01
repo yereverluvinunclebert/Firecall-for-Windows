@@ -1,0 +1,74 @@
+2022-01-03 16:45:06.890 Dean:    that will help to narrow it down
+2022-01-03 16:44:54.116 Dean:    it'll be Win10/11
+2022-01-03 16:44:44.825 Dean:    or
+2022-01-03 16:44:42.255 Dean:    then it will work for you
+2022-01-03 16:44:36.545 Dean:    get a hotmail account for testing
+2022-01-03 16:44:25.692 Dean:    so, dump it for the moment
+2022-01-03 16:44:14.071 Dean:    but remember gmail is probably blocking you
+2022-01-03 16:44:01.640 Dean:    send me your settings.ini
+2022-01-03 16:43:42.727 Dean:    so previous attempts could be read
+2022-01-03 16:43:29.944 Dean:    but I added the clear button instead to allow the user to clear it when he wanted to
+2022-01-03 16:43:06.102 Dean:    I was considering clearing it before each poll
+2022-01-03 16:42:51.228 Dean:    and you will see the latest poll
+2022-01-03 16:42:44.307 Dean:    you need to scroll down
+2022-01-03 16:42:37.866 Dean:    it is at the top
+2022-01-03 16:42:33.056 Dean:    if you see the scrollbox
+2022-01-03 16:42:11.402 Dean:    so it does not confuse between connections
+2022-01-03 16:42:01.291 Dean:    Don't forget to clear the window
+2022-01-03 16:30:42.917 Dean:    Ping response. Refresh interval: 15  OS:Windows 7 Professional  Version:0.0.1827
+2022-01-03 15:55:10.099 Dean:    often it is immediate and then sometimes it can be ten mins or so
+2022-01-03 15:54:52.927 Dean:    sometimes gmail can take a long time to process the emails when successfully sent
+2022-01-03 15:54:38.544 Dean:    re: FCW and email
+2022-01-03 15:54:33.583 Dean:    
+2022-01-03 15:54:33.372 Dean:    
+2022-01-03 15:53:59.162 Dean:    into a cupboard for sorting and disposing
+2022-01-03 15:53:48.670 Dean:    ino black bin bags
+2022-01-03 15:53:39.308 Dean:    bric a brac
+2022-01-03 15:53:23.498 Dean:    old books left over from Dad's day
+2022-01-03 15:53:14.477 Dean:    getting rid of 'stuff' from tmy study
+2022-01-03 15:53:04.976 Dean:    
+2022-01-03 15:52:44.524 Dean:    so here is the new version, just one line removed
+2022-01-03 15:52:32.421 Dean:    <><>FireCallWin.exe
+2022-01-03 15:52:11.728 Dean:    it just does not produce the 'extra' junk
+2022-01-03 15:51:55.867 Dean:    but essentially it is the same code
+2022-01-03 15:51:47.825 Dean:    I have now removed that
+2022-01-03 15:51:38.474 Dean:    the junk in the file was a result of my test code
+2022-01-03 13:29:14.192 Dean:    that we can never handle
+2022-01-03 13:29:05.900 Dean:    it has another level of app security
+2022-01-03 13:28:52.728 Dean:    I have also tested yahoo email and that cannot be implemented
+2022-01-03 13:28:15.893 Dean:    
+2022-01-03 13:28:12.702 Dean:    hideen behind an abnormal GUI
+2022-01-03 13:27:56.347 Dean:    as it seems to have no hidden security
+2022-01-03 13:27:38.142 Dean:    I will use hotmail to test from now on
+2022-01-03 13:27:27.240 Dean:    so I want no more to do with gmail
+2022-01-03 13:27:18.676 Dean:    and it said you had to authorise on your huawaei tablet for me to continue
+2022-01-03 13:26:55.824 Dean:    it said NO
+2022-01-03 13:26:50.704 Dean:    I no longer have access to your gmail
+2022-01-03 13:26:41.973 Dean:    and you have to dig into gmail to fox that
+2022-01-03 13:26:30.511 Dean:    as gmail simply says NO
+2022-01-03 13:26:23.281 Dean:    we could have managed to get the config correct for gmail may times and it would not have mattered
+2022-01-03 13:25:55.029 Dean:    so it will be a better test
+2022-01-03 13:25:47.149 Dean:    no security there
+2022-01-03 13:25:41.908 Dean:    is to create a hotmail account
+2022-01-03 13:25:35.417 Dean:    next thing you could test
+2022-01-03 13:25:28.277 Dean:    so I am going to leave it
+2022-01-03 13:25:20.514 Dean:    it works here!
+2022-01-03 13:16:38.531 Dean:    but I have learnt a lot
+2022-01-03 13:16:30.008 Dean:    I've spent ages on it
+2022-01-03 13:16:11.125 Dean:    
+2022-01-03 13:16:09.654 Dean:    and I was right
+2022-01-03 13:16:04.334 Dean:    I knew that email was going to be awful
+2022-01-03 13:15:55.543 Dean:    
+2022-01-03 13:15:54.923 Dean:    but if it does not work then I will need the alternative
+2022-01-03 13:15:40.750 Dean:    and because of stability/known bugs
+2022-01-03 13:15:28.608 Dean:    I prefer to use the APIs where possible for consistency
+2022-01-03 13:15:09.405 Dean:    I still have my alternative code just in case
+2022-01-03 13:14:57.223 Dean:    I may well still have a problem with using the APIs
+2022-01-03 13:14:38.772 Dean:    and I will look into the rubbish later
+2022-01-03 13:14:28.879 Dean:    just try as it is
+2022-01-03 13:14:23.729 Dean:    don't edit the rubbish
+2022-01-03 13:14:03.798 Dean:    and match that
+2022-01-03 13:14:00.608 Dean:    see last PNG I sent you
+2022-01-03 13:13:37.054 Dean:    smtpServer=smtp.gmail.com
+2022-01-03 13:12:48.208 Dean:    smtp.gmail.com
+2022-01-03 13:12:22.392 Dean:    smtp server is incorrect

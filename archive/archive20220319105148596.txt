@@ -1,0 +1,7 @@
+2022-01-03 10:42:53.470 Dean:    and you need to go in and for each, accept that the activity was yours...
+2022-01-03 10:42:28.775 Dean:    as it had done
+2022-01-03 10:42:26.175 Dean:    and automatically block it
+2022-01-03 10:42:11.655 Dean:    it may log suspicious activity from a machine/app combination
+2022-01-03 10:41:29.353 Dean:    this means logging into google dashboard and becoming familiar with it
+2022-01-03 10:41:11.975 Dean:    in oorder to operate in a 'norma;' fashion
+2022-01-03 10:38:24.489 Dean:    Well, these new security protocols mean that you have to maintain your settings on the dashboard and respond to events

@@ -1,0 +1,29 @@
+2022-01-05 11:02:53.654 Dean:    '    smtpuserPassword1
+2022-01-05 11:02:53.624 Dean:    '    smtpUsername1
+2022-01-05 11:02:53.594 Dean:    '    smtpPort1
+2022-01-05 11:02:53.554 Dean:    '    smtpServer1
+2022-01-05 11:02:38.749 Dean:    '
+2022-01-05 11:01:48.328 Dean:    ' add a combobox dropdown to the smtp server section that allows selection of smtp configs
+2022-01-05 11:01:48.298 Dean:    
+2022-01-05 11:01:46.558 Dean:    Med. Priority task
+2022-01-05 11:01:25.087 Dean:    
+2022-01-05 11:01:21.947 Dean:    once evry three/four years?
+2022-01-05 11:01:10.946 Dean:    how often does that need doing?
+2022-01-05 11:01:01.814 Dean:    expensive job owning a narrow boat
+2022-01-05 10:36:00.142 Dean:    recent errors too
+2022-01-05 10:35:53.135 Dean:    with a timestamp then I can email 
+2022-01-05 10:35:37.245 Dean:    I may log errors to an output log 
+2022-01-05 10:35:25.310 Dean:    thinking about that
+2022-01-05 10:34:53.558 Dean:    also, for any non-fatal error messages
+2022-01-05 10:34:41.159 Dean:    but my next job will be to sort the emails via timestamp and compare that to the chosen interval and then email that text to the recipient
+2022-01-05 10:33:57.790 Dean:    I won't be coding for a bit as I have a lot to catch up with
+2022-01-05 10:33:32.559 Dean:    glad to hear it is stable for you
+2022-01-05 10:33:10.172 Dean:     Windspeed is 12 knots, force 4, direction W
+2022-01-05 10:33:10.145 Dean:     
+2022-01-05 10:33:10.109 Dean:     Humidity: 75 % 
+2022-01-05 10:33:10.071 Dean:     Temperature: 4.00 C
+2022-01-05 10:33:10.044 Dean:     Pressure: 1007 mb
+2022-01-05 10:33:10.010 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2022-01-05 10:33:09.977 Dean:     Wed Jan 05 2022 09:50:00 GMT+0000 (GMT Standard Time) 
+2022-01-05 10:33:02.648 Dean:    How are the family doing?
+2022-01-05 10:32:37.591 Dean:    Good day! Are you awake yet?

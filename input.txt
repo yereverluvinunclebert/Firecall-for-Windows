@@ -1,0 +1,11 @@
+2021-10-23 19:58:59.940 You:    This is where your chat partner's text will appear.
+2021-10-23 19:58:42.940 You:
+2021-10-23 19:58:39.060 You:    As your chat partner types, his text will appear here.
+2021-10-23 19:58:20.340 You:
+2021-10-23 19:58:04.160 You:    He can send you text, photos, attachments and voice recordings straight from FCW
+2021-10-23 19:58:04.160 You:
+2021-10-23 19:58:04.160 You:
+2021-10-23 19:58:02.380 You:
+2021-10-23 19:57:41.250 You:
+2021-10-23 19:56:05.160 You:    
+2021-10-23 19:56:02.810 You:    Welcome to Fire Call for Windows Beta version

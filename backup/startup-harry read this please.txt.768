@@ -1,0 +1,748 @@
+2022-01-14 16:25:34.692 Dean:    on the list to do...
+2022-01-14 16:25:22.893 Dean:    yes the writing of the encrypted pwd is adding the blank lines
+2022-01-14 16:25:03.306 Dean:    Ping response. Refresh interval: 15  OS:Microsoft Windows XP  Version:0.0.1843
+2022-01-14 16:08:13.673 Dean:    so the pwd acts incorrectly when empty
+2022-01-14 16:07:55.957 Dean:    you have the old version
+2022-01-14 14:40:27.573 Dean:    I'll allow renaming of the config slots later
+2022-01-14 14:39:59.036 Dean:    I have handled an empty password field
+2022-01-14 14:18:36.204 Dean:    and I do need to do something about the empty password field
+2022-01-14 14:18:21.996 Dean:    You will be able to name the configuration options
+2022-01-14 14:08:07.700 Dean:    eg. smtpAuthenticate0=1
+2022-01-14 14:07:47.037 Dean:    and add a 0 ot the name of the config options
+2022-01-14 14:07:36.977 Dean:    edit the settings.ini
+2022-01-14 14:07:30.363 Dean:    or 
+2022-01-14 14:07:27.627 Dean:    you may have to re-enter your settings
+2022-01-14 14:07:08.932 Dean:    but OK for testing
+2022-01-14 14:07:03.972 Dean:    not perfect
+2022-01-14 14:06:55.610 Dean:    <><>FireCallWin.exe
+2022-01-14 13:57:57.489 Dean:    <><>FCWEmailsTab01.png
+2022-01-14 11:18:08.601 Dean:    even if only virtual
+2022-01-14 11:18:02.755 Dean:    sounds like a good time
+2022-01-14 10:24:56.692 Dean:     
+2022-01-14 10:24:56.654 Dean:     Mist  
+2022-01-14 10:24:56.617 Dean:     Windspeed is 3 knots, force 1, direction WSW 
+2022-01-14 10:24:56.559 Dean:     
+2022-01-14 10:24:56.516 Dean:     Humidity: 100 % 
+2022-01-14 10:24:56.483 Dean:     Temperature: 1.00 C
+2022-01-14 10:24:56.450 Dean:     Pressure: 1035 mb
+2022-01-14 10:24:56.412 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2022-01-14 10:24:56.371 Dean:     Fri Jan 14 2022 09:50:00 GMT+0000 (GMT Standard Time) 
+2022-01-14 10:24:44.720 Dean:    Morning!
+2022-01-14 10:24:42.911 Dean:    Good day! Are you awake yet?
+2022-01-14 00:23:15.691 Dean:    https://www.gb-sol.co.uk/products/pvslates/default.htm
+2022-01-14 00:23:14.579 Dean:    
+2022-01-14 00:21:46.386 Dean:    Just working on naming the selected config then I'll send you the update
+2022-01-14 00:17:57.683 Dean:    FCW modified to allow saving of up to five SMTP configs
+2022-01-13 21:00:08.873 Dean:    we also have an emergency hoist with a brake that allows anyone to escape from the third floor
+2022-01-13 20:59:10.193 Dean:    it allows someone to climb out and down most of the way
+2022-01-13 20:58:54.297 Dean:    we have a rolled up ladder which we attach to a window ledge and throw out the window
+2022-01-13 20:58:25.742 Dean:    do you have an escape ladder for your apartment?
+2022-01-13 20:58:11.025 Dean:    
+2022-01-13 20:57:50.784 Dean:    each slate wired up separately in parallel or series
+2022-01-13 20:57:23.969 Dean:    in he USA there are slates that can act as 1.5v solar panels
+2022-01-13 20:56:08.427 Dean:    any news on the roof?
+2022-01-13 10:52:13.360 Dean:    Lucy 'took over' at Christmas and in reality, left me with a lot to do!
+2022-01-13 10:51:46.141 Dean:    lots else to do today as well
+2022-01-13 10:51:35.375 Dean:    hope
+2022-01-13 10:51:32.020 Dean:    on FCW
+2022-01-13 10:51:27.792 Dean:    hop to code the multiple SMTP configs today
+2022-01-13 10:51:06.614 Dean:    you could get them to install a solar panel and an aerial or two whilst they are up there
+2022-01-13 10:50:47.716 Dean:    do you know what they are up to?
+2022-01-13 10:46:18.042 Dean:    feels cold though
+2022-01-13 10:45:52.044 Dean:     Windspeed is 6 knots, force 2, direction SW
+2022-01-13 10:45:52.013 Dean:     
+2022-01-13 10:45:51.981 Dean:     Humidity: 93 % 
+2022-01-13 10:45:51.935 Dean:     Temperature: 4.00 C
+2022-01-13 10:45:51.888 Dean:     Pressure: 1039 mb
+2022-01-13 10:45:51.841 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2022-01-13 10:45:51.794 Dean:     Thu Jan 13 2022 10:20:00 GMT+0000 (GMT Standard Time) 
+2022-01-13 10:45:45.273 Dean:    I am barely so
+2022-01-13 10:45:38.407 Dean:    Good day! Are you awake yet?
+2022-01-12 23:01:47.221 Dean:    but some good projects in my mind
+2022-01-12 23:01:40.693 Dean:    coding again soon
+2022-01-12 23:01:28.229 Dean:    night night
+2022-01-12 23:01:25.077 Dean:    off to bed I think
+2022-01-12 20:55:51.479 Dean:     Windspeed is 5 knots, force 2, direction SW
+2022-01-12 20:55:51.432 Dean:     
+2022-01-12 20:55:51.385 Dean:     Humidity: 100 % 
+2022-01-12 20:55:51.354 Dean:     Temperature: 3.00 C
+2022-01-12 20:55:51.307 Dean:     Pressure: 1039 mb
+2022-01-12 20:55:51.276 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2022-01-12 20:55:51.245 Dean:     Wed Jan 12 2022 20:20:00 GMT+0000 (GMT Standard Time) 
+2022-01-12 19:51:04.445 Dean:    it is cold here
+2022-01-12 10:53:17.703 Dean:    understood
+2022-01-12 10:53:15.284 Dean:    
+2022-01-11 23:35:23.111 Dean:    Up the hill to Bedfordshire
+2022-01-11 22:09:14.758 Dean:    is there any surviving original code written in IMP?
+2022-01-11 22:08:47.951 Dean:    so it means the language survives and can be used again
+2022-01-11 22:08:13.710 Dean:    and it is then compiled using gcc
+2022-01-11 22:07:55.929 Dean:    so, it has aparser that converts to C?
+2022-01-11 17:55:49.103 Dean:    what does it  run on now?
+2022-01-11 17:55:39.111 Dean:    Who wrote the latest version?
+2022-01-11 17:08:51.567 Dean:    What is that?
+2022-01-11 13:30:56.610 Dean:    I Was also using it to communicate with someone
+2022-01-11 13:30:46.037 Dean:    and so nothing to worry about
+2022-01-11 13:30:32.676 Dean:    now I log in and see I was half way through an update
+2022-01-11 13:30:20.054 Dean:    I could not remember what I had done
+2022-01-11 13:30:10.453 Dean:    and the pwd was changed, I lost it
+2022-01-11 13:30:01.998 Dean:    I Was in the process of transferring to github
+2022-01-11 13:29:50.157 Dean:    unfinished transfer
+2022-01-11 13:29:44.365 Dean:    Well sort of
+2022-01-11 13:29:39.389 Dean:    No
+2022-01-11 11:26:52.906 Dean:    which I intend to use
+2022-01-11 11:26:47.126 Dean:    so I was stuck out of github
+2022-01-11 11:26:35.543 Dean:    I had changed ti but not noted the change nor was it saved in the browser
+2022-01-11 11:26:20.649 Dean:    I have managed to reset my github password
+2022-01-11 11:25:56.082 Dean:    email now appears to be working again
+2022-01-11 11:25:39.071 Dean:    my goodness that makes a difference
+2022-01-11 11:01:28.756 Dean:    sitting on the massage chair...
+2022-01-11 11:01:14.058 Dean:    she isn't light
+2022-01-11 11:01:03.151 Dean:    she had sat upon the floor and managed to lock herself in position
+2022-01-11 11:00:46.046 Dean:    I pulled a muscle in my back lifting mum from the floor
+2022-01-11 11:00:27.338 Dean:    cloudy mostly
+2022-01-11 10:33:50.528 Dean:     
+2022-01-11 10:33:50.497 Dean:     Drizzle Light Mist  
+2022-01-11 10:33:50.450 Dean:     Windspeed is 7 knots, force 3, direction SSW 
+2022-01-11 10:33:50.403 Dean:     Mostly cloudy at 400 ft.
+2022-01-11 10:33:50.372 Dean:     Humidity: 100 % 
+2022-01-11 10:33:50.341 Dean:     Temperature: 8.00 C
+2022-01-11 10:33:50.309 Dean:     Pressure: 1029 mb
+2022-01-11 10:33:50.278 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2022-01-11 10:33:50.247 Dean:     Tue Jan 11 2022 10:20:00 GMT+0000 (GMT Standard Time) 
+2022-01-11 10:33:39.170 Dean:    How are you this fine morn?
+2022-01-10 23:22:04.060 Dean:    Night Night!
+2022-01-10 12:52:02.879 Dean:    github for example
+2022-01-10 12:51:55.927 Dean:    but the email is tturning out to be essential as I had registered a few places using it
+2022-01-10 12:51:31.319 Dean:    I have enough time to consider it if not to do it
+2022-01-10 12:51:14.887 Dean:    thinking about it
+2022-01-10 12:50:57.175 Dean:    I think I might experiment
+2022-01-10 12:05:43.763 Dean:    quicker than expected
+2022-01-10 12:04:55.156 Dean:    a bit more email repair and I will be running on all email cylinders
+2022-01-10 12:03:37.777 Dean:    next time I will not trust my domain registrar
+2022-01-10 11:38:49.008 Dean:    give it 24hrs
+2022-01-10 11:37:25.471 Dean:    the email may start to operate now - incoming
+2022-01-10 11:36:49.991 Dean:    latest version
+2022-01-10 11:36:38.143 Dean:    uncustomised
+2022-01-10 11:36:32.199 Dean:    new installation
+2022-01-10 11:36:28.081 Dean:    it does not even appear using firefox
+2022-01-10 11:11:50.838 Dean:    which I do not have
+2022-01-10 11:11:41.696 Dean:    or use Chrome!
+2022-01-10 11:11:35.207 Dean:    so I have two browser open in order to do anything
+2022-01-10 11:11:21.543 Dean:    and TSOhosts live chat does not operate in Firefox
+2022-01-10 11:11:09.047 Dean:    As an aside, TSOhost Cpanel only operates in Firefox and not my default browser Palemoon
+2022-01-10 11:10:28.951 Dean:    but I'll let them do that
+2022-01-10 11:10:17.903 Dean:    easy enough
+2022-01-10 11:10:13.847 Dean:    so I have to manually change the nameservers to the default
+2022-01-10 11:09:53.679 Dean:    but it seems that they have a button that you select that does nothing during the transfer
+2022-01-10 11:09:30.311 Dean:    I wanted to make the transfer simple...
+2022-01-10 11:09:09.783 Dean:    despite me requesting that they use the default nameservers 
+2022-01-10 11:08:51.151 Dean:    it seems that the nameservers are still those that were transferred over
+2022-01-10 10:59:14.951 Dean:    with live chat at TSOhosts
+2022-01-10 10:59:03.374 Dean:    just working on the MX record propagation
+2022-01-10 10:58:24.806 Dean:    
+2022-01-10 10:58:21.832 Dean:    so, a rewrite of that section is required or adding a delay
+2022-01-10 10:58:00.063 Dean:    but it appears that it is not doing what it should do
+2022-01-10 10:57:43.567 Dean:    I added some checks to see if the stream was already open and being written to
+2022-01-10 10:57:20.118 Dean:    
+2022-01-10 09:59:08.711 Dean:    but FCW does improve...
+2022-01-10 09:58:54.854 Dean:    the list never shortens
+2022-01-10 09:58:48.167 Dean:    I am gathering the runtime errors in my list
+2022-01-10 09:58:21.943 Dean:    is when Dropbox has had its knickers in a twist and is perpetually synching the output file due to a large queu and slow network times in Dropbox#
+2022-01-10 09:57:45.966 Dean:    the only other time it has occurred
+2022-01-10 09:57:39.031 Dean:    
+2022-01-10 09:57:36.148 Dean:    at the o/s level
+2022-01-10 09:57:18.126 Dean:    I thinkthe next write occurs before the o/s has had time to write and close the previous stream
+2022-01-10 09:56:46.352 Dean:    and that should sort it
+2022-01-10 09:56:33.655 Dean:    I think I my have to inject a delay or convert all the pasted lines to one long stream
+2022-01-10 09:56:07.654 Dean:    using the same routine as for just one line but calling it multiple times
+2022-01-10 09:55:51.318 Dean:    at the moment I am going through the process of converting to a stream and writing it for each line
+2022-01-10 09:55:26.399 Dean:    but it should not need it
+2022-01-10 09:55:19.191 Dean:    so a delay might sort it
+2022-01-10 09:55:10.790 Dean:    yes
+2022-01-10 09:15:53.546 Dean:     Windspeed is 3 knots, force 1, direction SSE
+2022-01-10 09:15:53.475 Dean:     Partly cloudy at 4800 ft.
+2022-01-10 09:15:53.426 Dean:     Humidity: 93 % 
+2022-01-10 09:15:53.383 Dean:     Temperature: 4.00 C
+2022-01-10 09:15:53.342 Dean:     Pressure: 1017 mb
+2022-01-10 09:15:53.313 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2022-01-10 09:15:53.275 Dean:     Mon Jan 10 2022 08:50:00 GMT+0000 (GMT Standard Time) 
+2022-01-10 09:15:34.692 Dean:    Good Morning!
+2022-01-09 23:14:18.782 Dean:    NightlyByeLode!
+2022-01-09 23:14:17.510 Dean:    ToodlePip!
+2022-01-09 23:12:55.545 Dean:    often occurs when copying and pasteing several lines all at once
+2022-01-09 23:12:36.529 Dean:    I have made changes but I need to dig deeper
+2022-01-09 23:12:26.094 Dean:    writing a stream of data and sometimes the stream won't be written
+2022-01-09 23:11:33.217 Dean:    hard to pin down
+2022-01-09 23:11:28.317 Dean:    the file write method might need a delay in between writes
+2022-01-09 23:11:05.657 Dean:    that's happened to me too
+2022-01-09 23:10:59.457 Dean:    yes
+2022-01-09 22:40:37.665 Dean:    but my guess is that the propagation has not been triggered
+2022-01-09 22:40:18.153 Dean:    and it is correct
+2022-01-09 22:40:14.897 Dean:    I can view its setting at this end on the dashboard
+2022-01-09 22:39:25.713 Dean:    and that needs to be replaced
+2022-01-09 22:39:18.696 Dean:    pointing elsewhere
+2022-01-09 22:39:11.945 Dean:    yes, that is the old MX record
+2022-01-09 20:26:18.888 Dean:    I won't receive that reply
+2022-01-09 19:35:51.442 Dean:    but not for long!
+2022-01-09 19:29:45.984 Dean:    so I have special dispensation from my own SWMBO
+2022-01-09 19:29:33.648 Dean:    too cold to work on outside
+2022-01-09 19:29:27.568 Dean:    That's my bike in the kitchen
+2022-01-09 19:29:18.666 Dean:    <><>270109853_2115168281954892_8311399200446268618_n.jpg
+2022-01-09 19:29:15.133 Dean:    
+2022-01-09 19:29:08.001 Dean:    2000mAh to 2200
+2022-01-09 19:28:59.304 Dean:    and less so my amperage as they are all mostly the same
+2022-01-09 19:28:43.481 Dean:    the batteries are sorted by voltage and type
+2022-01-09 19:28:29.144 Dean:    it has three drawers
+2022-01-09 19:28:23.040 Dean:    added compartments the correct size for various batteries
+2022-01-09 19:28:09.087 Dean:    made from an artists portable easel and carrying case
+2022-01-09 19:27:45.541 Dean:    Thats is my battery box
+2022-01-09 19:27:33.038 Dean:    <><>271209076_1026096284638011_396647387394857710_n.jpg
+2022-01-09 19:27:29.472 Dean:    
+2022-01-09 19:27:24.244 Dean:    my fingers are almost used to the key feel and travel
+2022-01-09 19:27:10.536 Dean:    and it is doing me well
+2022-01-09 19:27:05.192 Dean:    Mac
+2022-01-09 19:27:00.860 Dean:    I have modified the keys with some stickers on the old mack keyboard
+2022-01-09 19:26:41.556 Dean:    <><>mac keyboard.jpg
+2022-01-09 19:26:27.688 Dean:    
+2022-01-09 19:26:21.496 Dean:    I have raised a ticket with tsohosts
+2022-01-09 19:26:12.832 Dean:    
+2022-01-09 19:23:05.664 Dean:    just emailed you from LQ
+2022-01-09 19:22:57.032 Dean:    
+2022-01-09 19:21:49.848 Dean:    with the specs on the net
+2022-01-09 19:21:42.296 Dean:    checking the amperage of each type
+2022-01-09 19:21:27.190 Dean:    thinking of building a bike battery
+2022-01-09 19:21:16.128 Dean:    but still quite good after 18 months
+2022-01-09 19:21:03.688 Dean:    just three are showing a problem, not holding a charge quite as well
+2022-01-09 19:20:42.000 Dean:    hardly any change to 90% of them
+2022-01-09 19:20:32.040 Dean:    if they have and by how much
+2022-01-09 19:20:24.520 Dean:    18 mnths later doing the same to see how they have discharged
+2022-01-09 19:20:12.448 Dean:    wrote th initial values on the sides, charged them, updated the values
+2022-01-09 19:19:54.032 Dean:    salvaged 30+ 18 months ago
+2022-01-09 19:19:35.715 Dean:    testing 18650 batteries here salvaged from old laptops
+2022-01-09 19:19:21.887 Dean:    
+2022-01-09 19:19:15.638 Dean:    or the changes have failed to propagate
+2022-01-09 19:19:06.353 Dean:    so there is a misconfiguration with the MX record
+2022-01-09 19:18:51.808 Dean:    but incoming are not
+2022-01-09 19:18:46.128 Dean:    as I said, all outgoing emails are sending
+2022-01-09 19:18:33.329 Dean:    so it hould all kick into operation
+2022-01-09 19:18:22.072 Dean:    The domain and the nameservers are all registered with the same host
+2022-01-09 19:17:49.436 Dean:    not so bothered about the site
+2022-01-09 19:17:40.779 Dean:    working on email records first
+2022-01-09 18:41:33.374 Dean:    I am using supposedly the Incoming Server: 	sxb1plzcpnl453525.prod.sxb1.secureserver.net
+2022-01-09 18:40:44.238 Dean:    that is the server id
+2022-01-09 18:40:34.974 Dean:    <7bd3d6c0-e04e-72c9-ba87-a7456052d75a@lightquick.co.uk>
+2022-01-09 11:28:57.420 Dean:    but summat is wrong
+2022-01-09 11:28:53.320 Dean:    I am using the server's name servers and it should all have worked
+2022-01-09 11:28:01.185 Dean:    so that I can send an email but anyone who sends me one, it disappears into the ether
+2022-01-09 11:27:30.339 Dean:    it seems that with my email problem I have an account that has been resurrected, I re-rgistered the domain but the MX record has not propagated around the net
+2022-01-09 11:26:40.910 Dean:     Windspeed is 14 knots, force 4, direction WSW
+2022-01-09 11:26:40.796 Dean:     
+2022-01-09 11:26:40.676 Dean:     Humidity: 87 % 
+2022-01-09 11:26:40.536 Dean:     Temperature: 4.00 C
+2022-01-09 11:26:40.439 Dean:     Pressure: 999 mb
+2022-01-09 11:26:40.280 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2022-01-09 11:26:40.178 Dean:     Sun Jan 09 2022 10:50:00 GMT+0000 (GMT Standard Time) 
+2022-01-09 11:07:40.983 Dean:    Morning!
+2022-01-09 00:56:08.137 Dean:    TuttyByeLode
+2022-01-08 22:00:34.242 Dean:    one of my older accounts can send but not receive
+2022-01-08 22:00:16.019 Dean:    still working on email
+2022-01-08 22:00:11.172 Dean:    
+2022-01-08 16:31:58.336 Dean:    weather foul here too
+2022-01-08 16:18:18.208 Dean:    but it is all progress
+2022-01-08 16:18:07.959 Dean:    doing lots
+2022-01-08 16:17:58.338 Dean:    tired still
+2022-01-07 23:02:23.252 Dean:    an early night for me I think
+2022-01-07 23:02:00.363 Dean:    but I am too tired
+2022-01-07 23:01:51.420 Dean:    I was going to take the bike out for an evening cycle
+2022-01-07 18:33:42.061 Dean:    Did you hear about Norton implementing crypto mining on user's PC by default?
+2022-01-07 18:33:11.553 Dean:    
+2022-01-07 18:32:17.433 Dean:    and I might take it out tonight
+2022-01-07 18:32:07.307 Dean:    now recharging
+2022-01-07 18:32:00.626 Dean:    took it for a ride, just 6-7 miles
+2022-01-07 18:31:49.446 Dean:    resolved the battery problem, repackaged the battery and inserted inside the shell
+2022-01-07 18:31:24.719 Dean:    I repaired my bike today
+2022-01-07 18:31:15.598 Dean:    
+2022-01-07 18:31:09.557 Dean:    has it improved the clattering/shaking?
+2022-01-07 10:31:25.142 Dean:    fixing!
+2022-01-07 10:31:21.086 Dean:    no coding today
+2022-01-07 10:31:13.328 Dean:    Morning!
+2022-01-06 19:41:18.952 Dean:    TuttyByeLode
+2022-01-06 19:41:18.131 Dean:    ToodlePip!
+2022-01-06 15:22:37.467 Dean:    any good?
+2022-01-06 13:48:51.564 Dean:    
+2022-01-06 13:48:44.634 Dean:    needs it from time to time
+2022-01-06 13:48:39.403 Dean:    mum's bit
+2022-01-06 13:48:34.972 Dean:    cleaning the house here from top to bottom
+2022-01-06 13:48:25.890 Dean:    
+2022-01-06 13:48:23.484 Dean:    two/three PCs
+2022-01-06 13:48:12.518 Dean:    not as easy merging as I thought
+2022-01-06 13:48:03.027 Dean:    email is progressing
+2022-01-06 13:47:58.321 Dean:    no snow here
+2022-01-06 13:47:51.818 Dean:    snowing again...
+2022-01-05 23:23:13.982 Dean:    NightlyByeLode!
+2022-01-05 17:37:22.105 Dean:    not too many issues
+2022-01-05 17:37:13.353 Dean:    hope the boat craning out of the dock went well
+2022-01-05 17:36:57.781 Dean:    
+2022-01-05 17:36:57.221 Dean:    This email work has caused me to tidy up my emails altogether
+2022-01-05 17:36:30.008 Dean:    recovering old emails from my old email package on another system
+2022-01-05 14:14:58.370 Dean:    almost made that change
+2022-01-05 14:14:54.009 Dean:    
+2022-01-05 12:13:44.629 Dean:    sometimes the email settings are incorrectly set by idiot admins on the server side
+2022-01-05 12:13:12.312 Dean:    and you never know what they might be trying to do
+2022-01-05 12:13:02.379 Dean:    I have encountered some interesting combinations
+2022-01-05 12:12:43.461 Dean:    it will be down to the user to select what has been enabled for his server
+2022-01-05 12:12:04.602 Dean:    I am not going to limit the port selections
+2022-01-05 12:11:53.116 Dean:    
+2022-01-05 12:11:44.051 Dean:    just testing it
+2022-01-05 12:11:38.061 Dean:    I have added a SMTP config dropdown and selection
+2022-01-05 11:02:53.654 Dean:    '    smtpuserPassword1
+2022-01-05 11:02:53.624 Dean:    '    smtpUsername1
+2022-01-05 11:02:53.594 Dean:    '    smtpPort1
+2022-01-05 11:02:53.554 Dean:    '    smtpServer1
+2022-01-05 11:02:38.749 Dean:    '
+2022-01-05 11:01:48.328 Dean:    ' add a combobox dropdown to the smtp server section that allows selection of smtp configs
+2022-01-05 11:01:48.298 Dean:    
+2022-01-05 11:01:46.558 Dean:    Med. Priority task
+2022-01-05 11:01:25.087 Dean:    
+2022-01-05 11:01:21.947 Dean:    once evry three/four years?
+2022-01-05 11:01:10.946 Dean:    how often does that need doing?
+2022-01-05 11:01:01.814 Dean:    expensive job owning a narrow boat
+2022-01-05 10:36:00.142 Dean:    recent errors too
+2022-01-05 10:35:53.135 Dean:    with a timestamp then I can email 
+2022-01-05 10:35:37.245 Dean:    I may log errors to an output log 
+2022-01-05 10:35:25.310 Dean:    thinking about that
+2022-01-05 10:34:53.558 Dean:    also, for any non-fatal error messages
+2022-01-05 10:34:41.159 Dean:    but my next job will be to sort the emails via timestamp and compare that to the chosen interval and then email that text to the recipient
+2022-01-05 10:33:57.790 Dean:    I won't be coding for a bit as I have a lot to catch up with
+2022-01-05 10:33:32.559 Dean:    glad to hear it is stable for you
+2022-01-05 10:33:10.172 Dean:     Windspeed is 12 knots, force 4, direction W
+2022-01-05 10:33:10.145 Dean:     
+2022-01-05 10:33:10.109 Dean:     Humidity: 75 % 
+2022-01-05 10:33:10.071 Dean:     Temperature: 4.00 C
+2022-01-05 10:33:10.044 Dean:     Pressure: 1007 mb
+2022-01-05 10:33:10.010 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM 
+2022-01-05 10:33:09.977 Dean:     Wed Jan 05 2022 09:50:00 GMT+0000 (GMT Standard Time) 
+2022-01-05 10:33:02.648 Dean:    How are the family doing?
+2022-01-05 10:32:37.591 Dean:    Good day! Are you awake yet?
+2022-01-04 23:14:38.814 Dean:    GoodNigit Harry!
+2022-01-04 23:14:34.348 Dean:    Going up the wooden hill.
+2022-01-04 20:33:51.568 Dean:    it is a basic email client
+2022-01-04 20:33:32.137 Dean:    that has no wizard just a simple add account tool
+2022-01-04 20:33:21.078 Dean:    so I use Sylpheed another Windows email client
+2022-01-04 20:32:53.249 Dean:    or set up test accounts to poll Smtp servers that are malconfigured in some way
+2022-01-04 20:32:22.864 Dean:    so you cannot add details for the future
+2022-01-04 20:32:07.993 Dean:    Sometimes the wizard won't let you leave until the account details are polling correctly
+2022-01-04 20:31:17.448 Dean:    thunderbird is not bad but the new account wizard can be a pain
+2022-01-04 18:01:12.211 Dean:    https://www.youtube.com/watch?v=86cQJ0MMses
+2022-01-04 18:00:02.904 Dean:    there is a video that is wporth watching onthe subject
+2022-01-04 17:59:30.249 Dean:    e
+2022-01-04 17:59:28.224 Dean:    or rather slightly beforr that or it would not work
+2022-01-04 17:59:11.560 Dean:    then it hands it over to port 587
+2022-01-04 17:58:54.080 Dean:    when it has done its job of negotiating the STARTTLS
+2022-01-04 17:58:34.560 Dean:    regardless of what you put in the port field for STARTTLS
+2022-01-04 17:58:18.665 Dean:    the mitm proxy we have is actually open on port 10025
+2022-01-04 17:57:47.649 Dean:    the user can choose
+2022-01-04 17:57:38.024 Dean:    I don't restrict a particular port to a type of handshaking/encryption
+2022-01-04 17:56:51.272 Dean:    you don't want it falling back to another less powerful mode of encryption or plain text
+2022-01-04 17:55:58.448 Dean:    yes, that's basically it.
+2022-01-04 15:35:34.352 Dean:    I might add a load and save email configuartions later
+2022-01-04 13:19:49.071 Dean:    please replace that into the help folder
+2022-01-04 13:19:32.735 Dean:    <><>FireCallWin Help.html
+2022-01-04 10:32:46.991 Dean:    bloody gmail!
+2022-01-04 10:32:10.881 Dean:    How are you today?
+2022-01-04 10:32:08.156 Dean:    Good Morning!
+2022-01-04 00:22:42.308 Dean:    Going up the wooden hill.
+2022-01-03 18:39:32.192 Dean:    working on FCW as always
+2022-01-03 16:50:40.981 Dean:    which I will update fo email
+2022-01-03 16:50:34.241 Dean:    sending you the updated html help shortly
+2022-01-03 16:50:13.736 Dean:    I can't control either
+2022-01-03 16:50:03.275 Dean:    so it is either google blocking or Win10/11
+2022-01-03 16:49:47.894 Dean:    my gmail is working
+2022-01-03 16:49:32.832 Dean:    it is too much of a pain
+2022-01-03 16:49:23.151 Dean:    but I am done with gmail for now
+2022-01-03 16:49:10.839 Dean:    all looks good
+2022-01-03 16:48:50.815 Dean:    you can remove that junk from the file now
+2022-01-03 16:45:06.890 Dean:    that will help to narrow it down
+2022-01-03 16:44:54.116 Dean:    it'll be Win10/11
+2022-01-03 16:44:44.825 Dean:    or
+2022-01-03 16:44:42.255 Dean:    then it will work for you
+2022-01-03 16:44:36.545 Dean:    get a hotmail account for testing
+2022-01-03 16:44:25.692 Dean:    so, dump it for the moment
+2022-01-03 16:44:14.071 Dean:    but remember gmail is probably blocking you
+2022-01-03 16:44:01.640 Dean:    send me your settings.ini
+2022-01-03 16:43:42.727 Dean:    so previous attempts could be read
+2022-01-03 16:43:29.944 Dean:    but I added the clear button instead to allow the user to clear it when he wanted to
+2022-01-03 16:43:06.102 Dean:    I was considering clearing it before each poll
+2022-01-03 16:42:51.228 Dean:    and you will see the latest poll
+2022-01-03 16:42:44.307 Dean:    you need to scroll down
+2022-01-03 16:42:37.866 Dean:    it is at the top
+2022-01-03 16:42:33.056 Dean:    if you see the scrollbox
+2022-01-03 16:42:11.402 Dean:    so it does not confuse between connections
+2022-01-03 16:42:01.291 Dean:    Don't forget to clear the window
+2022-01-03 16:30:42.917 Dean:    Ping response. Refresh interval: 15  OS:Windows 7 Professional  Version:0.0.1827
+2022-01-03 15:55:10.099 Dean:    often it is immediate and then sometimes it can be ten mins or so
+2022-01-03 15:54:52.927 Dean:    sometimes gmail can take a long time to process the emails when successfully sent
+2022-01-03 15:54:38.544 Dean:    re: FCW and email
+2022-01-03 15:54:33.583 Dean:    
+2022-01-03 15:54:33.372 Dean:    
+2022-01-03 15:53:59.162 Dean:    into a cupboard for sorting and disposing
+2022-01-03 15:53:48.670 Dean:    ino black bin bags
+2022-01-03 15:53:39.308 Dean:    bric a brac
+2022-01-03 15:53:23.498 Dean:    old books left over from Dad's day
+2022-01-03 15:53:14.477 Dean:    getting rid of 'stuff' from tmy study
+2022-01-03 15:53:04.976 Dean:    
+2022-01-03 15:52:44.524 Dean:    so here is the new version, just one line removed
+2022-01-03 15:52:32.421 Dean:    <><>FireCallWin.exe
+2022-01-03 15:52:11.728 Dean:    it just does not produce the 'extra' junk
+2022-01-03 15:51:55.867 Dean:    but essentially it is the same code
+2022-01-03 15:51:47.825 Dean:    I have now removed that
+2022-01-03 15:51:38.474 Dean:    the junk in the file was a result of my test code
+2022-01-03 13:29:14.192 Dean:    that we can never handle
+2022-01-03 13:29:05.900 Dean:    it has another level of app security
+2022-01-03 13:28:52.728 Dean:    I have also tested yahoo email and that cannot be implemented
+2022-01-03 13:28:15.893 Dean:    
+2022-01-03 13:28:12.702 Dean:    hideen behind an abnormal GUI
+2022-01-03 13:27:56.347 Dean:    as it seems to have no hidden security
+2022-01-03 13:27:38.142 Dean:    I will use hotmail to test from now on
+2022-01-03 13:27:27.240 Dean:    so I want no more to do with gmail
+2022-01-03 13:27:18.676 Dean:    and it said you had to authorise on your huawaei tablet for me to continue
+2022-01-03 13:26:55.824 Dean:    it said NO
+2022-01-03 13:26:50.704 Dean:    I no longer have access to your gmail
+2022-01-03 13:26:41.973 Dean:    and you have to dig into gmail to fox that
+2022-01-03 13:26:30.511 Dean:    as gmail simply says NO
+2022-01-03 13:26:23.281 Dean:    we could have managed to get the config correct for gmail may times and it would not have mattered
+2022-01-03 13:25:55.029 Dean:    so it will be a better test
+2022-01-03 13:25:47.149 Dean:    no security there
+2022-01-03 13:25:41.908 Dean:    is to create a hotmail account
+2022-01-03 13:25:35.417 Dean:    next thing you could test
+2022-01-03 13:25:28.277 Dean:    so I am going to leave it
+2022-01-03 13:25:20.514 Dean:    it works here!
+2022-01-03 13:16:38.531 Dean:    but I have learnt a lot
+2022-01-03 13:16:30.008 Dean:    I've spent ages on it
+2022-01-03 13:16:11.125 Dean:    
+2022-01-03 13:16:09.654 Dean:    and I was right
+2022-01-03 13:16:04.334 Dean:    I knew that email was going to be awful
+2022-01-03 13:15:55.543 Dean:    
+2022-01-03 13:15:54.923 Dean:    but if it does not work then I will need the alternative
+2022-01-03 13:15:40.750 Dean:    and because of stability/known bugs
+2022-01-03 13:15:28.608 Dean:    I prefer to use the APIs where possible for consistency
+2022-01-03 13:15:09.405 Dean:    I still have my alternative code just in case
+2022-01-03 13:14:57.223 Dean:    I may well still have a problem with using the APIs
+2022-01-03 13:14:38.772 Dean:    and I will look into the rubbish later
+2022-01-03 13:14:28.879 Dean:    just try as it is
+2022-01-03 13:14:23.729 Dean:    don't edit the rubbish
+2022-01-03 13:14:03.798 Dean:    and match that
+2022-01-03 13:14:00.608 Dean:    see last PNG I sent you
+2022-01-03 13:13:37.054 Dean:    smtpServer=smtp.gmail.com
+2022-01-03 13:12:48.208 Dean:    smtp.gmail.com
+2022-01-03 13:12:22.392 Dean:    smtp server is incorrect
+2022-01-03 10:42:53.470 Dean:    and you need to go in and for each, accept that the activity was yours...
+2022-01-03 10:42:28.775 Dean:    as it had done
+2022-01-03 10:42:26.175 Dean:    and automatically block it
+2022-01-03 10:42:11.655 Dean:    it may log suspicious activity from a machine/app combination
+2022-01-03 10:41:29.353 Dean:    this means logging into google dashboard and becoming familiar with it
+2022-01-03 10:41:11.975 Dean:    in oorder to operate in a 'norma;' fashion
+2022-01-03 10:38:24.489 Dean:    Well, these new security protocols mean that you have to maintain your settings on the dashboard and respond to events
+2022-01-03 01:41:01.103 Dean:    goodnight!
+2022-01-03 00:30:24.838 Dean:    none encountered with hotmail
+2022-01-03 00:30:10.662 Dean:    we hit three levels just when checking the account
+2022-01-03 00:29:44.416 Dean:    as it is too riddled with security checks
+2022-01-03 00:29:29.279 Dean:    I would do that rather then use the google mail
+2022-01-03 00:29:12.015 Dean:    and easy to test
+2022-01-03 00:29:07.582 Dean:    easy to enter the details
+2022-01-03 00:29:02.078 Dean:    easy to create
+2022-01-03 00:28:56.591 Dean:    we know that process works
+2022-01-03 00:28:49.358 Dean:    you can create a hotmail account
+2022-01-03 00:28:34.847 Dean:    is ti now only google that is being a pain
+2022-01-03 00:28:26.462 Dean:    those two message prove the concept works
+2022-01-03 00:28:09.487 Dean:    as your details are being used in multiple locations
+2022-01-03 00:27:51.398 Dean:    and I suspect we are making more now
+2022-01-03 00:27:43.623 Dean:    and cleared them
+2022-01-03 00:27:40.182 Dean:    I found two of those on your google dashboard
+2022-01-03 00:27:30.166 Dean:    and raising suspiocious activity alarms
+2022-01-03 00:27:15.210 Dean:    What might be happening is that gmail is recognising emails being sent from two different places
+2022-01-03 00:25:56.939 Dean:    <><>gmailSettings.jpg
+2022-01-03 00:25:10.415 Dean:    wait a sec
+2022-01-03 00:01:05.675 Dean:    but I think I have done what was needed
+2022-01-03 00:00:56.325 Dean:    it won't even let me look at your details any further
+2022-01-03 00:00:33.948 Dean:    email from your account is now working
+2022-01-03 00:00:23.573 Dean:    any how, regardless of that
+2022-01-02 23:58:49.534 Dean:    then send me the code
+2022-01-02 23:58:30.774 Dean:    what a bloody to-do!
+2022-01-02 23:58:10.785 Dean:    Choose an account to get your code
+2022-01-02 23:58:10.733 Dean:    Under 'Signing in to Google' tap Security code
+2022-01-02 23:58:10.678 Dean:    Select the Security tab (you may need to scroll to the right)
+2022-01-02 23:58:10.567 Dean:    Tap Manage your Google Account
+2022-01-02 23:58:10.521 Dean:    Choose your account, if it not already selected
+2022-01-02 23:58:10.481 Dean:    Tap Google
+2022-01-02 23:58:10.430 Dean:    Open the Settings app
+2022-01-02 23:57:56.430 Dean:    it wants you to sign in on your Huawei HUWEI MediaPad T3
+2022-01-02 23:57:26.567 Dean:    it is riddled with security
+2022-01-02 23:57:15.847 Dean:    bloody hell
+2022-01-02 23:53:22.783 Dean:    I'll do some digging
+2022-01-02 23:53:17.966 Dean:    I'm in
+2022-01-02 23:52:23.702 Dean:    send it to me ASAP please
+2022-01-02 23:45:59.470 Dean:    to the phone ending in 35
+2022-01-02 23:45:53.006 Dean:    it has sent you a verification code
+2022-01-02 22:54:12.399 Dean:    please do so and I should be able to check
+2022-01-02 22:53:29.334 Dean:    it should ask you to validate my device (windows via firefox)
+2022-01-02 22:53:08.750 Dean:
+2022-01-02 22:53:02.466 Dean:    I am trying to log into your google account via webmail so I can check the settings
+2022-01-02 22:37:59.895 Dean:    that will hopefully be more reliable
+2022-01-02 22:37:42.407 Dean:    I have a new and more powerful encryption method too
+2022-01-02 22:37:27.186 Dean:    and then test of Win10 and all may be revealed
+2022-01-02 22:37:17.503 Dean:    so, I am going to stop for a while
+2022-01-02 22:37:06.183 Dean:    Well, I am email here, there and everywhere
+2022-01-02 22:30:14.949 Dean:    Awake response. Request time: Sun, 02/01/2022 22:27:01 GMT
+2022-01-02 22:10:59.919 Dean:    Ping response. Refresh interval: 15  OS:Windows 7 Professional  Version:0.0.1824
+2022-01-02 21:57:39.377 Dean:    recipientEmail=dean.beedell@hotmail.co.uk
+2022-01-02 21:57:39.247 Dean:    smtpServer=smtp.dsl.pipex.com
+2022-01-02 21:57:39.211 Dean:    smtpPort=587
+2022-01-02 21:57:39.169 Dean:    smtpPassword=redaxota
+2022-01-02 21:57:37.878 Dean:    smtpUsername=aqqc35@dsl.pipex.com
+2022-01-02 21:57:36.886 Dean:    please try
+2022-01-02 21:56:56.150 Dean:    the same password hasing algorithm (I may change it)
+2022-01-02 21:56:38.766 Dean:
+2022-01-02 21:56:34.514 Dean:    and then converting back when I need it
+2022-01-02 21:56:23.937 Dean:    thei time converting the data to base64 beforehand
+2022-01-02 21:56:12.002 Dean:    I am using the old API again
+2022-01-02 21:56:05.170 Dean:
+2022-01-02 21:56:02.299 Dean:    <><>FireCallWin.exe
+2022-01-02 20:22:45.070 Dean:    I MAY have cracked it
+2022-01-02 19:08:22.814 Dean:    no wonder it was hard to find
+2022-01-02 19:08:13.622 Dean:    one tiny character!
+2022-01-02 19:08:01.757 Dean:    there is a bug in the encryption routine
+2022-01-02 19:07:19.533 Dean:    then decrypt on the fly
+2022-01-02 19:07:08.557 Dean:    yes
+2022-01-02 19:05:03.429 Dean:    that is strange!
+2022-01-02 19:04:59.245 Dean:    w5s5ldk11rt5n
+2022-01-02 19:03:13.621 Dean:    #I will add an option turn encryption on/off
+2022-01-02 19:03:01.957 Dean:
+2022-01-02 19:00:08.765 Dean:    ÐÎËÊÐ
+2022-01-02 18:59:30.133 Dean:    and it encrypts to
+2022-01-02 18:59:24.742 Dean:    your pwd is w5r5ldk11rt5n
+2022-01-02 18:59:19.806 Dean:
+2022-01-02 18:59:19.638 Dean:
+2022-01-02 18:58:50.510 Dean:    the encrypted version in settings.in is   ¿ÞËÈþÔÍãÖô»Ð
+2022-01-02 18:58:00.198 Dean:    .1819
+2022-01-02 18:57:48.236 Dean:    <><>FireCallWin.exe
+2022-01-02 18:57:31.213 Dean:    and send me the encrypted version
+2022-01-02 18:57:20.070 Dean:    save it
+2022-01-02 18:57:13.765 Dean:    tyr my pwd ^$D2!Y93J_1Y!l)
+2022-01-02 18:56:38.549 Dean:    FCW'd you the latest
+2022-01-02 18:56:32.461 Dean:    sorry
+2022-01-02 18:56:29.798 Dean:    I emailed you the latest
+2022-01-02 18:56:24.245 Dean:    did you take the latest FCWin?
+2022-01-02 18:55:56.973 Dean:    which I suspect
+2022-01-02 18:55:52.718 Dean:    I will try it on Win10 and see if the problems are specific to it
+2022-01-02 18:55:35.302 Dean:
+2022-01-02 18:55:33.198 Dean:    I have proven it works
+2022-01-02 18:55:25.701 Dean:    I have the app working for email from Win7 using four accounts
+2022-01-02 18:55:07.669 Dean:    so,
+2022-01-02 18:55:04.277 Dean:
+2022-01-02 18:54:59.206 Dean:    too much security, too much to code
+2022-01-02 18:54:47.629 Dean:    in fact I think email will die if it all becomes too complex
+2022-01-02 18:54:31.118 Dean:    email clients are dying out
+2022-01-02 18:54:12.702 Dean:    email is becoming too complex!
+2022-01-02 18:54:01.621 Dean:    Thunderbird and sylpheed
+2022-01-02 18:53:53.989 Dean:
+2022-01-02 18:53:49.398 Dean:    tried two clients both failed
+2022-01-02 18:53:35.422 Dean:    So that was pointless
+2022-01-02 18:53:23.789 Dean:    a total failure
+2022-01-02 18:53:20.069 Dean:    I have just spent hours creating a yahoo email account and trying to confugure my client (TB) to work with it
+2022-01-02 18:52:54.685 Dean:
+2022-01-02 18:52:50.766 Dean:    Well, I give up for the moment
+2022-01-02 16:36:15.157 Dean:    do you have any other email account?
+2022-01-02 16:12:47.559 Dean:    Ping response. Refresh interval: 15  OS:Windows 7 Professional  Version:0.0.1819
+2022-01-02 16:08:10.253 Dean:    pls try mine again
+2022-01-02 16:07:57.436 Dean:    <><>FireCallWin.exe
+2022-01-02 16:06:34.421 Dean:    but it does not work for your details
+2022-01-02 16:06:25.725 Dean:    and it works for me
+2022-01-02 16:06:21.885 Dean:    it passes the correct password to gmail SMTP server
+2022-01-02 16:06:06.101 Dean:    I have ensured that ALL is now working as it should be
+2022-01-02 16:05:55.956 Dean:
+2022-01-02 13:37:06.564 Dean:    fixing
+2022-01-02 13:37:03.580 Dean:    jsut not enough...
+2022-01-02 13:36:59.108 Dean:    reliable
+2022-01-02 13:36:56.268 Dean:    but more rleiable
+2022-01-02 13:36:48.828 Dean:    same as the Win APIs
+2022-01-02 13:36:42.036 Dean:    but not others...
+2022-01-02 13:36:35.724 Dean:    some password combinations were working
+2022-01-02 13:36:22.124 Dean:    not difficult
+2022-01-02 13:36:19.028 Dean:    so, my workaround routines need rejigging
+2022-01-02 13:36:04.252 Dean:    the FSO method does handle unicode supposedly but there is another bug as the writing does not
+2022-01-02 13:35:27.044 Dean:    I have to rewrite my two routines to use the unicode method of writing that I am using for the main data files
+2022-01-02 13:34:54.640 Dean:
+2022-01-02 13:08:05.594 Dean:    still a bug to be ironed out
+2022-01-02 13:07:59.268 Dean:    don't do it yet
+2022-01-02 13:07:54.517 Dean:    nope
+2022-01-02 13:06:35.042 Dean:    <><>FireCallWin.exe
+2022-01-02 13:06:06.724 Dean:    I will give you latest FCW shortly
+2022-01-02 13:05:51.483 Dean:    port 587
+2022-01-02 13:05:47.380 Dean:    ^$D2!Y93J_1Y!l)
+2022-01-02 13:05:36.133 Dean:    deanaebeedell@gmail.com
+2022-01-02 13:05:24.540 Dean:    try mine at your end
+2022-01-02 13:05:08.064 Dean:    something seems wrong
+2022-01-02 13:04:07.453 Dean:    password: w5r5ldk11rt5n
+2022-01-02 13:03:43.476 Dean:    username g6auc0@gmail.com- what is that 0, shouldn't be six?
+2022-01-02 13:02:57.485 Dean:    I cannot make your gmail SMTP details work
+2022-01-02 13:02:44.232 Dean:
+2022-01-02 12:45:58.675 Dean:    but it matters not
+2022-01-02 12:45:53.417 Dean:    so slower
+2022-01-02 12:45:49.148 Dean:    have to read/write whole file/write updated date to temporary file and then rename/delete old
+2022-01-02 12:45:15.061 Dean:    they do not read/write using keys so a little slower
+2022-01-02 12:45:00.861 Dean:    so, two new routines created as a workaround
+2022-01-02 12:44:42.339 Dean:    but that only occurred when I changed the variable name
+2022-01-02 12:44:03.419 Dean:    then it happened to the writing too
+2022-01-02 12:43:55.740 Dean:    for a while it was only the reading of the data
+2022-01-02 12:43:43.930 Dean:    happened randomly
+2022-01-02 12:43:30.995 Dean:    it was the API havig a wobbly when writing my encrypted data
+2022-01-02 12:43:10.431 Dean:
+2022-01-02 12:43:01.818 Dean:    I will test with your gmail SMTP details shortly
+2022-01-02 12:42:38.928 Dean:    I was just able to send emails to your address using gmail and my own details in the SMTP server
+2022-01-02 11:44:51.331 Dean:    Please check your email
+2022-01-02 11:29:57.295 Dean:     Windspeed is 16 knots, force 4, direction SW
+2022-01-02 11:29:57.248 Dean:     Partly cloudy at 1800 ft.
+2022-01-02 11:29:57.201 Dean:     Humidity: 82 %
+2022-01-02 11:29:57.154 Dean:     Temperature: 11.00 C
+2022-01-02 11:29:57.108 Dean:     Pressure: 1007 mb
+2022-01-02 11:29:57.061 Dean:     EGSH NORWICH INTERNATIONAL AIRPORT, NORWICH, UNITED KINGDOM
+2022-01-02 11:29:57.014 Dean:     Sun Jan 02 2022 11:20:00 GMT+0000 (GMT Standard Time)
+2022-01-02 11:29:34.822 Dean:    my boy was out and I had to wait up for him
+2022-01-02 11:29:04.704 Dean:    late one last night
+2022-01-02 11:28:08.296 Dean:    How are you today?
+2022-01-02 11:28:00.338 Dean:    Good Morning!
+2022-01-02 01:12:51.251 Dean:    SO many bugs in Windows and none of them MINE!
+2022-01-02 01:12:37.956 Dean:
+2022-01-02 01:01:59.783 Dean:    TTFN, Cheerio!
+2022-01-02 00:48:10.831 Dean:    I will send you the new version whan I have tested it
+2022-01-02 00:19:06.553 Dean:    and it is
+2022-01-02 00:19:04.758 Dean:    just tested it is inow writing correctly
+2022-01-02 00:18:50.825 Dean:    but it will work
+2022-01-02 00:18:43.740 Dean:    it is now slower to read and write the settings.ini file
+2022-01-02 00:18:30.385 Dean:    just as I did when reading
+2022-01-02 00:18:21.662 Dean:    so I have bypassed the API
+2022-01-02 00:18:11.410 Dean:    but the API that writes the string to the INI file was placing four strange double chars after the encrypted password
+2022-01-02 00:17:22.130 Dean:    but the password itself was encrypted and written identically
+2022-01-02 00:17:04.093 Dean:    I changed the key from pop3Password to SMTPPassword
+2022-01-02 00:16:11.961 Dean:    and with those passwords
+2022-01-02 00:16:00.881 Dean:    it was working
+2022-01-02 00:15:56.575 Dean:    yes it is the write API
+2022-01-02 00:15:51.301 Dean:
+2022-01-01 23:06:09.516 Dean:    but I will need to determine why, all of a sudden
+2022-01-01 23:05:55.363 Dean:    I think the write API is doing the same
+2022-01-01 23:05:43.395 Dean:    due to a failure of the read API to recognise some chars
+2022-01-01 23:05:26.450 Dean:    the API that reads from an INI file has been replaced by a manual tool that does the same
+2022-01-01 23:05:02.966 Dean:    same again
+2022-01-01 23:05:00.267 Dean:    I think I have found the bug
+2022-01-01 23:04:50.843 Dean:
+2022-01-01 22:43:00.157 Dean:    I need to find out why
+2022-01-01 22:42:50.391 Dean:    I think the password is being decrypted incorrectly at the time it tests
+2022-01-01 22:42:28.419 Dean:    I will research
+2022-01-01 22:42:23.099 Dean:    stop for the moment
+2022-01-01 22:40:25.864 Dean:    but it worked well, we have probably flooded it with incorrect credentials
+2022-01-01 22:40:04.253 Dean:    gmail has stopped working here too
+2022-01-01 21:54:36.868 Dean:    and I'll try and decrypt it here
+2022-01-01 21:54:15.803 Dean:    would you send me your encrypted pass code from the settings.ini that resulted in redaxota's
+2022-01-01 21:53:32.192 Dean:    it is strange, that incorrect reading of the password
+2022-01-01 21:52:28.134 Dean:    back again
+2022-01-01 17:27:45.102 Dean:    Popping out for a while, should be back soon.
+2022-01-01 17:26:15.162 Dean:    should be just redaxota
+2022-01-01 17:25:51.694 Dean:    there were extra characters
+2022-01-01 17:25:44.798 Dean:    on your pipex pwd
+2022-01-01 17:25:37.791 Dean:
+2022-01-01 17:24:39.196 Dean:    unsure what some of the chars might be
+2022-01-01 17:24:24.748 Dean:    can you send it here as text pls
+2022-01-01 17:24:16.712 Dean:    your password for gmail
+2022-01-01 17:22:23.877 Dean:    pipex was the most tricky
+2022-01-01 16:04:09.195 Dean:    y
+2022-01-01 16:04:07.026 Dean:    and ou have to say yes to network access if it does...
+2022-01-01 16:03:52.482 Dean:    The firewall message will pop up
+2022-01-01 16:02:53.600 Dean:    as those a re live accounts
+2022-01-01 16:02:47.547 Dean:    please destroy them afterwards!
+2022-01-01 16:02:25.592 Dean:    so you can try those if you want
+2022-01-01 16:02:19.037 Dean:
+2022-01-01 16:02:05.867 Dean:    including passwords
+2022-01-01 16:01:59.142 Dean:    Those are the details of the accounts I have tested so far
+2022-01-01 16:01:32.824 Dean:    enabled allow insecure apps in google's dashboard
+2022-01-01 16:01:32.777 Dean:
+2022-01-01 16:01:32.730 Dean:    disabled Oauth in the advanced config in TB and checked the password using the pwd editor
+2022-01-01 16:01:32.683 Dean:
+2022-01-01 16:01:32.637 Dean:    SSL/TLS
+2022-01-01 16:01:32.590 Dean:    Encrypted password
+2022-01-01 16:01:32.559 Dean:    465
+2022-01-01 16:01:32.512 Dean:    smtp.gmail.com
+2022-01-01 16:01:32.465 Dean:    ^$D2!Y93J_1Y!l)
+2022-01-01 16:01:32.403 Dean:    deanaebeedell@gmail.com
+2022-01-01 16:01:32.340 Dean:
+2022-01-01 16:01:32.293 Dean:
+2022-01-01 16:01:32.231 Dean:    It has also been tested successfully in STARTTLS mode on ports 25 and 587 and base 64 authentication. . The option: "allow insecure apps" had to be enabled in google's own dashboard.
+2022-01-01 16:01:32.169 Dean:    Gmail has been successfully tested on port 465 with SSL/TLS and base 64 authentication.
+2022-01-01 16:01:32.075 Dean:
+2022-01-01 16:01:32.028 Dean:    =====
+2022-01-01 16:01:31.966 Dean:    GMAIL successful!
+2022-01-01 16:01:31.919 Dean:
+2022-01-01 16:01:31.872 Dean:
+2022-01-01 16:01:31.825 Dean:
+2022-01-01 16:01:31.794 Dean:    Microsoft's SMTP servers requires STARTTLS. It has been tested successfully on either port 25 or 587 with base 64 authentication.
+2022-01-01 16:01:31.747 Dean:
+2022-01-01 16:01:31.701 Dean:    )GuZYml28)%6
+2022-01-01 16:01:31.654 Dean:    requires 25 / 587 & STARTTLS
+2022-01-01 16:01:31.607 Dean:
+2022-01-01 16:01:31.560 Dean:    dean.beedell@outlook.com
+2022-01-01 16:01:31.529 Dean:    smtp.office365.com
+2022-01-01 16:01:31.482 Dean:
+2022-01-01 16:01:31.435 Dean:    Microsoft's SMTP servers requires STARTTLS. It has been tested successfully on either port 25 or 587 with base 64 authentication. .
+2022-01-01 16:01:31.373 Dean:
+2022-01-01 16:01:31.326 Dean:    =======
+2022-01-01 16:01:31.279 Dean:    OUTLOOK successful!
+2022-01-01 16:01:31.233 Dean:
+2022-01-01 16:01:31.170 Dean:
+2022-01-01 16:01:31.123 Dean:
+2022-01-01 16:01:31.077 Dean:    ftangftang1234
+2022-01-01 16:01:30.999 Dean:    dean.beedell@hotmail.co.uk
+2022-01-01 16:01:30.936 Dean:    SSL/TLS
+2022-01-01 16:01:30.889 Dean:    Base 64 encoded
+2022-01-01 16:01:30.827 Dean:    25 / 587
+2022-01-01 16:01:30.780 Dean:    smtp-mail.outlook.com
+2022-01-01 16:01:30.733 Dean:
+2022-01-01 16:01:30.671 Dean:    It has been tested successfully in STARTTLS mode on ports 25 and 587 and base 64 authentication.
+2022-01-01 16:01:30.640 Dean:
+2022-01-01 16:01:30.593 Dean:    Hotmail has been successfully tested on port 25 with SSL/TLS and base 64 authentication.
+2022-01-01 16:01:30.546 Dean:
+2022-01-01 16:01:30.484 Dean:    =======
+2022-01-01 16:01:30.406 Dean:    HOTMAIL successful!
+2022-01-01 16:01:30.328 Dean:
+2022-01-01 16:01:30.250 Dean:
+2022-01-01 16:01:30.172 Dean:    emailMessage=Testing Email from FireCall for Windows
+2022-01-01 16:01:30.063 Dean:    emailSubject=FireCall Status Information
+2022-01-01 16:01:29.969 Dean:    recipientEmail=aqqc35@dsl.pipex.com
+2022-01-01 16:01:29.891 Dean:    smtpServer=smtp.dsl.pipex.com
+2022-01-01 16:01:29.813 Dean:    smtpPort=587
+2022-01-01 16:01:29.735 Dean:    smtpPassword=redaxota
+2022-01-01 16:01:29.673 Dean:    smtpUsername=aqqc35@dsl.pipex.com
+2022-01-01 16:01:29.595 Dean:
+2022-01-01 16:01:29.517 Dean:    Pipex and Talk Talk's SMTP servers specifically require both 587 and STARTTLS with base 64 authentication. It has been tested successfully in STARTTLS mode.
+2022-01-01 16:01:29.454 Dean:
+2022-01-01 16:01:29.407 Dean:    =====
+2022-01-01 16:01:29.376 Dean:    Pipex    successful!
+2022-01-01 15:55:36.774 Dean:    and gmail settings snapshot
+2022-01-01 15:55:29.999 Dean:    latest FCW attached
+2022-01-01 15:54:59.412 Dean:    understood
+2022-01-01 15:54:54.419 Dean:    unserstood re: the email frequency
+2022-01-01 15:54:38.255 Dean:
+2022-01-01 15:54:38.099 Dean:
+2022-01-01 15:54:15.896 Dean:    <><>gmailSettings.jpg
+2022-01-01 15:52:13.822 Dean:    <><>FireCallWin.exe
+2022-01-01 15:51:38.085 Dean:    Ping response. Refresh interval: 15  OS:Windows 7 Professional  Version:0.0.1813
+2022-01-01 13:30:27.081 Dean:    Now I need to decide what to with the emails and how
+2022-01-01 13:27:15.787 Dean:    using port 587
+2022-01-01 13:27:03.347 Dean:    I have the emails working to all my accounts using STARTTLS or SSL
+2022-01-01 13:26:35.683 Dean:
+2022-01-01 11:42:45.475 Dean:    not the right amount of sleep
+2022-01-01 11:42:31.644 Dean:    slight hangover here
+2022-01-01 11:42:25.439 Dean:    Are you both well?
+2022-01-01 11:42:21.484 Dean:    How are you today?
+2022-01-01 11:42:18.724 Dean:    Hello!
+2022-01-01 00:05:21.321 Dean:    <p><p> Refresh Interval:15 OS:Windows 7 Professional Version 0.0.1806
+2022-01-01 00:05:17.409 Dean:    <t><t>1640995517317

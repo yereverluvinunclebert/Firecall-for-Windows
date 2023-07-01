@@ -1,0 +1,63 @@
+Informal Fire Call Specification  - Version 0.4  12/08/2021 - Harry Whitfield
+
+Messages (to be displayed)                                          // Examples or Comments
+
+    sp ::= " "                                                      // a single space
+    cr ::= "\r"                                                     // a carriage return
+    lf ::= "\n"                                                     // a line feed
+    d ::= [0..9]                                                    // a single digit
+
+    {date} ::= dddd-dd-dd                                           //2021-07-08
+    {time} ::= dd:dd:dd.ddd                                         //00:10:41.642
+    {marker} ::= the string ":    "                                 //a colon and four spaces
+    {prefix} ::= a string that does not contain the marker          //Harry
+    {message text} ::= a string that does not contain cr or lf      //Goodnight Dean!
+    {label} ::= {date}sp{time}sp{prefix}{marker}                    //"2021-07-08 00:10:41.642 Harry:    "
+
+{message} ::= {label}{message text}crlf                             //2021-07-08 00:10:41.642 Harry:    Goodnight Dean!
+
+
+Special Message Texts (to be acted upon and/or be displayed)
+
+    {file name} ::= a file name of a file in the Fire Call Exchange folder.
+    {emoji name} ::= a file name of a file in the local emoji folder.
+    {refreshTimerInterval} ::= an integer                           // 60
+    {system} ::= "MacOS" or "Windows"
+    {version} ::= d.d.d
+    {ping response} ::= Ping response. Refresh Interval:{refreshTimerInterval}spspOS:{system}spspVersion:{version}  //Ping response. Refresh Interval:15  OS:MacOS  Version:1.7.5
+    {awake call} ::= Date.now()                                     //1624981407581  (javascript time in mS)
+    {awake response} ::= "Awake response. Request time: " + new Date(Number(awakeTime)).toUTCString()               //Awake response. Request time: Wed, 30 Jun 2021 14:55:27 GMT
+    {shutdown call} ::= Date.now()                                  //1624981407581  (javascript time in mS)
+
+<><>{file name}                                                     // A file has been placed in the Fire Call Exchange folder. (*)
+<o><o>{emoji name}                                                  // Display the local emoji file!                            (*)
+<p><p> Refresh Interval:{refreshTimerInterval}spspOS:{system}spspVersion:{version}  // Ping request. Send a ping response       (*)
+<t><t>{awake call}                                                  // Awake call. Send an awake response!                      (*)
+<b><b>																// Attention call. Receiver to sound buzzer.				(*)
+<z><z>{shutdown call}												// Shutdown Call. Receiving App to Close.					(*)
+
+Commands (typed into the input line)
+
+    {fs} ::= a string of regular expression
+<<                                                                  // reset display to bottom
+>>{fs}                                                              // find the string or regExp in the display
+>>                                                                  // reset display to top
+<>                                                                  // remove the {label}s from text in the clipboard
+
+Special messages are displayed after modification as follows:
+
+(*)
+replace <><>   by "New file: "
+replace <o><o> by "New emoji: "
+replace <p><p> by "Ping request."
+replace <t><t> by "Awake at: "
+replace <b><b> by "Attention!"
+replace <z><z> by "Shutdown at: "
+
+
+Email Advice Messages
+
+Only if enabled in the preferences,
+a) emails should not be sent more frequently than at the interval specified in the preferences, and
+b) subject to (a), when new messages come in, an email should be sent containing all of the incoming lines received since the last email was sent.
+There should be a timer to trigger the sending of any outstanding emails when the specified interval is up.

@@ -1,0 +1,12 @@
+2022-01-04 18:01:12.211 Dean:    https://www.youtube.com/watch?v=86cQJ0MMses
+2022-01-04 18:00:02.904 Dean:    there is a video that is wporth watching onthe subject
+2022-01-04 17:59:30.249 Dean:    e
+2022-01-04 17:59:28.224 Dean:    or rather slightly beforr that or it would not work
+2022-01-04 17:59:11.560 Dean:    then it hands it over to port 587
+2022-01-04 17:58:54.080 Dean:    when it has done its job of negotiating the STARTTLS
+2022-01-04 17:58:34.560 Dean:    regardless of what you put in the port field for STARTTLS
+2022-01-04 17:58:18.665 Dean:    the mitm proxy we have is actually open on port 10025
+2022-01-04 17:57:47.649 Dean:    the user can choose
+2022-01-04 17:57:38.024 Dean:    I don't restrict a particular port to a type of handshaking/encryption
+2022-01-04 17:56:51.272 Dean:    you don't want it falling back to another less powerful mode of encryption or plain text
+2022-01-04 17:55:58.448 Dean:    yes, that's basically it.

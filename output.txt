@@ -1,0 +1,24 @@
+2021-10-23 19:58:59.940 Me:    Have fun and drop me a line if you want.
+2021-10-23 19:58:42.940 Me:    
+2021-10-23 19:58:39.060 Me:    There is a full help that you can access at any time, just click the button.
+2021-10-23 19:58:20.340 Me:    
+2021-10-23 19:58:04.160 Me:    over any component a tooltip will pop up briefly stating what the component does.
+2021-10-23 19:58:04.160 Me:    text in the two chat windows. The chat boxes are empty as you have not yet started to chat. If you hover your mouse 
+2021-10-23 19:58:04.160 Me:    When the basic configuration tasks are done, FCW will start and show a screen similar to the one above but with no chat 
+2021-10-23 19:58:02.380 Me:    
+2021-10-23 19:57:41.250 Me:    to share a folder with another user. 
+2021-10-23 19:57:41.250 Me:    these files must be shared within Dropbox so you can both see them. Visit dropbox for more detailed instructions on how 
+2021-10-23 19:57:41.250 Me:    other is the output file where your own updates will be written and sent to your partner. The location where you store 
+2021-10-23 19:57:41.250 Me:    Fire Call Win has two shared files, one is the input file from which you will receive updates from your partner. The 
+2021-10-23 19:57:39.830 Me:    
+2021-10-23 19:57:19.320 Me:    automatically run to allow you to set these.
+2021-10-23 19:57:19.320 Me:    the location for the input and output files and the location of the exchange folder. The preferences screen will 
+2021-10-23 19:57:19.320 Me:    When the program first runs it needs to have some configuration options filled in. Fire Call Win will prompt you to set 
+2021-10-23 19:56:35.830 Me:    
+2021-10-23 19:56:27.870 Me:    Windows. In addition to chat, Emojis, voice recordings and user files can be shared too.
+2021-10-23 19:56:27.870 Me:    shared file or folder resource over a network of some sort as long as it appears as a locally accessible resource to 
+2021-10-23 19:56:27.870 Me:    almost real-time basis. This version uses the basic Dropbox service to share files and folders but it can also use any 
+2021-10-23 19:56:27.870 Me:    encrypted transfer via  shared files and folders. Files can be transferred and exchanged, chat and data swapped on 
+2021-10-23 19:56:27.870 Me:    Fire Call Win is a simple chat tool that allows two users, typically developers, to communicate person-to-person using 
+2021-10-23 19:56:05.160 Me:    
+2021-10-23 19:56:02.810 Me:    Welcome to Fire Call for Windows Beta version

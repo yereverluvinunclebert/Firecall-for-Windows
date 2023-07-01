@@ -1,0 +1,455 @@
+' ==========
+'
+' check on file existence during drag and drop and attachment - DONE
+' new prefs tab for pre-defined text buttons - DONE
+' add pre-defined button texts to settings.ini - DONE
+' add code to read the pre-defined text buttons on startup and add them to the buttons - DONE
+' copy multiple lines with CR/LF as separate lines  - DONE
+' turn off tooltips - DONE
+' synch. the output box too as the user may be using .JS FC as well - DONE
+' copy multi selected lines from the upper input box - DONE
+' copy multi selected lines from the lower output box - DONE
+' handling incoming attachments - DONE
+    ' show JPG in the TV box - DONE
+    ' double click on the TV opens an image using the default app - DONE
+' PNG image handling  - we have code in rocketdock enhanced settings - DONE
+' Add display of an image on a click on each line containing a file reference - DONE
+' TIFF, EMF, WMF, CUR - DONE
+' prevention of listbox flicker when updating - DONE
+' vertical scrollbars disappearing - DONE
+' F5 and ctrl/c - recognise keypresses - DONE
+' create unknown image type picture - DONE
+' create unknown attachment image - DONE
+' create document-widget.png base upon the modern widget image, three cogs and a box - DONE
+' add a realtime clock just using VB6 line animation - DONE
+' add response to a ping - DONE
+' resize the PNG and images resized using LaVolpe's later method by their known size
+'   this was not done in rocket.exe as icons are always square
+'   so we need to find out whther LVp's code analyses the size (it does) and how it can return that data - DONE
+' fixed a bug where drag and dropping from within the listbox caused a program crash - DONE
+' fixed the <b><b> on the output not translating - DONE
+' added right click menu & F5 option and code for each input box - DONE
+' added right click menu option to show clock - DONE
+' When an image has just been selected manually disable the automatic selection of the last image provided so that
+'   the currently selected image is not automatically overwritten - DONE
+' resizing bug with TIFFs, fixed changes to la volpe's code to move them to a more appropriate place - DONE
+' clock/red button choice saved - DONE
+' ctrl+F for a search - DONE
+' F3 for subsequent searches - DONE
+' message width - reinstate that option to chop input text to the maximum length - DONE
+' all prefs to be grouped to make centralisation easier when new tabs are added - DONE
+' add a menu to select clock type - DONE
+' add code to all major buttons to make them respond to right clicks to show the menu - DONE
+' add the missing code to write the time of the last awake call - DONE
+' added quiet versions of the printer/shredder WAV files - DONE
+' add a cross to the image to make it go away - DONE
+' add controls for sounds and animations - DONE
+' add code to save new checkboxes for sounds and animations  - DONE
+' check for modification lamp being bright when no obvious change - DONE
+' add control logic to sounds and animations - DONE
+' add modification date/time and use this to replace the linecount, should be faster - DONE
+' add logic to select quieter sounds - DONE
+' add awake timer - DONE
+' FCW jumping to front - setZorder is called on formActivate, now disabled - DONE
+' all external references to firecallmain and firecallprefs subroutines are frowned upon in VB.NET so the code needs to be made public - DONE
+' fix all byRefs and byVals in my code, forget La Volpe's code as it will not be ported to VB.NET - DONE
+' added code to always display the last selected tab in prefs - DONE
+' On dropbox not working - check messagebox is not already up there before posting another - DONE
+' How to handle an incoming image using similar animation to the Emoji print out - ABANDONED - We aren't going to do it.
+' Add error handling around the datediff that was experiencing an overflow after an overnight sleep on rare occasions
+' Add HELP button to the prefs - DONE
+' Ensure a click on a text in any of the prefs icons also causes a click on the icon image - DONE
+' fix the <t><t> on the output file - DONE
+' documented all functions - WIP fireCallMain - DONE
+' documented all functions - WIP fireCallPrefs - DONE
+' fix the incorrect tooltips in the prefs - DONE
+' fix the problem with left/right keys not working in the edit text box - DONE
+' tidy and sort the variable and API declarations private/public in fireCallMain - DONE
+' tidy and sort the variable and API declarations private/public in module1 - DONE
+' rubberduck - DONE
+'    low priority - all done
+'    informational - all done
+'        removed unused vars
+'        removed unused API calls
+'        removed unused routines
+'        converted subs to functions
+'        variable declarations now all explicit, no &, $ etc
+'        all implied variants removed
+' document all functions - MODULE1 - DONE
+' new Emoji button images without the incorrectly cut/paste lines - DONE
+' add code and tooltips for the above buttons - DONE
+
+' merging both listboxes - DONE
+'    add a prefs option - DONE
+'    add the code to store, read, validate and adjust controls for the setting - DONE
+'    extend the box to the bottom of the display area - DONE
+'    create a new array to store the combined data - DONE
+'    hide the input and output boxes - DONE
+'    read the input data into the array as normal
+'    read the output data into the same array as normal
+'    resize the combined array to contain both sets of data - DONE
+'    populate the combined array from the two listboxes - DONE
+'    quicksort to sort the array - DONE
+'    build a new listbox from the combined array - DONE
+'    change any input-specific texts and messages to reflect the now combined listbox - DONE
+' convert the remaining sendSomething in the input file processing to a sendCommandTimer - DONE
+'    using the .tag property to pass the parameter, to prevent any re-entrance back into the polling process.
+' identify http & https as links and handle them as such on a click - DONE
+'    note listboxes cannot display individual lines in different colours
+' identify folders and mark them as such in the listbox text - DONE
+' add recognition of folders on an image double-click - DONE
+' update tooltips to reflect folders rather than files - DONE
+' fix continuous polling after a zero polling interval - DONE
+' add message when polling is off - DONE
+' config item to configure automatic shutdown or not - DONE
+' changed fnFExists and fnDirExists to unicode aware API replacements to remove two instances of FSO - DONE
+' add recognition of remote shutdown command - DONE
+' add code to ignore a shutdown if it is older than 5 minutes - DONE
+' alternative error handling - DONE
+' AWAKE to spec, doing it from the real timestamp causes overflows - DONE
+'   These need to be divided by 1000 to allow them to resolve using LONGs to standard Windows dates
+'   01/08/2021 18:46:24
+'   Wed, 30 Jun 2021 14:55:27 GMT
+' finish the help - very WIP indeed - DONE
+' sort out the automatic restarting of the timers if DB goes offline - DONE
+' PING does not respond when preceded by an AWAKE in close proximity - DONE
+' make the shutdown checkbox do its job, saving and displaying the status in PREFS - DONE
+' implement a message queue for text to send - DONE
+' create a manifest - DONE
+' when the string limit is reached use instrRev to find the final space and trim the line to that point - DONE
+' copying/pasteing text from Cinta notes with spaces, the pasted spaces are handled with a timestamp
+'    but an extra space without a timestamp enters the output text file
+'    resolved by using a vbLF instead of a vbCrLf - DONE - backed out as this must use vbCrLf to be Unix compatible
+' Test UTF-8 binary stream writing to file to replace the usage of the file system object i/o that is slow - TESTED
+' Merging to one listbox can lead to a final additional line with a squiggle in it - DONE
+' Test ADO stream code to replace the usage of the file system object i/o that is slow - DONE
+'   lineCount - DONE
+'   input - DONE
+'   output  - DONE
+' add new config options to select UTF8/ANSI
+' add new lamps to indicate which mode selected UTF8/ANSI
+' remove vbCRLF from incoming text from pasted text in locations such as Cintanotes and the VB6 IDE  - DONE
+' AWAKE bug GMT need to adjust for GMT - DONE
+' Align the buttons so that the window can be stretched, perhaps to set widths - DONE
+' convert shutdown code to use unix epoch to vb6 date conversion to fix mismatch bug - DONE
+' convert shutdown code to use the message queue instead of the .tag - DONE
+' shutdown bug need to adjust for GMT or it is 3600 secs out - DONE
+' Add code to ensure handling of missing button messages in settings.ini
+' record with mciSendString - DONE
+' playing recordings with playSound using a double-click on a WAV file - DONE
+' use setup2go to trial an installer package - DONE
+' change the end record button to be both an end record or end play - DONE
+' playing recordings with playSound using a button on the speaker button - DONE
+' add playSound of a blank WAV just prior to recording - DONE
+' playlamp tooltips adjust according to state - DONE
+' check the existence of a recording folder - DONE
+' the unique name for the WAV files needs to be a set length so it is picked up corrrectly - DONE
+' adding the file length to the name will further make it unique and will allow a timer to be set of the correct length during playSound
+'   meaning that no recording can take place while that timer is running - DONE
+' always check nothing.wav exists - DONE
+' FCW recognising a missing image or recording file should show the missing file image - DONE
+' ADO added file open check - DONE
+' ADO testing OK when running with small files - DONE
+' add right click menu to new right hand panel - DONE
+' add new housekeeping panel on the prefs - DONE
+' add backup on start, code, variables and logic - DONE
+' add the HTML help recent changes - DONE
+' test writing mp3 files rather than WAV files using mciSendString - ABANDONED - We aren't going to do it as Mac version can read WAV files
+' PNG files in the input file are currently not displaying images - DONE
+' file types not being recognised by type when reading the i/o files for the first time on startup - DONE
+' add ballon tooltips to the main GUI - DONE
+' fix that tiny artefact on the emoji screen - DONE
+' change the label names on the prefs to change them to control arrays to make room for more controls - DONE
+' double click on the last PNG dragged and dropped does not always raise the image in the default app when double clicked upon - DONE
+' add regular backups, code, variables and logic - DONE
+' F1 for help on the main form turns on the balloon tooltips - DONE
+' backupSettings renamed and all vars changed to suit new usage - DONE
+' backupSettings removed GOTO breakout inside loop, replaced by EXIT FOR - DONE
+' option to disable Dropbox checks to allow it to work with onedrive or google drive - DONE
+' option to select which Cloud option to use - allowing calling of functions that check for the existence of those specific processes - WIP
+' recognise and transform <r> in the inputfile - DONE
+' recognise the m4a sound recordings and open those as default attachments - DONE
+' change the unique naming of the recording files according to Harry's spec change  - DONE
+' Find the beginning of the line and respond to New file/folder &c at position 0 only for the input and test - DONE
+' Find the beginning of the line and respond to New file/folder &c at position 0 only for the output and test - DONE
+' replace the valid and invalid image lists with collections - DONE
+' replace the instr search for a image suffix within the imagelist string with a search through a collection function - DONE
+' single chat window duplicating texts - DONE
+' test awake response from remote using Harry - DONE
+' first try, welcome.wav file recorded using MIC - DONE
+' code added to allow the recordings to be handled separately, now displaying a recording image - DONE
+' first try have a default or sample input and output.txt files with contents and the settings.ini should point to these - DONE
+' added shutdown menu request options to the menus - DONE
+' added millisec accuracy to the various timestamp menu calls - DONE
+' the maximum number of texts assigned to a button is not currently limited to 10 as it should be, some checking required - DONE
+' added licence check to startup - DONE
+' form width and height is now saved and reloaded on startup
+' modified the licence check to use the main settings file - DONE
+' 70 SpecialFolder_Error 0 remove the error checking and test again - DONE
+' height and width being cropped on Win10 systems due to increaed border sizes affecting form.width/height - DONE
+' added code to extract DPI and twipsPerPixel reporting - DONE
+' long line problem where it failed to post at all when there were no spaces at all in a URL, now posts the line as entered - DONE
+' A-Z, 0-9 keypresses on the listboxes automatically set focus to the text box below - DONE
+' Add the thermometer graphic and make the line grow as the recording/playback proceeds - DONE
+' Add dynamic tooltips to the thermometer graphics - DONE
+' If it is the first time run set the input path in the settings file to the local input and output files - DONE
+' a single click on an externally dropped wav file in the listbox should allow the play button to appear automatically - DONE
+' windows error 70 during SpecialFolder shell object - caused by Avast on newly compiled  .exe - DONE
+' deal with executable files sent via FCW as a drag/drop. When clicked it checks a list of known executable suffixes. - DONE
+' test recording using different sampling rates see if it leads to poor quality recording? - DONE
+' find an alternative to the MCISendString method - DONE
+' add the code to enumerate audio devices - DONE
+' add a hidden combobox on the main form to store the audio input devices on startup - DONE
+' add a combobox on the prefs form to allow the audio input devices to be modified - DONE
+' add the code to save the audio input devices - DONE
+' find any code that causes the prefs to load prematurely causing problems with vars not yet initialised - DONE
+' add the selection between high and low quality mode and code to save it to file - DONE
+' add the new sounds image to help - DONE
+' now saves the last used prefs tab to file as soon as selected - DONE
+' windows error 70 during SpecialFolder shell object - test on Win10 with UAC at normal levels and if reoccurrence then
+'   use new specialFolder2 code that uses an API rather than the shell object - DONE
+' getkeypress - add F1 and F5 to the list of keypresses that need to be excluded - DONE
+' F5 does not cause a refresh on the list boxes - DONE
+'  A-Z, 0-9 first keypresses on the listboxes automatically set focus to the text box below - DONE
+' msgbox sits underneath on a drag drop, used setWindowsPos to set it on top then afterwards set it back to normal
+' delete button on the getkeypress add to ignore list - DONE
+' tooltip on attachment type = binary must be permanent so that users can see what they are potentially clicking on - DONE
+' tooltip message should have the name of the binary listed too - DONE
+' a dblclick upon an attached firecallwin.exe then pop up a message - DONE
+' double-clicking on an image, recording or attachment in the listboxes should do the same as clicking on the pictureBox - DONE
+' rename function names to add the prefix fn - WIP - search for public function - DONE
+' play with the recording params and see if you can create a smaller file - DONE
+' help changes re: recording sounds - DONE
+' Search on the single chat window returns nothing - DONE
+' pasteing this line:
+' https://forum.powerbasic.com/forum/user-to-user-discussions/powerbasic-for-windows/792800-audio-recording-and-editing-on-windows-10
+'   causes the last bit to be sent before the cut bit...
+'   this only occurs when in single chat mode because the quicksort is not stable and re-orders items with the same timestamp
+'   fix 1. use a stable quicksort, more complicated and much more code, decrease in speed.
+'   fix 2. use the same quicksort but just add one millisecond to any split line posted one after the other - DONE
+' fix the recent change that prevents edits to the text box - DONE
+' "this is an executable program" balloon pop up needs to be nullified when another is selected - DONE
+' Added right click menu options to Paste from clipboard to the output and combined list boxes - DONE
+' Added right click menu options to Paste & Go from clipboard to the output and combined list boxes - DONE
+' Added right click menu option to switch to single/split chat boxes - DONE
+' a right click menu option on the image to allow an "open this file at location" and open file with default app. - DONE
+' added doEvents to flush the event queue prior to reading from the clipboard to prevent the "cannot open clipboard" error.
+' font selection seems to choose italics since a fix to place the weight in FCWsettings.ini - DONE
+' font selection - added colour to main font selection - DONE
+' font selection - renamed vars to follow standards - DONE
+' font selection - added bool to prevent changing immediately, now waits for a save - DONE
+' fix problem with command buttons generating an error when changing font colour - DONE
+' merge the two routines that both change the control fonts - DONE
+' add the pre-setting of the font code to selection of either font - DONE
+' add .json to the known document types - DONE
+' separate the combobox reset code from the font selection - DONE
+' remove the font colour option from the font dialog - DONE
+' if the pasted line is one long URL without any spaces - do not split - DONE
+' add a longer line length to match FCW js up to 240 - DONE
+' multiInstr should return a value of the found position as well as a boolean true/false - DONE
+' Add ADO Error number 3004, a File Write Error to the list - DONE
+' email controls do not show when the two check boxes are not selected - DONE
+' GetPrivateProfileString cannot read certain special characters, need a new routine to read encrypted strings - DONE
+' the email password is unhashed/unencrypted - we have encryption in the FireStrike Program, bring it over - DONE
+' the asterix filled password field needs to be locked - DONE
+' WritePrivateProfileString cannot read certain special characters, need a new routine to write encrypted strings - DONE
+' implemented Base64 encoding/decoding of strings prior to committing them to settings.ini - DONE
+' reverted to useing getSettings and putSettings as we can now pass strings with special chars - DONE
+' upgraded the encryption routine from simple hashing to a decent AES type. The password is still stored in plaintext in the form load - DONE
+' addition of STARTTLS injection using a proxy, allowing negotiation - DONE
+' outlook - validate done  - successful - DONE
+' Test email button - DONE
+' test pipex - successful - DONE
+' test outlook - successful - DONE
+' test hotmail - successful - DONE
+' test gmail - successful - DONE
+' test yahoo - fail due to Oauth or similar - DONE
+' add a quotation menu option on the top menu - DONE
+' F5 causing a problem after a refresh - DONE
+' when a system has no sound options we need to populate the combobox text with an option of "no recording devices found" - DONE
+' sound combobox now has the option to state "no audio devices found" restored by changing the dropdown to a combobox - DONE
+'   whose keydown even is captured with a keyAsciii = 0 - DONE
+' gaps around the prefs borders sorted, moved prefs r/h buttons too - DONE
+' lifted lid image on the main screen created and implemented on a catch click and a ballon tooltip - DONE
+' add a combobox dropdown to the smtp server section that allows selection of smtp configs - DONE
+' replace sendSomething with a call to a routine just to populate the array for multiple items to avoid the ADO file write error 3004 - DONE
+' double messages being sent with sequential timestamps - perhaps change sendsomething to use the queue - DONE
+'   removed the redim preserve on the output and inputfile arrays - DONE
+'   handled a mismatch in length between the listboxes and the associated arrays, clearing the remaining elements - DONE
+' handled a RETURN keypress when listboxes have focus generating a CRLF before the next text entry - DONE
+' added a logfile append whenever an error is generated - DONE
+' all msgbox error texts now use the new output log method - DONE
+' conversion to seconds of a timestamp string now works as expected using new code from Olaf Schmidt - DONE
+' added timestamp to the error log debug output - DONE
+' send mail when certain errors occur, write all errors to a log file with a timestamp - DONE
+' send any recent errors, store the last error timestamp to allow comparison, send only those sent already - DONE
+' cause the email icon to disappear using a timer - DONE
+' emailing functionality, advice and errors to the help - DONE
+' only send an email when the program is idle - DONE
+' settings.ini to be copied and tested on test machines - DONE
+' red alcohol thermometer to mark the recording time - DONE
+' FCW jumping to front still, obtaining focus when a timer does a function such as polling - no longer occurring - DONE
+' emoji dropdown now a dropdown and not a combo to remove the highlight - DONE
+' clock is now the default and not the buzzer - DONE
+' added tooltip to email icon to indicate status - DONE
+' drag and drop file duplicate error message ensured to be on top when explorer is on top - DONE
+' sometimes the upper list box does not update even though the modification lamp is lit - add a refresh to the listbox - DONE
+' one consistent shadow style on the picture      - DONE
+' add error list to the help - DONE
+' GIF not displaying - DONE
+' cannot open clipboard error  - added sleep call prior to each.  - DONE
+' copy and quote requires a click on the output window for the quote to appear - removed DoEvents - DONE
+' single window - the duplications can still occur, we need to add the same code as per the dual window - DONE
+' automatic housekeeping? archive data older than... - DONE
+' If currentIdleTime < 30000 Then Exit Sub ' this needs to be commented back in  - DONE
+' the updateArchiveFile routine needs to be a function that returns a true if the archive file has been created successfully - DONE
+' test with other weird characters in the filename  - DONE
+' if the archive file has not been created then the routine should end  - DONE
+'   create a housekeeping timer in code to run hourly  - DONE
+' test remote shutdown using Harry - DONE
+' themeing - the last selected theme is now saved and applied on prefs startup - DONE
+' themeing - the themeing menu options are now checked and renamed according to current state - DONE
+' themeing - confirmed auto themeing works on Win7 with classic theme and Win10 with lighter themes - DONE
+' themeing, theme timer changes the theme and icons, tested on Win10 - DONE
+' extended the width of FCW to extend across a 1440 wide screen - DONE
+' resizing and border testing on Windows 10 right hand border - DONE
+' does not know PDF file type - displays unknown, removed from image types - DONE
+' HEIC image support, add to the list of supported image types to allow it to be double-clicked - DONE
+' Duplication still occurring on the input - moved the no-duplication code until after the unlock window command - DONE
+' read the archive folder location from the settings file - DONE
+' read the backup folder location from the settings file - DONE
+' added new FCWEnableAlarmSound var to allow the alarm sound flag to be lowered and saved - DONE
+' removed some of the extraneous separate labels on the sound tab in prefs - DONE
+' added timer and vars necessary to allow the animation on the config button - DONE
+' move iconiseTimer to final prefs page where it can be merged to the opacity setting - DONE
+' setting opacity to a pre-defined level as an option instead of automatically iconising - DONE
+
+' HIGH PRIORITY
+' =============
+'
+'     test that a FCW built on a 64bit system does run without flaw on a 32 bit Win7 system
+'     test that a FCW with a 16 x 16 icon built on a 64bit system does run without flaw on a 32 bit Win7 system
+'     test that a FCW built on a 32bit system does run without flaw on a 32 bit Win7 system - WIP
+'     test that a FCW built on a 32bit system does run without flaw on a 64 bit Win7 system - WIP
+'     test that a FCW built on a 32bit system does run without flaw on a 64 bit Win10 system
+'
+'     When program first starts on a new system without any X,Y information it starts off centre
+'
+'     find an icon for the main form that is suitable for 32/64bit systems
+'     test the icon just on the main form and not on the project itself - is that possible?
+'
+' settings.ini needs to be copied over from the users area to the sample item in the programs folder
+' default settings.ini to be standardised for new users - WIP
+'   the input and output files need to be directed to the initial text files so that the listboxes are not blank
+
+' paste & go from the output
+
+' MED. PRIORITY
+' =============
+
+' menu option to edit a line in the combined box - needs to know whether that line
+'      is part of the output, analyse the header?
+'      for the moment remove it from the menu options? YES
+
+' modify the minimise button to something else - a stamp - DONE
+
+' menu option to delete a line - WIP
+'      added line, now need to add code to rewrite the file
+
+' menu option to edit a line - WIP
+'      added line, now need to add code to rewrite the file
+
+' when the combined text box is being scrolled back a timed poll sets the page to the bottom automatically
+'    test the removal of the position setting to the final position when the slider is being used or when control has focus.
+'    or perhaps when the slider position is not at max.
+
+' F1 for help on the main form causes the balloon tooltips to respond in 200ms and then reset to 650ms when done
+
+' repair all on error statements previously commented out
+
+' rubberduck the code again
+
+' build an installer using setup2go - WIP
+
+' too many spaces in the setting file
+
+' LOW Priority
+' ============
+
+'       Elroy's codoe to add balloon tips to comboBox
+'       https://www.vbforums.com/showthread.php?893844-VB6-QUESTION-How-to-capture-the-MouseOver-Event-on-a-comboBox
+'
+
+' HEIC image support, add native support to VB6 handling of HEIC files when the code is available.
+
+' modify the default top and tail to use debugLOG instead of msgbox for the duration of this project.
+
+' add top and tail to all functions plus descriptions WIP
+
+' document all functions - MODULE2 - monitor code that is largely unused
+' document all functions - MODULE3 - email module that is currently unused at the moment
+
+' FCW move to front and back - test
+
+' make the tooltips persist on a shown image
+
+' record the help file text on a Wav FILE
+
+' bypass the 48k limitations of the intrinsic ListBox control. Juat search for that, we have code (I think).
+
+' Elroy's change to the dropdown combobox allowing subclassing to capture a right click (comboboxes do not have mouseDown events) 
+' windows call and return the
+' mouseover event.
+'  https://www.vbforums.com/showthread.php?893844-VB6-QUESTION-How-to-capture-the-MouseOver-Event-on-a-comboBox&highlight=
+
+' alternative to the above, implement Krool's combobox that has onMouseOver
+
+' replace the input text box with a version with out own context menu http://www.vb-helper.com/howto_replace_textbox_menu.html
+'   or replace it with Krool's unicode version.
+
+' implement Krool's unicode text input box - I think this is not required.
+
+' Add a realtime GDI clock, we have the code for a realtime GDI+ clock that animates the hands using a drawline function
+'   much in the same way as a VB6 line draw. We can take all the GDI startup and shutdown code and use that to
+'   place the code on the form and draw the hands.
+'
+'   a. We need to ascertain the effect of LaVolpe's GDI+ usage in starting and shutting GDI+ and whether it
+'      would interfere with a GDI clock that is continuously running (most likely).
+'   b. We would need to find out how to rotate a PNG around a specific point.
+
+' Oauth compatibility on emails https://www.vbforums.com/showthread.php?866333-OAuth-2-0
+
+' readme.txt for each folder
+
+' camera code
+
+' UI change to modify the backup folder location
+
+' UI change to modify the archive folder location
+
+' DPI for big screens  100% is 96 DPI. 125% is 120 DPI.
+' all pictures need to be resized when DPI changes - we have code from LaVolpe that does this.
+' the alternative is to have alternative imagery for each DPI level
+' have that stored in a RES file and pull it in as the DPI changes
+
+' test using google drive shared area
+
+' test using onedrive shared area
+
+' paste & go added to the text box menu 
+
+
+
+
+' Nothing to do with FCW
+' =======================
+
+' Elroy's code to animate Wanda
+' Elroy's balloon tooltips on Steamydock IconSettings and DockSettings
+' Elroy's balloon tooltips on Firestrike
+' font dialog fixes to Steamydock utilities
+' Olaf's cGdiPlusCache.cls loading PNGs, icons and images of all sorts - demos here
+'   https://www.vbforums.com/showthread.php?876365-VB6-cGdiPlusCache-cls-revisited
+' comboboxes to dropdown lists, any that remain as comboboxes keyAscii = 0 on click to prevent modification
+' change the debug log on steamydock to use a simple logfile and not a separate debug window.
+' ensure that the autothemeimg selects the correct background images fopr the icons during startup.
