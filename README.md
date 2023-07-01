@@ -1,6 +1,6 @@
 # Firecall for Windows
 
-Firecall for Windows, written in VB6. A WoW64 dock settings utility for Reactos, 
+Firecall for Windows, written in VB6. A WoW64 utility for Reactos, 
 Windows XP, Win7, 8 and 10+.
 
 Fire Call Win is a simple chat tool that allows two users, typically developers, 
@@ -10,6 +10,8 @@ real-time basis. This version uses the basic Dropbox service to share files and
 folders but it can also use any shared file or folder resource over a network of 
 some sort as long as it appears as a locally accessible resource to Windows. In 
 addition to chat, Emojis, voice recordings and user files can be shared too.
+
+![FCWWider01](https://github.com/yereverluvinunclebert/Firecall-for-Windows/assets/2788342/fa09d58f-04bb-4a82-bbfb-4a30928c47b9)
 
 This program is free and FOSS. The basic file and folder sharing services are 
 free, this program uses Dropbox out of the box but Google Drive and Microsofts 
@@ -29,6 +31,8 @@ is conversion to RADBasic/TwinBasic for future-proofing and 64bit-ness.
 
 This utility is one of a set of steampunk and dieselpunk desktop widgets. That 
 you can find here on Deviantart: https://www.deviantart.com/yereverluvinuncleber/gallery
+
+![document-unknown](https://github.com/yereverluvinunclebert/Firecall-for-Windows/assets/2788342/178e5248-ea23-454e-a1be-bb2ba8b9f7a1)
 
 I do hope you enjoy using this utility and others. Your own software 
 enhancements and contributions will be gratefully received if you choose to 
@@ -133,6 +137,8 @@ startup, reason this is done this way is because the enumeration must be done on
 button to operate in HQ mode. Although we normally store the config. data in the prefs form, if we read that
 construct on startup it will try to load the whole prefs form and the prefs program variables are not ready
 for that to occur. Basically, we cannot have the combobox on another form and instead we keep the two in synch.
+
+![firecallDesktopPrefs01](https://github.com/yereverluvinunclebert/Firecall-for-Windows/assets/2788342/c6039ce2-efd2-438c-ae0c-5b4994b96e94)
 
 The email is achieved using a tool from Microsoft called CDO, Firecall uses this to make the email point-to-point
 connection. Microsoft have failed to update CDO for a while so STARTTLS is not supported by default. In order to
