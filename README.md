@@ -11,7 +11,8 @@ folders but it can also use any shared file or folder resource over a network of
 some sort as long as it appears as a locally accessible resource to Windows. In 
 addition to chat, Emojis, voice recordings and user files can be shared too.
 
-![FCWWider01](https://github.com/yereverluvinunclebert/Firecall-for-Windows/assets/2788342/fa09d58f-04bb-4a82-bbfb-4a30928c47b9)
+![FCWWider01](https://github.com/yereverluvinunclebert/Firecall-for-Windows/assets/2788342/56b8af40-8e5a-47bf-83a8-3911d4ed7ded)
+
 
 This program is free and FOSS. The basic file and folder sharing services are 
 free, this program uses Dropbox out of the box but Google Drive and Microsofts 
