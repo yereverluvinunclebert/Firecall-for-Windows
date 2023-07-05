@@ -324,6 +324,17 @@
 ' move iconiseTimer to final prefs page where it can be merged to the opacity setting - DONE
 ' setting opacity to a pre-defined level as an option instead of automatically iconising - DONE
 
+' Tasks underway now
+' ==================
+
+' Addition of temporary menu options to reveal the program folder
+' Addition of temporary menu options to edit using the vbp file
+
+' Addition of FCWDefaultEditor public variable 
+' Addition of FCWDefaultEditor reading and writing settings.ini 
+' Addition of FCWDebug public variable 
+' Addition of FCWDebug reading and writing settings.ini
+
 ' HIGH PRIORITY
 ' =============
 '

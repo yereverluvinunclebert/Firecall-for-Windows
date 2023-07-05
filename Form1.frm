@@ -1546,6 +1546,18 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuBlankLine7 
          Caption         =   "-"
       End
+      Begin VB.Menu mnuBlankLine12 
+         Caption         =   ""
+      End
+      Begin VB.Menu mnuAppFolder 
+         Caption         =   "Reveal Widget in Windows Explorer"
+      End
+      Begin VB.Menu mnuEditWidget 
+         Caption         =   "Edit Widget using..."
+      End
+      Begin VB.Menu mnuBlankLine11 
+         Caption         =   ""
+      End
       Begin VB.Menu mnuRefresh 
          Caption         =   "Refresh the Chat boxes (F5)"
       End
@@ -6574,8 +6586,24 @@ Private Sub adjustMainControls()
         houseKeepingTimer.Enabled = False
     End If
     
-    
+    ' temporary code STARTS
+    Dim FCWDefaultEditor As String: FCWDefaultEditor = vbNullString
+    Dim FCWDebug As String: FCWDebug = vbNullString
 
+    FCWDefaultEditor = "E:\vb6\fire call\FireCallWin.vbp"
+    FCWDebug = "1"
+    ' temporary code ENDS
+    
+    If FCWDefaultEditor <> vbNullString And FCWDebug = "1" Then
+        FireCallMain.mnuEditWidget.Caption = "Edit Widget using " & FCWDefaultEditor
+        FireCallMain.mnuEditWidget.Visible = True
+        FireCallMain.mnuAppFolder.Visible = True
+    Else
+        FireCallMain.mnuEditWidget.Visible = False
+        FireCallMain.mnuAppFolder.Visible = False
+    End If
+    
+    
    On Error GoTo 0
    Exit Sub
 
@@ -7637,4 +7665,78 @@ End Sub
 Private Sub mnuBringToCentre_Click()
     Call centreMainScreen
     
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : mnuAppFolder_Click
+' Author    : beededea
+' Date      : 05/05/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub mnuAppFolder_Click()
+    Dim folderPath As String: folderPath = vbNullString
+    Dim execStatus As Long: execStatus = 0
+    
+   On Error GoTo mnuAppFolder_Click_Error
+
+    folderPath = App.Path
+    If fDirExists(folderPath) Then ' if it is a folder already
+
+        execStatus = ShellExecute(Me.hwnd, "open", folderPath, vbNullString, vbNullString, 1)
+        If execStatus <= 32 Then MsgBox "Attempt to open folder failed."
+    Else
+        MsgBox "Having a bit of a problem opening a folder for this widget - " & folderPath & " It doesn't seem to have a valid working directory set.", "Panzer Earth Gauge Confirmation Message", vbOKOnly + vbExclamation
+        'MessageBox Me.hWnd, "Having a bit of a problem opening a folder for that command - " & sCommand & " It doesn't seem to have a valid working directory set.", "Panzer Earth Gauge Confirmation Message", vbOKOnly + vbExclamation
+    End If
+
+   On Error GoTo 0
+   Exit Sub
+
+mnuAppFolder_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuAppFolder_Click of Form menuForm"
+
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : mnuEditWidget_Click
+' Author    : beededea
+' Date      : 05/05/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub mnuEditWidget_Click()
+    Dim editorPath As String: editorPath = vbNullString
+    Dim execStatus As Long: execStatus = 0
+    
+    ' temporary code STARTS
+    Dim FCWDefaultEditor As String: FCWDefaultEditor = vbNullString
+    Dim FCWDebug As String: FCWDebug = vbNullString
+
+    FCWDefaultEditor = "E:\vb6\fire call\FireCallWin.vbp"
+    FCWDebug = "1"
+    ' temporary code ENDS
+    
+    
+   On Error GoTo mnuEditWidget_Click_Error
+
+    editorPath = FCWDefaultEditor
+    If fFExists(editorPath) Then ' if it is a folder already
+        '''If debugflg = 1  Then msgBox "ShellExecute " & sCommand
+        
+            ' run the selected program
+        execStatus = ShellExecute(Me.hwnd, "open", editorPath, vbNullString, vbNullString, 1)
+        If execStatus <= 32 Then MsgBox "Attempt to open the IDE for this program failed."
+    Else
+        MsgBox "Having a bit of a problem opening an IDE for this program - " & editorPath & " It doesn't seem to have a valid working directory set.", "Panzer Earth Gauge Confirmation Message", vbOKOnly + vbExclamation
+        'MessageBox Me.hWnd, "Having a bit of a problem opening a folder for that command - " & sCommand & " It doesn't seem to have a valid working directory set.", "Panzer Earth Gauge Confirmation Message", vbOKOnly + vbExclamation
+    End If
+
+   On Error GoTo 0
+   Exit Sub
+
+mnuEditWidget_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuEditWidget_Click of Form menuForm"
 End Sub
