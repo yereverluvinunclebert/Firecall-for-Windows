@@ -1550,7 +1550,7 @@ Begin VB.Form FireCallMain
          Caption         =   ""
       End
       Begin VB.Menu mnuAppFolder 
-         Caption         =   "Reveal Widget in Windows Explorer"
+         Caption         =   "Reveal Program Location in Windows Explorer"
       End
       Begin VB.Menu mnuEditWidget 
          Caption         =   "Edit Widget using..."
@@ -6595,7 +6595,7 @@ Private Sub adjustMainControls()
     ' temporary code ENDS
     
     If FCWDefaultEditor <> vbNullString And FCWDebug = "1" Then
-        FireCallMain.mnuEditWidget.Caption = "Edit Widget using " & FCWDefaultEditor
+        FireCallMain.mnuEditWidget.Caption = "Edit Program using " & FCWDefaultEditor
         FireCallMain.mnuEditWidget.Visible = True
         FireCallMain.mnuAppFolder.Visible = True
     Else
