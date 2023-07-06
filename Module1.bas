@@ -621,6 +621,7 @@ Public FCWIconiseDesktop As String
 
 Public FCWArchiveFolder As String
 Public FCWBackupFolder As String
+Public FCWDefaultEditor As String
 
 Public FCWMsgBox13Enabled As String
 
@@ -2978,6 +2979,7 @@ Public Sub readSettingsFile(ByVal location As String, ByVal FCWSettingsFile As S
         
         FCWArchiveFolder = fGetINISetting(location, "archiveFolder", FCWSettingsFile)
         FCWBackupFolder = fGetINISetting(location, "backupFolder", FCWSettingsFile)
+        FCWDefaultEditor = fGetINISetting(location, "defaultEditor", FCWSettingsFile)
         
         
         FCWSkinTheme = fGetINISetting(location, "skinTheme", FCWSettingsFile)

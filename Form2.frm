@@ -3800,6 +3800,7 @@ Private Sub btnSave_Click()
         
         PutINISetting "Software\FireCallWin", "archiveFolder", FCWArchiveFolder, FCWSettingsFile
         PutINISetting "Software\FireCallWin", "backupFolder", FCWBackupFolder, FCWSettingsFile
+        PutINISetting "Software\FireCallWin", "defaultEditor", FCWDefaultEditor, FCWSettingsFile
         
         
         'save the values from the Text Items
@@ -5554,10 +5555,10 @@ Private Sub mnuCoffee_Click()
     ' On Error GoTo mnuCoffee_Click_Error
     If debugflg = 1 Then Debug.Print "%" & "mnuCoffee_Click"
     
-    answer = MsgBox(" Help support the creation of more widgets like this, send us a beer! This button opens a browser window and connects to the Paypal donate page for this widget). Will you be kind and proceed?", vbExclamation + vbYesNo)
+    answer = MsgBox(" Help support the creation of more widgets like this, DO send us a coffee! This button opens a browser window and connects to the Kofi donate page for this widget). Will you be kind and proceed?", vbExclamation + vbYesNo)
 
     If answer = vbYes Then
-        Call ShellExecute(Me.hwnd, "Open", "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info@lightquick.co.uk&currency_code=GBP&amount=2.50&return=&item_name=Donate%20a%20Beer", vbNullString, App.Path, 1)
+        Call ShellExecute(Me.hwnd, "Open", "https://www.ko-fi.com/yereverluvinunclebert", vbNullString, App.Path, 1)
     End If
 
     On Error GoTo 0

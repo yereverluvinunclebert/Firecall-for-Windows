@@ -1526,10 +1526,7 @@ Begin VB.Form FireCallMain
          Visible         =   0   'False
       End
       Begin VB.Menu mnuCoffee 
-         Caption         =   "Donate a coffee with paypal"
-      End
-      Begin VB.Menu mnuSweets 
-         Caption         =   "Donate some sweets/candy with Amazon"
+         Caption         =   "Donate a coffee with Kofi!"
       End
       Begin VB.Menu mnuSupport 
          Caption         =   "Contact Support"
@@ -2116,6 +2113,7 @@ Private Sub Form_Load()
     FCWLastAwakeString = vbNullString
     FCWLastShutdown = vbNullString
     FCWAllowShutdowns = vbNullString
+    FCWDefaultEditor = vbNullString
     storedSearchString = vbNullString
     storedSearchLineNo = 0
     
@@ -6587,7 +6585,6 @@ Private Sub adjustMainControls()
     End If
     
     ' temporary code STARTS
-    Dim FCWDefaultEditor As String: FCWDefaultEditor = vbNullString
     Dim FCWDebug As String: FCWDebug = vbNullString
 
     FCWDefaultEditor = "E:\vb6\fire call\FireCallWin.vbp"
@@ -7711,7 +7708,6 @@ Private Sub mnuEditWidget_Click()
     Dim execStatus As Long: execStatus = 0
     
     ' temporary code STARTS
-    Dim FCWDefaultEditor As String: FCWDefaultEditor = vbNullString
     Dim FCWDebug As String: FCWDebug = vbNullString
 
     FCWDefaultEditor = "E:\vb6\fire call\FireCallWin.vbp"
