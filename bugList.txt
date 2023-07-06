@@ -327,14 +327,14 @@
 ' Addition of temporary menu options to reveal the program folder - DONE
 ' Addition of temporary menu options to edit using the vbp file - DONE
 
+' Addition of FCWDefaultEditor public variable - DONE
+' Addition of FCWDefaultEditor reading and writing settings.ini - DONE
+' Addition of FCWDebug public variable  - DONE
+' Addition of FCWDebug reading and writing settings.ini - DONE
+
 ' Tasks underway now
 ' ==================
 
-' Addition of temporary menu options to reveal the program folder
-' Addition of temporary menu options to edit using the vbp file
-
-' Addition of FCWDefaultEditor public variable 
-' Addition of FCWDefaultEditor reading and writing settings.ini 
 ' Addition of FCWDebug public variable 
 ' Addition of FCWDebug reading and writing settings.ini
 

@@ -3801,7 +3801,7 @@ Private Sub btnSave_Click()
         PutINISetting "Software\FireCallWin", "archiveFolder", FCWArchiveFolder, FCWSettingsFile
         PutINISetting "Software\FireCallWin", "backupFolder", FCWBackupFolder, FCWSettingsFile
         PutINISetting "Software\FireCallWin", "defaultEditor", FCWDefaultEditor, FCWSettingsFile
-        
+        PutINISetting "Software\FireCallWin", "debug", FCWDebug, FCWSettingsFile
         
         'save the values from the Text Items
           

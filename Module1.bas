@@ -622,18 +622,15 @@ Public FCWIconiseDesktop As String
 Public FCWArchiveFolder As String
 Public FCWBackupFolder As String
 Public FCWDefaultEditor As String
+Public FCWDebug As String
 
 Public FCWMsgBox13Enabled As String
 
 
 Public backupTimerCount As Integer
-
 Public CTRL_1 As Boolean
-
 Public messageQueue As Collection
-
 Public ioMethodADO As Boolean
-
 Public SoundName As String
 
 'Public screenTwipsPerPixelX As Long ' .07 DAEB 26/04/2021 common.bas changed to use pixels alone, removed all unnecessary twip conversion
@@ -2980,6 +2977,7 @@ Public Sub readSettingsFile(ByVal location As String, ByVal FCWSettingsFile As S
         FCWArchiveFolder = fGetINISetting(location, "archiveFolder", FCWSettingsFile)
         FCWBackupFolder = fGetINISetting(location, "backupFolder", FCWSettingsFile)
         FCWDefaultEditor = fGetINISetting(location, "defaultEditor", FCWSettingsFile)
+        FCWDebug = fGetINISetting(location, "debug", FCWSettingsFile)
         
         
         FCWSkinTheme = fGetINISetting(location, "skinTheme", FCWSettingsFile)
