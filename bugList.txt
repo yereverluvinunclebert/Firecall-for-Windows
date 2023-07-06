@@ -327,19 +327,30 @@
 ' Addition of temporary menu options to reveal the program folder - DONE
 ' Addition of temporary menu options to edit using the vbp file - DONE
 
-' Addition of FCWDefaultEditor public variable - DONE
-' Addition of FCWDefaultEditor reading and writing settings.ini - DONE
-' Addition of FCWDebug public variable  - DONE
-' Addition of FCWDebug reading and writing settings.ini - DONE
+' addition of FCWDefaultEditor public variable - DONE
+' addition of FCWDefaultEditor reading and writing settings.ini - DONE
+' addition of FCWDebug public variable  - DONE
+' addition of FCWDebug reading and writing settings.ini - DONE
 ' changes to paypal link, to point to kofi - DONE
 ' remove Amazon link - DONE
+' addition of development prefs tab as per pz Earth
+' new positioning of all tab frames and inner frames using variables
+' addition of about prefs tab as per pz Earth
+' right click menu for development and about us tabs
 
 ' Tasks underway now
 ' ==================
 
-' Addition of development prefs tab as per pz Earth
-' Addition of about prefs tab as per pz Earth
-
+' same online help submenus as per PzEarth
+' development tooltips as per PzEarth
+' about tooltips as per PzEarth
+' balloon tooltips development as per PzEarth 
+' balloon tooltips about as per PzEarth 
+' four buttons on about us page to point to menu links
+' theme the about us RTF box
+' create the correct text for the about box
+' scrollbox cover from PzEarth
+' closure of all open forms, check and test
 
 ' HIGH PRIORITY
 ' =============

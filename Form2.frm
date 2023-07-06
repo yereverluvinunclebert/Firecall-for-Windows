@@ -6,15 +6,318 @@ Begin VB.Form FireCallPrefs
    ClientHeight    =   10650
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   10815
+   ClientWidth     =   10905
    Icon            =   "Form2.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   10650
-   ScaleWidth      =   10815
+   ScaleWidth      =   10905
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
+   Begin VB.Frame fraAbout 
+      Caption         =   "About"
+      Height          =   9210
+      Left            =   120
+      TabIndex        =   298
+      Top             =   1110
+      Visible         =   0   'False
+      Width           =   10590
+      Begin VB.CommandButton btnDonate 
+         Caption         =   "&Donate"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   8865
+         Style           =   1  'Graphical
+         TabIndex        =   304
+         ToolTipText     =   "Opens a browser window and sends you to our donate page on Amazon"
+         Top             =   1485
+         Width           =   1470
+      End
+      Begin VB.CommandButton btnUpdate 
+         Caption         =   "&Update"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   8865
+         Style           =   1  'Graphical
+         TabIndex        =   303
+         ToolTipText     =   "Here you can visit the update location where you can download new versions of the programs."
+         Top             =   360
+         Width           =   1470
+      End
+      Begin VB.CommandButton btnFacebook 
+         Caption         =   "&Facebook"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   8865
+         Style           =   1  'Graphical
+         TabIndex        =   302
+         ToolTipText     =   "This will link you to the Rocket/Steamy dock users Group"
+         Top             =   735
+         Width           =   1470
+      End
+      Begin VB.CommandButton btnAboutDebugInfo 
+         Caption         =   "Debug &Info."
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   8865
+         Style           =   1  'Graphical
+         TabIndex        =   301
+         ToolTipText     =   "This gives access to the debugging tool"
+         Top             =   1110
+         Width           =   1470
+      End
+      Begin VB.TextBox txtAboutText 
+         Appearance      =   0  'Flat
+         BackColor       =   &H8000000F&
+         BorderStyle     =   0  'None
+         Height          =   6585
+         Left            =   345
+         MultiLine       =   -1  'True
+         ScrollBars      =   2  'Vertical
+         TabIndex        =   300
+         Text            =   "Form2.frx":000C
+         Top             =   2205
+         Width           =   9975
+      End
+      Begin VB.Frame fraScrollbarCover 
+         BorderStyle     =   0  'None
+         Height          =   6435
+         Left            =   7950
+         TabIndex        =   299
+         Top             =   1995
+         Width           =   420
+      End
+      Begin VB.Label Label17 
+         Caption         =   "Windows XP, Vista, 7, 8, 10  && 11 + ReactOS"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Left            =   2700
+         TabIndex        =   315
+         Top             =   1560
+         Width           =   3735
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Target"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   4
+         Left            =   1050
+         TabIndex        =   314
+         Top             =   1560
+         Width           =   1470
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Current Developer"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   3
+         Left            =   1050
+         TabIndex        =   313
+         Top             =   1215
+         Width           =   1470
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Dean Beedell © 2023"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   6
+         Left            =   2715
+         TabIndex        =   312
+         Top             =   1215
+         Width           =   2175
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Version"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   1
+         Left            =   1065
+         TabIndex        =   311
+         Top             =   495
+         Width           =   795
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Originator"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   2
+         Left            =   1050
+         TabIndex        =   310
+         Top             =   855
+         Width           =   795
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Dean Beedell © 2023"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   5
+         Left            =   2715
+         TabIndex        =   309
+         Top             =   855
+         Width           =   2175
+      End
+      Begin VB.Label lblMinorVersion 
+         BackStyle       =   0  'Transparent
+         Caption         =   "0"
+         BeginProperty Font 
+            Name            =   "Centurion Light SF"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   3090
+         TabIndex        =   308
+         Top             =   510
+         Width           =   225
+      End
+      Begin VB.Label lblMajorVersion 
+         BackStyle       =   0  'Transparent
+         Caption         =   "0"
+         BeginProperty Font 
+            Name            =   "Centurion Light SF"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   2730
+         TabIndex        =   307
+         Top             =   510
+         Width           =   225
+      End
+      Begin VB.Label lblRevisionNum 
+         BackStyle       =   0  'Transparent
+         Caption         =   "0"
+         BeginProperty Font 
+            Name            =   "Centurion Light SF"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   3450
+         TabIndex        =   306
+         Top             =   510
+         Width           =   525
+      End
+      Begin VB.Label lblDotDot 
+         BackStyle       =   0  'Transparent
+         Caption         =   ".        ."
+         BeginProperty Font 
+            Name            =   "Centurion Light SF"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Left            =   2940
+         TabIndex        =   305
+         Top             =   510
+         Width           =   495
+      End
+   End
    Begin VB.Frame fraDevelopment 
       Caption         =   "Development"
       Height          =   3435
@@ -51,7 +354,7 @@ Begin VB.Form FireCallPrefs
                Height          =   315
                Left            =   1440
                TabIndex        =   294
-               ToolTipText     =   $"Form2.frx":000C
+               ToolTipText     =   $"Form2.frx":0FB7
                Top             =   105
                Width           =   3660
             End
@@ -66,7 +369,7 @@ Begin VB.Form FireCallPrefs
                Width           =   1350
             End
             Begin VB.Label lblDebug 
-               Caption         =   $"Form2.frx":009E
+               Caption         =   $"Form2.frx":1049
                Height          =   930
                Index           =   9
                Left            =   1440
@@ -77,9 +380,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbDebug 
             Height          =   315
-            ItemData        =   "Form2.frx":0142
+            ItemData        =   "Form2.frx":10ED
             Left            =   1680
-            List            =   "Form2.frx":0144
+            List            =   "Form2.frx":10EF
             Style           =   2  'Dropdown List
             TabIndex        =   290
             ToolTipText     =   "Choose to set debug mode."
@@ -138,7 +441,7 @@ Begin VB.Form FireCallPrefs
                Width           =   3960
             End
             Begin VB.Label lblConfigurationTab 
-               Caption         =   $"Form2.frx":0146
+               Caption         =   $"Form2.frx":10F1
                Height          =   660
                Index           =   8
                Left            =   270
@@ -227,9 +530,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbMaxLineLength 
             Height          =   315
-            ItemData        =   "Form2.frx":01E4
+            ItemData        =   "Form2.frx":118F
             Left            =   1710
-            List            =   "Form2.frx":01E6
+            List            =   "Form2.frx":1191
             Style           =   2  'Dropdown List
             TabIndex        =   96
             ToolTipText     =   "The program will cut your text to a new line when this limit is reached"
@@ -308,14 +611,14 @@ Begin VB.Form FireCallPrefs
    Begin VB.Frame fraAboutButton 
       BorderStyle     =   0  'None
       Height          =   1140
-      Left            =   9795
+      Left            =   9780
       TabIndex        =   286
       Top             =   -90
       Width           =   975
-      Begin VB.Image imgAbout 
+      Begin VB.Image picAbout 
          Height          =   600
          Left            =   160
-         Picture         =   "Form2.frx":01E8
+         Picture         =   "Form2.frx":1193
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -323,6 +626,7 @@ Begin VB.Form FireCallPrefs
       Begin VB.Label lblAbout 
          Caption         =   "About"
          Height          =   240
+         Index           =   0
          Left            =   255
          TabIndex        =   287
          Top             =   825
@@ -331,7 +635,7 @@ Begin VB.Form FireCallPrefs
       Begin VB.Image imgAboutClicked 
          Height          =   600
          Left            =   160
-         Picture         =   "Form2.frx":0770
+         Picture         =   "Form2.frx":171B
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -340,14 +644,14 @@ Begin VB.Form FireCallPrefs
    Begin VB.Frame fraDevelopmentButton 
       BorderStyle     =   0  'None
       Height          =   1140
-      Left            =   7770
+      Left            =   7755
       TabIndex        =   284
       Top             =   -90
       Width           =   1035
       Begin VB.Image picDevelopment 
          Height          =   600
          Left            =   160
-         Picture         =   "Form2.frx":0C5B
+         Picture         =   "Form2.frx":1C06
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -363,7 +667,7 @@ Begin VB.Form FireCallPrefs
       Begin VB.Image imgDevelopmentClicked 
          Height          =   600
          Left            =   160
-         Picture         =   "Form2.frx":1213
+         Picture         =   "Form2.frx":21BE
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -393,7 +697,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   165
-         Picture         =   "Form2.frx":1599
+         Picture         =   "Form2.frx":2544
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   182
@@ -433,7 +737,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   630
          Left            =   165
-         Picture         =   "Form2.frx":21B9
+         Picture         =   "Form2.frx":3164
          ScaleHeight     =   630
          ScaleWidth      =   630
          TabIndex        =   31
@@ -462,7 +766,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   630
          Left            =   165
-         Picture         =   "Form2.frx":2778
+         Picture         =   "Form2.frx":3723
          ScaleHeight     =   630
          ScaleWidth      =   630
          TabIndex        =   28
@@ -498,7 +802,7 @@ Begin VB.Form FireCallPrefs
    Begin VB.Frame fraWindowButton 
       BorderStyle     =   0  'None
       Height          =   1140
-      Left            =   8820
+      Left            =   8805
       TabIndex        =   16
       Top             =   -90
       Width           =   930
@@ -507,7 +811,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   165
-         Picture         =   "Form2.frx":2D7A
+         Picture         =   "Form2.frx":3D25
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   17
@@ -536,7 +840,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":35C2
+         Picture         =   "Form2.frx":456D
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   14
@@ -565,7 +869,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":3DAE
+         Picture         =   "Form2.frx":4D59
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   11
@@ -594,7 +898,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":4291
+         Picture         =   "Form2.frx":523C
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   8
@@ -626,7 +930,7 @@ Begin VB.Form FireCallPrefs
          ForeColor       =   &H80000008&
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":482D
+         Picture         =   "Form2.frx":57D8
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   5
@@ -654,7 +958,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   405
          Left            =   240
-         Picture         =   "Form2.frx":508F
+         Picture         =   "Form2.frx":603A
          ScaleHeight     =   405
          ScaleWidth      =   420
          TabIndex        =   2
@@ -724,7 +1028,7 @@ Begin VB.Form FireCallPrefs
             Left            =   1305
             Style           =   2  'Dropdown List
             TabIndex        =   38
-            ToolTipText     =   $"Form2.frx":5625
+            ToolTipText     =   $"Form2.frx":65D0
             Top             =   0
             Width           =   3960
          End
@@ -886,7 +1190,7 @@ Begin VB.Form FireCallPrefs
             Width           =   780
          End
          Begin VB.Label lblWindowLevelDescription 
-            Caption         =   $"Form2.frx":56C0
+            Caption         =   $"Form2.frx":666B
             Height          =   870
             Left            =   1365
             TabIndex        =   44
@@ -1137,9 +1441,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbRefreshInterval 
             Height          =   315
-            ItemData        =   "Form2.frx":575B
+            ItemData        =   "Form2.frx":6706
             Left            =   1485
-            List            =   "Form2.frx":575D
+            List            =   "Form2.frx":6708
             Style           =   2  'Dropdown List
             TabIndex        =   79
             ToolTipText     =   "Set the refresh interval"
@@ -1228,7 +1532,7 @@ Begin VB.Form FireCallPrefs
             Width           =   1350
          End
          Begin VB.Label lblGeneralTab 
-            Caption         =   $"Form2.frx":575F
+            Caption         =   $"Form2.frx":670A
             Height          =   900
             Index           =   7
             Left            =   1545
@@ -1908,9 +2212,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbSmtpConfig 
             Height          =   315
-            ItemData        =   "Form2.frx":580C
+            ItemData        =   "Form2.frx":67B7
             Left            =   2025
-            List            =   "Form2.frx":580E
+            List            =   "Form2.frx":67B9
             Style           =   2  'Dropdown List
             TabIndex        =   247
             ToolTipText     =   "Select which SMTP configuration slot you would like to operate."
@@ -1964,7 +2268,7 @@ Begin VB.Form FireCallPrefs
                Height          =   210
                Index           =   1
                Left            =   4920
-               Picture         =   "Form2.frx":5810
+               Picture         =   "Form2.frx":67BB
                ScaleHeight     =   210
                ScaleWidth      =   225
                TabIndex        =   242
@@ -1978,7 +2282,7 @@ Begin VB.Form FireCallPrefs
                Height          =   240
                Index           =   0
                Left            =   90
-               Picture         =   "Form2.frx":5A3D
+               Picture         =   "Form2.frx":69E8
                ScaleHeight     =   240
                ScaleWidth      =   255
                TabIndex        =   241
@@ -2043,7 +2347,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnSeePassword 
             Height          =   315
             Left            =   6045
-            Picture         =   "Form2.frx":5EC7
+            Picture         =   "Form2.frx":6E72
             Style           =   1  'Graphical
             TabIndex        =   223
             ToolTipText     =   "Click here to expose the password to prying eyes..."
@@ -2120,9 +2424,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbAdviceInterval 
             Height          =   315
-            ItemData        =   "Form2.frx":6188
+            ItemData        =   "Form2.frx":7133
             Left            =   2025
-            List            =   "Form2.frx":618A
+            List            =   "Form2.frx":7135
             Style           =   2  'Dropdown List
             TabIndex        =   75
             ToolTipText     =   "Advice messages are sent when new data is received but not more often than at the specified interval."
@@ -2142,7 +2446,7 @@ Begin VB.Form FireCallPrefs
                Left            =   1260
                TabIndex        =   231
                Text            =   "This is the SMTP server name as supplied by your email provider"
-               ToolTipText     =   $"Form2.frx":618C
+               ToolTipText     =   $"Form2.frx":7137
                Top             =   30
                Width           =   3960
             End
@@ -2380,9 +2684,9 @@ Begin VB.Form FireCallPrefs
          Width           =   5565
          Begin VB.ComboBox cmbEmojiSet 
             Height          =   315
-            ItemData        =   "Form2.frx":6219
+            ItemData        =   "Form2.frx":71C4
             Left            =   1185
-            List            =   "Form2.frx":621B
+            List            =   "Form2.frx":71C6
             Style           =   2  'Dropdown List
             TabIndex        =   107
             ToolTipText     =   "Choose the emoji set to use"
@@ -2419,7 +2723,7 @@ Begin VB.Form FireCallPrefs
             Width           =   3750
          End
          Begin VB.Label lblEmojiTab 
-            Caption         =   $"Form2.frx":621D
+            Caption         =   $"Form2.frx":71C8
             Height          =   825
             Index           =   4
             Left            =   1170
@@ -2717,9 +3021,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbCaptureDevices 
             Height          =   315
-            ItemData        =   "Form2.frx":62E3
+            ItemData        =   "Form2.frx":728E
             Left            =   1365
-            List            =   "Form2.frx":62E5
+            List            =   "Form2.frx":7290
             TabIndex        =   211
             Text            =   "cmbCaptureDevices"
             Top             =   4455
@@ -2728,7 +3032,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnMute 
             Height          =   285
             Left            =   5385
-            Picture         =   "Form2.frx":62E7
+            Picture         =   "Form2.frx":7292
             Style           =   1  'Graphical
             TabIndex        =   171
             TabStop         =   0   'False
@@ -2756,9 +3060,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbAlarmSound 
             Height          =   315
-            ItemData        =   "Form2.frx":6514
+            ItemData        =   "Form2.frx":74BF
             Left            =   1365
-            List            =   "Form2.frx":6516
+            List            =   "Form2.frx":74C1
             Style           =   2  'Dropdown List
             TabIndex        =   53
             ToolTipText     =   "Choose the alarm sound."
@@ -2768,7 +3072,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnPlaySound 
             Height          =   285
             Left            =   5055
-            Picture         =   "Form2.frx":6518
+            Picture         =   "Form2.frx":74C3
             Style           =   1  'Graphical
             TabIndex        =   52
             TabStop         =   0   'False
@@ -2927,10 +3231,7 @@ Begin VB.Form FireCallPrefs
          Caption         =   "-"
       End
       Begin VB.Menu mnuCoffee 
-         Caption         =   "Donate a coffee with paypal"
-      End
-      Begin VB.Menu mnuSweets 
-         Caption         =   "Donate some sweets/candy with Amazon"
+         Caption         =   "Donate a coffee with Kofi!"
       End
       Begin VB.Menu mnuSupport 
          Caption         =   "Contact Support"
@@ -3170,6 +3471,45 @@ Private Sub cmbDebug_Click()
     End If
 End Sub
 
+Private Sub fraAbout_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Button = 2 Then
+        ' only required for VB6, the VB.NET version allows
+        ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
+        Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
+    End If
+End Sub
+
+Private Sub fraDevelopment_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Button = 2 Then
+        ' only required for VB6, the VB.NET version allows
+        ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
+        Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
+    End If
+End Sub
+
+Private Sub fraDevelopmentInner_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Button = 2 Then
+        ' only required for VB6, the VB.NET version allows
+        ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
+        Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
+    End If
+End Sub
+
+Private Sub picAbout_Click()
+    Call clearBorderStyle
+
+    fraAbout.Visible = True
+    fraAboutButton.BorderStyle = 1
+    
+    FCWLastSelectedTab = "about"
+    PutINISetting "Software\FireCallWin", "lastSelectedTab", FCWLastSelectedTab, FCWSettingsFile
+    
+    FireCallPrefs.Height = fraAbout.Height + 2000
+    btnSave.Top = fraAbout.Top + fraAbout.Height + 100
+    btnCancel.Top = fraAbout.Top + fraAbout.Height + 100
+    btnHelp.Top = fraAbout.Top + fraAbout.Height + 100
+End Sub
+
 '---------------------------------------------------------------------------------------
 ' Procedure : picDevelopment_Click
 ' Author    : beededea
@@ -3318,19 +3658,19 @@ Private Sub btnTestEmail_Click()
                         txtEmailMessage.Text)
 End Sub
 
-Private Sub btnTestEmail_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnTestEmail_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip btnTestEmail.hwnd, "Error messages will only appear 30 secs after the button is pressed. A success can only be checked by viewing the email client to see if an email has arrived. Please note that STARTTLS on port 587 is not currently supported. Port 25 and SSL is tested and operates successfully on Hotmail.", _
                   TTIconInfo, "Help on Testing Email", , , , True
 
 End Sub
 
-Private Sub chkSendEmails_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub chkSendEmails_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip chkSendEmails.hwnd, "Messages are sent by email using the SMTP details entered.  Extract these from your email client, Outlook or Thunderbird for example.", _
                   TTIconInfo, "Help on Advice Messages", , , , True
 
 End Sub
 
-Private Sub chkSendErrorEmails_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub chkSendErrorEmails_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip chkSendErrorEmails.hwnd, "Error messages are sent when an error is generated as long as FCW is still running. Messages are sent by email using the SMTP details entered below.", _
                   TTIconInfo, "Help on Error Messages", , , , True
 End Sub
@@ -3345,7 +3685,7 @@ Private Sub chkAllowShutdowns_Click()
 
 End Sub
 
-Private Sub chkAllowShutdowns_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub chkAllowShutdowns_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip chkAllowShutdowns.hwnd, "This determines whether your remote partner has the capability of issuing shutdown requests to your copy of Fire Call prior to him performing administration or housekeeping tasks such as reducing the size of the text files used to store the chat text. If these tasks are carried out whilst FCW is running it could cause the app some problems. Having the ability to indicate the need for a shutdown to your partner is a useful tool. This is really only needed if your chat partner performs the housekeeping tasks manually.", _
                   TTIconInfo, "Help on Remote Shutdown Requests", , , , True
 End Sub
@@ -3421,7 +3761,7 @@ Private Sub Command2_Click()
     txtEmailLog.Text = ""
 End Sub
 
-Private Sub fraAllowShutdowns_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraAllowShutdowns_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraAllowShutdowns.hwnd, "This determines whether your remote partner has the capability of issuing shutdown requests to your copy of Fire Call prior to him performing administration or housekeeping tasks such as reducing the size of the text files used to store the chat text. If these tasks are carried out whilst FCW is running it could cause the app some problems. Having the ability to indicate the need for a shutdown to your partner is a useful tool. This is really only needed if your chat partner performs the housekeeping tasks manually.", _
                   TTIconInfo, "Help on Remote Shutdown Requests", , , , True
 End Sub
@@ -3488,6 +3828,9 @@ Private Sub Form_Load()
     ' make the last used tab appear on startup
     Call showLastTab
     
+    'load the about text
+    Call loadPrefsAboutText
+    
     btnSave.Enabled = False ' disable the save button
 
 End Sub
@@ -3505,6 +3848,7 @@ Private Sub showLastTab()
     If FCWLastSelectedTab = "housekeeping" Then Call picHouseKeeping_Click
     If FCWLastSelectedTab = "window" Then Call picWindow_Click
     If FCWLastSelectedTab = "development" Then Call picDevelopment_Click
+    If FCWLastSelectedTab = "about" Then Call picAbout_Click
 
 End Sub
 
@@ -3518,7 +3862,7 @@ Private Sub positionThings()
     
     ' size and position the frames and buttons
     
-    FireCallPrefs.Width = 10905
+    FireCallPrefs.Width = 10995
     
     frameTop = 1050
     
@@ -3532,6 +3876,7 @@ Private Sub positionThings()
     fraHousekeeping.Top = frameTop
     fraSounds.Top = frameTop
     fraDevelopment.Top = frameTop
+    fraAbout.Top = frameTop
     
     frameLeft = 120
     
@@ -3545,8 +3890,9 @@ Private Sub positionThings()
     fraHousekeeping.Left = frameLeft
     fraSounds.Left = frameLeft
     fraDevelopment.Left = frameLeft
+    fraAbout.Left = frameLeft
     
-    frameWidth = 10575
+    frameWidth = 10650
     
     fraGeneral.Width = frameWidth
     fraConfiguration.Width = frameWidth
@@ -3558,6 +3904,7 @@ Private Sub positionThings()
     fraHousekeeping.Width = frameWidth
     fraSounds.Width = frameWidth
     fraDevelopment.Width = frameWidth
+    fraAbout.Width = frameWidth
     
     innerLeftPos = 1625
     
@@ -3584,6 +3931,7 @@ Private Sub positionThings()
     fraHousekeeping.Visible = False
     fraSounds.Visible = False
     fraDevelopment.Visible = False
+    fraAbout.Visible = False
     
     FireCallPrefs.Height = fraGeneral.Height + 2000
     btnSave.Top = fraGeneral.Top + fraGeneral.Height + 100
@@ -5030,7 +5378,7 @@ Private Sub populateCmbAlarmSound()
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraConfigurationInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraConfigurationInner_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5038,13 +5386,13 @@ Private Sub fraConfigurationInner_MouseDown(Button As Integer, Shift As Integer,
     End If
 End Sub
 
-Private Sub fraConfigurationInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraConfigurationInner_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraConfigurationInner.hwnd, "The configuration panel is the location for optional configuration items. These items change how FireCall operates, configure them to suit your needs and your mode of operation.", _
                   TTIconInfo, "Help on Configuration", , , , True
 
 End Sub
 
-Private Sub fraConfiguration_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraConfiguration_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraConfiguration.hwnd, "The configuration panel is the location for optional configuration items. These items change how FireCall operates, configure them to suit your needs and your mode of operation.", _
                   TTIconInfo, "Help on Configuration", , , , True
 End Sub
@@ -5053,18 +5401,18 @@ End Sub
 
 
 
-Private Sub fraDropbox_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraDropbox_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraDropbox.hwnd, "Selecting Dropbox here means that FireCall will look for the Dropbox processes and report an error if they are missing. Uncheck the check box below to suppress the alarm.", _
                   TTIconInfo, "Help on Dropbox Selection", , , , True
 End Sub
 
-Private Sub fraEmail_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraEmail_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraEmail.hwnd, "The email panel is where you will configure FCW to work with your email client in order to send email messages containing status and advice.", _
                   TTIconInfo, "Help on Email", , , , True
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraEmailInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraEmailInner_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5072,19 +5420,19 @@ Private Sub fraEmailInner_MouseDown(Button As Integer, Shift As Integer, x As Si
     End If
 End Sub
 
-Private Sub fraEmailInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraEmailInner_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraEmailInner.hwnd, "The email panel is where you will configure FCW to work with your email client in order to send email messages containing status and advice.", _
                   TTIconInfo, "Help on Email", , , , True
 End Sub
 
-Private Sub fraEmojis_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraEmojis_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraEmojis.hwnd, "Your own Emoji sets can be copied to a folder alongside the standard folder and must have two forms of the emojis within two subfolders, base and telly, both containing emojis of the size, 96x96 pixels.", _
                   TTIconInfo, "Help on Emoji Sets", , , , True
                   
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraEmojisInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraEmojisInner_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5092,20 +5440,20 @@ Private Sub fraEmojisInner_MouseDown(Button As Integer, Shift As Integer, x As S
     End If
 End Sub
 
-Private Sub fraEmojisInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraEmojisInner_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraEmojisInner.hwnd, "Your own Emoji sets can be copied to a folder alongside the standard folder and must have two forms of the emojis within two subfolders, base and telly, both containing emojis of the size, 96x96 pixels.", _
                   TTIconInfo, "Help on Emoji Sets", , , , True
 
 End Sub
 
-Private Sub fraFonts_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraFonts_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip fraFonts.hwnd, "For the chat window we suggest Linux Biolinum G at 8pt and Centurion Light SF at 8pt for the config. screen, both of which you will find bundled in the FCW program folder. Choose a small 8pt font for each.", _
                   TTIconInfo, "Help on Setting the Fonts", , , , True
 
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraFontsInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraFontsInner_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5113,18 +5461,18 @@ Private Sub fraFontsInner_MouseDown(Button As Integer, Shift As Integer, x As Si
     End If
 End Sub
 
-Private Sub fraFontsInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraFontsInner_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip fraFontsInner.hwnd, "For the chat window we suggest Linux Biolinum G at 8pt and Centurion Light SF at 8pt for the config. screen, both of which you will find bundled in the FCW program folder. Choose a small 8pt font for each.", _
                   TTIconInfo, "Help on Setting the Fonts", , , , True
 End Sub
 
-Private Sub fraGeneral_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraGeneral_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraGeneral.hwnd, "The General Panel contains the most important user-configurable items required for the program to operate correctly. If these items are not filled in then FireCall will not operate at all.", _
                   TTIconInfo, "Help on Essential Configuration", , , , True
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraGeneralInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraGeneralInner_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5133,19 +5481,19 @@ Private Sub fraGeneralInner_MouseDown(Button As Integer, Shift As Integer, x As 
 End Sub
 
 
-Private Sub fraGeneralInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraGeneralInner_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraGeneralInner.hwnd, "The General Panel contains the most important user-configurable items required for the program to operate correctly. If these items are not filled in then FireCall will not operate at all.", _
                   TTIconInfo, "Help on Essential Configuration", , , , True
 End Sub
 
 
 
-Private Sub fraGoogleDrive_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraGoogleDrive_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraGoogleDrive.hwnd, "Selecting Google Drive here means that FireCall will look for the Google Drive processes and report an error if they are missing.", _
                   TTIconInfo, "Help on Google Drive Selection", , , , True
 End Sub
 
-Private Sub fraHousekeepingInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraHousekeepingInner_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5153,12 +5501,12 @@ Private Sub fraHousekeepingInner_MouseDown(Button As Integer, Shift As Integer, 
     End If
 End Sub
 
-Private Sub fraHousekeepingInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraHousekeepingInner_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraHousekeepingInner.hwnd, "The housekeeping panel is where you can configure backups and the archiving of old data. The backup functionality is working well but the archiving has not yet been implemented.", _
                   TTIconInfo, "Help on Housekeeping", , , , True
 End Sub
 
-Private Sub fraHousekeeping_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraHousekeeping_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5166,31 +5514,31 @@ Private Sub fraHousekeeping_MouseDown(Button As Integer, Shift As Integer, x As 
     End If
 End Sub
 
-Private Sub fraHousekeeping_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraHousekeeping_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraHousekeeping.hwnd, "The housekeeping panel is where you can configure backups and the archiving of old data. The backup functionality is working well but the archiving has not yet been implemented.", _
                   TTIconInfo, "Help on Housekeeping", , , , True
 End Sub
 
 
 
-Private Sub fraNone_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraNone_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraNone.hwnd, "Selecting None - FireCall will not look for any processes. This implies you are using your own network for internal file sharing.", _
                   TTIconInfo, "Help on OneDrive Selection", , , , True
 End Sub
 
-Private Sub fraOneDrive_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraOneDrive_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraOneDrive.hwnd, "Selecting OneDrive here means that FireCall will look for the OneDrive processes and report an error if they are missing.", _
                   TTIconInfo, "Help on OneDrive Selection", , , , True
 End Sub
 
 
-Private Sub fraSMTPframe_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraSMTPframe_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraSMTPframe.hwnd, "Messages are sent by email using the SMTP details entered.  Extract these from your email client, Outlook or Thunderbird for example.", _
                   TTIconInfo, "Help on SMTP Server", , , , True
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraSounds_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraSounds_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5198,7 +5546,7 @@ Private Sub fraSounds_MouseDown(Button As Integer, Shift As Integer, x As Single
     End If
 End Sub
 
-Private Sub fraSounds_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraSounds_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
 CreateToolTip fraSounds.hwnd, "The sound panel allows you to configure the sounds that occur within FCW. Some of the animations have associated sounds, you can control these here..", _
                   TTIconInfo, "Help on Configuring Sounds", , , , True
@@ -5206,7 +5554,7 @@ CreateToolTip fraSounds.hwnd, "The sound panel allows you to configure the sound
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraSoundsInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraSoundsInner_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5214,20 +5562,20 @@ Private Sub fraSoundsInner_MouseDown(Button As Integer, Shift As Integer, x As S
     End If
 End Sub
 
-Private Sub fraSoundsInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraSoundsInner_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraSoundsInner.hwnd, "The sound panel allows you to configure the sounds that occur within FCW. Some of the animations have associated sounds, you can control these here..", _
                   TTIconInfo, "Help on Configuring Sounds", , , , True
 
 End Sub
 
-Private Sub fraTargetClient_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraTargetClient_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraTargetClient.hwnd, "The target client is an option that you may not need to change unless you are communicating with the javascript version of the FireCall app that runs on Mac OS X. That version requires UTF8 support to display and handle unicode characters. If you are a Windows user communicating with FireCall for Windows you do not need to select the UTF8 option. However, the code we use to handle UTF8 files may be faster for reading and writing the input/output data files, so by all means try it out.", _
                   TTIconInfo, "Help on Selecting ANSI or UTF8", , , , True
 
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraTexts_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraTexts_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5235,13 +5583,13 @@ Private Sub fraTexts_MouseDown(Button As Integer, Shift As Integer, x As Single,
     End If
 End Sub
 
-Private Sub fraTexts_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraTexts_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraTexts.hwnd, "The texts panel is where you can configure the pre-programmed messages that FCW can send using the buttons at the bottom of the utility. This panel allows you to change or add to the pre-defined texts that appear on the buttons.", _
                   TTIconInfo, "Help on PreDefined Texts", , , , True
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraTextsInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraTextsInner_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5249,14 +5597,14 @@ Private Sub fraTextsInner_MouseDown(Button As Integer, Shift As Integer, x As Si
     End If
 End Sub
 
-Private Sub fraTextsInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraTextsInner_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraTextsInner.hwnd, "The texts panel is where you can configure the pre-programmed messages that FCW can send using the buttons at the bottom of the utility. This panel allows you to change or add to the pre-defined texts that appear on the buttons.", _
                   TTIconInfo, "Help on PreDefined Texts", , , , True
 
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraWindow_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraWindow_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5264,13 +5612,13 @@ Private Sub fraWindow_MouseDown(Button As Integer, Shift As Integer, x As Single
     End If
 End Sub
 
-Private Sub fraWindow_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraWindow_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraWindow.hwnd, "The Opacity and Window Level of the program are rather strange characteristics to change in a Windows program, however Fire Call Win is a copy of a Yahoo Widget of the same name. All widgets have similar window tab options including the capability to change the opacity and window level. Whether these options are useful to you or anyone is a moot point but as this tool aims to replicate the YWE version functionality it has been reproduced here. It is here as more of an experiment as to how to implement a feature, one carried over from the Yahoo Widget (javascript) version of this program.", _
                   TTIconInfo, "Help on YWE Quirk Mode Options", , , , True
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraWindowInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraWindowInner_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -5287,7 +5635,7 @@ Private Sub lblAllowShutdowns_Click()
     End If
 End Sub
 
-Private Sub fraWindowInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraWindowInner_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraWindowInner.hwnd, "The Opacity and Window Level of the program are rather strange characteristics to change in a Windows program, however Fire Call Win is a copy of a Yahoo Widget of the same name. All widgets have similar window tab options including the capability to change the opacity and window level. Whether these options are useful to you or anyone is a moot point but as this tool aims to replicate the YWE version functionality it has been reproduced here. It is here as more of an experiment as to how to implement a feature, one carried over from the Yahoo Widget (javascript) version of this program.", _
                   TTIconInfo, "Help on YWE Quirk Mode Options", , , , True
 End Sub
@@ -5329,7 +5677,7 @@ Private Sub lbloptServiceProvider_Click(Index As Integer)
     optServiceProvider(Index).Value = True
 End Sub
 
-Private Sub fraServiceProvider_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraServiceProvider_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     CreateToolTip fraServiceProvider.hwnd, "Select which utility you are using to share the files and folders. Dependant upon which selection you choose, Fire Call for Windows will check if the processes associated with the chosen utility are running. This setting will not change the shared folder location, you'll have to do that yourself using the text fields above. If you are not using a service provider and instead just sharing files over a network then select - none", _
                   TTIconInfo, "Help on Selecting a Service Provider", , , , True
 End Sub
@@ -5409,6 +5757,8 @@ Private Sub clearBorderStyle()
     fraHousekeeping.Visible = False
     fraSounds.Visible = False
     fraDevelopment.Visible = False
+    fraAbout.Visible = False
+    
     
     fraConfigurationButtons.BorderStyle = 0
     fraGeneralButtons.BorderStyle = 0
@@ -5420,7 +5770,8 @@ Private Sub clearBorderStyle()
     fraHousekeepingButton.BorderStyle = 0
     fraSoundsButton.BorderStyle = 0
     fraDevelopmentButton.BorderStyle = 0
-
+    fraAboutButton.BorderStyle = 0
+    
    On Error GoTo 0
    Exit Sub
 
@@ -5440,7 +5791,7 @@ Private Sub optWindowWidth_Click(Index As Integer)
     btnSave.Enabled = True ' enable the save button
 End Sub
 
-Private Sub optHandleData_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub optHandleData_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     
     CreateToolTip optHandleData(Index).hwnd, "The target client is an option that you may not need to change unless you are communicating with the javascript version of the FireCall app that runs on Mac OS X. That version requires UTF8 support to display and handle unicode characters. If you are a Windows user communicating with FireCall for Windows you do not need to select the UTF8 option. However, the code we use to handle UTF8 files may be faster for reading and writing the input/output data files, so by all means try it out. The first uses the File System Object to read and write text, whereas the second uses an ADO record stream to write UTF8 compatible files.", _
                   TTIconInfo, "Help on Selecting ANSI or UTF8", , , , True
@@ -5646,6 +5997,16 @@ End Sub
 
 
 
+Private Sub txtAboutText_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    
+    If Button = vbRightButton Then
+        txtAboutText.Enabled = False
+        txtAboutText.Enabled = True
+        Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
+    End If
+
+End Sub
+
 Private Sub txtDefaultEditor_Change()
     btnSave.Enabled = True ' enable the save button
 End Sub
@@ -5669,9 +6030,6 @@ End Sub
 
 
 
-Private Sub txtOpenFile_Change()
-
-End Sub
 
 Private Sub txtSmtpConfigName_Change()
     btnTestEmail.Enabled = False
@@ -6082,7 +6440,7 @@ End Sub
 
 
 ' right click menu display
-Private Sub Form_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub Form_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -6091,7 +6449,7 @@ Private Sub Form_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRe
 End Sub
 
 ' right click menu display
-Private Sub fraConfiguration_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub fraConfiguration_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -6100,17 +6458,7 @@ Private Sub fraConfiguration_MouseDown(ByRef Button As Integer, ByRef Shift As I
 End Sub
 
 ' right click menu display
-Private Sub fraEmail_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
-    If Button = 2 Then
-        ' only required for VB6, the VB.NET version allows
-        ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
-        Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
-    End If
-End Sub
-
-
-' right click menu display
-Private Sub fraEmojis_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub fraEmail_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -6120,7 +6468,17 @@ End Sub
 
 
 ' right click menu display
-Private Sub fraFonts_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub fraEmojis_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
+    If Button = 2 Then
+        ' only required for VB6, the VB.NET version allows
+        ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
+        Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
+    End If
+End Sub
+
+
+' right click menu display
+Private Sub fraFonts_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -6129,7 +6487,7 @@ Private Sub fraFonts_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, 
 End Sub
 
 ' right click menu display
-Private Sub fraGeneral_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub fraGeneral_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -6241,3 +6599,29 @@ Private Sub checkIconiseOpacityLevel()
     End If
 End Sub
 
+
+'---------------------------------------------------------------------------------------
+' Procedure : loadPrefsAboutText
+' Author    : beededea
+' Date      : 12/03/2020
+' Purpose   : The text for the about page is stored here
+'---------------------------------------------------------------------------------------
+'
+Private Sub loadPrefsAboutText()
+    On Error GoTo loadPrefsAboutText_Error
+    'If debugflg = 1 Then Debug.Print "%loadPrefsAboutText"
+    
+    lblMajorVersion.Caption = App.Major
+    lblMinorVersion.Caption = App.Minor
+    lblRevisionNum.Caption = App.Revision
+    
+    Call LoadFileToTB(txtAboutText, App.Path & "\resources\txt\about.txt", False)
+
+   On Error GoTo 0
+   Exit Sub
+
+loadPrefsAboutText_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure loadPrefsAboutText of Form PanzerEarthPrefs"
+    
+End Sub
