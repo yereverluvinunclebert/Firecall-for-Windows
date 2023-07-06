@@ -331,17 +331,14 @@
 ' Addition of FCWDefaultEditor reading and writing settings.ini - DONE
 ' Addition of FCWDebug public variable  - DONE
 ' Addition of FCWDebug reading and writing settings.ini - DONE
+' changes to paypal link, to point to kofi - DONE
+' remove Amazon link - DONE
 
 ' Tasks underway now
 ' ==================
 
-' Addition of FCWDebug public variable 
-' Addition of FCWDebug reading and writing settings.ini
-
-' Addition of development window as per pz Earth
-
-' changes to paypal link, to point to kofi
-' remove Amazon link
+' Addition of development prefs tab as per pz Earth
+' Addition of about prefs tab as per pz Earth
 
 
 ' HIGH PRIORITY

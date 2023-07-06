@@ -6587,8 +6587,8 @@ Private Sub adjustMainControls()
     End If
     
     ' temporary code STARTS
-    FCWDefaultEditor = "E:\vb6\fire call\FireCallWin.vbp"
-    FCWDebug = "1"
+'    FCWDefaultEditor = "E:\vb6\fire call\FireCallWin.vbp"
+'    FCWDebug = "1"
     ' temporary code ENDS
     
     If FCWDefaultEditor <> vbNullString And FCWDebug = "1" Then
@@ -7708,8 +7708,8 @@ Private Sub mnuEditWidget_Click()
     Dim execStatus As Long: execStatus = 0
     
     ' temporary code STARTS
-    FCWDefaultEditor = "E:\vb6\fire call\FireCallWin.vbp"
-    FCWDebug = "1"
+'    FCWDefaultEditor = "E:\vb6\fire call\FireCallWin.vbp"
+'    FCWDebug = "1"
     ' temporary code ENDS
     
    On Error GoTo mnuEditWidget_Click_Error

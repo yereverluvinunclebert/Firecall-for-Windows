@@ -6,15 +6,671 @@ Begin VB.Form FireCallPrefs
    ClientHeight    =   10650
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   8910
+   ClientWidth     =   10815
    Icon            =   "Form2.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   10650
-   ScaleWidth      =   8910
+   ScaleWidth      =   10815
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
+   Begin VB.Frame fraDevelopment 
+      Caption         =   "Development"
+      Height          =   3435
+      Left            =   825
+      TabIndex        =   288
+      Top             =   2085
+      Visible         =   0   'False
+      Width           =   9105
+      Begin VB.Frame fraDevelopmentInner 
+         BorderStyle     =   0  'None
+         Height          =   2775
+         Left            =   1275
+         TabIndex        =   289
+         Top             =   345
+         Width           =   6705
+         Begin VB.Frame fraDefaultEditor 
+            BorderStyle     =   0  'None
+            Height          =   1875
+            Left            =   240
+            TabIndex        =   293
+            Top             =   1080
+            Width           =   6075
+            Begin VB.CommandButton btnDefaultEditor 
+               Caption         =   "..."
+               Height          =   300
+               Left            =   5115
+               Style           =   1  'Graphical
+               TabIndex        =   295
+               ToolTipText     =   "Click to select the .vbp file to edit the program - You need to have access to the source!"
+               Top             =   120
+               Width           =   315
+            End
+            Begin VB.TextBox txtDefaultEditor 
+               Height          =   315
+               Left            =   1440
+               TabIndex        =   294
+               ToolTipText     =   $"Form2.frx":000C
+               Top             =   105
+               Width           =   3660
+            End
+            Begin VB.Label lblDebug 
+               Caption         =   "Default Editor :"
+               Height          =   255
+               Index           =   7
+               Left            =   285
+               TabIndex        =   297
+               Tag             =   "lblSharedInputFile"
+               Top             =   135
+               Width           =   1350
+            End
+            Begin VB.Label lblDebug 
+               Caption         =   $"Form2.frx":009E
+               Height          =   930
+               Index           =   9
+               Left            =   1440
+               TabIndex        =   296
+               Top             =   660
+               Width           =   3900
+            End
+         End
+         Begin VB.ComboBox cmbDebug 
+            Height          =   315
+            ItemData        =   "Form2.frx":0142
+            Left            =   1680
+            List            =   "Form2.frx":0144
+            Style           =   2  'Dropdown List
+            TabIndex        =   290
+            ToolTipText     =   "Choose to set debug mode."
+            Top             =   -15
+            Width           =   2160
+         End
+         Begin VB.Label lblDebug 
+            Caption         =   "Debug :"
+            Height          =   375
+            Index           =   0
+            Left            =   1005
+            TabIndex        =   292
+            Tag             =   "lblAlarmSound"
+            Top             =   45
+            Width           =   1740
+         End
+         Begin VB.Label lblDebug 
+            Caption         =   "Turning on the debugging will provide extra information in the debug window.  *"
+            Height          =   495
+            Index           =   2
+            Left            =   1695
+            TabIndex        =   291
+            Tag             =   "lblAlarmSoundDesc"
+            Top             =   450
+            Width           =   4455
+         End
+      End
+   End
+   Begin VB.Frame fraConfiguration 
+      Caption         =   "Configuration"
+      Height          =   7260
+      Left            =   360
+      TabIndex        =   21
+      Top             =   1365
+      Width           =   8640
+      Begin VB.Frame fraConfigurationInner 
+         BorderStyle     =   0  'None
+         Height          =   6660
+         Left            =   750
+         TabIndex        =   95
+         Top             =   360
+         Width           =   7260
+         Begin VB.Frame fraAllowShutdowns 
+            BorderStyle     =   0  'None
+            Height          =   1245
+            Left            =   1425
+            TabIndex        =   198
+            Top             =   5370
+            Width           =   4575
+            Begin VB.CheckBox chkAllowShutdowns 
+               Caption         =   "Allow Remote Partner to Shutdown Fire Call"
+               Height          =   225
+               Left            =   285
+               TabIndex        =   199
+               Top             =   135
+               Width           =   3960
+            End
+            Begin VB.Label lblConfigurationTab 
+               Caption         =   $"Form2.frx":0146
+               Height          =   660
+               Index           =   8
+               Left            =   270
+               TabIndex        =   200
+               Top             =   525
+               Width           =   3720
+            End
+         End
+         Begin VB.CheckBox chkEnableBalloonTooltips 
+            Caption         =   "Enable Balloon Tooltips on all Controls"
+            Height          =   225
+            Left            =   1710
+            TabIndex        =   197
+            ToolTipText     =   "Check the box to enable larger balloon tooltips for all controls on the main program"
+            Top             =   5085
+            Width           =   3405
+         End
+         Begin VB.Frame fraTargetClient 
+            Height          =   855
+            Left            =   1695
+            TabIndex        =   176
+            Top             =   -90
+            Width           =   3675
+            Begin VB.OptionButton optHandleData 
+               Caption         =   " Unix Client         (UTF8)"
+               Height          =   270
+               Index           =   1
+               Left            =   105
+               TabIndex        =   178
+               Top             =   495
+               Width           =   2640
+            End
+            Begin VB.OptionButton optHandleData 
+               Caption         =   " Windows Client  (ANSI)"
+               Height          =   270
+               Index           =   0
+               Left            =   105
+               TabIndex        =   177
+               Top             =   180
+               Width           =   2670
+            End
+         End
+         Begin VB.CheckBox chkSingleListBox 
+            Caption         =   "Single Chat Window"
+            Height          =   225
+            Left            =   1710
+            TabIndex        =   172
+            ToolTipText     =   "Check this box to merge the two chatboxes into one larger box"
+            Top             =   2400
+            Width           =   3270
+         End
+         Begin VB.TextBox txtPrefixString 
+            Height          =   315
+            Left            =   1695
+            TabIndex        =   100
+            ToolTipText     =   "Enter a prefix/nickname for outgoing messages."
+            Top             =   1230
+            Width           =   3660
+         End
+         Begin VB.CheckBox chkLoadBottom 
+            Caption         =   "Load Text at Bottom of chatbox"
+            Height          =   225
+            Left            =   1710
+            TabIndex        =   99
+            ToolTipText     =   "Check this box to load new messages at the bottom of the text display."
+            Top             =   1965
+            Width           =   3210
+         End
+         Begin VB.CheckBox chkEnableScrollbars 
+            Caption         =   "Enable Scrollbars on Chat Boxes"
+            Height          =   225
+            Left            =   1710
+            TabIndex        =   98
+            ToolTipText     =   "Check the box to enable the optional horizontal and vertical scrollbars"
+            Top             =   4185
+            Width           =   3555
+         End
+         Begin VB.CheckBox chkEnableTooltips 
+            Caption         =   "Enable Tooltips on all Controls"
+            Height          =   225
+            Left            =   1710
+            TabIndex        =   97
+            ToolTipText     =   "Check the box to enable tooltips for all controls on the main program"
+            Top             =   4650
+            Width           =   3345
+         End
+         Begin VB.ComboBox cmbMaxLineLength 
+            Height          =   315
+            ItemData        =   "Form2.frx":01E4
+            Left            =   1710
+            List            =   "Form2.frx":01E6
+            Style           =   2  'Dropdown List
+            TabIndex        =   96
+            ToolTipText     =   "The program will cut your text to a new line when this limit is reached"
+            Top             =   3330
+            Width           =   1575
+         End
+         Begin VB.Label lblConfigurationTab 
+            Caption         =   "Select the type of client your chat partner will be using."
+            Height          =   375
+            Index           =   4
+            Left            =   1695
+            TabIndex        =   180
+            ToolTipText     =   "You can use an ADO record stream or the FileSystemObject (FSO) to write UTF8 or ANSI compatible files"
+            Top             =   840
+            Width           =   3990
+         End
+         Begin VB.Label lblConfigurationTab 
+            Caption         =   "Target Client :"
+            Height          =   255
+            Index           =   0
+            Left            =   645
+            TabIndex        =   179
+            Tag             =   "lblTargetClient"
+            Top             =   105
+            Width           =   1065
+         End
+         Begin VB.Label lblConfigurationTab 
+            Caption         =   "This determines whether the separate chat boxes are merged into one larger box"
+            Height          =   660
+            Index           =   6
+            Left            =   1710
+            TabIndex        =   173
+            Top             =   2745
+            Width           =   3615
+         End
+         Begin VB.Label lblConfigurationTab 
+            Caption         =   "Enter a prefix/nickname for outgoing messages."
+            Height          =   375
+            Index           =   5
+            Left            =   1755
+            TabIndex        =   104
+            Top             =   1650
+            Width           =   3705
+         End
+         Begin VB.Label lblConfigurationTab 
+            Caption         =   "Prefix String :"
+            Height          =   255
+            Index           =   1
+            Left            =   705
+            TabIndex        =   103
+            Tag             =   "lblPrefixString"
+            Top             =   1275
+            Width           =   1065
+         End
+         Begin VB.Label lblConfigurationTab 
+            Caption         =   "Maximum Line Length : "
+            Height          =   285
+            Index           =   2
+            Left            =   30
+            TabIndex        =   102
+            Tag             =   "lblMaxLineLength"
+            Top             =   3375
+            Width           =   1740
+         End
+         Begin VB.Label lblConfigurationTab 
+            Caption         =   "Choose the maximum length for your texts."
+            Height          =   300
+            Index           =   7
+            Left            =   1710
+            TabIndex        =   101
+            Top             =   3780
+            Width           =   3750
+         End
+      End
+   End
+   Begin VB.Frame fraAboutButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   9795
+      TabIndex        =   286
+      Top             =   -90
+      Width           =   975
+      Begin VB.Image imgAbout 
+         Height          =   600
+         Left            =   160
+         Picture         =   "Form2.frx":01E8
+         Stretch         =   -1  'True
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "About"
+         Height          =   240
+         Left            =   255
+         TabIndex        =   287
+         Top             =   825
+         Width           =   615
+      End
+      Begin VB.Image imgAboutClicked 
+         Height          =   600
+         Left            =   160
+         Picture         =   "Form2.frx":0770
+         Stretch         =   -1  'True
+         Top             =   225
+         Width           =   600
+      End
+   End
+   Begin VB.Frame fraDevelopmentButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   7770
+      TabIndex        =   284
+      Top             =   -90
+      Width           =   1035
+      Begin VB.Image picDevelopment 
+         Height          =   600
+         Left            =   160
+         Picture         =   "Form2.frx":0C5B
+         Stretch         =   -1  'True
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblDevelopment 
+         Caption         =   "Development"
+         Height          =   240
+         Left            =   30
+         TabIndex        =   285
+         Top             =   810
+         Width           =   960
+      End
+      Begin VB.Image imgDevelopmentClicked 
+         Height          =   600
+         Left            =   160
+         Picture         =   "Form2.frx":1213
+         Stretch         =   -1  'True
+         Top             =   225
+         Width           =   600
+      End
+   End
+   Begin VB.CommandButton btnSave 
+      Caption         =   "&Save"
+      Enabled         =   0   'False
+      Height          =   360
+      Left            =   7950
+      Style           =   1  'Graphical
+      TabIndex        =   19
+      ToolTipText     =   "Save the changes you have made to the preferences"
+      Top             =   10140
+      Width           =   1320
+   End
+   Begin VB.Frame fraHousekeepingButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   6840
+      TabIndex        =   181
+      ToolTipText     =   "Opens the Housekeeping tab"
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picHousekeeping 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   165
+         Picture         =   "Form2.frx":1599
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   182
+         ToolTipText     =   "Opens the Housekeeping tab"
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblHousekeeping 
+         Caption         =   "House"
+         Height          =   225
+         Left            =   210
+         TabIndex        =   183
+         ToolTipText     =   "Opens the Housekeeping tab"
+         Top             =   810
+         Width           =   540
+      End
+   End
+   Begin VB.CommandButton btnHelp 
+      Caption         =   "Help"
+      Height          =   360
+      Left            =   120
+      Style           =   1  'Graphical
+      TabIndex        =   174
+      ToolTipText     =   "Open the help utility"
+      Top             =   10155
+      Width           =   1320
+   End
+   Begin VB.Frame fraSoundsButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   5880
+      TabIndex        =   30
+      Top             =   -105
+      Width           =   930
+      Begin VB.PictureBox picSounds 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   630
+         Left            =   165
+         Picture         =   "Form2.frx":21B9
+         ScaleHeight     =   630
+         ScaleWidth      =   630
+         TabIndex        =   31
+         ToolTipText     =   "Opens the Window tab"
+         Top             =   210
+         Width           =   630
+      End
+      Begin VB.Label lblSounds 
+         Caption         =   "Sounds"
+         Height          =   240
+         Left            =   210
+         TabIndex        =   32
+         Top             =   825
+         Width           =   615
+      End
+   End
+   Begin VB.Frame fraTextsButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   4920
+      TabIndex        =   27
+      Top             =   -105
+      Width           =   930
+      Begin VB.PictureBox picTexts 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   630
+         Left            =   165
+         Picture         =   "Form2.frx":2778
+         ScaleHeight     =   630
+         ScaleWidth      =   630
+         TabIndex        =   28
+         ToolTipText     =   "Opens the Window tab"
+         Top             =   225
+         Width           =   630
+      End
+      Begin VB.Label lblTexts 
+         Caption         =   "Texts"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   29
+         Top             =   825
+         Width           =   615
+      End
+   End
+   Begin VB.Timer themeTimer 
+      Enabled         =   0   'False
+      Interval        =   10000
+      Left            =   45
+      Top             =   7965
+   End
+   Begin VB.CommandButton btnCancel 
+      Caption         =   "&Close"
+      Height          =   360
+      Left            =   9345
+      Style           =   1  'Graphical
+      TabIndex        =   20
+      ToolTipText     =   "Close the utility"
+      Top             =   10140
+      Width           =   1320
+   End
+   Begin VB.Frame fraWindowButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   8820
+      TabIndex        =   16
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picWindow 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   165
+         Picture         =   "Form2.frx":2D7A
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   17
+         ToolTipText     =   "Opens the Window tab"
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblWindow 
+         Caption         =   "Window"
+         Height          =   240
+         Left            =   180
+         TabIndex        =   18
+         Top             =   825
+         Width           =   615
+      End
+   End
+   Begin VB.Frame fraFontsButtons 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   3960
+      TabIndex        =   13
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picFonts 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":35C2
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   14
+         ToolTipText     =   "Opens the Fonts tab"
+         Top             =   210
+         Width           =   600
+      End
+      Begin VB.Label lblFonts 
+         Caption         =   "Fonts"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   15
+         Top             =   825
+         Width           =   510
+      End
+   End
+   Begin VB.Frame fraEmojisButtons 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   3000
+      TabIndex        =   10
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picEmojis 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":3DAE
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   11
+         ToolTipText     =   "Opens the Emojis tab"
+         Top             =   210
+         Width           =   600
+      End
+      Begin VB.Label lblEmojis 
+         Caption         =   "Emojis"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   12
+         Top             =   825
+         Width           =   510
+      End
+   End
+   Begin VB.Frame fraEmailButtons 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   2040
+      TabIndex        =   7
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picEmail 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":4291
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   8
+         ToolTipText     =   "Opens the email tab"
+         Top             =   210
+         Width           =   600
+      End
+      Begin VB.Label lblEmail 
+         Caption         =   "Email"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   9
+         Top             =   825
+         Width           =   510
+      End
+   End
+   Begin VB.Frame fraConfigurationButtons 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   1080
+      TabIndex        =   4
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picConfig 
+         Appearance      =   0  'Flat
+         AutoSize        =   -1  'True
+         BackColor       =   &H80000005&
+         BorderStyle     =   0  'None
+         ForeColor       =   &H80000008&
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":482D
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   5
+         ToolTipText     =   "Opens the configuration tab"
+         Top             =   195
+         Width           =   600
+      End
+      Begin VB.Label lblConfig 
+         Caption         =   "Config."
+         Height          =   240
+         Left            =   195
+         TabIndex        =   6
+         Top             =   825
+         Width           =   630
+      End
+   End
+   Begin VB.Frame fraGeneralButtons 
+      Height          =   1140
+      Left            =   120
+      TabIndex        =   1
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picGeneral 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   405
+         Left            =   240
+         Picture         =   "Form2.frx":508F
+         ScaleHeight     =   405
+         ScaleWidth      =   420
+         TabIndex        =   2
+         ToolTipText     =   "Opens the general tab"
+         Top             =   300
+         Width           =   420
+      End
+      Begin VB.Label lblGeneral 
+         Caption         =   "General"
+         Height          =   240
+         Left            =   195
+         TabIndex        =   3
+         Top             =   825
+         Width           =   705
+      End
+   End
    Begin VB.Frame fraWindow 
       Caption         =   "Window"
       Height          =   8205
@@ -68,7 +724,7 @@ Begin VB.Form FireCallPrefs
             Left            =   1305
             Style           =   2  'Dropdown List
             TabIndex        =   38
-            ToolTipText     =   $"Form2.frx":000C
+            ToolTipText     =   $"Form2.frx":5625
             Top             =   0
             Width           =   3960
          End
@@ -230,7 +886,7 @@ Begin VB.Form FireCallPrefs
             Width           =   780
          End
          Begin VB.Label lblWindowLevelDescription 
-            Caption         =   $"Form2.frx":00A7
+            Caption         =   $"Form2.frx":56C0
             Height          =   870
             Left            =   1365
             TabIndex        =   44
@@ -481,9 +1137,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbRefreshInterval 
             Height          =   315
-            ItemData        =   "Form2.frx":0142
+            ItemData        =   "Form2.frx":575B
             Left            =   1485
-            List            =   "Form2.frx":0144
+            List            =   "Form2.frx":575D
             Style           =   2  'Dropdown List
             TabIndex        =   79
             ToolTipText     =   "Set the refresh interval"
@@ -572,7 +1228,7 @@ Begin VB.Form FireCallPrefs
             Width           =   1350
          End
          Begin VB.Label lblGeneralTab 
-            Caption         =   $"Form2.frx":0146
+            Caption         =   $"Form2.frx":575F
             Height          =   900
             Index           =   7
             Left            =   1545
@@ -607,505 +1263,6 @@ Begin VB.Form FireCallPrefs
             Top             =   2415
             Width           =   3945
          End
-      End
-   End
-   Begin VB.Frame fraConfiguration 
-      Caption         =   "Configuration"
-      Height          =   7260
-      Left            =   360
-      TabIndex        =   21
-      Top             =   1365
-      Width           =   8640
-      Begin VB.Frame fraConfigInner 
-         BorderStyle     =   0  'None
-         Height          =   6660
-         Left            =   750
-         TabIndex        =   95
-         Top             =   360
-         Width           =   7260
-         Begin VB.Frame fraAllowShutdowns 
-            BorderStyle     =   0  'None
-            Height          =   1245
-            Left            =   1425
-            TabIndex        =   198
-            Top             =   5370
-            Width           =   4575
-            Begin VB.CheckBox chkAllowShutdowns 
-               Caption         =   "Allow Remote Partner to Shutdown Fire Call"
-               Height          =   225
-               Left            =   285
-               TabIndex        =   199
-               Top             =   135
-               Width           =   3960
-            End
-            Begin VB.Label lblConfigurationTab 
-               Caption         =   $"Form2.frx":01F3
-               Height          =   660
-               Index           =   8
-               Left            =   270
-               TabIndex        =   200
-               Top             =   525
-               Width           =   3720
-            End
-         End
-         Begin VB.CheckBox chkEnableBalloonTooltips 
-            Caption         =   "Enable Balloon Tooltips on all Controls"
-            Height          =   225
-            Left            =   1710
-            TabIndex        =   197
-            ToolTipText     =   "Check the box to enable larger balloon tooltips for all controls on the main program"
-            Top             =   5085
-            Width           =   3405
-         End
-         Begin VB.Frame fraTargetClient 
-            Height          =   855
-            Left            =   1695
-            TabIndex        =   176
-            Top             =   -90
-            Width           =   3675
-            Begin VB.OptionButton optHandleData 
-               Caption         =   " Unix Client         (UTF8)"
-               Height          =   270
-               Index           =   1
-               Left            =   105
-               TabIndex        =   178
-               Top             =   495
-               Width           =   2640
-            End
-            Begin VB.OptionButton optHandleData 
-               Caption         =   " Windows Client  (ANSI)"
-               Height          =   270
-               Index           =   0
-               Left            =   105
-               TabIndex        =   177
-               Top             =   180
-               Width           =   2670
-            End
-         End
-         Begin VB.CheckBox chkSingleListBox 
-            Caption         =   "Single Chat Window"
-            Height          =   225
-            Left            =   1710
-            TabIndex        =   172
-            ToolTipText     =   "Check this box to merge the two chatboxes into one larger box"
-            Top             =   2400
-            Width           =   3270
-         End
-         Begin VB.TextBox txtPrefixString 
-            Height          =   315
-            Left            =   1695
-            TabIndex        =   100
-            ToolTipText     =   "Enter a prefix/nickname for outgoing messages."
-            Top             =   1230
-            Width           =   3660
-         End
-         Begin VB.CheckBox chkLoadBottom 
-            Caption         =   "Load Text at Bottom of chatbox"
-            Height          =   225
-            Left            =   1710
-            TabIndex        =   99
-            ToolTipText     =   "Check this box to load new messages at the bottom of the text display."
-            Top             =   1965
-            Width           =   3210
-         End
-         Begin VB.CheckBox chkEnableScrollbars 
-            Caption         =   "Enable Scrollbars on Chat Boxes"
-            Height          =   225
-            Left            =   1710
-            TabIndex        =   98
-            ToolTipText     =   "Check the box to enable the optional horizontal and vertical scrollbars"
-            Top             =   4185
-            Width           =   3555
-         End
-         Begin VB.CheckBox chkEnableTooltips 
-            Caption         =   "Enable Tooltips on all Controls"
-            Height          =   225
-            Left            =   1710
-            TabIndex        =   97
-            ToolTipText     =   "Check the box to enable tooltips for all controls on the main program"
-            Top             =   4650
-            Width           =   3345
-         End
-         Begin VB.ComboBox cmbMaxLineLength 
-            Height          =   315
-            ItemData        =   "Form2.frx":0291
-            Left            =   1710
-            List            =   "Form2.frx":0293
-            Style           =   2  'Dropdown List
-            TabIndex        =   96
-            ToolTipText     =   "The program will cut your text to a new line when this limit is reached"
-            Top             =   3330
-            Width           =   1575
-         End
-         Begin VB.Label lblConfigurationTab 
-            Caption         =   "Select the type of client your chat partner will be using."
-            Height          =   375
-            Index           =   4
-            Left            =   1695
-            TabIndex        =   180
-            ToolTipText     =   "You can use an ADO record stream or the FileSystemObject (FSO) to write UTF8 or ANSI compatible files"
-            Top             =   840
-            Width           =   3990
-         End
-         Begin VB.Label lblConfigurationTab 
-            Caption         =   "Target Client :"
-            Height          =   255
-            Index           =   0
-            Left            =   645
-            TabIndex        =   179
-            Tag             =   "lblTargetClient"
-            Top             =   105
-            Width           =   1065
-         End
-         Begin VB.Label lblConfigurationTab 
-            Caption         =   "This determines whether the separate chat boxes are merged into one larger box"
-            Height          =   660
-            Index           =   6
-            Left            =   1710
-            TabIndex        =   173
-            Top             =   2745
-            Width           =   3615
-         End
-         Begin VB.Label lblConfigurationTab 
-            Caption         =   "Enter a prefix/nickname for outgoing messages."
-            Height          =   375
-            Index           =   5
-            Left            =   1755
-            TabIndex        =   104
-            Top             =   1650
-            Width           =   3705
-         End
-         Begin VB.Label lblConfigurationTab 
-            Caption         =   "Prefix String :"
-            Height          =   255
-            Index           =   1
-            Left            =   705
-            TabIndex        =   103
-            Tag             =   "lblPrefixString"
-            Top             =   1275
-            Width           =   1065
-         End
-         Begin VB.Label lblConfigurationTab 
-            Caption         =   "Maximum Line Length : "
-            Height          =   285
-            Index           =   2
-            Left            =   30
-            TabIndex        =   102
-            Tag             =   "lblMaxLineLength"
-            Top             =   3375
-            Width           =   1740
-         End
-         Begin VB.Label lblConfigurationTab 
-            Caption         =   "Choose the maximum length for your texts."
-            Height          =   300
-            Index           =   7
-            Left            =   1710
-            TabIndex        =   101
-            Top             =   3780
-            Width           =   3750
-         End
-      End
-   End
-   Begin VB.CommandButton btnSave 
-      Caption         =   "&Save"
-      Enabled         =   0   'False
-      Height          =   360
-      Left            =   6105
-      Style           =   1  'Graphical
-      TabIndex        =   19
-      ToolTipText     =   "Save the changes you have made to the preferences"
-      Top             =   10140
-      Width           =   1320
-   End
-   Begin VB.Frame fraHousekeepingButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   6840
-      TabIndex        =   181
-      ToolTipText     =   "Opens the Housekeeping tab"
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picHousekeeping 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   165
-         Picture         =   "Form2.frx":0295
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   182
-         ToolTipText     =   "Opens the Housekeeping tab"
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Label lblHousekeeping 
-         Caption         =   "House"
-         Height          =   225
-         Left            =   210
-         TabIndex        =   183
-         ToolTipText     =   "Opens the Housekeeping tab"
-         Top             =   810
-         Width           =   540
-      End
-   End
-   Begin VB.CommandButton btnHelp 
-      Caption         =   "Help"
-      Height          =   360
-      Left            =   120
-      Style           =   1  'Graphical
-      TabIndex        =   174
-      ToolTipText     =   "Open the help utility"
-      Top             =   10155
-      Width           =   1320
-   End
-   Begin VB.Frame fraSoundsButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   5880
-      TabIndex        =   30
-      Top             =   -105
-      Width           =   930
-      Begin VB.PictureBox picSounds 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   630
-         Left            =   165
-         Picture         =   "Form2.frx":0EB5
-         ScaleHeight     =   630
-         ScaleWidth      =   630
-         TabIndex        =   31
-         ToolTipText     =   "Opens the Window tab"
-         Top             =   210
-         Width           =   630
-      End
-      Begin VB.Label lblSounds 
-         Caption         =   "Sounds"
-         Height          =   240
-         Left            =   210
-         TabIndex        =   32
-         Top             =   825
-         Width           =   615
-      End
-   End
-   Begin VB.Frame fraTextsButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   4920
-      TabIndex        =   27
-      Top             =   -105
-      Width           =   930
-      Begin VB.PictureBox picTexts 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   630
-         Left            =   165
-         Picture         =   "Form2.frx":1474
-         ScaleHeight     =   630
-         ScaleWidth      =   630
-         TabIndex        =   28
-         ToolTipText     =   "Opens the Window tab"
-         Top             =   225
-         Width           =   630
-      End
-      Begin VB.Label lblTexts 
-         Caption         =   "Texts"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   29
-         Top             =   825
-         Width           =   615
-      End
-   End
-   Begin VB.Timer themeTimer 
-      Enabled         =   0   'False
-      Interval        =   10000
-      Left            =   45
-      Top             =   7965
-   End
-   Begin VB.CommandButton btnCancel 
-      Caption         =   "&Close"
-      Height          =   360
-      Left            =   7500
-      Style           =   1  'Graphical
-      TabIndex        =   20
-      ToolTipText     =   "Close the utility"
-      Top             =   10155
-      Width           =   1320
-   End
-   Begin VB.Frame fraWindowButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   7815
-      TabIndex        =   16
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picWindow 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   165
-         Picture         =   "Form2.frx":1A76
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   17
-         ToolTipText     =   "Opens the Window tab"
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Label lblWindow 
-         Caption         =   "Window"
-         Height          =   240
-         Left            =   180
-         TabIndex        =   18
-         Top             =   825
-         Width           =   615
-      End
-   End
-   Begin VB.Frame fraFontsButtons 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   3960
-      TabIndex        =   13
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picFonts 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":22BE
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   14
-         ToolTipText     =   "Opens the Fonts tab"
-         Top             =   210
-         Width           =   600
-      End
-      Begin VB.Label lblFonts 
-         Caption         =   "Fonts"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   15
-         Top             =   825
-         Width           =   510
-      End
-   End
-   Begin VB.Frame fraEmojisButtons 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   3000
-      TabIndex        =   10
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picEmojis 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":2AAA
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   11
-         ToolTipText     =   "Opens the Emojis tab"
-         Top             =   210
-         Width           =   600
-      End
-      Begin VB.Label lblEmojis 
-         Caption         =   "Emojis"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   12
-         Top             =   825
-         Width           =   510
-      End
-   End
-   Begin VB.Frame fraEmailButtons 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   2040
-      TabIndex        =   7
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picEmail 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":2F8D
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   8
-         ToolTipText     =   "Opens the email tab"
-         Top             =   210
-         Width           =   600
-      End
-      Begin VB.Label lblEmail 
-         Caption         =   "Email"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   9
-         Top             =   825
-         Width           =   510
-      End
-   End
-   Begin VB.Frame fraConfigurationButtons 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   1080
-      TabIndex        =   4
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picConfig 
-         Appearance      =   0  'Flat
-         AutoSize        =   -1  'True
-         BackColor       =   &H80000005&
-         BorderStyle     =   0  'None
-         ForeColor       =   &H80000008&
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":3529
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   5
-         ToolTipText     =   "Opens the configuration tab"
-         Top             =   195
-         Width           =   600
-      End
-      Begin VB.Label lblConfig 
-         Caption         =   "Config."
-         Height          =   240
-         Left            =   195
-         TabIndex        =   6
-         Top             =   825
-         Width           =   630
-      End
-   End
-   Begin VB.Frame fraGeneralButtons 
-      Height          =   1140
-      Left            =   120
-      TabIndex        =   1
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picGeneral 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   405
-         Left            =   240
-         Picture         =   "Form2.frx":3D8B
-         ScaleHeight     =   405
-         ScaleWidth      =   420
-         TabIndex        =   2
-         ToolTipText     =   "Opens the general tab"
-         Top             =   300
-         Width           =   420
-      End
-      Begin VB.Label lblGeneral 
-         Caption         =   "General"
-         Height          =   240
-         Left            =   195
-         TabIndex        =   3
-         Top             =   825
-         Width           =   705
       End
    End
    Begin VB.Frame fraTexts 
@@ -1751,9 +1908,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbSmtpConfig 
             Height          =   315
-            ItemData        =   "Form2.frx":4321
+            ItemData        =   "Form2.frx":580C
             Left            =   2025
-            List            =   "Form2.frx":4323
+            List            =   "Form2.frx":580E
             Style           =   2  'Dropdown List
             TabIndex        =   247
             ToolTipText     =   "Select which SMTP configuration slot you would like to operate."
@@ -1807,7 +1964,7 @@ Begin VB.Form FireCallPrefs
                Height          =   210
                Index           =   1
                Left            =   4920
-               Picture         =   "Form2.frx":4325
+               Picture         =   "Form2.frx":5810
                ScaleHeight     =   210
                ScaleWidth      =   225
                TabIndex        =   242
@@ -1821,7 +1978,7 @@ Begin VB.Form FireCallPrefs
                Height          =   240
                Index           =   0
                Left            =   90
-               Picture         =   "Form2.frx":4552
+               Picture         =   "Form2.frx":5A3D
                ScaleHeight     =   240
                ScaleWidth      =   255
                TabIndex        =   241
@@ -1886,7 +2043,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnSeePassword 
             Height          =   315
             Left            =   6045
-            Picture         =   "Form2.frx":49DC
+            Picture         =   "Form2.frx":5EC7
             Style           =   1  'Graphical
             TabIndex        =   223
             ToolTipText     =   "Click here to expose the password to prying eyes..."
@@ -1963,9 +2120,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbAdviceInterval 
             Height          =   315
-            ItemData        =   "Form2.frx":4C9D
+            ItemData        =   "Form2.frx":6188
             Left            =   2025
-            List            =   "Form2.frx":4C9F
+            List            =   "Form2.frx":618A
             Style           =   2  'Dropdown List
             TabIndex        =   75
             ToolTipText     =   "Advice messages are sent when new data is received but not more often than at the specified interval."
@@ -1985,7 +2142,7 @@ Begin VB.Form FireCallPrefs
                Left            =   1260
                TabIndex        =   231
                Text            =   "This is the SMTP server name as supplied by your email provider"
-               ToolTipText     =   $"Form2.frx":4CA1
+               ToolTipText     =   $"Form2.frx":618C
                Top             =   30
                Width           =   3960
             End
@@ -2223,9 +2380,9 @@ Begin VB.Form FireCallPrefs
          Width           =   5565
          Begin VB.ComboBox cmbEmojiSet 
             Height          =   315
-            ItemData        =   "Form2.frx":4D2E
+            ItemData        =   "Form2.frx":6219
             Left            =   1185
-            List            =   "Form2.frx":4D30
+            List            =   "Form2.frx":621B
             Style           =   2  'Dropdown List
             TabIndex        =   107
             ToolTipText     =   "Choose the emoji set to use"
@@ -2262,7 +2419,7 @@ Begin VB.Form FireCallPrefs
             Width           =   3750
          End
          Begin VB.Label lblEmojiTab 
-            Caption         =   $"Form2.frx":4D32
+            Caption         =   $"Form2.frx":621D
             Height          =   825
             Index           =   4
             Left            =   1170
@@ -2298,7 +2455,7 @@ Begin VB.Form FireCallPrefs
       TabIndex        =   184
       Top             =   1215
       Width           =   8655
-      Begin VB.Frame fraHiddenHousekeeping 
+      Begin VB.Frame fraHousekeepingInner 
          BorderStyle     =   0  'None
          Height          =   7080
          Left            =   600
@@ -2523,11 +2680,11 @@ Begin VB.Form FireCallPrefs
    Begin VB.Frame fraSounds 
       Caption         =   "Sounds"
       Height          =   7095
-      Left            =   90
+      Left            =   105
       TabIndex        =   33
       Top             =   1110
       Visible         =   0   'False
-      Width           =   8640
+      Width           =   10575
       Begin VB.Frame fraSoundsInner 
          BorderStyle     =   0  'None
          Height          =   6630
@@ -2560,9 +2717,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbCaptureDevices 
             Height          =   315
-            ItemData        =   "Form2.frx":4DF8
+            ItemData        =   "Form2.frx":62E3
             Left            =   1365
-            List            =   "Form2.frx":4DFA
+            List            =   "Form2.frx":62E5
             TabIndex        =   211
             Text            =   "cmbCaptureDevices"
             Top             =   4455
@@ -2571,7 +2728,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnMute 
             Height          =   285
             Left            =   5385
-            Picture         =   "Form2.frx":4DFC
+            Picture         =   "Form2.frx":62E7
             Style           =   1  'Graphical
             TabIndex        =   171
             TabStop         =   0   'False
@@ -2599,9 +2756,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbAlarmSound 
             Height          =   315
-            ItemData        =   "Form2.frx":5029
+            ItemData        =   "Form2.frx":6514
             Left            =   1365
-            List            =   "Form2.frx":502B
+            List            =   "Form2.frx":6516
             Style           =   2  'Dropdown List
             TabIndex        =   53
             ToolTipText     =   "Choose the alarm sound."
@@ -2611,7 +2768,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnPlaySound 
             Height          =   285
             Left            =   5055
-            Picture         =   "Form2.frx":502D
+            Picture         =   "Form2.frx":6518
             Style           =   1  'Graphical
             TabIndex        =   52
             TabStop         =   0   'False
@@ -2951,6 +3108,34 @@ sendEmailPrefs_Error:
 
 End Function
 
+Private Sub btnDefaultEditor_Click()
+    Dim retFileName As String: retFileName = vbNullString
+    Dim answer As VbMsgBoxResult: answer = vbNo
+
+    Call addTargetFile(txtDefaultEditor.Text, retFileName)
+    
+    If retFileName <> vbNullString Then
+        txtDefaultEditor.Text = retFileName ' strips the buffered bit, leaving just the filename
+    End If
+    
+    If retFileName = vbNullString Then
+        Exit Sub
+    End If
+    
+    If Not fFExists(retFileName) Then
+        answer = MsgBox("The file doesn't currently exist, do you want me to create the chosen file, " & "   -  are you sure?", vbYesNo)
+        If answer = vbNo Then
+            Exit Sub
+        End If
+    
+        'create new
+        Open retFileName For Output As #1
+        Close #1
+    End If
+End Sub
+
+
+
 Private Sub chkEnableAlarmSound_Click()
     btnSave.Enabled = True ' enable the save button
     FCWEnableAlarmSound = LTrim$(Str$(chkEnableAlarmSound.Value))
@@ -2968,6 +3153,54 @@ Private Sub chkServiceProcesses_Click()
     
     FCWCheckServiceProcesses = LTrim$(Str$(chkServiceProcesses.Value))
 
+End Sub
+
+Private Sub cmbDebug_Click()
+    btnSave.Enabled = True ' enable the save button
+    If cmbDebug.ListIndex = 0 Then
+        txtDefaultEditor.Enabled = False
+        lblDebug(7).Enabled = False
+        btnDefaultEditor.Enabled = False
+        lblDebug(9).Enabled = False
+    Else
+        txtDefaultEditor.Enabled = True
+        lblDebug(7).Enabled = True
+        btnDefaultEditor.Enabled = True
+        lblDebug(9).Enabled = True
+    End If
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : picDevelopment_Click
+' Author    : beededea
+' Date      : 06/07/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub picDevelopment_Click()
+' clicking on the development icon
+
+   On Error GoTo picDevelopment_Click_Error
+
+    Call clearBorderStyle
+
+    fraDevelopment.Visible = True
+    fraDevelopmentButton.BorderStyle = 1
+    
+    FCWLastSelectedTab = "development"
+    PutINISetting "Software\FireCallWin", "lastSelectedTab", FCWLastSelectedTab, FCWSettingsFile
+    
+    FireCallPrefs.Height = fraDevelopment.Height + 2000
+    btnSave.Top = fraDevelopment.Top + fraDevelopment.Height + 100
+    btnCancel.Top = fraDevelopment.Top + fraDevelopment.Height + 100
+    btnHelp.Top = fraDevelopment.Top + fraDevelopment.Height + 100
+
+   On Error GoTo 0
+   Exit Sub
+
+picDevelopment_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picDevelopment_Click of Form FireCallPrefs"
 End Sub
 
 Private Sub optIconiseDesktop_Click()
@@ -3271,39 +3504,50 @@ Private Sub showLastTab()
     If FCWLastSelectedTab = "sounds" Then Call picSounds_Click
     If FCWLastSelectedTab = "housekeeping" Then Call picHouseKeeping_Click
     If FCWLastSelectedTab = "window" Then Call picWindow_Click
+    If FCWLastSelectedTab = "development" Then Call picDevelopment_Click
 
 End Sub
 
 
 Private Sub positionThings()
 
-    Dim frameWidth As Integer
+    Dim frameWidth As Integer: frameWidth = 0
+    Dim frameTop As Integer: frameTop = 0
+    Dim frameLeft As Integer: frameLeft = 0
+    Dim innerLeftPos As Integer: innerLeftPos = 0
     
     ' size and position the frames and buttons
     
-    Me.Width = 9000
+    FireCallPrefs.Width = 10905
     
-    fraGeneral.Top = 1050
-    fraConfiguration.Top = 1050
-    fraEmail.Top = 1050
-    fraEmojis.Top = 1050
-    fraFonts.Top = 1050
-    fraWindow.Top = 1050
-    fraTexts.Top = 1050
-    fraHousekeeping.Top = 1050
-    fraSounds.Top = 1050
+    frameTop = 1050
     
-    fraGeneral.Left = 120
-    fraConfiguration.Left = 120
-    fraEmail.Left = 120
-    fraEmojis.Left = 120
-    fraFonts.Left = 120
-    fraWindow.Left = 120
-    fraTexts.Left = 120
-    fraHousekeeping.Left = 120
-    fraSounds.Left = 120
+    fraGeneral.Top = frameTop
+    fraConfiguration.Top = frameTop
+    fraEmail.Top = frameTop
+    fraEmojis.Top = frameTop
+    fraFonts.Top = frameTop
+    fraWindow.Top = frameTop
+    fraTexts.Top = frameTop
+    fraHousekeeping.Top = frameTop
+    fraSounds.Top = frameTop
+    fraDevelopment.Top = frameTop
     
-    frameWidth = 8700
+    frameLeft = 120
+    
+    fraGeneral.Left = frameLeft
+    fraConfiguration.Left = frameLeft
+    fraEmail.Left = frameLeft
+    fraEmojis.Left = frameLeft
+    fraFonts.Left = frameLeft
+    fraWindow.Left = frameLeft
+    fraTexts.Left = frameLeft
+    fraHousekeeping.Left = frameLeft
+    fraSounds.Left = frameLeft
+    fraDevelopment.Left = frameLeft
+    
+    frameWidth = 10575
+    
     fraGeneral.Width = frameWidth
     fraConfiguration.Width = frameWidth
     fraEmail.Width = frameWidth
@@ -3313,6 +3557,20 @@ Private Sub positionThings()
     fraTexts.Width = frameWidth
     fraHousekeeping.Width = frameWidth
     fraSounds.Width = frameWidth
+    fraDevelopment.Width = frameWidth
+    
+    innerLeftPos = 1625
+    
+    fraGeneralInner.Left = innerLeftPos
+    fraConfigurationInner.Left = innerLeftPos
+    fraEmailInner.Left = innerLeftPos
+    fraEmojisInner.Left = innerLeftPos
+    fraFontsInner.Left = innerLeftPos
+    fraWindowInner.Left = innerLeftPos
+    fraTextsInner.Left = innerLeftPos
+    fraHousekeepingInner.Left = innerLeftPos
+    fraSoundsInner.Left = innerLeftPos
+    fraDevelopmentInner.Left = innerLeftPos
     
     fraGeneralButtons.BorderStyle = 1
     
@@ -3325,6 +3583,7 @@ Private Sub positionThings()
     fraTexts.Visible = False
     fraHousekeeping.Visible = False
     fraSounds.Visible = False
+    fraDevelopment.Visible = False
     
     FireCallPrefs.Height = fraGeneral.Height + 2000
     btnSave.Top = fraGeneral.Top + fraGeneral.Height + 100
@@ -3674,6 +3933,10 @@ Private Sub btnSave_Click()
     
     FCWIconiseOpacity = LTrim$(Str$(optIconiseOpacity.Value))
     FCWIconiseDesktop = LTrim$(Str$(optIconiseDesktop.Value))
+    
+    'development
+    FCWDebug = LTrim$(Str$(cmbDebug.ListIndex))
+    FCWDefaultEditor = txtDefaultEditor.Text
     
     ' save the values from the general tab
     If fFExists(FCWSettingsFile) Then
@@ -4476,6 +4739,10 @@ Private Sub adjustPrefsControls()
     
     Call checkIconiseOpacityLevel
    
+    ' development
+    cmbDebug.ListIndex = Val(FCWDebug)
+    txtDefaultEditor.Text = FCWDefaultEditor
+   
    On Error GoTo 0
    Exit Sub
 
@@ -4721,7 +4988,12 @@ Private Sub populateComboBoxes()
     cmbArchiveDays.AddItem "100 days", 7
     cmbArchiveDays.ItemData(7) = 8640000
 
-
+    ' development
+    cmbDebug.AddItem "Debug OFF", 0
+    cmbDebug.ItemData(0) = 0
+    cmbDebug.AddItem "Debug ON", 1
+    cmbDebug.ItemData(1) = 1
+    
     On Error GoTo 0
     Exit Sub
 
@@ -4758,7 +5030,7 @@ Private Sub populateCmbAlarmSound()
 End Sub
 
 ' Clicking on the icon inner frame
-Private Sub fraConfigInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraConfigurationInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -4766,8 +5038,8 @@ Private Sub fraConfigInner_MouseDown(Button As Integer, Shift As Integer, x As S
     End If
 End Sub
 
-Private Sub fraConfigInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    CreateToolTip fraConfigInner.hwnd, "The configuration panel is the location for optional configuration items. These items change how FireCall operates, configure them to suit your needs and your mode of operation.", _
+Private Sub fraConfigurationInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+    CreateToolTip fraConfigurationInner.hwnd, "The configuration panel is the location for optional configuration items. These items change how FireCall operates, configure them to suit your needs and your mode of operation.", _
                   TTIconInfo, "Help on Configuration", , , , True
 
 End Sub
@@ -4873,7 +5145,7 @@ Private Sub fraGoogleDrive_MouseMove(Button As Integer, Shift As Integer, x As S
                   TTIconInfo, "Help on Google Drive Selection", , , , True
 End Sub
 
-Private Sub fraHiddenHousekeeping_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub fraHousekeepingInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -4881,8 +5153,8 @@ Private Sub fraHiddenHousekeeping_MouseDown(Button As Integer, Shift As Integer,
     End If
 End Sub
 
-Private Sub fraHiddenHousekeeping_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    CreateToolTip fraHiddenHousekeeping.hwnd, "The housekeeping panel is where you can configure backups and the archiving of old data. The backup functionality is working well but the archiving has not yet been implemented.", _
+Private Sub fraHousekeepingInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+    CreateToolTip fraHousekeepingInner.hwnd, "The housekeeping panel is where you can configure backups and the archiving of old data. The backup functionality is working well but the archiving has not yet been implemented.", _
                   TTIconInfo, "Help on Housekeeping", , , , True
 End Sub
 
@@ -5116,7 +5388,16 @@ End Sub
 
 
 ' removes all styling from the icon frames and makes the major frames below invisible too
+'---------------------------------------------------------------------------------------
+' Procedure : clearBorderStyle
+' Author    : beededea
+' Date      : 06/07/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub clearBorderStyle()
+
+   On Error GoTo clearBorderStyle_Error
 
     fraGeneral.Visible = False
     fraConfiguration.Visible = False
@@ -5127,7 +5408,8 @@ Private Sub clearBorderStyle()
     fraTexts.Visible = False
     fraHousekeeping.Visible = False
     fraSounds.Visible = False
-
+    fraDevelopment.Visible = False
+    
     fraConfigurationButtons.BorderStyle = 0
     fraGeneralButtons.BorderStyle = 0
     fraEmailButtons.BorderStyle = 0
@@ -5137,6 +5419,14 @@ Private Sub clearBorderStyle()
     fraTextsButton.BorderStyle = 0
     fraHousekeepingButton.BorderStyle = 0
     fraSoundsButton.BorderStyle = 0
+    fraDevelopmentButton.BorderStyle = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+clearBorderStyle_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure clearBorderStyle of Form FireCallPrefs"
 
 End Sub
 
@@ -5354,6 +5644,12 @@ End Sub
 
 
 
+
+
+Private Sub txtDefaultEditor_Change()
+    btnSave.Enabled = True ' enable the save button
+End Sub
+
 Private Sub txtEmailMessage_Change()
     btnTestEmail.Enabled = False
     btnSave.Enabled = True ' enable the save button
@@ -5369,6 +5665,12 @@ Private Sub txtExchangeFolder_Change()
 End Sub
 Private Sub txtFontSize_Change()
     btnSave.Enabled = True ' enable the save button
+End Sub
+
+
+
+Private Sub txtOpenFile_Change()
+
 End Sub
 
 Private Sub txtSmtpConfigName_Change()
