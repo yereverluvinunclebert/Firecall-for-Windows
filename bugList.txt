@@ -333,20 +333,23 @@
 ' addition of FCWDebug reading and writing settings.ini - DONE
 ' changes to paypal link, to point to kofi - DONE
 ' remove Amazon link - DONE
-' addition of development prefs tab as per pz Earth
-' new positioning of all tab frames and inner frames using variables
-' addition of about prefs tab as per pz Earth
-' right click menu for development and about us tabs
+' addition of development prefs tab as per pz Earth - DONE
+' new positioning of all tab frames and inner frames using variables - DONE
+' addition of about prefs tab as per pz Earth - DONE
+' right click menu for development and about us tabs - DONE
+
+' same online help submenus as per PzEarth - DONE
+' four buttons on about us page to point to menu links - DONE
 
 ' Tasks underway now
 ' ==================
 
-' same online help submenus as per PzEarth
-' development tooltips as per PzEarth
+' development tooltips as per PzEarth - wip
 ' about tooltips as per PzEarth
 ' balloon tooltips development as per PzEarth 
 ' balloon tooltips about as per PzEarth 
-' four buttons on about us page to point to menu links
+' new icon tooltips on the two new prefs image buttons
+
 ' theme the about us RTF box
 ' create the correct text for the about box
 ' scrollbox cover from PzEarth
