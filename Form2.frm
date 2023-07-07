@@ -54,7 +54,7 @@ Begin VB.Form FireCallPrefs
          Left            =   8865
          Style           =   1  'Graphical
          TabIndex        =   303
-         ToolTipText     =   "Opens a browser window and sends you to our donate page on Amazon"
+         ToolTipText     =   "Opens a browser window and sends you to our donate a coffee page on Kofi!"
          Top             =   1485
          Width           =   1470
       End
@@ -92,7 +92,7 @@ Begin VB.Form FireCallPrefs
          Left            =   8865
          Style           =   1  'Graphical
          TabIndex        =   301
-         ToolTipText     =   "This will link you to the Rocket/Steamy dock users Group"
+         ToolTipText     =   "This will link you to the our Steampunk/Dieselpunk program users Group."
          Top             =   735
          Width           =   1470
       End
@@ -362,7 +362,7 @@ Begin VB.Form FireCallPrefs
                Height          =   315
                Left            =   1440
                TabIndex        =   294
-               ToolTipText     =   $"Form2.frx":0FB7
+               ToolTipText     =   $"Form2.frx":14AD
                Top             =   105
                Width           =   3660
             End
@@ -377,7 +377,7 @@ Begin VB.Form FireCallPrefs
                Width           =   1350
             End
             Begin VB.Label lblDebug 
-               Caption         =   $"Form2.frx":1049
+               Caption         =   $"Form2.frx":153F
                Height          =   930
                Index           =   9
                Left            =   1440
@@ -388,9 +388,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbDebug 
             Height          =   315
-            ItemData        =   "Form2.frx":10ED
+            ItemData        =   "Form2.frx":15E3
             Left            =   1680
-            List            =   "Form2.frx":10EF
+            List            =   "Form2.frx":15E5
             Style           =   2  'Dropdown List
             TabIndex        =   290
             ToolTipText     =   "Choose to set debug mode."
@@ -449,7 +449,7 @@ Begin VB.Form FireCallPrefs
                Width           =   3960
             End
             Begin VB.Label lblConfigurationTab 
-               Caption         =   $"Form2.frx":10F1
+               Caption         =   $"Form2.frx":15E7
                Height          =   660
                Index           =   8
                Left            =   270
@@ -538,9 +538,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbMaxLineLength 
             Height          =   315
-            ItemData        =   "Form2.frx":118F
+            ItemData        =   "Form2.frx":1685
             Left            =   1710
-            List            =   "Form2.frx":1191
+            List            =   "Form2.frx":1687
             Style           =   2  'Dropdown List
             TabIndex        =   96
             ToolTipText     =   "The program will cut your text to a new line when this limit is reached"
@@ -623,14 +623,6 @@ Begin VB.Form FireCallPrefs
       TabIndex        =   286
       Top             =   -90
       Width           =   975
-      Begin VB.Image picAbout 
-         Height          =   600
-         Left            =   160
-         Picture         =   "Form2.frx":1193
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
       Begin VB.Label lblAbout 
          Caption         =   "About"
          Height          =   240
@@ -640,11 +632,21 @@ Begin VB.Form FireCallPrefs
          Top             =   825
          Width           =   615
       End
+      Begin VB.Image picAbout 
+         Height          =   600
+         Left            =   160
+         Picture         =   "Form2.frx":1689
+         Stretch         =   -1  'True
+         ToolTipText     =   "Opens the About tab"
+         Top             =   225
+         Width           =   600
+      End
       Begin VB.Image imgAboutClicked 
          Height          =   600
          Left            =   160
-         Picture         =   "Form2.frx":171B
+         Picture         =   "Form2.frx":1C11
          Stretch         =   -1  'True
+         ToolTipText     =   "Opens the About tab"
          Top             =   225
          Width           =   600
       End
@@ -656,14 +658,6 @@ Begin VB.Form FireCallPrefs
       TabIndex        =   284
       Top             =   -90
       Width           =   1035
-      Begin VB.Image picDevelopment 
-         Height          =   600
-         Left            =   160
-         Picture         =   "Form2.frx":1C06
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
       Begin VB.Label lblDevelopment 
          Caption         =   "Development"
          Height          =   240
@@ -672,11 +666,21 @@ Begin VB.Form FireCallPrefs
          Top             =   810
          Width           =   960
       End
+      Begin VB.Image picDevelopment 
+         Height          =   600
+         Left            =   160
+         Picture         =   "Form2.frx":20FC
+         Stretch         =   -1  'True
+         ToolTipText     =   "Opens the Development tab"
+         Top             =   225
+         Width           =   600
+      End
       Begin VB.Image imgDevelopmentClicked 
          Height          =   600
          Left            =   160
-         Picture         =   "Form2.frx":21BE
+         Picture         =   "Form2.frx":26B4
          Stretch         =   -1  'True
+         ToolTipText     =   "Opens the Development tab"
          Top             =   225
          Width           =   600
       End
@@ -705,7 +709,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   165
-         Picture         =   "Form2.frx":2544
+         Picture         =   "Form2.frx":2A3A
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   182
@@ -745,7 +749,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   630
          Left            =   165
-         Picture         =   "Form2.frx":3164
+         Picture         =   "Form2.frx":365A
          ScaleHeight     =   630
          ScaleWidth      =   630
          TabIndex        =   31
@@ -774,7 +778,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   630
          Left            =   165
-         Picture         =   "Form2.frx":3723
+         Picture         =   "Form2.frx":3C19
          ScaleHeight     =   630
          ScaleWidth      =   630
          TabIndex        =   28
@@ -819,7 +823,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   165
-         Picture         =   "Form2.frx":3D25
+         Picture         =   "Form2.frx":421B
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   17
@@ -848,7 +852,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":456D
+         Picture         =   "Form2.frx":4A63
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   14
@@ -877,7 +881,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":4D59
+         Picture         =   "Form2.frx":524F
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   11
@@ -906,7 +910,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":523C
+         Picture         =   "Form2.frx":5732
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   8
@@ -938,7 +942,7 @@ Begin VB.Form FireCallPrefs
          ForeColor       =   &H80000008&
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":57D8
+         Picture         =   "Form2.frx":5CCE
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   5
@@ -966,7 +970,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   405
          Left            =   240
-         Picture         =   "Form2.frx":603A
+         Picture         =   "Form2.frx":6530
          ScaleHeight     =   405
          ScaleWidth      =   420
          TabIndex        =   2
@@ -1036,7 +1040,7 @@ Begin VB.Form FireCallPrefs
             Left            =   1305
             Style           =   2  'Dropdown List
             TabIndex        =   38
-            ToolTipText     =   $"Form2.frx":65D0
+            ToolTipText     =   $"Form2.frx":6AC6
             Top             =   0
             Width           =   3960
          End
@@ -1198,7 +1202,7 @@ Begin VB.Form FireCallPrefs
             Width           =   780
          End
          Begin VB.Label lblWindowLevelDescription 
-            Caption         =   $"Form2.frx":666B
+            Caption         =   $"Form2.frx":6B61
             Height          =   870
             Left            =   1365
             TabIndex        =   44
@@ -1449,9 +1453,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbRefreshInterval 
             Height          =   315
-            ItemData        =   "Form2.frx":6706
+            ItemData        =   "Form2.frx":6BFC
             Left            =   1485
-            List            =   "Form2.frx":6708
+            List            =   "Form2.frx":6BFE
             Style           =   2  'Dropdown List
             TabIndex        =   79
             ToolTipText     =   "Set the refresh interval"
@@ -1540,7 +1544,7 @@ Begin VB.Form FireCallPrefs
             Width           =   1350
          End
          Begin VB.Label lblGeneralTab 
-            Caption         =   $"Form2.frx":670A
+            Caption         =   $"Form2.frx":6C00
             Height          =   900
             Index           =   7
             Left            =   1545
@@ -2220,9 +2224,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbSmtpConfig 
             Height          =   315
-            ItemData        =   "Form2.frx":67B7
+            ItemData        =   "Form2.frx":6CAD
             Left            =   2025
-            List            =   "Form2.frx":67B9
+            List            =   "Form2.frx":6CAF
             Style           =   2  'Dropdown List
             TabIndex        =   247
             ToolTipText     =   "Select which SMTP configuration slot you would like to operate."
@@ -2276,7 +2280,7 @@ Begin VB.Form FireCallPrefs
                Height          =   210
                Index           =   1
                Left            =   4920
-               Picture         =   "Form2.frx":67BB
+               Picture         =   "Form2.frx":6CB1
                ScaleHeight     =   210
                ScaleWidth      =   225
                TabIndex        =   242
@@ -2290,7 +2294,7 @@ Begin VB.Form FireCallPrefs
                Height          =   240
                Index           =   0
                Left            =   90
-               Picture         =   "Form2.frx":69E8
+               Picture         =   "Form2.frx":6EDE
                ScaleHeight     =   240
                ScaleWidth      =   255
                TabIndex        =   241
@@ -2355,7 +2359,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnSeePassword 
             Height          =   315
             Left            =   6045
-            Picture         =   "Form2.frx":6E72
+            Picture         =   "Form2.frx":7368
             Style           =   1  'Graphical
             TabIndex        =   223
             ToolTipText     =   "Click here to expose the password to prying eyes..."
@@ -2432,9 +2436,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbAdviceInterval 
             Height          =   315
-            ItemData        =   "Form2.frx":7133
+            ItemData        =   "Form2.frx":7629
             Left            =   2025
-            List            =   "Form2.frx":7135
+            List            =   "Form2.frx":762B
             Style           =   2  'Dropdown List
             TabIndex        =   75
             ToolTipText     =   "Advice messages are sent when new data is received but not more often than at the specified interval."
@@ -2454,7 +2458,7 @@ Begin VB.Form FireCallPrefs
                Left            =   1260
                TabIndex        =   231
                Text            =   "This is the SMTP server name as supplied by your email provider"
-               ToolTipText     =   $"Form2.frx":7137
+               ToolTipText     =   $"Form2.frx":762D
                Top             =   30
                Width           =   3960
             End
@@ -2692,9 +2696,9 @@ Begin VB.Form FireCallPrefs
          Width           =   5565
          Begin VB.ComboBox cmbEmojiSet 
             Height          =   315
-            ItemData        =   "Form2.frx":71C4
+            ItemData        =   "Form2.frx":76BA
             Left            =   1185
-            List            =   "Form2.frx":71C6
+            List            =   "Form2.frx":76BC
             Style           =   2  'Dropdown List
             TabIndex        =   107
             ToolTipText     =   "Choose the emoji set to use"
@@ -2731,7 +2735,7 @@ Begin VB.Form FireCallPrefs
             Width           =   3750
          End
          Begin VB.Label lblEmojiTab 
-            Caption         =   $"Form2.frx":71C8
+            Caption         =   $"Form2.frx":76BE
             Height          =   825
             Index           =   4
             Left            =   1170
@@ -3029,9 +3033,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbCaptureDevices 
             Height          =   315
-            ItemData        =   "Form2.frx":728E
+            ItemData        =   "Form2.frx":7784
             Left            =   1365
-            List            =   "Form2.frx":7290
+            List            =   "Form2.frx":7786
             TabIndex        =   211
             Text            =   "cmbCaptureDevices"
             Top             =   4455
@@ -3040,7 +3044,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnMute 
             Height          =   285
             Left            =   5385
-            Picture         =   "Form2.frx":7292
+            Picture         =   "Form2.frx":7788
             Style           =   1  'Graphical
             TabIndex        =   171
             TabStop         =   0   'False
@@ -3068,9 +3072,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbAlarmSound 
             Height          =   315
-            ItemData        =   "Form2.frx":74BF
+            ItemData        =   "Form2.frx":79B5
             Left            =   1365
-            List            =   "Form2.frx":74C1
+            List            =   "Form2.frx":79B7
             Style           =   2  'Dropdown List
             TabIndex        =   53
             ToolTipText     =   "Choose the alarm sound."
@@ -3080,7 +3084,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnPlaySound 
             Height          =   285
             Left            =   5055
-            Picture         =   "Form2.frx":74C3
+            Picture         =   "Form2.frx":79B9
             Style           =   1  'Graphical
             TabIndex        =   52
             TabStop         =   0   'False
@@ -6691,5 +6695,14 @@ Private Sub fraScrollbarCover_MouseMove(Button As Integer, Shift As Integer, X A
     fraScrollbarCover.Visible = False
 
 End Sub
+Private Sub fraDevelopmentInner_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If FCWEnableBalloonTooltips = "1" Then CreateToolTip fraDevelopmentInner.hwnd, "This tab contains elements that will assist in debugging and developing this program further. ", _
+                  TTIconInfo, "Help on the Development Tab", , , , True
 
+End Sub
+
+Private Sub fraDevelopment_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If FCWEnableBalloonTooltips = "1" Then CreateToolTip fraDevelopment.hwnd, "This tab contains elements that will assist in debugging and developing this program further. ", _
+                  TTIconInfo, "Help on the Development Tab", , , , True
+End Sub
 

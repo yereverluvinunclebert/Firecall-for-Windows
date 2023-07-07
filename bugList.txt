@@ -340,20 +340,21 @@
 
 ' same online help submenus as per PzEarth - DONE
 ' four buttons on about us page to point to menu links - DONE
+' development tooltips as per PzEarth - DONE
+' about tooltips as per PzEarth - DONE
+' balloon tooltips development as per PzEarth - DONE
+' balloon tooltips about as per PzEarth - DONE
+' new icon tooltips on the two new prefs image buttons - DONE
+' theme the about us RTF box - DONE
+' create the correct text for the about - DONE
+' scrollbox cover from PzEarth - DONE
 
 ' Tasks underway now
 ' ==================
 
-' development tooltips as per PzEarth - wip
-' about tooltips as per PzEarth
-' balloon tooltips development as per PzEarth 
-' balloon tooltips about as per PzEarth 
-' new icon tooltips on the two new prefs image buttons
-
-' theme the about us RTF box
-' create the correct text for the about box
-' scrollbox cover from PzEarth
 ' closure of all open forms, check and test
+' sizing of main form taking into account Win10+ borders - as per PzEarth
+' sizing of prefs form taking into account Win10+ borders - as per PzEarth
 
 ' HIGH PRIORITY
 ' =============
