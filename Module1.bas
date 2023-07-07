@@ -3765,7 +3765,7 @@ Public Sub setThemeShade(ByVal redC As Integer, ByVal greenC As Integer, ByVal b
     FireCallPrefs.sliOpacity.BackColor = RGB(redC, greenC, blueC)
     FireCallPrefs.sliAutomaticBackupInterval.BackColor = RGB(redC, greenC, blueC)
     FireCallPrefs.sliRecordingQuality.BackColor = RGB(redC, greenC, blueC)
-    
+    FireCallPrefs.txtAboutText.BackColor = RGB(redC, greenC, blueC)
     ' these elements are normal elements that should have their styling reverted
     ' the loop above changes the background colour and we don't want that for all items
         
