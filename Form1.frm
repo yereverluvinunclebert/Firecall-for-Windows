@@ -1528,8 +1528,23 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuCoffee 
          Caption         =   "Donate a coffee with Kofi!"
       End
-      Begin VB.Menu mnuSupport 
-         Caption         =   "Contact Support"
+      Begin VB.Menu mnuOnline 
+         Caption         =   "Online Help and other options"
+         Begin VB.Menu mnuWidgets 
+            Caption         =   "See the other widgets"
+         End
+         Begin VB.Menu mnuLatest 
+            Caption         =   "Download Latest Version from Github"
+         End
+         Begin VB.Menu mnuSupport 
+            Caption         =   "Contact Support"
+         End
+         Begin VB.Menu mnuFacebook 
+            Caption         =   "Chat about the widget on Facebook"
+         End
+         Begin VB.Menu mnuHelpHTM 
+            Caption         =   "Open Help CHM"
+         End
       End
       Begin VB.Menu mnuBlankLine6 
          Caption         =   "-"
@@ -7732,4 +7747,138 @@ Private Sub mnuEditWidget_Click()
 mnuEditWidget_Click_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuEditWidget_Click of Form menuForm"
+End Sub
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : mnuWidgets_Click
+' Author    : beededea
+' Date      : 13/02/2019
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub mnuWidgets_Click()
+    Dim answer As VbMsgBoxResult
+
+    On Error GoTo mnuWidgets_Click_Error
+    '''If debugflg = 1  Then msgBox "%" & "mnuWidgets_Click"
+
+    answer = MsgBox(" This button opens a browser window and connects to the Steampunk widgets page on my site. Do you wish to proceed?", vbExclamation + vbYesNo)
+
+    If answer = vbYes Then
+        Call ShellExecute(Me.hwnd, "Open", "https://www.deviantart.com/yereverluvinuncleber/gallery/59981269/yahoo-widgets", vbNullString, App.Path, 1)
+    End If
+
+    On Error GoTo 0
+    Exit Sub
+
+mnuWidgets_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuWidgets_Click of form menuForm"
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : mnuLatest_Click
+' Author    : beededea
+' Date      : 13/02/2019
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Sub mnuLatest_Click()
+    Dim answer As VbMsgBoxResult: answer = vbNo
+
+    On Error GoTo mnuLatest_Click_Error
+    '''If debugflg = 1  Then msgBox "%" & "mnuLatest_Click"
+    
+    'MsgBox "The download menu option is not yet enabled."
+
+    answer = MsgBox("Download latest version of the program from github - this button opens a browser window and connects to the widget download page where you can check and download the latest SETUP.EXE file). Proceed?", vbExclamation + vbYesNo)
+
+    If answer = vbYes Then
+        Call ShellExecute(Me.hwnd, "Open", "https://github.com/yereverluvinunclebert/Firecall-for-Windows", vbNullString, App.Path, 1)
+    End If
+
+
+    On Error GoTo 0
+    Exit Sub
+
+mnuLatest_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuLatest_Click of form menuForm"
+
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : mnuFacebook_Click
+' Author    : beededea
+' Date      : 14/02/2019
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Sub mnuFacebook_Click()
+    Dim answer As VbMsgBoxResult
+
+    On Error GoTo mnuFacebook_Click_Error
+    '''If debugflg = 1  Then msgBox "%" & "mnuFacebook_Click"
+
+    answer = MsgBox("Visiting the Facebook chat page - this button opens a browser window and connects to our Facebook chat page. Proceed?", vbExclamation + vbYesNo)
+    If answer = vbYes Then
+        Call ShellExecute(Me.hwnd, "Open", "http://www.facebook.com/profile.php?id=100012278951649", vbNullString, App.Path, 1)
+    End If
+
+    On Error GoTo 0
+    Exit Sub
+
+mnuFacebook_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuFacebook_Click of form menuForm"
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : mnuHelpHTM_Click
+' Author    : beededea
+' Date      : 14/05/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub mnuHelpHTM_Click()
+    On Error GoTo mnuHelpHTM_Click_Error
+    
+    Call btnPicHelp_Click
+
+'        If fFExists(App.Path & "\help\Help.chm") Then
+'            Call ShellExecute(Me.hwnd, "Open", App.Path & "\help\Help.chm", vbNullString, App.Path, 1)
+'        Else
+'            MsgBox ("The help file - help\Help.chm - is missing from the help folder.")
+'        End If
+
+   On Error GoTo 0
+   Exit Sub
+
+mnuHelpHTM_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuHelpHTM_Click of Form menuForm"
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : btnAboutDebugInfo_Click
+' Author    : beededea
+' Date      : 03/03/2020
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub btnAboutDebugInfo_Click()
+
+   On Error GoTo btnAboutDebugInfo_Click_Error
+   'If debugflg = 1 Then Debug.Print "%btnAboutDebugInfo_Click"
+
+    'mnuDebug_Click
+    MsgBox "The debug mode is not yet enabled."
+
+   On Error GoTo 0
+   Exit Sub
+
+btnAboutDebugInfo_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnAboutDebugInfo_Click of form PanzerEarthPrefs"
 End Sub
