@@ -349,11 +349,12 @@
 ' create the correct text for the about - DONE
 ' scrollbox cover from PzEarth - DONE
 ' complete the credits in the about.txt - DONE
+' closure of all open forms, check and test - DONE
 
 ' Tasks underway now
 ' ==================
 
-' closure of all open forms, check and test
+
 ' sizing of main form taking into account Win10+ borders - as per PzEarth
 ' sizing of prefs form taking into account Win10+ borders - as per PzEarth
 ' help file - update credits

@@ -3736,7 +3736,7 @@ Public Sub setThemeShade(ByVal redC As Integer, ByVal greenC As Integer, ByVal b
         ' the general tab icon does not need alternative images as it is a square image on a background
         If fFExists(App.Path & "\config-icon.jpg") Then FireCallPrefs.picConfig.Picture = LoadPicture(App.Path & "\config-icon.jpg")
         If fFExists(App.Path & "\pennyred.jpg") Then FireCallPrefs.picEmail.Picture = LoadPicture(App.Path & "\pennyred.jpg")
-        If fFExists(App.Path & "\emoji-icon.jpg") Then FireCallPrefs.picEmojis.Picture = LoadPicture(App.Path & "\emoji-icon.jpg")
+        If fFExists(App.Path & "\emoji-icon.jpg") Then FireCallPrefs.picEmoji.Picture = LoadPicture(App.Path & "\emoji-icon.jpg")
         If fFExists(App.Path & "\font-icon.jpg") Then FireCallPrefs.picFonts.Picture = LoadPicture(App.Path & "\font-icon.jpg")
         If fFExists(App.Path & "\texts-icon.jpg") Then FireCallPrefs.picTexts.Picture = LoadPicture(App.Path & "\texts-icon.jpg")
         If fFExists(App.Path & "\sounds-icon.jpg") Then FireCallPrefs.picSounds.Picture = LoadPicture(App.Path & "\sounds-icon.jpg")
@@ -3750,7 +3750,7 @@ Public Sub setThemeShade(ByVal redC As Integer, ByVal greenC As Integer, ByVal b
     
         If fFExists(App.Path & "\config-icon-light.jpg") Then FireCallPrefs.picConfig.Picture = LoadPicture(App.Path & "\config-icon-light.jpg")
         If fFExists(App.Path & "\pennyredlight.jpg") Then FireCallPrefs.picEmail.Picture = LoadPicture(App.Path & "\pennyredlight.jpg")
-        If fFExists(App.Path & "\emoji-icon-light.jpg") Then FireCallPrefs.picEmojis.Picture = LoadPicture(App.Path & "\emoji-icon-light.jpg")
+        If fFExists(App.Path & "\emoji-icon-light.jpg") Then FireCallPrefs.picEmoji.Picture = LoadPicture(App.Path & "\emoji-icon-light.jpg")
         If fFExists(App.Path & "\font-icon-light.jpg") Then FireCallPrefs.picFonts.Picture = LoadPicture(App.Path & "\font-icon-light.jpg")
         If fFExists(App.Path & "\texts-icon-light.jpg") Then FireCallPrefs.picTexts.Picture = LoadPicture(App.Path & "\texts-icon-light.jpg")
         If fFExists(App.Path & "\sounds-icon-light.jpg") Then FireCallPrefs.picSounds.Picture = LoadPicture(App.Path & "\sounds-icon-light.jpg")
