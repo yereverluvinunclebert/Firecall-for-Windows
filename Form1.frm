@@ -2673,9 +2673,43 @@ Private Function fTestMissingFields() As Boolean
 End Function
 
 ' call the same form unload subroutine called by the form unloading itself
+'---------------------------------------------------------------------------------------
+' Procedure : btnClose_Click
+' Author    : beededea
+' Date      : 08/07/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnClose_Click()
+   On Error GoTo btnClose_Click_Error
+
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
+    
+    ' unload the native VB6 forms
+    
     Unload FireCallMain
+    Unload about
+    Unload FireCallPrefs
+    Unload licence
+    Unload MinimiseForm
+    Unload MinimiseMenuForm
+    
+    ' remove all variable references to each form in turn
+    
+    Set FireCallMain = Nothing
+    Set about = Nothing
+    Set FireCallPrefs = Nothing
+    Set licence = Nothing
+    Set MinimiseForm = Nothing
+    Set MinimiseMenuForm = Nothing
+
+   On Error GoTo 0
+   Exit Sub
+
+btnClose_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnClose_Click of Form FireCallMain"
+    
 End Sub
 
 ' attach a single file to send to the remote chat partner

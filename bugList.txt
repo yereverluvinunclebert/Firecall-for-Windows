@@ -348,6 +348,7 @@
 ' theme the about us RTF box - DONE
 ' create the correct text for the about - DONE
 ' scrollbox cover from PzEarth - DONE
+' complete the credits in the about.txt - DONE
 
 ' Tasks underway now
 ' ==================
@@ -355,10 +356,17 @@
 ' closure of all open forms, check and test
 ' sizing of main form taking into account Win10+ borders - as per PzEarth
 ' sizing of prefs form taking into account Win10+ borders - as per PzEarth
+' help file - update credits
+' credit area - update credits
+' create CHM file and link that.
+' paste & go right click own menu from the output text 
 
 ' HIGH PRIORITY
 ' =============
 '
+'     build a setup2go file for FCW
+'     create a build process for FCW and document
+'     create an installer and test.
 '     test that a FCW built on a 64bit system does run without flaw on a 32 bit Win7 system
 '     test that a FCW with a 16 x 16 icon built on a 64bit system does run without flaw on a 32 bit Win7 system
 '     test that a FCW built on a 32bit system does run without flaw on a 32 bit Win7 system - WIP
@@ -374,7 +382,7 @@
 ' default settings.ini to be standardised for new users - WIP
 '   the input and output files need to be directed to the initial text files so that the listboxes are not blank
 
-' paste & go from the output
+
 
 ' MED. PRIORITY
 ' =============
@@ -405,10 +413,16 @@
 
 ' too many spaces in the setting file
 
+
+
 ' LOW Priority
 ' ============
 
-'       Elroy's codoe to add balloon tips to comboBox
+' add an Rc5 about image, same as PzEarth, transparent background
+
+' add RC5 auto-register of DLLs module
+
+'       Elroy's code to add balloon tips to comboBox
 '       https://www.vbforums.com/showthread.php?893844-VB6-QUESTION-How-to-capture-the-MouseOver-Event-on-a-comboBox
 '
 
@@ -427,7 +441,7 @@
 
 ' record the help file text on a Wav FILE
 
-' bypass the 48k limitations of the intrinsic ListBox control. Juat search for that, we have code (I think).
+' bypass the 48k limitations of the intrinsic ListBox control. Just search for that, we have code (I think).
 
 ' Elroy's change to the dropdown combobox allowing subclassing to capture a right click (comboboxes do not have mouseDown events) 
 ' windows call and return the
@@ -451,7 +465,7 @@
 
 ' Oauth compatibility on emails https://www.vbforums.com/showthread.php?866333-OAuth-2-0
 
-' readme.txt for each folder
+' readme.txt for each folder wip
 
 ' camera code
 
@@ -471,17 +485,3 @@
 ' paste & go added to the text box menu 
 
 
-
-
-' Nothing to do with FCW
-' =======================
-
-' Elroy's code to animate Wanda
-' Elroy's balloon tooltips on Steamydock IconSettings and DockSettings
-' Elroy's balloon tooltips on Firestrike
-' font dialog fixes to Steamydock utilities
-' Olaf's cGdiPlusCache.cls loading PNGs, icons and images of all sorts - demos here
-'   https://www.vbforums.com/showthread.php?876365-VB6-cGdiPlusCache-cls-revisited
-' comboboxes to dropdown lists, any that remain as comboboxes keyAscii = 0 on click to prevent modification
-' change the debug log on steamydock to use a simple logfile and not a separate debug window.
-' ensure that the autothemeimg selects the correct background images fopr the icons during startup.

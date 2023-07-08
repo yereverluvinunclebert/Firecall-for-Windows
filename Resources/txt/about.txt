@@ -4,11 +4,9 @@ Fire Call Win is a simple chat tool that allows two users, typically developers,
 
 Right-click on the widget to display the function menu, it works well on Windows XP to Windows 11.This version was developed on Windows 7 using 32 bit VisualBasic 6 as a FOSS project creating a WoW64 program for the desktop. 
 
-It is open source to allow easy configuration, bug-fixing, enhancement and community contribution towards free-and-useful VB6 utilities that can be created by anyone. The first step was the creation 
-of this 32bit WoW64 program.  A future step is a conversion of to RADBasic/TwinBasic for future-proofing and essential 64bit-ness. 
+It is open source to allow easy configuration, bug-fixing, enhancement and community contribution towards free-and-useful VB6 utilities that can be created by anyone. The first step was the creation of this 32bit WoW64 program.  A future step is a conversion of to RADBasic/TwinBasic for future-proofing and essential 64bit-ness. 
 
-This program is free and FOSS. The basic file and folder sharing services are free, this program uses Dropbox out of the box but Google Drive and Microsoft's Onedrive all provide basic file and folder
-sharing facilities for free.
+This program is free and FOSS. The basic file and folder sharing services are free, this program uses Dropbox out of the box but Google Drive and Microsoft's Onedrive all provide basic file and folder sharing facilities for free.
 
 This utility is one of a set of steampunk and dieselpunk programs written in VB6 and javascript -that you can find here on Deviantart: https://www.deviantart.com/yereverluvinuncleber/gallery
 
@@ -18,9 +16,9 @@ CREDITS:
 
 I have really tried to maintain the credits as the project has progressed. If I have made a mistake and left someone out then do forgive me. I will make amends if anyone points out my mistake in leaving someone out.
 
-LA Volpe (VB Forums) for his transparent picture handling.
+MicroSoft in the 90s - MS built good, lean and useful tools in the late 90s/early 2000s. Thanks for VB6 but no thanks for VB.NET, you fecked up there.
 
-MicroSoft in the 90s - MS built good, lean and useful tools in the late 90s/early 2000s. Thanks for VB6.
+LA Volpe (VB Forums) for his transparent picture handling.
 
 Shuja Ali @ codeguru for his settings.ini code.
 
@@ -37,7 +35,21 @@ theTrick for his sound recording and saving to a WAV file.
 
 Elroy on VB forums for his kind help with subclassing and balloon tooltips and all his other kindness.
 
-Wqweto for his innovative email injection work and help.
+Wqweto for his innovative email injection work, validPath 
+
+credit Matthew Gates Function fIsFileAlreadyOpen
+
+Chris Fannin (AbbydonKrafts) Copying a folder  http://vbcity.com/forums/t/129391.aspx
+
+Austin Hickl fnGetDateInUniversalFormat  http://computer-programming-forum.com/66-vb-controls/6dff1bae05df0a6e.htm
+
+Ellis Dee VB6 quicksort https://www.vbforums.com/showthread.php?473677-VB6-Sorting-algorithms-(sort-array-sorting-arrays)
+
+KayJay fnIsGoodURL that utilises the isValidURL API  https://www.vbforums.com/showthread.php?231061-Validate-URL&p=1361958&viewfull=1#post1361958
+
+JCI's resize image https://www.vbforums.com/member.php?40893-jcis
+
+Keith Lacelle for the alternative FSO code  to read a value from an INI file 
 
 Harry Whitfield for his quality testing, brain stimulation and being an unwitting source of inspiration.
 
