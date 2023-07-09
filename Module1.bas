@@ -3697,17 +3697,8 @@ End Function
 '---------------------------------------------------------------------------------------
 '
 Public Sub setThemeShade(ByVal redC As Integer, ByVal greenC As Integer, ByVal blueC As Integer)
-        
-    ' variables declared
-    'Dim a As Long
+
     Dim ctrl As Control
-    'Dim useloop As Integer
-    
-    'initialise the dimensioned variables
-    ' a = 0
-     'Ctrl As Control
-    ' useloop = 0
-    
     ' RGB(redC, greenC, blueC) is the background colour used by the lighter themes
     
     FireCallPrefs.BackColor = RGB(redC, greenC, blueC)
@@ -3742,6 +3733,8 @@ Public Sub setThemeShade(ByVal redC As Integer, ByVal greenC As Integer, ByVal b
         If fFExists(App.Path & "\sounds-icon.jpg") Then FireCallPrefs.picSounds.Picture = LoadPicture(App.Path & "\sounds-icon.jpg")
         If fFExists(App.Path & "\housekeepingIcon.jpg") Then FireCallPrefs.picHousekeeping.Picture = LoadPicture(App.Path & "\housekeepingIcon.jpg")
         If fFExists(App.Path & "\windowsScreenMagnify.jpg") Then FireCallPrefs.picWindow.Picture = LoadPicture(App.Path & "\windowsScreenMagnify.gif")
+        If fFExists(App.Path & "\about-icon-dark.jpg") Then FireCallPrefs.picAbout.Picture = LoadPicture(App.Path & "\about-icon-dark.jpg")
+        If fFExists(App.Path & "\development-icon-dark.jpg") Then FireCallPrefs.picDevelopment.Picture = LoadPicture(App.Path & "\development-icon-dark.jpg")
         
     Else
         'classicTheme = False
@@ -3756,7 +3749,9 @@ Public Sub setThemeShade(ByVal redC As Integer, ByVal greenC As Integer, ByVal b
         If fFExists(App.Path & "\sounds-icon-light.jpg") Then FireCallPrefs.picSounds.Picture = LoadPicture(App.Path & "\sounds-icon-light.jpg")
         If fFExists(App.Path & "\housekeeping-icon-light.jpg") Then FireCallPrefs.picHousekeeping.Picture = LoadPicture(App.Path & "\housekeeping-icon-light.jpg")
         If fFExists(App.Path & "\windowsScreenMagnifyLight.jpg") Then FireCallPrefs.picWindow.Picture = LoadPicture(App.Path & "\windowsScreenMagnifyLight.jpg")
-        
+        If fFExists(App.Path & "\about-icon-light.jpg") Then FireCallPrefs.picAbout.Picture = LoadPicture(App.Path & "\about-icon-light.jpg")
+        If fFExists(App.Path & "\development-icon-light.jpg") Then FireCallPrefs.picDevelopment.Picture = LoadPicture(App.Path & "\development-icon-light.jpg")
+    
     End If
     
     FireCallPrefs.sliIconiseDelay.BackColor = RGB(redC, greenC, blueC)
