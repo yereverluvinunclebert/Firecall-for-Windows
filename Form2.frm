@@ -15,6 +15,1211 @@ Begin VB.Form FireCallPrefs
    ScaleWidth      =   10905
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
+   Begin VB.Frame fraAboutButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   9780
+      TabIndex        =   285
+      Top             =   -90
+      Width           =   975
+      Begin VB.Label lblAbout 
+         Caption         =   "About"
+         Height          =   240
+         Index           =   0
+         Left            =   255
+         TabIndex        =   286
+         Top             =   825
+         Width           =   615
+      End
+      Begin VB.Image picAbout 
+         Height          =   600
+         Left            =   160
+         Picture         =   "Form2.frx":000C
+         Stretch         =   -1  'True
+         ToolTipText     =   "Opens the About tab"
+         Top             =   225
+         Width           =   600
+      End
+   End
+   Begin VB.Frame fraDevelopmentButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   7755
+      TabIndex        =   283
+      Top             =   -90
+      Width           =   1035
+      Begin VB.Label lblDevelopment 
+         Caption         =   "Development"
+         Height          =   240
+         Left            =   30
+         TabIndex        =   284
+         Top             =   825
+         Width           =   960
+      End
+      Begin VB.Image picDevelopment 
+         Height          =   600
+         Left            =   165
+         Picture         =   "Form2.frx":0594
+         Stretch         =   -1  'True
+         ToolTipText     =   "Opens the Development tab"
+         Top             =   210
+         Width           =   600
+      End
+   End
+   Begin VB.CommandButton btnSave 
+      Caption         =   "&Save"
+      Enabled         =   0   'False
+      Height          =   360
+      Left            =   8055
+      Style           =   1  'Graphical
+      TabIndex        =   19
+      ToolTipText     =   "Save the changes you have made to the preferences"
+      Top             =   10140
+      Width           =   1320
+   End
+   Begin VB.Frame fraHousekeepingButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   6840
+      TabIndex        =   181
+      ToolTipText     =   "Opens the Housekeeping tab"
+      Top             =   -105
+      Width           =   930
+      Begin VB.PictureBox picHousekeeping 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   165
+         Picture         =   "Form2.frx":0B4C
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   182
+         ToolTipText     =   "Opens the Housekeeping tab"
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblHousekeeping 
+         Caption         =   "House"
+         Height          =   225
+         Left            =   210
+         TabIndex        =   183
+         ToolTipText     =   "Opens the Housekeeping tab"
+         Top             =   840
+         Width           =   540
+      End
+   End
+   Begin VB.CommandButton btnHelp 
+      Caption         =   "Help"
+      Height          =   360
+      Left            =   120
+      Style           =   1  'Graphical
+      TabIndex        =   174
+      ToolTipText     =   "Open the help utility"
+      Top             =   10155
+      Width           =   1320
+   End
+   Begin VB.Frame fraSoundsButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   5880
+      TabIndex        =   30
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picSounds 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   165
+         Picture         =   "Form2.frx":176C
+         ScaleHeight     =   600
+         ScaleWidth      =   630
+         TabIndex        =   31
+         ToolTipText     =   "Opens the Window tab"
+         Top             =   225
+         Width           =   630
+      End
+      Begin VB.Label lblSounds 
+         Caption         =   "Sounds"
+         Height          =   240
+         Left            =   210
+         TabIndex        =   32
+         Top             =   825
+         Width           =   615
+      End
+   End
+   Begin VB.Frame fraTextsButton 
+      BorderStyle     =   0  'None
+      Height          =   1155
+      Left            =   4920
+      TabIndex        =   27
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picTexts 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   165
+         Picture         =   "Form2.frx":1D2B
+         ScaleHeight     =   600
+         ScaleWidth      =   630
+         TabIndex        =   28
+         ToolTipText     =   "Opens the Window tab"
+         Top             =   225
+         Width           =   630
+      End
+      Begin VB.Label lblTexts 
+         Caption         =   "Texts"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   29
+         Top             =   825
+         Width           =   615
+      End
+   End
+   Begin VB.Timer themeTimer 
+      Enabled         =   0   'False
+      Interval        =   10000
+      Left            =   45
+      Top             =   7965
+   End
+   Begin VB.CommandButton btnCancel 
+      Caption         =   "&Close"
+      Height          =   360
+      Left            =   9450
+      Style           =   1  'Graphical
+      TabIndex        =   20
+      ToolTipText     =   "Close the utility"
+      Top             =   10140
+      Width           =   1320
+   End
+   Begin VB.Frame fraWindowButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   8805
+      TabIndex        =   16
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picWindow 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   165
+         Picture         =   "Form2.frx":232D
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   17
+         ToolTipText     =   "Opens the Window tab"
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblWindow 
+         Caption         =   "Window"
+         Height          =   240
+         Left            =   180
+         TabIndex        =   18
+         Top             =   825
+         Width           =   615
+      End
+   End
+   Begin VB.Frame fraFontsButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   3960
+      TabIndex        =   13
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picFonts 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":2B75
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   14
+         ToolTipText     =   "Opens the Fonts tab"
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblFonts 
+         Caption         =   "Fonts"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   15
+         Top             =   825
+         Width           =   510
+      End
+   End
+   Begin VB.Frame fraEmojiButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   3000
+      TabIndex        =   10
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picEmoji 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":3361
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   11
+         ToolTipText     =   "Opens the Emojis tab"
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblEmojis 
+         Caption         =   "Emojis"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   12
+         Top             =   825
+         Width           =   510
+      End
+   End
+   Begin VB.Frame fraEmailButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   2040
+      TabIndex        =   7
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picEmail 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":3844
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   8
+         ToolTipText     =   "Opens the email tab"
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblEmail 
+         Caption         =   "Email"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   9
+         Top             =   825
+         Width           =   510
+      End
+   End
+   Begin VB.Frame fraConfigurationButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   1080
+      TabIndex        =   4
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picConfig 
+         Appearance      =   0  'Flat
+         AutoSize        =   -1  'True
+         BackColor       =   &H80000005&
+         BorderStyle     =   0  'None
+         ForeColor       =   &H80000008&
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":3DE0
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   5
+         ToolTipText     =   "Opens the configuration tab"
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblConfig 
+         Caption         =   "Config."
+         Height          =   240
+         Left            =   195
+         TabIndex        =   6
+         Top             =   825
+         Width           =   630
+      End
+   End
+   Begin VB.Frame fraGeneralButton 
+      Height          =   1140
+      Left            =   120
+      TabIndex        =   1
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picGeneral 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   405
+         Left            =   240
+         Picture         =   "Form2.frx":4642
+         ScaleHeight     =   405
+         ScaleWidth      =   420
+         TabIndex        =   2
+         ToolTipText     =   "Opens the general tab"
+         Top             =   300
+         Width           =   420
+      End
+      Begin VB.Label lblGeneral 
+         Caption         =   "General"
+         Height          =   240
+         Left            =   195
+         TabIndex        =   3
+         Top             =   825
+         Width           =   705
+      End
+   End
+   Begin VB.Frame fraEmoji 
+      Caption         =   "Emojis"
+      Height          =   3285
+      Left            =   1140
+      TabIndex        =   23
+      Top             =   2490
+      Width           =   8655
+      Begin VB.Frame fraEmojisInner 
+         BorderStyle     =   0  'None
+         Height          =   2730
+         Left            =   1305
+         TabIndex        =   105
+         Top             =   375
+         Width           =   5565
+         Begin VB.ComboBox cmbEmojiSet 
+            Height          =   315
+            ItemData        =   "Form2.frx":4BD8
+            Left            =   2190
+            List            =   "Form2.frx":4BDA
+            Style           =   2  'Dropdown List
+            TabIndex        =   107
+            ToolTipText     =   "Choose the emoji set to use"
+            Top             =   0
+            Width           =   1710
+         End
+         Begin VB.CommandButton btnEmojiLocation 
+            Caption         =   "..."
+            Height          =   300
+            Left            =   2190
+            Style           =   1  'Graphical
+            TabIndex        =   106
+            ToolTipText     =   "Open a file explorer at the Emoji folder location."
+            Top             =   1980
+            Width           =   315
+         End
+         Begin VB.Label lblEmojiTab 
+            Caption         =   "Emoji Set:"
+            Height          =   375
+            Index           =   0
+            Left            =   1410
+            TabIndex        =   112
+            Tag             =   "lblEmojiSet"
+            Top             =   60
+            Width           =   1740
+         End
+         Begin VB.Label lblEmojiTab 
+            Caption         =   "Choose the Emoji set you wish to use."
+            Height          =   300
+            Index           =   2
+            Left            =   2190
+            TabIndex        =   111
+            Top             =   450
+            Width           =   3750
+         End
+         Begin VB.Label lblEmojiTab 
+            Caption         =   $"Form2.frx":4BDC
+            Height          =   825
+            Index           =   4
+            Left            =   2175
+            TabIndex        =   110
+            Top             =   870
+            Width           =   3750
+         End
+         Begin VB.Label lblEmojiTab 
+            Caption         =   "Open a file explorer at the Emoji folder location."
+            Height          =   465
+            Index           =   3
+            Left            =   2670
+            TabIndex        =   109
+            Top             =   1965
+            Width           =   2895
+         End
+         Begin VB.Label lblEmojiTab 
+            Caption         =   "Emoji Location:"
+            Height          =   375
+            Index           =   1
+            Left            =   1005
+            TabIndex        =   108
+            Tag             =   "lblEmojiLocation"
+            Top             =   2010
+            Width           =   1230
+         End
+      End
+   End
+   Begin VB.Frame fraHousekeeping 
+      Caption         =   "Housekeeping"
+      Height          =   7890
+      Left            =   675
+      TabIndex        =   184
+      Top             =   1215
+      Width           =   8655
+      Begin VB.Frame fraHousekeepingInner 
+         BorderStyle     =   0  'None
+         Height          =   7080
+         Left            =   600
+         TabIndex        =   185
+         Top             =   255
+         Width           =   7245
+         Begin VB.Frame fraHouseKeepingBackups 
+            BorderStyle     =   0  'None
+            Height          =   4125
+            Left            =   165
+            TabIndex        =   252
+            Top             =   2835
+            Width           =   6855
+            Begin VB.CheckBox chkAutomaticBackups 
+               Caption         =   "  Automatic Backups"
+               Height          =   225
+               Left            =   1800
+               TabIndex        =   255
+               ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
+               Top             =   1185
+               Width           =   1950
+            End
+            Begin VB.CommandButton btnBackupLocation 
+               Caption         =   "..."
+               Height          =   300
+               Left            =   1800
+               Style           =   1  'Graphical
+               TabIndex        =   254
+               ToolTipText     =   "Open a file explorer at the Backup folder location."
+               Top             =   3345
+               Width           =   315
+            End
+            Begin VB.CheckBox chkBackupOnStart 
+               Caption         =   "  Backup on Start"
+               Height          =   225
+               Left            =   1785
+               TabIndex        =   253
+               ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
+               Top             =   315
+               Width           =   1725
+            End
+            Begin vb6projectCCRSlider.Slider sliAutomaticBackupInterval 
+               Height          =   390
+               Left            =   1680
+               TabIndex        =   256
+               ToolTipText     =   "Set the hourly interval "
+               Top             =   1935
+               Width           =   3870
+               _ExtentX        =   6826
+               _ExtentY        =   688
+               Min             =   1
+               Max             =   24
+               Value           =   24
+               SelStart        =   20
+            End
+            Begin VB.Label lblHousekeepingDesc 
+               Caption         =   "Check this box to enable automatic hourly backups"
+               Height          =   450
+               Index           =   3
+               Left            =   1800
+               TabIndex        =   265
+               Tag             =   "lblAutomaticBackupsDesc"
+               ToolTipText     =   "Check this box to enable automatic hourly backups"
+               Top             =   1530
+               Width           =   4335
+            End
+            Begin VB.Label lblHousekeepingDesc 
+               Caption         =   "Set the automatic backup interval in hours."
+               Height          =   330
+               Index           =   4
+               Left            =   1770
+               TabIndex        =   264
+               Tag             =   "lblIntervalDesc"
+               Top             =   2760
+               Width           =   3810
+            End
+            Begin VB.Label lblHousekeepingTab 
+               Caption         =   "Interval:"
+               Height          =   315
+               Index           =   1
+               Left            =   990
+               TabIndex        =   263
+               Tag             =   "lblInterval"
+               Top             =   1995
+               Width           =   780
+            End
+            Begin VB.Label lblIntervalMid 
+               Caption         =   "12"
+               Height          =   315
+               Left            =   3435
+               TabIndex        =   262
+               Top             =   2430
+               Width           =   840
+            End
+            Begin VB.Label lblIntervalMax 
+               Caption         =   "24"
+               Height          =   315
+               Left            =   5250
+               TabIndex        =   261
+               Top             =   2445
+               Width           =   405
+            End
+            Begin VB.Label lblIntervalMin 
+               Caption         =   "1"
+               Height          =   315
+               Left            =   1770
+               TabIndex        =   260
+               Top             =   2445
+               Width           =   345
+            End
+            Begin VB.Label lblHousekeepingTab 
+               Caption         =   "Backup Location:"
+               Height          =   375
+               Index           =   2
+               Left            =   420
+               TabIndex        =   259
+               Tag             =   "lblBackupLocation"
+               Top             =   3345
+               Width           =   1425
+            End
+            Begin VB.Label lblHousekeepingDesc 
+               Caption         =   "Open file explorer at the backup folder location. This will allow you to select a backup file for restoring if required."
+               Height          =   675
+               Index           =   5
+               Left            =   2265
+               TabIndex        =   258
+               Tag             =   "lblBackupLocationDesc"
+               Top             =   3345
+               Width           =   2895
+            End
+            Begin VB.Label lblHousekeepingDesc 
+               Caption         =   "Check this box to enable automatic backups on each startup"
+               Height          =   450
+               Index           =   2
+               Left            =   1785
+               TabIndex        =   257
+               Tag             =   "lblBackupOnStartDesc"
+               ToolTipText     =   "Check this box to enable automatic backups on each startup"
+               Top             =   660
+               Width           =   4335
+            End
+         End
+         Begin VB.ComboBox cmbArchiveDays 
+            Height          =   315
+            Left            =   1920
+            Style           =   2  'Dropdown List
+            TabIndex        =   250
+            Top             =   945
+            Width           =   1665
+         End
+         Begin VB.CommandButton Command1 
+            Caption         =   "..."
+            Height          =   300
+            Left            =   1905
+            Style           =   1  'Graphical
+            TabIndex        =   194
+            ToolTipText     =   "Open a file explorer at the Archive folder location."
+            Top             =   2070
+            Width           =   315
+         End
+         Begin VB.CheckBox chkAutomaticHousekeeping 
+            Caption         =   "Send Emails"
+            Height          =   225
+            Left            =   1935
+            TabIndex        =   186
+            ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
+            Top             =   150
+            Width           =   225
+         End
+         Begin VB.Label lblHousekeepingDesc 
+            Caption         =   "Select the number of days after which all old chats will be archived from your selected files."
+            Height          =   450
+            Index           =   6
+            Left            =   1935
+            TabIndex        =   251
+            Tag             =   "lblAutomaticHousekeepingDesc"
+            ToolTipText     =   "Check this box to enable automatic housekeeping"
+            Top             =   1410
+            Width           =   3525
+         End
+         Begin VB.Label lblHousekeepingTab 
+            Caption         =   "Archive Location:"
+            Height          =   375
+            Index           =   0
+            Left            =   525
+            TabIndex        =   196
+            Tag             =   "lblArchiveLocation"
+            Top             =   2070
+            Width           =   1425
+         End
+         Begin VB.Label lblHousekeepingDesc 
+            Caption         =   "Open file explorer at the archive folder location. This will allow you to view archive files."
+            Height          =   675
+            Index           =   1
+            Left            =   2370
+            TabIndex        =   195
+            Top             =   2070
+            Width           =   2895
+         End
+         Begin VB.Label lblHousekeepingDesc 
+            Caption         =   "Check this box to enable automatic housekeeping"
+            Height          =   450
+            Index           =   0
+            Left            =   1920
+            TabIndex        =   188
+            Tag             =   "lblAutomaticHousekeepingDesc"
+            ToolTipText     =   "Check this box to enable automatic housekeeping"
+            Top             =   495
+            Width           =   4335
+         End
+         Begin VB.Label lblAutomaticHousekeeping 
+            Caption         =   "Automatic Housekeeping"
+            Height          =   270
+            Left            =   2280
+            TabIndex        =   187
+            ToolTipText     =   "Check this box to enable automatic housekeeping"
+            Top             =   150
+            Width           =   3120
+         End
+      End
+   End
+   Begin VB.Frame fraSounds 
+      Caption         =   "Sounds"
+      Height          =   7095
+      Left            =   105
+      TabIndex        =   33
+      Top             =   1110
+      Visible         =   0   'False
+      Width           =   10575
+      Begin VB.Frame fraSoundsInner 
+         BorderStyle     =   0  'None
+         Height          =   6630
+         Left            =   1125
+         TabIndex        =   50
+         Top             =   300
+         Width           =   6480
+         Begin VB.CheckBox chkEnableAlarmSound 
+            Caption         =   "Enable Alarm Sound"
+            Height          =   225
+            Left            =   1365
+            TabIndex        =   274
+            ToolTipText     =   "Check this box to enable or disable the sounds played during any alarm raised."
+            Top             =   870
+            Width           =   3570
+         End
+         Begin vb6projectCCRSlider.Slider sliRecordingQuality 
+            Height          =   450
+            Left            =   1230
+            TabIndex        =   214
+            ToolTipText     =   "Quality of recording affects WAV file size."
+            Top             =   5520
+            Width           =   3705
+            _ExtentX        =   6535
+            _ExtentY        =   794
+            Min             =   1
+            Max             =   5
+            Value           =   3
+            SelStart        =   3
+         End
+         Begin VB.ComboBox cmbCaptureDevices 
+            Height          =   315
+            ItemData        =   "Form2.frx":4CA2
+            Left            =   1365
+            List            =   "Form2.frx":4CA4
+            TabIndex        =   211
+            Text            =   "cmbCaptureDevices"
+            Top             =   4455
+            Width           =   3420
+         End
+         Begin VB.CommandButton btnMute 
+            Height          =   285
+            Left            =   5385
+            Picture         =   "Form2.frx":4CA6
+            Style           =   1  'Graphical
+            TabIndex        =   171
+            TabStop         =   0   'False
+            ToolTipText     =   "Mute the playing sound"
+            Top             =   0
+            Width           =   300
+         End
+         Begin VB.CheckBox chkPlayVolume 
+            Caption         =   "Enable loud volume"
+            Height          =   225
+            Left            =   1365
+            TabIndex        =   163
+            ToolTipText     =   "When checked this box enables the louder versions of the sounds to be played"
+            Top             =   2445
+            Width           =   3405
+         End
+         Begin VB.CheckBox chkEnableSounds 
+            Caption         =   "Enable Sounds for the Animations"
+            Height          =   225
+            Left            =   1365
+            TabIndex        =   161
+            ToolTipText     =   "Check this box to enable or disable all of the sounds used during any animation on the main screen."
+            Top             =   1350
+            Width           =   3405
+         End
+         Begin VB.ComboBox cmbAlarmSound 
+            Height          =   315
+            ItemData        =   "Form2.frx":4ED3
+            Left            =   1365
+            List            =   "Form2.frx":4ED5
+            Style           =   2  'Dropdown List
+            TabIndex        =   53
+            ToolTipText     =   "Choose the alarm sound."
+            Top             =   0
+            Width           =   2160
+         End
+         Begin VB.CommandButton btnPlaySound 
+            Height          =   285
+            Left            =   5055
+            Picture         =   "Form2.frx":4ED7
+            Style           =   1  'Graphical
+            TabIndex        =   52
+            TabStop         =   0   'False
+            ToolTipText     =   "Play this sound"
+            Top             =   0
+            Width           =   300
+         End
+         Begin VB.CommandButton btnSoundsLocation 
+            Caption         =   "..."
+            Height          =   300
+            Left            =   1365
+            Style           =   1  'Graphical
+            TabIndex        =   51
+            ToolTipText     =   "Open a file explorer at the Sounds folder location."
+            Top             =   3780
+            Width           =   315
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   "Quality :"
+            Height          =   375
+            Index           =   10
+            Left            =   645
+            TabIndex        =   217
+            Tag             =   "lblMicrophone"
+            Top             =   5565
+            Width           =   660
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   "High"
+            Height          =   195
+            Index           =   9
+            Left            =   4620
+            TabIndex        =   216
+            ToolTipText     =   "This records at 550khz and creates hight quality and large recordings that may fill your drive!"
+            Top             =   6015
+            Width           =   615
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   "Low"
+            Height          =   195
+            Index           =   8
+            Left            =   1245
+            TabIndex        =   215
+            ToolTipText     =   "This captures at 5500khz and creates low quality but small recordings"
+            Top             =   6015
+            Width           =   615
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   "Select the audio input device and the recording quality option below."
+            Height          =   525
+            Index           =   7
+            Left            =   1380
+            TabIndex        =   213
+            Top             =   4965
+            Width           =   3615
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   "Recording :"
+            Height          =   375
+            Index           =   2
+            Left            =   405
+            TabIndex        =   212
+            Tag             =   "lblMicrophone"
+            Top             =   4470
+            Width           =   1545
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   "When checked this box enables the louder versions of the sounds to be played"
+            Height          =   660
+            Index           =   5
+            Left            =   1410
+            TabIndex        =   164
+            Tag             =   "lblPlayVolumeDesc"
+            Top             =   2805
+            Width           =   3615
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   "When checked this box enables all the other sounds used during any animation on the main screen."
+            Height          =   660
+            Index           =   4
+            Left            =   1395
+            TabIndex        =   162
+            Tag             =   "lblEnableSoundsDesc"
+            Top             =   1710
+            Width           =   3615
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   " Alarm Sound :"
+            Height          =   375
+            Index           =   0
+            Left            =   240
+            TabIndex        =   58
+            Tag             =   "lblAlarmSound"
+            Top             =   45
+            Width           =   1740
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   "Choose the alarm sound."
+            Height          =   300
+            Index           =   3
+            Left            =   1350
+            TabIndex        =   57
+            Tag             =   "lblAlarmSoundDesc"
+            Top             =   450
+            Width           =   1890
+         End
+         Begin VB.Label lblPlaySound 
+            Caption         =   "Play this sound"
+            Height          =   300
+            Left            =   3825
+            TabIndex        =   56
+            Top             =   45
+            Width           =   1635
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   "Sounds Location:"
+            Height          =   375
+            Index           =   1
+            Left            =   -15
+            TabIndex        =   55
+            Tag             =   "lblSoundsLocation"
+            Top             =   3780
+            Width           =   1425
+         End
+         Begin VB.Label lblSoundsTab 
+            Caption         =   "Open a file explorer at the sounds folder location."
+            Height          =   465
+            Index           =   6
+            Left            =   1830
+            TabIndex        =   54
+            Tag             =   "lblSoundsLocationDesc"
+            Top             =   3780
+            Width           =   2895
+         End
+      End
+   End
+   Begin VB.Frame fraAbout 
+      Caption         =   "About"
+      Height          =   9210
+      Left            =   120
+      TabIndex        =   297
+      Top             =   1110
+      Visible         =   0   'False
+      Width           =   10590
+      Begin VB.Frame fraScrollbarCoverII 
+         BorderStyle     =   0  'None
+         Height          =   6675
+         Left            =   10290
+         TabIndex        =   315
+         Top             =   2235
+         Width           =   240
+      End
+      Begin VB.Frame fraScrollbarCover 
+         BorderStyle     =   0  'None
+         Height          =   6675
+         Left            =   9810
+         TabIndex        =   314
+         Top             =   2130
+         Width           =   735
+      End
+      Begin VB.CommandButton btnDonate 
+         Caption         =   "&Donate"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   8865
+         Style           =   1  'Graphical
+         TabIndex        =   302
+         ToolTipText     =   "Opens a browser window and sends you to our donate a coffee page on Kofi!"
+         Top             =   1485
+         Width           =   1470
+      End
+      Begin VB.CommandButton btnUpdate 
+         Caption         =   "&Update"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   8865
+         Style           =   1  'Graphical
+         TabIndex        =   301
+         ToolTipText     =   "Here you can visit the update location where you can download new versions of the programs."
+         Top             =   360
+         Width           =   1470
+      End
+      Begin VB.CommandButton btnFacebook 
+         Caption         =   "&Facebook"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   8865
+         Style           =   1  'Graphical
+         TabIndex        =   300
+         ToolTipText     =   "This will link you to the our Steampunk/Dieselpunk program users Group."
+         Top             =   735
+         Width           =   1470
+      End
+      Begin VB.CommandButton btnAboutDebugInfo 
+         Caption         =   "Debug &Info."
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   8865
+         Style           =   1  'Graphical
+         TabIndex        =   299
+         ToolTipText     =   "This gives access to the debugging tool"
+         Top             =   1110
+         Width           =   1470
+      End
+      Begin VB.TextBox txtAboutText 
+         Appearance      =   0  'Flat
+         BackColor       =   &H8000000F&
+         BorderStyle     =   0  'None
+         Height          =   6585
+         Left            =   345
+         MultiLine       =   -1  'True
+         ScrollBars      =   2  'Vertical
+         TabIndex        =   298
+         Text            =   "Form2.frx":50E1
+         Top             =   2205
+         Width           =   9945
+      End
+      Begin VB.Label Label17 
+         Caption         =   "Windows XP, Vista, 7, 8, 10  && 11 + ReactOS"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Left            =   4005
+         TabIndex        =   313
+         Top             =   1560
+         Width           =   3735
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Target"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   4
+         Left            =   2355
+         TabIndex        =   312
+         Top             =   1560
+         Width           =   1470
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Current Developer"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   3
+         Left            =   2355
+         TabIndex        =   311
+         Top             =   1215
+         Width           =   1470
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Dean Beedell © 2023"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   6
+         Left            =   4020
+         TabIndex        =   310
+         Top             =   1215
+         Width           =   2175
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Version"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   1
+         Left            =   2370
+         TabIndex        =   309
+         Top             =   495
+         Width           =   795
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Originator"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   2
+         Left            =   2355
+         TabIndex        =   308
+         Top             =   855
+         Width           =   795
+      End
+      Begin VB.Label lblAbout 
+         Caption         =   "Dean Beedell © 2023"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Index           =   5
+         Left            =   4020
+         TabIndex        =   307
+         Top             =   855
+         Width           =   2175
+      End
+      Begin VB.Label lblMinorVersion 
+         BackStyle       =   0  'Transparent
+         Caption         =   "0"
+         BeginProperty Font 
+            Name            =   "Centurion Light SF"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   4395
+         TabIndex        =   306
+         Top             =   510
+         Width           =   225
+      End
+      Begin VB.Label lblMajorVersion 
+         BackStyle       =   0  'Transparent
+         Caption         =   "0"
+         BeginProperty Font 
+            Name            =   "Centurion Light SF"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   4035
+         TabIndex        =   305
+         Top             =   510
+         Width           =   225
+      End
+      Begin VB.Label lblRevisionNum 
+         BackStyle       =   0  'Transparent
+         Caption         =   "0"
+         BeginProperty Font 
+            Name            =   "Centurion Light SF"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   4755
+         TabIndex        =   304
+         Top             =   510
+         Width           =   525
+      End
+      Begin VB.Label lblDotDot 
+         BackStyle       =   0  'Transparent
+         Caption         =   ".        ."
+         BeginProperty Font 
+            Name            =   "Centurion Light SF"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   225
+         Left            =   4200
+         TabIndex        =   303
+         Top             =   510
+         Width           =   495
+      End
+   End
    Begin VB.Frame fraFonts 
       Caption         =   "Fonts"
       Height          =   3705
@@ -177,7 +1382,7 @@ Begin VB.Form FireCallPrefs
       Caption         =   "Development"
       Height          =   3435
       Left            =   825
-      TabIndex        =   288
+      TabIndex        =   287
       Top             =   2085
       Visible         =   0   'False
       Width           =   9105
@@ -185,14 +1390,14 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   2775
          Left            =   1275
-         TabIndex        =   289
+         TabIndex        =   288
          Top             =   345
          Width           =   6705
          Begin VB.Frame fraDefaultEditor 
             BorderStyle     =   0  'None
             Height          =   1875
             Left            =   240
-            TabIndex        =   293
+            TabIndex        =   292
             Top             =   1080
             Width           =   6075
             Begin VB.CommandButton btnDefaultEditor 
@@ -200,7 +1405,7 @@ Begin VB.Form FireCallPrefs
                Height          =   300
                Left            =   5115
                Style           =   1  'Graphical
-               TabIndex        =   295
+               TabIndex        =   294
                ToolTipText     =   "Click to select the .vbp file to edit the program - You need to have access to the source!"
                Top             =   120
                Width           =   315
@@ -208,8 +1413,8 @@ Begin VB.Form FireCallPrefs
             Begin VB.TextBox txtDefaultEditor 
                Height          =   315
                Left            =   1440
-               TabIndex        =   294
-               ToolTipText     =   $"Form2.frx":000C
+               TabIndex        =   293
+               ToolTipText     =   $"Form2.frx":6582
                Top             =   105
                Width           =   3660
             End
@@ -218,28 +1423,28 @@ Begin VB.Form FireCallPrefs
                Height          =   255
                Index           =   7
                Left            =   285
-               TabIndex        =   297
+               TabIndex        =   296
                Tag             =   "lblSharedInputFile"
                Top             =   135
                Width           =   1350
             End
             Begin VB.Label lblDebug 
-               Caption         =   $"Form2.frx":009E
+               Caption         =   $"Form2.frx":6614
                Height          =   930
                Index           =   9
                Left            =   1440
-               TabIndex        =   296
+               TabIndex        =   295
                Top             =   660
                Width           =   3900
             End
          End
          Begin VB.ComboBox cmbDebug 
             Height          =   315
-            ItemData        =   "Form2.frx":0142
+            ItemData        =   "Form2.frx":66B8
             Left            =   1680
-            List            =   "Form2.frx":0144
+            List            =   "Form2.frx":66BA
             Style           =   2  'Dropdown List
-            TabIndex        =   290
+            TabIndex        =   289
             ToolTipText     =   "Choose to set debug mode."
             Top             =   -15
             Width           =   2160
@@ -249,7 +1454,7 @@ Begin VB.Form FireCallPrefs
             Height          =   375
             Index           =   0
             Left            =   1005
-            TabIndex        =   292
+            TabIndex        =   291
             Tag             =   "lblAlarmSound"
             Top             =   45
             Width           =   1740
@@ -259,7 +1464,7 @@ Begin VB.Form FireCallPrefs
             Height          =   495
             Index           =   2
             Left            =   1695
-            TabIndex        =   291
+            TabIndex        =   290
             Tag             =   "lblAlarmSoundDesc"
             Top             =   450
             Width           =   4455
@@ -296,7 +1501,7 @@ Begin VB.Form FireCallPrefs
                Width           =   3960
             End
             Begin VB.Label lblConfigurationTab 
-               Caption         =   $"Form2.frx":0146
+               Caption         =   $"Form2.frx":66BC
                Height          =   660
                Index           =   8
                Left            =   270
@@ -385,9 +1590,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbMaxLineLength 
             Height          =   315
-            ItemData        =   "Form2.frx":01E4
+            ItemData        =   "Form2.frx":675A
             Left            =   1710
-            List            =   "Form2.frx":01E6
+            List            =   "Form2.frx":675C
             Style           =   2  'Dropdown List
             TabIndex        =   96
             ToolTipText     =   "The program will cut your text to a new line when this limit is reached"
@@ -463,359 +1668,6 @@ Begin VB.Form FireCallPrefs
          End
       End
    End
-   Begin VB.Frame fraAboutButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   9780
-      TabIndex        =   286
-      Top             =   -90
-      Width           =   975
-      Begin VB.Label lblAbout 
-         Caption         =   "About"
-         Height          =   240
-         Index           =   0
-         Left            =   255
-         TabIndex        =   287
-         Top             =   825
-         Width           =   615
-      End
-      Begin VB.Image picAbout 
-         Height          =   600
-         Left            =   160
-         Picture         =   "Form2.frx":01E8
-         Stretch         =   -1  'True
-         ToolTipText     =   "Opens the About tab"
-         Top             =   225
-         Width           =   600
-      End
-   End
-   Begin VB.Frame fraDevelopmentButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   7755
-      TabIndex        =   284
-      Top             =   -90
-      Width           =   1035
-      Begin VB.Label lblDevelopment 
-         Caption         =   "Development"
-         Height          =   240
-         Left            =   30
-         TabIndex        =   285
-         Top             =   810
-         Width           =   960
-      End
-      Begin VB.Image picDevelopment 
-         Height          =   600
-         Left            =   160
-         Picture         =   "Form2.frx":0770
-         Stretch         =   -1  'True
-         ToolTipText     =   "Opens the Development tab"
-         Top             =   225
-         Width           =   600
-      End
-   End
-   Begin VB.CommandButton btnSave 
-      Caption         =   "&Save"
-      Enabled         =   0   'False
-      Height          =   360
-      Left            =   8055
-      Style           =   1  'Graphical
-      TabIndex        =   19
-      ToolTipText     =   "Save the changes you have made to the preferences"
-      Top             =   10140
-      Width           =   1320
-   End
-   Begin VB.Frame fraHousekeepingButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   6840
-      TabIndex        =   181
-      ToolTipText     =   "Opens the Housekeeping tab"
-      Top             =   -105
-      Width           =   930
-      Begin VB.PictureBox picHousekeeping 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   165
-         Picture         =   "Form2.frx":0D28
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   182
-         ToolTipText     =   "Opens the Housekeeping tab"
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Label lblHousekeeping 
-         Caption         =   "House"
-         Height          =   225
-         Left            =   210
-         TabIndex        =   183
-         ToolTipText     =   "Opens the Housekeeping tab"
-         Top             =   810
-         Width           =   540
-      End
-   End
-   Begin VB.CommandButton btnHelp 
-      Caption         =   "Help"
-      Height          =   360
-      Left            =   120
-      Style           =   1  'Graphical
-      TabIndex        =   174
-      ToolTipText     =   "Open the help utility"
-      Top             =   10155
-      Width           =   1320
-   End
-   Begin VB.Frame fraSoundsButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   5880
-      TabIndex        =   30
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picSounds 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   630
-         Left            =   165
-         Picture         =   "Form2.frx":1948
-         ScaleHeight     =   630
-         ScaleWidth      =   630
-         TabIndex        =   31
-         ToolTipText     =   "Opens the Window tab"
-         Top             =   210
-         Width           =   630
-      End
-      Begin VB.Label lblSounds 
-         Caption         =   "Sounds"
-         Height          =   240
-         Left            =   210
-         TabIndex        =   32
-         Top             =   825
-         Width           =   615
-      End
-   End
-   Begin VB.Frame fraTextsButton 
-      BorderStyle     =   0  'None
-      Height          =   1155
-      Left            =   4920
-      TabIndex        =   27
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picTexts 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   630
-         Left            =   165
-         Picture         =   "Form2.frx":1F07
-         ScaleHeight     =   630
-         ScaleWidth      =   630
-         TabIndex        =   28
-         ToolTipText     =   "Opens the Window tab"
-         Top             =   210
-         Width           =   630
-      End
-      Begin VB.Label lblTexts 
-         Caption         =   "Texts"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   29
-         Top             =   825
-         Width           =   615
-      End
-   End
-   Begin VB.Timer themeTimer 
-      Enabled         =   0   'False
-      Interval        =   10000
-      Left            =   45
-      Top             =   7965
-   End
-   Begin VB.CommandButton btnCancel 
-      Caption         =   "&Close"
-      Height          =   360
-      Left            =   9450
-      Style           =   1  'Graphical
-      TabIndex        =   20
-      ToolTipText     =   "Close the utility"
-      Top             =   10140
-      Width           =   1320
-   End
-   Begin VB.Frame fraWindowButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   8805
-      TabIndex        =   16
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picWindow 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   165
-         Picture         =   "Form2.frx":2509
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   17
-         ToolTipText     =   "Opens the Window tab"
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Label lblWindow 
-         Caption         =   "Window"
-         Height          =   240
-         Left            =   180
-         TabIndex        =   18
-         Top             =   825
-         Width           =   615
-      End
-   End
-   Begin VB.Frame fraFontsButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   3960
-      TabIndex        =   13
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picFonts 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":2D51
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   14
-         ToolTipText     =   "Opens the Fonts tab"
-         Top             =   210
-         Width           =   600
-      End
-      Begin VB.Label lblFonts 
-         Caption         =   "Fonts"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   15
-         Top             =   825
-         Width           =   510
-      End
-   End
-   Begin VB.Frame fraEmojiButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   3000
-      TabIndex        =   10
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picEmoji 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":353D
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   11
-         ToolTipText     =   "Opens the Emojis tab"
-         Top             =   210
-         Width           =   600
-      End
-      Begin VB.Label lblEmojis 
-         Caption         =   "Emojis"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   12
-         Top             =   825
-         Width           =   510
-      End
-   End
-   Begin VB.Frame fraEmailButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   2040
-      TabIndex        =   7
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picEmail 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":3A20
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   8
-         ToolTipText     =   "Opens the email tab"
-         Top             =   210
-         Width           =   600
-      End
-      Begin VB.Label lblEmail 
-         Caption         =   "Email"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   9
-         Top             =   825
-         Width           =   510
-      End
-   End
-   Begin VB.Frame fraConfigurationButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   1080
-      TabIndex        =   4
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picConfig 
-         Appearance      =   0  'Flat
-         AutoSize        =   -1  'True
-         BackColor       =   &H80000005&
-         BorderStyle     =   0  'None
-         ForeColor       =   &H80000008&
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":3FBC
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   5
-         ToolTipText     =   "Opens the configuration tab"
-         Top             =   195
-         Width           =   600
-      End
-      Begin VB.Label lblConfig 
-         Caption         =   "Config."
-         Height          =   240
-         Left            =   195
-         TabIndex        =   6
-         Top             =   825
-         Width           =   630
-      End
-   End
-   Begin VB.Frame fraGeneralButton 
-      Height          =   1140
-      Left            =   120
-      TabIndex        =   1
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picGeneral 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   405
-         Left            =   240
-         Picture         =   "Form2.frx":481E
-         ScaleHeight     =   405
-         ScaleWidth      =   420
-         TabIndex        =   2
-         ToolTipText     =   "Opens the general tab"
-         Top             =   300
-         Width           =   420
-      End
-      Begin VB.Label lblGeneral 
-         Caption         =   "General"
-         Height          =   240
-         Left            =   195
-         TabIndex        =   3
-         Top             =   825
-         Width           =   705
-      End
-   End
    Begin VB.Frame fraWindow 
       Caption         =   "Window"
       Height          =   8205
@@ -834,14 +1686,14 @@ Begin VB.Form FireCallPrefs
             BorderStyle     =   0  'None
             Height          =   1470
             Left            =   1065
-            TabIndex        =   276
+            TabIndex        =   275
             Top             =   3285
             Width           =   4005
             Begin VB.OptionButton optIconiseDesktop 
                Caption         =   "Iconise to Desktop"
                Height          =   330
                Left            =   270
-               TabIndex        =   278
+               TabIndex        =   277
                ToolTipText     =   "Minimise to desktop"
                Top             =   60
                Width           =   2790
@@ -850,7 +1702,7 @@ Begin VB.Form FireCallPrefs
                Caption         =   "Iconise to Defined Opacity"
                Height          =   330
                Left            =   270
-               TabIndex        =   277
+               TabIndex        =   276
                ToolTipText     =   "Fade to a defined opacity"
                Top             =   465
                Width           =   2790
@@ -859,7 +1711,7 @@ Begin VB.Form FireCallPrefs
                Caption         =   "Select whether to minimise to desktop or opacity."
                Height          =   600
                Left            =   270
-               TabIndex        =   279
+               TabIndex        =   278
                Top             =   885
                Width           =   3900
             End
@@ -869,7 +1721,7 @@ Begin VB.Form FireCallPrefs
             Left            =   1305
             Style           =   2  'Dropdown List
             TabIndex        =   38
-            ToolTipText     =   $"Form2.frx":4DB4
+            ToolTipText     =   $"Form2.frx":675E
             Top             =   0
             Width           =   3960
          End
@@ -911,7 +1763,7 @@ Begin VB.Form FireCallPrefs
          Begin vb6projectCCRSlider.Slider sliIconiseDelay 
             Height          =   420
             Left            =   1260
-            TabIndex        =   267
+            TabIndex        =   266
             ToolTipText     =   "Choose the delay (seconds) before auto-iconisation occurs. Set to 0 to disable,"
             Top             =   6060
             Width           =   3870
@@ -926,7 +1778,7 @@ Begin VB.Form FireCallPrefs
             Caption         =   "450"
             Height          =   345
             Left            =   3930
-            TabIndex        =   274
+            TabIndex        =   273
             Top             =   6570
             Width           =   495
          End
@@ -934,7 +1786,7 @@ Begin VB.Form FireCallPrefs
             Caption         =   "150"
             Height          =   345
             Left            =   2205
-            TabIndex        =   273
+            TabIndex        =   272
             Top             =   6570
             Width           =   345
          End
@@ -942,7 +1794,7 @@ Begin VB.Form FireCallPrefs
             Caption         =   "0"
             Height          =   345
             Left            =   1395
-            TabIndex        =   272
+            TabIndex        =   271
             Top             =   6570
             Width           =   345
          End
@@ -950,7 +1802,7 @@ Begin VB.Form FireCallPrefs
             Caption         =   "600"
             Height          =   345
             Left            =   4740
-            TabIndex        =   271
+            TabIndex        =   270
             Top             =   6570
             Width           =   405
          End
@@ -958,7 +1810,7 @@ Begin VB.Form FireCallPrefs
             Caption         =   "300"
             Height          =   345
             Left            =   3075
-            TabIndex        =   270
+            TabIndex        =   269
             Top             =   6570
             Width           =   840
          End
@@ -967,7 +1819,7 @@ Begin VB.Form FireCallPrefs
             Height          =   345
             Index           =   3
             Left            =   -15
-            TabIndex        =   269
+            TabIndex        =   268
             Tag             =   "lblIconiseDelay"
             Top             =   6135
             Width           =   1800
@@ -977,7 +1829,7 @@ Begin VB.Form FireCallPrefs
             Height          =   360
             Index           =   9
             Left            =   1365
-            TabIndex        =   268
+            TabIndex        =   267
             Top             =   6900
             Width           =   3810
          End
@@ -1031,7 +1883,7 @@ Begin VB.Form FireCallPrefs
             Width           =   780
          End
          Begin VB.Label lblWindowLevelDescription 
-            Caption         =   $"Form2.frx":4E4F
+            Caption         =   $"Form2.frx":67F9
             Height          =   870
             Left            =   1365
             TabIndex        =   44
@@ -1075,6 +1927,473 @@ Begin VB.Form FireCallPrefs
          End
       End
    End
+   Begin VB.Frame fraEmail 
+      Caption         =   "Email"
+      Height          =   8250
+      Left            =   1080
+      TabIndex        =   22
+      Top             =   1950
+      Width           =   8640
+      Begin VB.Frame fraEmailInner 
+         BorderStyle     =   0  'None
+         Height          =   7665
+         Left            =   510
+         TabIndex        =   74
+         Top             =   450
+         Width           =   7470
+         Begin VB.TextBox txtSmtpConfigName 
+            Height          =   315
+            Left            =   4680
+            TabIndex        =   248
+            ToolTipText     =   "Enter the configuration identifier here"
+            Top             =   1305
+            Width           =   1290
+         End
+         Begin VB.ComboBox cmbSmtpConfig 
+            Height          =   315
+            ItemData        =   "Form2.frx":6894
+            Left            =   2025
+            List            =   "Form2.frx":6896
+            Style           =   2  'Dropdown List
+            TabIndex        =   246
+            ToolTipText     =   "Select which SMTP configuration slot you would like to operate."
+            Top             =   1305
+            Width           =   1860
+         End
+         Begin VB.Frame fraEmailfra 
+            Height          =   4140
+            Left            =   7215
+            TabIndex        =   239
+            Top             =   2070
+            Visible         =   0   'False
+            Width           =   5220
+            Begin VB.CommandButton Command2 
+               Caption         =   "Clear"
+               Height          =   420
+               Left            =   60
+               TabIndex        =   245
+               Top             =   3630
+               Width           =   1080
+            End
+            Begin VB.CommandButton btnCloseEmailFra 
+               Caption         =   "Close"
+               Height          =   420
+               Left            =   4065
+               TabIndex        =   244
+               Top             =   3630
+               Width           =   1080
+            End
+            Begin VB.TextBox txtEmailLog 
+               BeginProperty Font 
+                  Name            =   "Courier New"
+                  Size            =   7.5
+                  Charset         =   204
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   3045
+               Left            =   60
+               MultiLine       =   -1  'True
+               ScrollBars      =   3  'Both
+               TabIndex        =   243
+               Top             =   510
+               Width           =   5070
+            End
+            Begin VB.PictureBox Picture 
+               BackColor       =   &H00C0E0FF&
+               BorderStyle     =   0  'None
+               Height          =   210
+               Index           =   1
+               Left            =   4920
+               Picture         =   "Form2.frx":6898
+               ScaleHeight     =   210
+               ScaleWidth      =   225
+               TabIndex        =   241
+               ToolTipText     =   "Click to close the image"
+               Top             =   195
+               Width           =   225
+            End
+            Begin VB.PictureBox Picture 
+               BackColor       =   &H00C0E0FF&
+               BorderStyle     =   0  'None
+               Height          =   240
+               Index           =   0
+               Left            =   90
+               Picture         =   "Form2.frx":6AC5
+               ScaleHeight     =   240
+               ScaleWidth      =   255
+               TabIndex        =   240
+               ToolTipText     =   "Click to close the image"
+               Top             =   180
+               Width           =   255
+            End
+            Begin VB.TextBox Text2 
+               Height          =   300
+               Left            =   60
+               TabIndex        =   242
+               Text            =   "                                               Email Log"
+               Top             =   150
+               Width           =   5115
+            End
+         End
+         Begin VB.CheckBox chkAppendConfig 
+            Caption         =   "Append the above details to test emails"
+            Height          =   225
+            Left            =   2025
+            TabIndex        =   238
+            ToolTipText     =   "This will make it easier to identify which settings belong to which test email"
+            Top             =   4275
+            Width           =   3900
+         End
+         Begin VB.ComboBox cmbSmtpSecurity 
+            Height          =   315
+            Left            =   2025
+            Style           =   2  'Dropdown List
+            TabIndex        =   235
+            ToolTipText     =   "Choose the security level, none, SSL or TLS"
+            Top             =   3060
+            Width           =   1845
+         End
+         Begin VB.TextBox txtSmtpPort 
+            Height          =   285
+            Left            =   2025
+            TabIndex        =   228
+            Text            =   "Choose the SMTP port number, typically port 25, 465 or 587 for TLS"
+            ToolTipText     =   "Enter your email server's SMTP port here, you will find this in your email client outgoing email configuration, eg. 25"
+            Top             =   2220
+            Width           =   645
+         End
+         Begin VB.ComboBox cmbSmtpAuthenticate 
+            Height          =   315
+            Left            =   2025
+            Style           =   2  'Dropdown List
+            TabIndex        =   227
+            ToolTipText     =   "Select the authentication method"
+            Top             =   2655
+            Width           =   1845
+         End
+         Begin VB.TextBox txtSMTPNoPassword 
+            Height          =   285
+            Left            =   3570
+            Locked          =   -1  'True
+            TabIndex        =   224
+            ToolTipText     =   "Enter your email server's SMTP details here, you will find those in your email client outgoing email configuration"
+            Top             =   3555
+            Width           =   3960
+         End
+         Begin VB.CommandButton btnSeePassword 
+            Height          =   315
+            Left            =   6045
+            Picture         =   "Form2.frx":6F4F
+            Style           =   1  'Graphical
+            TabIndex        =   223
+            ToolTipText     =   "Click here to expose the password to prying eyes..."
+            Top             =   3855
+            Width           =   315
+         End
+         Begin VB.TextBox txtSmtpPassword 
+            Height          =   285
+            Left            =   2025
+            TabIndex        =   221
+            ToolTipText     =   "Enter your email server's SMTP password here, you will find those in your email client outgoing email configuration"
+            Top             =   3870
+            Width           =   3960
+         End
+         Begin VB.TextBox txtSmtpUsername 
+            Height          =   285
+            Left            =   2025
+            TabIndex        =   219
+            ToolTipText     =   "Enter your email server's SMTP username details here, you will find those in your email client outgoing email configuration"
+            Top             =   3465
+            Width           =   3960
+         End
+         Begin VB.CommandButton btnTestEmail 
+            Caption         =   "Test"
+            Enabled         =   0   'False
+            Height          =   420
+            Left            =   5145
+            Style           =   1  'Graphical
+            TabIndex        =   218
+            Top             =   6825
+            Width           =   1080
+         End
+         Begin VB.CheckBox chkSendErrorEmails 
+            Caption         =   "Send Error Emails"
+            Height          =   225
+            Left            =   2025
+            TabIndex        =   175
+            Top             =   390
+            Width           =   2025
+         End
+         Begin VB.TextBox txtRecipientEmail 
+            Height          =   285
+            Left            =   2025
+            TabIndex        =   167
+            ToolTipText     =   "Enter the email address where you wish to receive email updates on Fire Call Win's operational status."
+            Top             =   4665
+            Width           =   3960
+         End
+         Begin VB.TextBox txtEmailSubject 
+            Height          =   285
+            Left            =   2025
+            TabIndex        =   166
+            ToolTipText     =   "If you have a preference for a specific subject text, enter it here."
+            Top             =   5085
+            Width           =   3960
+         End
+         Begin VB.TextBox txtEmailMessage 
+            Height          =   1035
+            Left            =   2025
+            MultiLine       =   -1  'True
+            ScrollBars      =   2  'Vertical
+            TabIndex        =   165
+            ToolTipText     =   "If you have a preference for a specific email text, enter it here."
+            Top             =   5490
+            Width           =   4185
+         End
+         Begin VB.CheckBox chkSendEmails 
+            Caption         =   "Send Advice Emails"
+            Height          =   225
+            Left            =   2025
+            TabIndex        =   76
+            Top             =   0
+            Width           =   3105
+         End
+         Begin VB.ComboBox cmbAdviceInterval 
+            Height          =   315
+            ItemData        =   "Form2.frx":7210
+            Left            =   2025
+            List            =   "Form2.frx":7212
+            Style           =   2  'Dropdown List
+            TabIndex        =   75
+            ToolTipText     =   "Advice messages are sent when new data is received but not more often than at the specified interval."
+            Top             =   810
+            Width           =   3960
+         End
+         Begin VB.Frame fraSMTPframe 
+            BorderStyle     =   0  'None
+            Height          =   285
+            Left            =   765
+            TabIndex        =   229
+            Tag             =   "Do NOT delete me - I am here for balloon tooltip"
+            Top             =   1785
+            Width           =   6705
+            Begin VB.TextBox txtSmtpServer 
+               Height          =   285
+               Left            =   1260
+               TabIndex        =   230
+               Text            =   "This is the SMTP server name as supplied by your email provider"
+               ToolTipText     =   $"Form2.frx":7214
+               Top             =   30
+               Width           =   3960
+            End
+            Begin VB.Label lblEmailTab 
+               Alignment       =   1  'Right Justify
+               AutoSize        =   -1  'True
+               BackStyle       =   0  'Transparent
+               Caption         =   "SMTP Server"
+               Height          =   195
+               Index           =   1
+               Left            =   195
+               TabIndex        =   231
+               Tag             =   "lblServer"
+               Top             =   45
+               Width           =   960
+            End
+         End
+         Begin VB.Label lblEmailTab 
+            Caption         =   "Tag"
+            Height          =   345
+            Index           =   16
+            Left            =   4245
+            TabIndex        =   249
+            Tag             =   "lblAdviceInterval"
+            ToolTipText     =   "Give this configuration an identifier"
+            Top             =   1350
+            Width           =   705
+         End
+         Begin VB.Label lblEmailTab 
+            Caption         =   "SMTP Configuration"
+            Height          =   345
+            Index           =   7
+            Left            =   435
+            TabIndex        =   247
+            Tag             =   "lblAdviceInterval"
+            ToolTipText     =   "The SMTP details will be saved to this chosen configuration slot"
+            Top             =   1365
+            Width           =   1725
+         End
+         Begin VB.Label lblEmailTab 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "(SSL is the default)"
+            Height          =   195
+            Index           =   14
+            Left            =   4635
+            TabIndex        =   237
+            Tag             =   "lblMsg"
+            Top             =   3075
+            Width           =   1815
+            WordWrap        =   -1  'True
+         End
+         Begin VB.Label lblEmailTab 
+            Alignment       =   1  'Right Justify
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "SMTP Security"
+            Height          =   195
+            Index           =   15
+            Left            =   840
+            TabIndex        =   236
+            Tag             =   "lblServer"
+            Top             =   3105
+            Width           =   1065
+         End
+         Begin VB.Label lblEmailTab 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "(Base 64 is the default)"
+            Height          =   195
+            Index           =   13
+            Left            =   4350
+            TabIndex        =   234
+            Tag             =   "lblMsg"
+            Top             =   2670
+            Width           =   2070
+            WordWrap        =   -1  'True
+         End
+         Begin VB.Label lblEmailTab 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "(Typically port 25, 465 or 587)"
+            Height          =   345
+            Index           =   12
+            Left            =   3855
+            TabIndex        =   233
+            Tag             =   "lblMsg"
+            Top             =   2310
+            Width           =   2370
+            WordWrap        =   -1  'True
+         End
+         Begin VB.Label lblEmailTab 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "If you make any changes to the above, press SAVE before trying to test. Check  your email client to see if any email has arrived."
+            Height          =   780
+            Index           =   11
+            Left            =   2040
+            TabIndex        =   232
+            Tag             =   "lblMsg"
+            Top             =   6705
+            Width           =   2925
+            WordWrap        =   -1  'True
+         End
+         Begin VB.Label lblEmailTab 
+            Alignment       =   1  'Right Justify
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "SMTP Authentication"
+            Height          =   195
+            Index           =   10
+            Left            =   390
+            TabIndex        =   226
+            Tag             =   "lblServer"
+            Top             =   2700
+            Width           =   1515
+         End
+         Begin VB.Label lblEmailTab 
+            Alignment       =   1  'Right Justify
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "SMTP Port"
+            Height          =   195
+            Index           =   9
+            Left            =   1110
+            TabIndex        =   225
+            Tag             =   "lblServer"
+            Top             =   2250
+            Width           =   780
+         End
+         Begin VB.Label lblEmailTab 
+            Alignment       =   1  'Right Justify
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "SMTP Password"
+            Height          =   195
+            Index           =   6
+            Left            =   705
+            TabIndex        =   222
+            Tag             =   "lblServer"
+            Top             =   3900
+            Width           =   1185
+         End
+         Begin VB.Label lblEmailTab 
+            Alignment       =   1  'Right Justify
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "SMTP Username"
+            Height          =   195
+            Index           =   5
+            Left            =   690
+            TabIndex        =   220
+            Tag             =   "lblServer"
+            Top             =   3495
+            Width           =   1215
+         End
+         Begin VB.Label lblEmailTab 
+            Alignment       =   1  'Right Justify
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "Recipient Email"
+            Height          =   195
+            Index           =   2
+            Left            =   780
+            TabIndex        =   170
+            Tag             =   "lblTo"
+            Top             =   4710
+            Width           =   1095
+         End
+         Begin VB.Label lblEmailTab 
+            Alignment       =   1  'Right Justify
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "Subject"
+            Height          =   195
+            Index           =   3
+            Left            =   1350
+            TabIndex        =   169
+            Tag             =   "lblSubject"
+            Top             =   5115
+            Width           =   540
+         End
+         Begin VB.Label lblEmailTab 
+            Alignment       =   1  'Right Justify
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "Test Message"
+            Height          =   195
+            Index           =   4
+            Left            =   900
+            TabIndex        =   168
+            Tag             =   "lblMsg"
+            Top             =   5520
+            Width           =   1005
+         End
+         Begin VB.Label lblEmailTab 
+            Caption         =   "Advice Interval"
+            Height          =   345
+            Index           =   0
+            Left            =   795
+            TabIndex        =   77
+            Tag             =   "lblAdviceInterval"
+            ToolTipText     =   "Advice messages are sent when new data is received but not more often than at the specified interval."
+            Top             =   870
+            Width           =   1740
+         End
+      End
+   End
    Begin VB.Frame fraGeneral 
       Caption         =   "General"
       Height          =   7110
@@ -1093,7 +2412,7 @@ Begin VB.Form FireCallPrefs
             Caption         =   "Check the above network processes are running"
             Height          =   225
             Left            =   1485
-            TabIndex        =   282
+            TabIndex        =   281
             ToolTipText     =   "Check this box to enable alarms when the above network processes are not running. Uncheck the check box to suppress the alarm."
             Top             =   4695
             Width           =   4035
@@ -1102,7 +2421,7 @@ Begin VB.Form FireCallPrefs
             Caption         =   "Run Fire Call at Windows Startup"
             Height          =   225
             Left            =   1485
-            TabIndex        =   280
+            TabIndex        =   279
             ToolTipText     =   "Check this box to enable the automatic start of the program when Windows is started."
             Top             =   5865
             Width           =   3555
@@ -1282,9 +2601,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbRefreshInterval 
             Height          =   315
-            ItemData        =   "Form2.frx":4EEA
+            ItemData        =   "Form2.frx":72A1
             Left            =   1485
-            List            =   "Form2.frx":4EEC
+            List            =   "Form2.frx":72A3
             Style           =   2  'Dropdown List
             TabIndex        =   79
             ToolTipText     =   "Set the refresh interval"
@@ -1296,7 +2615,7 @@ Begin VB.Form FireCallPrefs
             Height          =   255
             Index           =   10
             Left            =   375
-            TabIndex        =   283
+            TabIndex        =   282
             Tag             =   "lblServiceProvider"
             ToolTipText     =   "Check this box to enable regular testing of the above network processes."
             Top             =   4695
@@ -1307,7 +2626,7 @@ Begin VB.Form FireCallPrefs
             Height          =   375
             Index           =   11
             Left            =   615
-            TabIndex        =   281
+            TabIndex        =   280
             Tag             =   "lblRefreshInterval"
             Top             =   5865
             Width           =   1740
@@ -1373,7 +2692,7 @@ Begin VB.Form FireCallPrefs
             Width           =   1350
          End
          Begin VB.Label lblGeneralTab 
-            Caption         =   $"Form2.frx":4EEE
+            Caption         =   $"Form2.frx":72A5
             Height          =   900
             Index           =   7
             Left            =   1545
@@ -1871,1338 +3190,6 @@ Begin VB.Form FireCallPrefs
          End
       End
    End
-   Begin VB.Frame fraEmail 
-      Caption         =   "Email"
-      Height          =   8250
-      Left            =   1080
-      TabIndex        =   22
-      Top             =   1950
-      Width           =   8640
-      Begin VB.Frame fraEmailInner 
-         BorderStyle     =   0  'None
-         Height          =   7665
-         Left            =   510
-         TabIndex        =   74
-         Top             =   450
-         Width           =   7470
-         Begin VB.TextBox txtSmtpConfigName 
-            Height          =   315
-            Left            =   4680
-            TabIndex        =   249
-            ToolTipText     =   "Enter the configuration identifier here"
-            Top             =   1305
-            Width           =   1290
-         End
-         Begin VB.ComboBox cmbSmtpConfig 
-            Height          =   315
-            ItemData        =   "Form2.frx":4F9B
-            Left            =   2025
-            List            =   "Form2.frx":4F9D
-            Style           =   2  'Dropdown List
-            TabIndex        =   247
-            ToolTipText     =   "Select which SMTP configuration slot you would like to operate."
-            Top             =   1305
-            Width           =   1860
-         End
-         Begin VB.Frame fraEmailfra 
-            Height          =   4140
-            Left            =   7215
-            TabIndex        =   240
-            Top             =   2070
-            Visible         =   0   'False
-            Width           =   5220
-            Begin VB.CommandButton Command2 
-               Caption         =   "Clear"
-               Height          =   420
-               Left            =   60
-               TabIndex        =   246
-               Top             =   3630
-               Width           =   1080
-            End
-            Begin VB.CommandButton btnCloseEmailFra 
-               Caption         =   "Close"
-               Height          =   420
-               Left            =   4065
-               TabIndex        =   245
-               Top             =   3630
-               Width           =   1080
-            End
-            Begin VB.TextBox txtEmailLog 
-               BeginProperty Font 
-                  Name            =   "Courier New"
-                  Size            =   7.5
-                  Charset         =   204
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   3045
-               Left            =   60
-               MultiLine       =   -1  'True
-               ScrollBars      =   3  'Both
-               TabIndex        =   244
-               Top             =   510
-               Width           =   5070
-            End
-            Begin VB.PictureBox Picture 
-               BackColor       =   &H00C0E0FF&
-               BorderStyle     =   0  'None
-               Height          =   210
-               Index           =   1
-               Left            =   4920
-               Picture         =   "Form2.frx":4F9F
-               ScaleHeight     =   210
-               ScaleWidth      =   225
-               TabIndex        =   242
-               ToolTipText     =   "Click to close the image"
-               Top             =   195
-               Width           =   225
-            End
-            Begin VB.PictureBox Picture 
-               BackColor       =   &H00C0E0FF&
-               BorderStyle     =   0  'None
-               Height          =   240
-               Index           =   0
-               Left            =   90
-               Picture         =   "Form2.frx":51CC
-               ScaleHeight     =   240
-               ScaleWidth      =   255
-               TabIndex        =   241
-               ToolTipText     =   "Click to close the image"
-               Top             =   180
-               Width           =   255
-            End
-            Begin VB.TextBox Text2 
-               Height          =   300
-               Left            =   60
-               TabIndex        =   243
-               Text            =   "                                               Email Log"
-               Top             =   150
-               Width           =   5115
-            End
-         End
-         Begin VB.CheckBox chkAppendConfig 
-            Caption         =   "Append the above details to test emails"
-            Height          =   225
-            Left            =   2025
-            TabIndex        =   239
-            ToolTipText     =   "This will make it easier to identify which settings belong to which test email"
-            Top             =   4275
-            Width           =   3900
-         End
-         Begin VB.ComboBox cmbSmtpSecurity 
-            Height          =   315
-            Left            =   2025
-            Style           =   2  'Dropdown List
-            TabIndex        =   236
-            ToolTipText     =   "Choose the security level, none, SSL or TLS"
-            Top             =   3060
-            Width           =   1845
-         End
-         Begin VB.TextBox txtSmtpPort 
-            Height          =   285
-            Left            =   2025
-            TabIndex        =   229
-            Text            =   "Choose the SMTP port number, typically port 25, 465 or 587 for TLS"
-            ToolTipText     =   "Enter your email server's SMTP port here, you will find this in your email client outgoing email configuration, eg. 25"
-            Top             =   2220
-            Width           =   645
-         End
-         Begin VB.ComboBox cmbSmtpAuthenticate 
-            Height          =   315
-            Left            =   2025
-            Style           =   2  'Dropdown List
-            TabIndex        =   228
-            ToolTipText     =   "Select the authentication method"
-            Top             =   2655
-            Width           =   1845
-         End
-         Begin VB.TextBox txtSMTPNoPassword 
-            Height          =   285
-            Left            =   3570
-            Locked          =   -1  'True
-            TabIndex        =   224
-            ToolTipText     =   "Enter your email server's SMTP details here, you will find those in your email client outgoing email configuration"
-            Top             =   3555
-            Width           =   3960
-         End
-         Begin VB.CommandButton btnSeePassword 
-            Height          =   315
-            Left            =   6045
-            Picture         =   "Form2.frx":5656
-            Style           =   1  'Graphical
-            TabIndex        =   223
-            ToolTipText     =   "Click here to expose the password to prying eyes..."
-            Top             =   3855
-            Width           =   315
-         End
-         Begin VB.TextBox txtSmtpPassword 
-            Height          =   285
-            Left            =   2025
-            TabIndex        =   221
-            ToolTipText     =   "Enter your email server's SMTP password here, you will find those in your email client outgoing email configuration"
-            Top             =   3870
-            Width           =   3960
-         End
-         Begin VB.TextBox txtSmtpUsername 
-            Height          =   285
-            Left            =   2025
-            TabIndex        =   219
-            ToolTipText     =   "Enter your email server's SMTP username details here, you will find those in your email client outgoing email configuration"
-            Top             =   3465
-            Width           =   3960
-         End
-         Begin VB.CommandButton btnTestEmail 
-            Caption         =   "Test"
-            Enabled         =   0   'False
-            Height          =   420
-            Left            =   5145
-            Style           =   1  'Graphical
-            TabIndex        =   218
-            Top             =   6825
-            Width           =   1080
-         End
-         Begin VB.CheckBox chkSendErrorEmails 
-            Caption         =   "Send Error Emails"
-            Height          =   225
-            Left            =   2025
-            TabIndex        =   175
-            Top             =   390
-            Width           =   2025
-         End
-         Begin VB.TextBox txtRecipientEmail 
-            Height          =   285
-            Left            =   2025
-            TabIndex        =   167
-            ToolTipText     =   "Enter the email address where you wish to receive email updates on Fire Call Win's operational status."
-            Top             =   4665
-            Width           =   3960
-         End
-         Begin VB.TextBox txtEmailSubject 
-            Height          =   285
-            Left            =   2025
-            TabIndex        =   166
-            ToolTipText     =   "If you have a preference for a specific subject text, enter it here."
-            Top             =   5085
-            Width           =   3960
-         End
-         Begin VB.TextBox txtEmailMessage 
-            Height          =   1035
-            Left            =   2025
-            MultiLine       =   -1  'True
-            ScrollBars      =   2  'Vertical
-            TabIndex        =   165
-            ToolTipText     =   "If you have a preference for a specific email text, enter it here."
-            Top             =   5490
-            Width           =   4185
-         End
-         Begin VB.CheckBox chkSendEmails 
-            Caption         =   "Send Advice Emails"
-            Height          =   225
-            Left            =   2025
-            TabIndex        =   76
-            Top             =   0
-            Width           =   3105
-         End
-         Begin VB.ComboBox cmbAdviceInterval 
-            Height          =   315
-            ItemData        =   "Form2.frx":5917
-            Left            =   2025
-            List            =   "Form2.frx":5919
-            Style           =   2  'Dropdown List
-            TabIndex        =   75
-            ToolTipText     =   "Advice messages are sent when new data is received but not more often than at the specified interval."
-            Top             =   810
-            Width           =   3960
-         End
-         Begin VB.Frame fraSMTPframe 
-            BorderStyle     =   0  'None
-            Height          =   285
-            Left            =   765
-            TabIndex        =   230
-            Tag             =   "Do NOT delete me - I am here for balloon tooltip"
-            Top             =   1785
-            Width           =   6705
-            Begin VB.TextBox txtSmtpServer 
-               Height          =   285
-               Left            =   1260
-               TabIndex        =   231
-               Text            =   "This is the SMTP server name as supplied by your email provider"
-               ToolTipText     =   $"Form2.frx":591B
-               Top             =   30
-               Width           =   3960
-            End
-            Begin VB.Label lblEmailTab 
-               Alignment       =   1  'Right Justify
-               AutoSize        =   -1  'True
-               BackStyle       =   0  'Transparent
-               Caption         =   "SMTP Server"
-               Height          =   195
-               Index           =   1
-               Left            =   195
-               TabIndex        =   232
-               Tag             =   "lblServer"
-               Top             =   45
-               Width           =   960
-            End
-         End
-         Begin VB.Label lblEmailTab 
-            Caption         =   "Tag"
-            Height          =   345
-            Index           =   16
-            Left            =   4245
-            TabIndex        =   250
-            Tag             =   "lblAdviceInterval"
-            ToolTipText     =   "Give this configuration an identifier"
-            Top             =   1350
-            Width           =   705
-         End
-         Begin VB.Label lblEmailTab 
-            Caption         =   "SMTP Configuration"
-            Height          =   345
-            Index           =   7
-            Left            =   435
-            TabIndex        =   248
-            Tag             =   "lblAdviceInterval"
-            ToolTipText     =   "The SMTP details will be saved to this chosen configuration slot"
-            Top             =   1365
-            Width           =   1725
-         End
-         Begin VB.Label lblEmailTab 
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "(SSL is the default)"
-            Height          =   195
-            Index           =   14
-            Left            =   4635
-            TabIndex        =   238
-            Tag             =   "lblMsg"
-            Top             =   3075
-            Width           =   1815
-            WordWrap        =   -1  'True
-         End
-         Begin VB.Label lblEmailTab 
-            Alignment       =   1  'Right Justify
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "SMTP Security"
-            Height          =   195
-            Index           =   15
-            Left            =   840
-            TabIndex        =   237
-            Tag             =   "lblServer"
-            Top             =   3105
-            Width           =   1065
-         End
-         Begin VB.Label lblEmailTab 
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "(Base 64 is the default)"
-            Height          =   195
-            Index           =   13
-            Left            =   4350
-            TabIndex        =   235
-            Tag             =   "lblMsg"
-            Top             =   2670
-            Width           =   2070
-            WordWrap        =   -1  'True
-         End
-         Begin VB.Label lblEmailTab 
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "(Typically port 25, 465 or 587)"
-            Height          =   345
-            Index           =   12
-            Left            =   3855
-            TabIndex        =   234
-            Tag             =   "lblMsg"
-            Top             =   2310
-            Width           =   2370
-            WordWrap        =   -1  'True
-         End
-         Begin VB.Label lblEmailTab 
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "If you make any changes to the above, press SAVE before trying to test. Check  your email client to see if any email has arrived."
-            Height          =   780
-            Index           =   11
-            Left            =   2040
-            TabIndex        =   233
-            Tag             =   "lblMsg"
-            Top             =   6705
-            Width           =   2925
-            WordWrap        =   -1  'True
-         End
-         Begin VB.Label lblEmailTab 
-            Alignment       =   1  'Right Justify
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "SMTP Authentication"
-            Height          =   195
-            Index           =   10
-            Left            =   390
-            TabIndex        =   227
-            Tag             =   "lblServer"
-            Top             =   2700
-            Width           =   1515
-         End
-         Begin VB.Label lblEmailTab 
-            Alignment       =   1  'Right Justify
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "SMTP Port"
-            Height          =   195
-            Index           =   9
-            Left            =   1110
-            TabIndex        =   226
-            Tag             =   "lblServer"
-            Top             =   2250
-            Width           =   780
-         End
-         Begin VB.Label lblEmailTab 
-            Alignment       =   1  'Right Justify
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "SMTP Password"
-            Height          =   195
-            Index           =   6
-            Left            =   705
-            TabIndex        =   222
-            Tag             =   "lblServer"
-            Top             =   3900
-            Width           =   1185
-         End
-         Begin VB.Label lblEmailTab 
-            Alignment       =   1  'Right Justify
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "SMTP Username"
-            Height          =   195
-            Index           =   5
-            Left            =   690
-            TabIndex        =   220
-            Tag             =   "lblServer"
-            Top             =   3495
-            Width           =   1215
-         End
-         Begin VB.Label lblEmailTab 
-            Alignment       =   1  'Right Justify
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "Recipient Email"
-            Height          =   195
-            Index           =   2
-            Left            =   780
-            TabIndex        =   170
-            Tag             =   "lblTo"
-            Top             =   4710
-            Width           =   1095
-         End
-         Begin VB.Label lblEmailTab 
-            Alignment       =   1  'Right Justify
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "Subject"
-            Height          =   195
-            Index           =   3
-            Left            =   1350
-            TabIndex        =   169
-            Tag             =   "lblSubject"
-            Top             =   5115
-            Width           =   540
-         End
-         Begin VB.Label lblEmailTab 
-            Alignment       =   1  'Right Justify
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "Test Message"
-            Height          =   195
-            Index           =   4
-            Left            =   900
-            TabIndex        =   168
-            Tag             =   "lblMsg"
-            Top             =   5520
-            Width           =   1005
-         End
-         Begin VB.Label lblEmailTab 
-            Caption         =   "Advice Interval"
-            Height          =   345
-            Index           =   0
-            Left            =   795
-            TabIndex        =   77
-            Tag             =   "lblAdviceInterval"
-            ToolTipText     =   "Advice messages are sent when new data is received but not more often than at the specified interval."
-            Top             =   870
-            Width           =   1740
-         End
-      End
-      Begin VB.Label lblEmailTab 
-         Alignment       =   1  'Right Justify
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "SMTP Server"
-         Height          =   195
-         Index           =   8
-         Left            =   1320
-         TabIndex        =   225
-         Tag             =   "lblServer"
-         Top             =   2745
-         Width           =   960
-      End
-   End
-   Begin VB.Frame fraEmoji 
-      Caption         =   "Emojis"
-      Height          =   3285
-      Left            =   1140
-      TabIndex        =   23
-      Top             =   2490
-      Width           =   8655
-      Begin VB.Frame fraEmojisInner 
-         BorderStyle     =   0  'None
-         Height          =   2730
-         Left            =   1410
-         TabIndex        =   105
-         Top             =   375
-         Width           =   5565
-         Begin VB.ComboBox cmbEmojiSet 
-            Height          =   315
-            ItemData        =   "Form2.frx":59A8
-            Left            =   1185
-            List            =   "Form2.frx":59AA
-            Style           =   2  'Dropdown List
-            TabIndex        =   107
-            ToolTipText     =   "Choose the emoji set to use"
-            Top             =   0
-            Width           =   1710
-         End
-         Begin VB.CommandButton btnEmojiLocation 
-            Caption         =   "..."
-            Height          =   300
-            Left            =   1185
-            Style           =   1  'Graphical
-            TabIndex        =   106
-            ToolTipText     =   "Open a file explorer at the Emoji folder location."
-            Top             =   1980
-            Width           =   315
-         End
-         Begin VB.Label lblEmojiTab 
-            Caption         =   "Emoji Set:"
-            Height          =   375
-            Index           =   0
-            Left            =   405
-            TabIndex        =   112
-            Tag             =   "lblEmojiSet"
-            Top             =   60
-            Width           =   1740
-         End
-         Begin VB.Label lblEmojiTab 
-            Caption         =   "Choose the Emoji set you wish to use."
-            Height          =   300
-            Index           =   2
-            Left            =   1185
-            TabIndex        =   111
-            Top             =   450
-            Width           =   3750
-         End
-         Begin VB.Label lblEmojiTab 
-            Caption         =   $"Form2.frx":59AC
-            Height          =   825
-            Index           =   4
-            Left            =   1170
-            TabIndex        =   110
-            Top             =   870
-            Width           =   3750
-         End
-         Begin VB.Label lblEmojiTab 
-            Caption         =   "Open a file explorer at the Emoji folder location."
-            Height          =   465
-            Index           =   3
-            Left            =   1665
-            TabIndex        =   109
-            Top             =   1965
-            Width           =   2895
-         End
-         Begin VB.Label lblEmojiTab 
-            Caption         =   "Emoji Location:"
-            Height          =   375
-            Index           =   1
-            Left            =   0
-            TabIndex        =   108
-            Tag             =   "lblEmojiLocation"
-            Top             =   2010
-            Width           =   1230
-         End
-      End
-   End
-   Begin VB.Frame fraHousekeeping 
-      Caption         =   "Housekeeping"
-      Height          =   7890
-      Left            =   675
-      TabIndex        =   184
-      Top             =   1215
-      Width           =   8655
-      Begin VB.Frame fraHousekeepingInner 
-         BorderStyle     =   0  'None
-         Height          =   7080
-         Left            =   600
-         TabIndex        =   185
-         Top             =   255
-         Width           =   7245
-         Begin VB.Frame fraHouseKeepingBackups 
-            BorderStyle     =   0  'None
-            Height          =   4125
-            Left            =   165
-            TabIndex        =   253
-            Top             =   2835
-            Width           =   6855
-            Begin VB.CheckBox chkAutomaticBackups 
-               Caption         =   "  Automatic Backups"
-               Height          =   225
-               Left            =   1800
-               TabIndex        =   256
-               ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
-               Top             =   1185
-               Width           =   1950
-            End
-            Begin VB.CommandButton btnBackupLocation 
-               Caption         =   "..."
-               Height          =   300
-               Left            =   1800
-               Style           =   1  'Graphical
-               TabIndex        =   255
-               ToolTipText     =   "Open a file explorer at the Backup folder location."
-               Top             =   3345
-               Width           =   315
-            End
-            Begin VB.CheckBox chkBackupOnStart 
-               Caption         =   "  Backup on Start"
-               Height          =   225
-               Left            =   1785
-               TabIndex        =   254
-               ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
-               Top             =   315
-               Width           =   1725
-            End
-            Begin vb6projectCCRSlider.Slider sliAutomaticBackupInterval 
-               Height          =   390
-               Left            =   1680
-               TabIndex        =   257
-               ToolTipText     =   "Set the hourly interval "
-               Top             =   1935
-               Width           =   3870
-               _ExtentX        =   6826
-               _ExtentY        =   688
-               Min             =   1
-               Max             =   24
-               Value           =   24
-               SelStart        =   20
-            End
-            Begin VB.Label lblHousekeepingDesc 
-               Caption         =   "Check this box to enable automatic hourly backups"
-               Height          =   450
-               Index           =   3
-               Left            =   1800
-               TabIndex        =   266
-               Tag             =   "lblAutomaticBackupsDesc"
-               ToolTipText     =   "Check this box to enable automatic hourly backups"
-               Top             =   1530
-               Width           =   4335
-            End
-            Begin VB.Label lblHousekeepingDesc 
-               Caption         =   "Set the automatic backup interval in hours."
-               Height          =   330
-               Index           =   4
-               Left            =   1770
-               TabIndex        =   265
-               Tag             =   "lblIntervalDesc"
-               Top             =   2760
-               Width           =   3810
-            End
-            Begin VB.Label lblHousekeepingTab 
-               Caption         =   "Interval:"
-               Height          =   315
-               Index           =   1
-               Left            =   990
-               TabIndex        =   264
-               Tag             =   "lblInterval"
-               Top             =   1995
-               Width           =   780
-            End
-            Begin VB.Label lblIntervalMid 
-               Caption         =   "12"
-               Height          =   315
-               Left            =   3435
-               TabIndex        =   263
-               Top             =   2430
-               Width           =   840
-            End
-            Begin VB.Label lblIntervalMax 
-               Caption         =   "24"
-               Height          =   315
-               Left            =   5250
-               TabIndex        =   262
-               Top             =   2445
-               Width           =   405
-            End
-            Begin VB.Label lblIntervalMin 
-               Caption         =   "1"
-               Height          =   315
-               Left            =   1770
-               TabIndex        =   261
-               Top             =   2445
-               Width           =   345
-            End
-            Begin VB.Label lblHousekeepingTab 
-               Caption         =   "Backup Location:"
-               Height          =   375
-               Index           =   2
-               Left            =   420
-               TabIndex        =   260
-               Tag             =   "lblBackupLocation"
-               Top             =   3345
-               Width           =   1425
-            End
-            Begin VB.Label lblHousekeepingDesc 
-               Caption         =   "Open file explorer at the backup folder location. This will allow you to select a backup file for restoring if required."
-               Height          =   675
-               Index           =   5
-               Left            =   2265
-               TabIndex        =   259
-               Tag             =   "lblBackupLocationDesc"
-               Top             =   3345
-               Width           =   2895
-            End
-            Begin VB.Label lblHousekeepingDesc 
-               Caption         =   "Check this box to enable automatic backups on each startup"
-               Height          =   450
-               Index           =   2
-               Left            =   1785
-               TabIndex        =   258
-               Tag             =   "lblBackupOnStartDesc"
-               ToolTipText     =   "Check this box to enable automatic backups on each startup"
-               Top             =   660
-               Width           =   4335
-            End
-         End
-         Begin VB.ComboBox cmbArchiveDays 
-            Height          =   315
-            Left            =   1920
-            Style           =   2  'Dropdown List
-            TabIndex        =   251
-            Top             =   945
-            Width           =   1665
-         End
-         Begin VB.CommandButton Command1 
-            Caption         =   "..."
-            Height          =   300
-            Left            =   1905
-            Style           =   1  'Graphical
-            TabIndex        =   194
-            ToolTipText     =   "Open a file explorer at the Archive folder location."
-            Top             =   2070
-            Width           =   315
-         End
-         Begin VB.CheckBox chkAutomaticHousekeeping 
-            Caption         =   "Send Emails"
-            Height          =   225
-            Left            =   1935
-            TabIndex        =   186
-            ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
-            Top             =   150
-            Width           =   225
-         End
-         Begin VB.Label lblHousekeepingDesc 
-            Caption         =   "Select the number of days after which all old chats will be archived from your selected files."
-            Height          =   450
-            Index           =   6
-            Left            =   1935
-            TabIndex        =   252
-            Tag             =   "lblAutomaticHousekeepingDesc"
-            ToolTipText     =   "Check this box to enable automatic housekeeping"
-            Top             =   1410
-            Width           =   3525
-         End
-         Begin VB.Label lblHousekeepingTab 
-            Caption         =   "Archive Location:"
-            Height          =   375
-            Index           =   0
-            Left            =   525
-            TabIndex        =   196
-            Tag             =   "lblArchiveLocation"
-            Top             =   2070
-            Width           =   1425
-         End
-         Begin VB.Label lblHousekeepingDesc 
-            Caption         =   "Open file explorer at the archive folder location. This will allow you to view archive files."
-            Height          =   675
-            Index           =   1
-            Left            =   2370
-            TabIndex        =   195
-            Top             =   2070
-            Width           =   2895
-         End
-         Begin VB.Label lblHousekeepingDesc 
-            Caption         =   "Check this box to enable automatic housekeeping"
-            Height          =   450
-            Index           =   0
-            Left            =   1920
-            TabIndex        =   188
-            Tag             =   "lblAutomaticHousekeepingDesc"
-            ToolTipText     =   "Check this box to enable automatic housekeeping"
-            Top             =   495
-            Width           =   4335
-         End
-         Begin VB.Label lblAutomaticHousekeeping 
-            Caption         =   "Automatic Housekeeping"
-            Height          =   270
-            Left            =   2280
-            TabIndex        =   187
-            ToolTipText     =   "Check this box to enable automatic housekeeping"
-            Top             =   150
-            Width           =   3120
-         End
-      End
-   End
-   Begin VB.Frame fraSounds 
-      Caption         =   "Sounds"
-      Height          =   7095
-      Left            =   105
-      TabIndex        =   33
-      Top             =   1110
-      Visible         =   0   'False
-      Width           =   10575
-      Begin VB.Frame fraSoundsInner 
-         BorderStyle     =   0  'None
-         Height          =   6630
-         Left            =   1125
-         TabIndex        =   50
-         Top             =   300
-         Width           =   6480
-         Begin VB.CheckBox chkEnableAlarmSound 
-            Caption         =   "Enable Alarm Sound"
-            Height          =   225
-            Left            =   1365
-            TabIndex        =   275
-            ToolTipText     =   "Check this box to enable or disable the sounds played during any alarm raised."
-            Top             =   870
-            Width           =   3570
-         End
-         Begin vb6projectCCRSlider.Slider sliRecordingQuality 
-            Height          =   450
-            Left            =   1230
-            TabIndex        =   214
-            ToolTipText     =   "Quality of recording affects WAV file size."
-            Top             =   5520
-            Width           =   3705
-            _ExtentX        =   6535
-            _ExtentY        =   794
-            Min             =   1
-            Max             =   5
-            Value           =   3
-            SelStart        =   3
-         End
-         Begin VB.ComboBox cmbCaptureDevices 
-            Height          =   315
-            ItemData        =   "Form2.frx":5A72
-            Left            =   1365
-            List            =   "Form2.frx":5A74
-            TabIndex        =   211
-            Text            =   "cmbCaptureDevices"
-            Top             =   4455
-            Width           =   3420
-         End
-         Begin VB.CommandButton btnMute 
-            Height          =   285
-            Left            =   5385
-            Picture         =   "Form2.frx":5A76
-            Style           =   1  'Graphical
-            TabIndex        =   171
-            TabStop         =   0   'False
-            ToolTipText     =   "Mute the playing sound"
-            Top             =   0
-            Width           =   300
-         End
-         Begin VB.CheckBox chkPlayVolume 
-            Caption         =   "Enable loud volume"
-            Height          =   225
-            Left            =   1365
-            TabIndex        =   163
-            ToolTipText     =   "When checked this box enables the louder versions of the sounds to be played"
-            Top             =   2445
-            Width           =   3405
-         End
-         Begin VB.CheckBox chkEnableSounds 
-            Caption         =   "Enable Sounds for the Animations"
-            Height          =   225
-            Left            =   1365
-            TabIndex        =   161
-            ToolTipText     =   "Check this box to enable or disable all of the sounds used during any animation on the main screen."
-            Top             =   1350
-            Width           =   3405
-         End
-         Begin VB.ComboBox cmbAlarmSound 
-            Height          =   315
-            ItemData        =   "Form2.frx":5CA3
-            Left            =   1365
-            List            =   "Form2.frx":5CA5
-            Style           =   2  'Dropdown List
-            TabIndex        =   53
-            ToolTipText     =   "Choose the alarm sound."
-            Top             =   0
-            Width           =   2160
-         End
-         Begin VB.CommandButton btnPlaySound 
-            Height          =   285
-            Left            =   5055
-            Picture         =   "Form2.frx":5CA7
-            Style           =   1  'Graphical
-            TabIndex        =   52
-            TabStop         =   0   'False
-            ToolTipText     =   "Play this sound"
-            Top             =   0
-            Width           =   300
-         End
-         Begin VB.CommandButton btnSoundsLocation 
-            Caption         =   "..."
-            Height          =   300
-            Left            =   1365
-            Style           =   1  'Graphical
-            TabIndex        =   51
-            ToolTipText     =   "Open a file explorer at the Sounds folder location."
-            Top             =   3780
-            Width           =   315
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   "Quality :"
-            Height          =   375
-            Index           =   10
-            Left            =   645
-            TabIndex        =   217
-            Tag             =   "lblMicrophone"
-            Top             =   5565
-            Width           =   660
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   "High"
-            Height          =   195
-            Index           =   9
-            Left            =   4620
-            TabIndex        =   216
-            ToolTipText     =   "This records at 550khz and creates hight quality and large recordings that may fill your drive!"
-            Top             =   6015
-            Width           =   615
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   "Low"
-            Height          =   195
-            Index           =   8
-            Left            =   1245
-            TabIndex        =   215
-            ToolTipText     =   "This captures at 5500khz and creates low quality but small recordings"
-            Top             =   6015
-            Width           =   615
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   "Select the audio input device and the recording quality option below."
-            Height          =   525
-            Index           =   7
-            Left            =   1380
-            TabIndex        =   213
-            Top             =   4965
-            Width           =   3615
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   "Recording :"
-            Height          =   375
-            Index           =   2
-            Left            =   405
-            TabIndex        =   212
-            Tag             =   "lblMicrophone"
-            Top             =   4470
-            Width           =   1545
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   "When checked this box enables the louder versions of the sounds to be played"
-            Height          =   660
-            Index           =   5
-            Left            =   1410
-            TabIndex        =   164
-            Tag             =   "lblPlayVolumeDesc"
-            Top             =   2805
-            Width           =   3615
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   "When checked this box enables all the other sounds used during any animation on the main screen."
-            Height          =   660
-            Index           =   4
-            Left            =   1395
-            TabIndex        =   162
-            Tag             =   "lblEnableSoundsDesc"
-            Top             =   1710
-            Width           =   3615
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   " Alarm Sound :"
-            Height          =   375
-            Index           =   0
-            Left            =   240
-            TabIndex        =   58
-            Tag             =   "lblAlarmSound"
-            Top             =   45
-            Width           =   1740
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   "Choose the alarm sound."
-            Height          =   300
-            Index           =   3
-            Left            =   1350
-            TabIndex        =   57
-            Tag             =   "lblAlarmSoundDesc"
-            Top             =   450
-            Width           =   1890
-         End
-         Begin VB.Label lblPlaySound 
-            Caption         =   "Play this sound"
-            Height          =   300
-            Left            =   3825
-            TabIndex        =   56
-            Top             =   45
-            Width           =   1635
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   "Sounds Location:"
-            Height          =   375
-            Index           =   1
-            Left            =   -15
-            TabIndex        =   55
-            Tag             =   "lblSoundsLocation"
-            Top             =   3780
-            Width           =   1425
-         End
-         Begin VB.Label lblSoundsTab 
-            Caption         =   "Open a file explorer at the sounds folder location."
-            Height          =   465
-            Index           =   6
-            Left            =   1830
-            TabIndex        =   54
-            Tag             =   "lblSoundsLocationDesc"
-            Top             =   3780
-            Width           =   2895
-         End
-      End
-   End
-   Begin VB.Frame fraAbout 
-      Caption         =   "About"
-      Height          =   9210
-      Left            =   120
-      TabIndex        =   298
-      Top             =   1110
-      Visible         =   0   'False
-      Width           =   10590
-      Begin VB.Frame fraScrollbarCoverII 
-         BorderStyle     =   0  'None
-         Height          =   6675
-         Left            =   10290
-         TabIndex        =   316
-         Top             =   2235
-         Width           =   240
-      End
-      Begin VB.Frame fraScrollbarCover 
-         BorderStyle     =   0  'None
-         Height          =   6675
-         Left            =   9810
-         TabIndex        =   315
-         Top             =   2130
-         Width           =   735
-      End
-      Begin VB.CommandButton btnDonate 
-         Caption         =   "&Donate"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Left            =   8865
-         Style           =   1  'Graphical
-         TabIndex        =   303
-         ToolTipText     =   "Opens a browser window and sends you to our donate a coffee page on Kofi!"
-         Top             =   1485
-         Width           =   1470
-      End
-      Begin VB.CommandButton btnUpdate 
-         Caption         =   "&Update"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Left            =   8865
-         Style           =   1  'Graphical
-         TabIndex        =   302
-         ToolTipText     =   "Here you can visit the update location where you can download new versions of the programs."
-         Top             =   360
-         Width           =   1470
-      End
-      Begin VB.CommandButton btnFacebook 
-         Caption         =   "&Facebook"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Left            =   8865
-         Style           =   1  'Graphical
-         TabIndex        =   301
-         ToolTipText     =   "This will link you to the our Steampunk/Dieselpunk program users Group."
-         Top             =   735
-         Width           =   1470
-      End
-      Begin VB.CommandButton btnAboutDebugInfo 
-         Caption         =   "Debug &Info."
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Left            =   8865
-         Style           =   1  'Graphical
-         TabIndex        =   300
-         ToolTipText     =   "This gives access to the debugging tool"
-         Top             =   1110
-         Width           =   1470
-      End
-      Begin VB.TextBox txtAboutText 
-         Appearance      =   0  'Flat
-         BackColor       =   &H8000000F&
-         BorderStyle     =   0  'None
-         Height          =   6585
-         Left            =   345
-         MultiLine       =   -1  'True
-         ScrollBars      =   2  'Vertical
-         TabIndex        =   299
-         Text            =   "Form2.frx":5EB1
-         Top             =   2205
-         Width           =   9945
-      End
-      Begin VB.Label Label17 
-         Caption         =   "Windows XP, Vista, 7, 8, 10  && 11 + ReactOS"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   225
-         Left            =   4005
-         TabIndex        =   314
-         Top             =   1560
-         Width           =   3735
-      End
-      Begin VB.Label lblAbout 
-         Caption         =   "Target"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   225
-         Index           =   4
-         Left            =   2355
-         TabIndex        =   313
-         Top             =   1560
-         Width           =   1470
-      End
-      Begin VB.Label lblAbout 
-         Caption         =   "Current Developer"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   225
-         Index           =   3
-         Left            =   2355
-         TabIndex        =   312
-         Top             =   1215
-         Width           =   1470
-      End
-      Begin VB.Label lblAbout 
-         Caption         =   "Dean Beedell © 2023"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   225
-         Index           =   6
-         Left            =   4020
-         TabIndex        =   311
-         Top             =   1215
-         Width           =   2175
-      End
-      Begin VB.Label lblAbout 
-         Caption         =   "Version"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   225
-         Index           =   1
-         Left            =   2370
-         TabIndex        =   310
-         Top             =   495
-         Width           =   795
-      End
-      Begin VB.Label lblAbout 
-         Caption         =   "Originator"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   225
-         Index           =   2
-         Left            =   2355
-         TabIndex        =   309
-         Top             =   855
-         Width           =   795
-      End
-      Begin VB.Label lblAbout 
-         Caption         =   "Dean Beedell © 2023"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   225
-         Index           =   5
-         Left            =   4020
-         TabIndex        =   308
-         Top             =   855
-         Width           =   2175
-      End
-      Begin VB.Label lblMinorVersion 
-         BackStyle       =   0  'Transparent
-         Caption         =   "0"
-         BeginProperty Font 
-            Name            =   "Centurion Light SF"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   240
-         Left            =   4395
-         TabIndex        =   307
-         Top             =   510
-         Width           =   225
-      End
-      Begin VB.Label lblMajorVersion 
-         BackStyle       =   0  'Transparent
-         Caption         =   "0"
-         BeginProperty Font 
-            Name            =   "Centurion Light SF"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   240
-         Left            =   4035
-         TabIndex        =   306
-         Top             =   510
-         Width           =   225
-      End
-      Begin VB.Label lblRevisionNum 
-         BackStyle       =   0  'Transparent
-         Caption         =   "0"
-         BeginProperty Font 
-            Name            =   "Centurion Light SF"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   240
-         Left            =   4755
-         TabIndex        =   305
-         Top             =   510
-         Width           =   525
-      End
-      Begin VB.Label lblDotDot 
-         BackStyle       =   0  'Transparent
-         Caption         =   ".        ."
-         BeginProperty Font 
-            Name            =   "Centurion Light SF"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   225
-         Left            =   4200
-         TabIndex        =   304
-         Top             =   510
-         Width           =   495
-      End
-   End
    Begin VB.Menu prefsMnuPopmenu 
       Caption         =   "The main menu"
       Visible         =   0   'False
@@ -3533,6 +3520,12 @@ Private Sub fraDevelopmentInner_MouseDown(Button As Integer, Shift As Integer, X
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+End Sub
+
+
+
+Private Sub fraGeneralButton_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    Call picButtonMouseUpEvent("general", picGeneral, fraGeneral, fraGeneralButton)
 End Sub
 
 Private Sub fraScrollbarCoverII_DragDrop(Source As Control, X As Single, Y As Single)

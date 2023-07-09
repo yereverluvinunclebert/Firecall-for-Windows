@@ -349,18 +349,20 @@
 ' create the correct text for the about - DONE
 ' scrollbox cover from PzEarth - DONE
 ' complete the credits in the about.txt - DONE
+
 ' closure of all open forms, check and test - DONE
+' sizing of prefs form taking into account Win10+ borders - as per PzEarth - DONE
+' paste & go right click own menu from the output text - DONE
+' update help file with broken functionality or not yet implemented - DONE
 
 ' Tasks underway now
 ' ==================
 
-
 ' sizing of main form taking into account Win10+ borders - as per PzEarth
-' sizing of prefs form taking into account Win10+ borders - as per PzEarth
+
 ' help file - update credits
 ' credit area - update credits
 ' create CHM file and link that.
-' paste & go right click own menu from the output text 
 
 ' HIGH PRIORITY
 ' =============
@@ -387,6 +389,9 @@
 
 ' MED. PRIORITY
 ' =============
+
+' instead of separate menu options that we hide or show dependant upon whether combined or split
+' we should have a separate menu for each - dimbo.
 
 ' menu option to edit a line in the combined box - needs to know whether that line
 '      is part of the output, analyse the header?

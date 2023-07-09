@@ -1731,6 +1731,16 @@ Begin VB.Form FireCallMain
          Caption         =   "Text 10"
       End
    End
+   Begin VB.Menu mnuTextInputPopmenu 
+      Caption         =   "The Input Box Menu"
+      Visible         =   0   'False
+      Begin VB.Menu mnuTextInputPasteAndGo 
+         Caption         =   "Paste && Go"
+      End
+      Begin VB.Menu mnuTextInputPasteLine 
+         Caption         =   "Paste From Clipboard (Ctrl+V)"
+      End
+   End
 End
 Attribute VB_Name = "FireCallMain"
 Attribute VB_GlobalNameSpace = False
@@ -1846,7 +1856,7 @@ Option Explicit
 
 '------------------------------------------------------ STARTS
 ' for SetWindowPos z-ordering
-Private Declare Function SetWindowPos Lib "user32" (ByVal hwnd As Long, ByVal hWndInsertAfter As Long, ByVal x As Long, ByVal y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
+Private Declare Function SetWindowPos Lib "user32" (ByVal hwnd As Long, ByVal hWndInsertAfter As Long, ByVal X As Long, ByVal Y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
 
 Private Const HWND_TOP As Long = 0 ' for SetWindowPos z-ordering
 Private Const HWND_TOPMOST As Long = -1
@@ -2876,7 +2886,7 @@ Private Sub lbxCombinedTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
     CTRL_1 = False
 End Sub
 ' show the alternative right click menu and set the bulbs to dull
-Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         mnuLBOpenSharedInputFile.Visible = True
         mnuLBOpenSharedOutputFile.Visible = True
@@ -2916,7 +2926,7 @@ Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x
     
 End Sub
 
-Private Sub lbxCombinedTextArea_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lbxCombinedTextArea_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip lbxCombinedTextArea.hwnd, "The combined chat box contains both chat partner's texts and messages. This is both the input and output files' contents combined and then sorted.", _
                   TTIconInfo, "Help on the Combined Chat Box", , , , True
 End Sub
@@ -2957,7 +2967,7 @@ Private Sub lbxInputTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
     CTRL_1 = False
 End Sub
 
-Private Sub lbxInputTextArea_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lbxInputTextArea_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip lbxInputTextArea.hwnd, "The top chat box contains your chat partner's texts and messages. This is known as the input box displaying the contents of the shared input file.", _
                   TTIconInfo, "Help on the Upper Chat Box", , , , True
 End Sub
@@ -2994,7 +3004,7 @@ Private Sub lbxOutputTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
     CTRL_1 = False
 End Sub
 
-Private Sub lbxOutputTextArea_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lbxOutputTextArea_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip lbxOutputTextArea.hwnd, "The bottom chat contains your own texts and messages. This is the output box displaying the contents of the shared output file. Beneath your chat box is the text box where you type your messages, pressing the SEND button to dispatch the text.", _
                   TTIconInfo, "Help on the Lower Chat Box", , , , True
 End Sub
@@ -3667,17 +3677,17 @@ Private Sub lbxCombinedTextArea_Click()
     Call lbxTextAreaClick(lbxCombinedTextArea)
 End Sub
 'captures a drag and drop to any of the listBoxes
-Private Sub lbxInputTextArea_OLEDragDrop(Data As DataObject, Effect As Long, ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
-    Call lbxOutputTextArea_OLEDragDrop(Data, Effect, Button, Shift, x, y)
+Private Sub lbxInputTextArea_OLEDragDrop(Data As DataObject, Effect As Long, ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
+    Call lbxOutputTextArea_OLEDragDrop(Data, Effect, Button, Shift, X, Y)
 End Sub
 
 'captures a drag and drop to any of the listBoxes
-Private Sub lbxCombinedTextArea_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integer, Shift As Integer, x As Single, y As Single)
-    Call lbxOutputTextArea_OLEDragDrop(Data, Effect, Button, Shift, x, y)
+Private Sub lbxCombinedTextArea_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    Call lbxOutputTextArea_OLEDragDrop(Data, Effect, Button, Shift, X, Y)
 End Sub
 
 'captures a drag and drop to any of the output listBoxes
-Private Sub lbxOutputTextArea_OLEDragDrop(Data As DataObject, Effect As Long, ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub lbxOutputTextArea_OLEDragDrop(Data As DataObject, Effect As Long, ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Dim iconTitle As String
     Dim fileNameToCopy As String
     Dim answer As VbMsgBoxResult
@@ -3795,7 +3805,7 @@ End Sub
 ' make the Emoji lid disappear or show the right click menu
 
 ' show the right click menu
-Private Sub cmbEmojiSelection_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub cmbEmojiSelection_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         Me.PopupMenu mainMnuPopmenu, vbPopupMenuRightButton
     End If
@@ -4056,7 +4066,7 @@ getToolSettingsFile_Error:
 End Sub
 
 ' show the right click menu
-Private Sub Form_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub Form_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
 
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -4068,7 +4078,7 @@ End Sub
 
 
 ' show the alternative right click menu and set the bulbs to dull
-Private Sub lbxInputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub lbxInputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         mnuLBOpenSharedInputFile.Visible = True
         mnuLBOpenSharedOutputFile.Visible = False
@@ -4105,7 +4115,7 @@ End Sub
 
 
 ' show the alternative right click menu
-Private Sub lbxOutputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub lbxOutputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Dim theText As String
     If Button = 2 Then
         If lbxOutputTextArea.SelCount = 1 Then
@@ -4364,7 +4374,7 @@ Private Sub pausePrinterTimer_Timer()
 End Sub
 
 ' make the Emoji lid disappear or show the right click menu
-Private Sub picBtnLidCatch_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub picBtnLidCatch_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
@@ -4382,7 +4392,7 @@ Private Sub picBtnLidCatch_MouseDown(ByRef Button As Integer, ByRef Shift As Int
 
 End Sub
 
-Private Sub picBtnLidCatch_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picBtnLidCatch_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picBtnLidCatch.hwnd, "Click on pull catch to remove the cover and display the Emoji Panel below.", _
                   TTIconInfo, "Help on Opening the Lid", , , , True
 End Sub
@@ -4436,7 +4446,7 @@ Private Sub picBtnPlaySound_Click()
 
 End Sub
 
-Private Sub picBtnPlaySound_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picBtnPlaySound_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picBtnPlaySound.hwnd, "This button is generally hidden but when you have selected a recording to play, the green button will appear. When playing, the green lamp will light up brightly but will change from bright green to dull when it has finished.", _
                   TTIconInfo, "Help on the Buzzer Lamp", , , , True
@@ -4457,17 +4467,17 @@ End Sub
 
 
 
-Private Sub picBuzzerDullLamp_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picBuzzerDullLamp_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picBuzzerDullLamp.hwnd, "Just above the Clock or the Fire Call button is the buzzer lamp. If your chat partner has buzzed you during your absence, meaning that you did not hear the buzz, the buzz light will stay lit to let you know you've been buzzed. A click on the buzz lamp will extinguish the lamp to its dull state", _
                   TTIconInfo, "Help on the Buzzer Lamp", , , , True
 End Sub
-Private Sub picBuzzerBrightLamp_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picBuzzerBrightLamp_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picBuzzerBrightLamp.hwnd, "Just above the Clock or the Fire Call button is the buzzer lamp. If your chat partner has buzzed you during your absence, meaning that you did not hear the buzz, the buzz light will stay lit to let you know you've been buzzed. A click on the buzz lamp will extinguish the lamp to its dull state", _
                   TTIconInfo, "Help on the Buzzer Lamp", , , , True
 End Sub
 
 ' show the right click menu on the clock
-Private Sub picClock_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub picClock_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -4475,7 +4485,7 @@ Private Sub picClock_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, 
     End If
 End Sub
 
-Private Sub picClock_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picClock_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picClock.hwnd, "The clock can be replaced by the buzzer button, just click the screw top left.", _
                   TTIconInfo, "Help on the Clock", , , , True
 
@@ -4513,7 +4523,7 @@ Private Sub picClock_DblClick()
 End Sub
 
 
-Private Sub picClockSwitch_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picClockSwitch_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picClockSwitch.hwnd, "Pressing the top left screw on the Fire Call button will cause the button to flip to the real-time clock display. A further press on the screw will revert back to the fire call button, ready to buzz!", _
                   TTIconInfo, "Help on Toggling Clock and Buzzer", , , , True
 End Sub
@@ -4553,7 +4563,7 @@ Private Sub picEmoji_Click()
     Call clickOnPicEmoji
 End Sub
 
-Private Sub picEmoji_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picEmoji_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If FCWEnableBalloonTooltips = "1" Then CreateToolTip picEmoji.hwnd, "Clicking on the strip of paper (just appearing at the top of the Emoji Window) will allow you to see your chat partner's current Emoji state. A small animation will run when the paper is first clicked upon. Another click on the displayed print out will shred it.", _
                   TTIconInfo, "Help on the Partner's Emoji State", , , , True
 
@@ -4591,7 +4601,7 @@ Private Sub picEmojiKnobLeft_Click()
     
 End Sub
 
-Private Sub picEmojiKnobLeft_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picEmojiKnobLeft_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picEmojiKnobLeft.hwnd, "The left hand button allows you to select other emojis for viewing on the telly screen. Note that as you select each Emoji, the Emoji drop-down at the top of the program will change as well.", _
                   TTIconInfo, "Help on the Emoji Selection Controls", , , , True
 End Sub
@@ -4629,13 +4639,13 @@ End Sub
 
 
 
-Private Sub picEmojiKnobRight_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picEmojiKnobRight_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picEmojiKnobRight.hwnd, "The right hand button allows you to select other emojis for viewing on the telly screen. Note that as you select each Emoji, the Emoji drop-down at the top of the program will change as well.", _
                   TTIconInfo, "Help on the Emoji Selection Controls", , , , True
 
 End Sub
 
-Private Sub picEmojiSmall_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picEmojiSmall_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picEmojiSmall.hwnd, "The Emoji selection Drop Down. Select an Emoji and press SEND. This will send the emoji to your chat partner. If you open the Emoji panel, bottom right you can see your current Emoji state.", _
                   TTIconInfo, "Help on Emojis", , , , True
 End Sub
@@ -4656,7 +4666,7 @@ Private Sub picFsoLid_Click()
     
 End Sub
 
-Private Sub picImageButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picImageButton_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picImageButton.hwnd, "This button top right will close any image or icon that is currently being displayed .", _
                   TTIconInfo, "Help on the Image Control", , , , True
 
@@ -4719,7 +4729,7 @@ End Sub
 
 
 
-Private Sub picImagePrintOut_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picImagePrintOut_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -4727,7 +4737,7 @@ Private Sub picImagePrintOut_MouseDown(Button As Integer, Shift As Integer, x As
     End If
 End Sub
 
-Private Sub picImagePrintOut_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picImagePrintOut_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If binaryFlag = True Then
         
             CreateToolTip picImagePrintOut.hwnd, "This is an executable program, double clicking on it will run it straight away, this could be dangerous", _
@@ -4815,7 +4825,7 @@ Private Sub picImageButton_Click()
 End Sub
 
 ' right click popup menu for the lid background
-Private Sub picLidBackground_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub picLidBackground_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -4828,7 +4838,7 @@ End Sub
 
 
 
-Private Sub picLidBackground_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picLidBackground_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picLidBackground.hwnd, "Click the control panel background to close the lid on the Emoji Control Panel.", _
                   TTIconInfo, "Help on the Emoji Control Panel Background", , , , True
 End Sub
@@ -4845,7 +4855,7 @@ Private Sub picLidOpen_Click()
     picBtnLidShadow.Visible = True
 End Sub
 
-Private Sub picLidOpen_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picLidOpen_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If FCWEnableBalloonTooltips = "1" Then CreateToolTip picLidOpen.hwnd, "Click upon the lid to close the Emoji Control Panel and view the Audio Recording Tools.", _
                   TTIconInfo, "Help on Closing the Lid", , , , True
 End Sub
@@ -4854,7 +4864,7 @@ Private Sub picOutputEmoji_Click()
     Me.Refresh
 End Sub
 
-Private Sub picOutputEmoji_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picOutputEmoji_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If FCWEnableBalloonTooltips = "1" Then CreateToolTip picOutputEmoji.hwnd, "The Emoji Control Panel shows your current emoji state on the television screen.", _
                   TTIconInfo, "Help on the Partner's Emoji State", , , , True
 End Sub
@@ -4863,11 +4873,11 @@ Private Sub picPlayLampDull_Click()
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
 End Sub
 
-Private Sub picPlayLampDull_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picPlayLampDull_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picPlayLampDull.hwnd, "When you are playing a recording the lamp will light up brightly but will change from bright green to dull when it has finished.", _
                   TTIconInfo, "Help on the Recording Lamp", , , , True
 End Sub
-Private Sub picPlayLampBright_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picPlayLampBright_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picPlayLampBright.hwnd, "When you are playing a recording the lamp will light up brightly but will change from bright green to dull when it has finished.", _
                   TTIconInfo, "Help on the Recording Lamp", , , , True
 End Sub
@@ -4876,19 +4886,19 @@ Private Sub picRecordLampBright_Click()
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
 End Sub
 
-Private Sub picRecordLampBright_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picRecordLampBright_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picRecordLampBright.hwnd, "The small red lamp on the speaker panel will light up brightly when recording a message for your chat partner. The maximum length is 65 seconds.", _
                   TTIconInfo, "Help on the Recording Lamp", , , , True
   
 End Sub
 
-Private Sub picRecordLampDull_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picRecordLampDull_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picRecordLampDull.hwnd, "The small red lamp on the speaker panel will light up brightly when recording a message for your chat partner. The maximum length is 65 seconds.", _
                   TTIconInfo, "Help on the Recording Lamp", , , , True
 End Sub
 
 ' right click popup menu for the lid background
-Private Sub picRedButton_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub picRedButton_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Dim fullPath As String
     
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
@@ -4914,14 +4924,14 @@ Private Sub lampTimer_Timer()
     lampTimer.Enabled = False
 End Sub
 
-Private Sub picRedButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picRedButton_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picRedButton.hwnd, "This big red button, if kept pressed for 5 seconds will buzz your chat partner to get his attention. You will also hear the buzzer sound at your end to confirm the operation.", _
                   TTIconInfo, "Help on the Clock", , , , True
 End Sub
 
 
 'Restore the normal image of the big red button
-Private Sub picRedButton_MouseUp(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub picRedButton_MouseUp(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
 
     Dim fullPath As String
     
@@ -4938,7 +4948,7 @@ Private Sub picRedButton_MouseUp(ByRef Button As Integer, ByRef Shift As Integer
 End Sub
 
 
-Private Sub picSideBar_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picSideBar_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -4960,7 +4970,7 @@ Private Sub picSpeakerGrille_Click()
     End If
 End Sub
 
-Private Sub picSpeakerGrille_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picSpeakerGrille_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If FCWEnableBalloonTooltips = "1" Then CreateToolTip picSpeakerGrille.hwnd, "Clicking on the speaker grille will toggle the sound partial mute for the whole application, changing them from loud to quiet and back again as required.", _
                   TTIconInfo, "Help on the Sound Mute", , , , True
 End Sub
@@ -4977,7 +4987,7 @@ Private Sub picSpeakerGrilleOpen_Click()
 End Sub
 
 
-Private Sub picSpeakerGrilleOpen_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picSpeakerGrilleOpen_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If FCWEnableBalloonTooltips = "1" Then CreateToolTip picSpeakerGrilleOpen.hwnd, "Clicking on the speaker grille will toggle the sound partial mute for the whole application, changing them from loud to quiet and back again as required.", _
                   TTIconInfo, "Help on the Sound Mute", , , , True
 End Sub
@@ -5000,28 +5010,28 @@ Private Sub inputScrollBarTimer_Timer()
     Call ShowScrollBar(lbxInputTextArea.hwnd, SB_VERT, False)  ' hides the vertical scrollbar
 End Sub
 
-Private Sub picTextChangeBright_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picTextChangeBright_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If FCWEnableBalloonTooltips = "1" Then CreateToolTip picTextChangeBright.hwnd, "When the right lamp is lit continuously it means that you have an update from your chat partner in chat. It can be extinguished by clicking upon your partner's chat box.", _
                   TTIconInfo, "Help on the update Lamp", , , , True
 End Sub
 
-Private Sub picTextChangeDull_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picTextChangeDull_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If FCWEnableBalloonTooltips = "1" Then CreateToolTip picTextChangeDull.hwnd, "When the right lamp is lit continuously it means that you have an update from your chat partner in chat. It can be extinguished by clicking upon your partner's chat box.", _
                   TTIconInfo, "Help on the update Lamp", , , , True
 End Sub
 
 
 
-Private Sub picThermometer_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picThermometer_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If FCWEnableBalloonTooltips = "1" Then CreateToolTip picThermometer.hwnd, "The alcohol level indicates the seconds left until the recording time is reached, a maximum of 65 seconds. When playing it indicates the track length. If you hover the cursor over the thermometer when it is playing or recording, a single line tooltip will also display giving a continuous status.", _
                   TTIconInfo, "Help on Displaying Recording Position", , , , True
 End Sub
 
-Private Sub picTimerLampBright_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picTimerLampBright_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If FCWEnableBalloonTooltips = "1" Then CreateToolTip picTimerLampBright.hwnd, "The polling lamp will regularly glow for 5 seconds to indicate that the tool is successfully polling the shared data area. It does this according to an interval set in the preferences.", _
                   TTIconInfo, "Help on Polling", , , , True
 End Sub
-Private Sub picTimerLampDull_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picTimerLampDull_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
         If FCWEnableBalloonTooltips = "1" Then CreateToolTip picTimerLampDull.hwnd, "The polling lamp will regularly glow for 5 seconds to indicate that the tool is successfully polling the shared data area. It does this according to an interval set in the preferences. The polling lamp also has another function, you may double-click on it to refresh both chat windows, this will also initiate a poll of the input file", _
                   TTIconInfo, "Help on Polling", , , , True
 End Sub
@@ -5357,24 +5367,33 @@ Private Sub btnPing_Click()
     txtTextEntry.SetFocus
 End Sub
 
-Private Sub txtTextEntry_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub txtTextEntry_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = vbRightButton Then
-        txtTextEntry.Enabled = False
+        txtTextEntry.Enabled = False ' this allows the right click menu to supercede the rubbish right click text box IME menu
         txtTextEntry.Enabled = True
         
         If Clipboard.GetText <> "" Then
-            mnuOutputPasteLine.Visible = True
-            mnuOutputPasteAndGo.Visible = True
+            'mnuTextInputPasteAndGo.Visible = True
+            Me.PopupMenu mnuTextInputPopmenu, vbPopupMenuRightButton
+            'mnuTextInputPasteAndGo.Visible = True
         Else
-            mnuOutputPasteAndGo.Visible = False
-            mnuOutputPasteLine.Visible = False
+            'mnuOutputPasteAndGo.Visible = False
+            'mnuOutputPasteLine.Visible = False
         End If
         
-        Me.PopupMenu mainMnuPopmenu, vbPopupMenuRightButton
+        
     End If
 End Sub
 
-Private Sub txtTextEntry_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub mnuTextInputPasteAndGo_click()
+    Call pasteAndGoHandler
+End Sub
+
+Private Sub mnuTextInputPasteLine_click()
+    Call mnuOutputPasteLine_click_event
+End Sub
+
+Private Sub txtTextEntry_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip txtTextEntry.hwnd, "This is the text box where you type your messages, pressing the SEND button to dispatch the text.", _
                   TTIconInfo, "Help on Text entry", , , , True
 End Sub
@@ -5731,9 +5750,13 @@ End Sub
 
 
 Private Sub mnuCombinedPasteLine_click()
-    Call mnuOutputPasteLine_click
+    Call mnuOutputPasteLine_click_event
 End Sub
 Private Sub mnuOutputPasteLine_click()
+    Call mnuOutputPasteLine_click_event
+End Sub
+
+Private Sub mnuOutputPasteLine_click_event()
     DoEvents
     txtTextEntry.Text = Clipboard.GetText
     txtTextEntry.SetFocus ' set focus back to the text entry box
@@ -5748,7 +5771,6 @@ Private Sub mnuOutputPasteAndGo_click()
 End Sub
 
 Private Sub pasteAndGoHandler()
-    'DoEvents
     
     Dim clipboardRetries As Integer
     clipboardRetries = 0
@@ -6257,7 +6279,7 @@ End Sub
 'the following routines are only required to handle the menu generation
 
 ' right click popup menu for the close button
-Private Sub btnClose_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnClose_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -6265,7 +6287,7 @@ Private Sub btnClose_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, 
     End If
 End Sub
 ' right click popup menu for the SEND button
-Private Sub btnEmojiSet_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnEmojiSet_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -6274,7 +6296,7 @@ Private Sub btnEmojiSet_MouseDown(ByRef Button As Integer, ByRef Shift As Intege
 End Sub
 
 ' right click popup menu for the attach button
-Private Sub btnPicAttach_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicAttach_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     btnPicAttach.Left = btnPicAttach.Left + 10
     btnPicAttach.Top = btnPicAttach.Top + 10
     If Button = 2 Then
@@ -6286,7 +6308,7 @@ End Sub
 
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicBusy_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicBusy_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Call readStringsIntoTextMenu(9)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -6296,7 +6318,7 @@ Private Sub btnPicBusy_MouseDown(ByRef Button As Integer, ByRef Shift As Integer
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicCod_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicCod_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Call readStringsIntoTextMenu(10)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -6306,7 +6328,7 @@ Private Sub btnPicCod_MouseDown(ByRef Button As Integer, ByRef Shift As Integer,
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicConfig_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicConfig_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     btnPicConfig.Left = btnPicConfig.Left + 10
     btnPicConfig.Top = btnPicConfig.Top + 10
             
@@ -6320,7 +6342,7 @@ Private Sub btnPicConfig_MouseDown(ByRef Button As Integer, ByRef Shift As Integ
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicGdn_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicGdn_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Call readStringsIntoTextMenu(8)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -6330,7 +6352,7 @@ Private Sub btnPicGdn_MouseDown(ByRef Button As Integer, ByRef Shift As Integer,
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicHelp_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicHelp_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     btnPicHelp.Left = btnPicHelp.Left + 10
     btnPicHelp.Top = btnPicHelp.Top + 10
     If Button = 2 Then
@@ -6341,7 +6363,7 @@ Private Sub btnPicHelp_MouseDown(ByRef Button As Integer, ByRef Shift As Integer
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicMorn_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicMorn_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Call readStringsIntoTextMenu(4)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -6351,7 +6373,7 @@ Private Sub btnPicMorn_MouseDown(ByRef Button As Integer, ByRef Shift As Integer
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicNews_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicNews_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Call readStringsIntoTextMenu(3)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -6361,7 +6383,7 @@ Private Sub btnPicNews_MouseDown(ByRef Button As Integer, ByRef Shift As Integer
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicOut_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicOut_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Call readStringsIntoTextMenu(11)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -6371,7 +6393,7 @@ Private Sub btnPicOut_MouseDown(ByRef Button As Integer, ByRef Shift As Integer,
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicPrg_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicPrg_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Call readStringsIntoTextMenu(7)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -6381,7 +6403,7 @@ Private Sub btnPicPrg_MouseDown(ByRef Button As Integer, ByRef Shift As Integer,
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicTtfn_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicTtfn_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     
     Call readStringsIntoTextMenu(1)
 
@@ -6433,7 +6455,7 @@ End Sub
     
     
 ' right click popup menu for the small buttons at the base
-Private Sub btnPicWell_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicWell_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Call readStringsIntoTextMenu(2)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -6442,7 +6464,7 @@ Private Sub btnPicWell_MouseDown(ByRef Button As Integer, ByRef Shift As Integer
     End If
 End Sub
 
-Private Sub btnPicWot_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPicWot_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Call readStringsIntoTextMenu(5)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -6452,7 +6474,7 @@ Private Sub btnPicWot_MouseDown(ByRef Button As Integer, ByRef Shift As Integer,
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub BtnPicWth_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub BtnPicWth_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     Call readStringsIntoTextMenu(6)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
@@ -6462,7 +6484,7 @@ Private Sub BtnPicWth_MouseDown(ByRef Button As Integer, ByRef Shift As Integer,
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnSendText_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnSendText_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -6471,7 +6493,7 @@ Private Sub btnSendText_MouseDown(ByRef Button As Integer, ByRef Shift As Intege
 End Sub
 
 ' right click popup menu for the small buttons at the base
-Private Sub btnPing_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+Private Sub btnPing_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
@@ -6830,22 +6852,22 @@ Private Sub btnStop_Click()
 End Sub
 
 
-Private Sub btnClose_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnClose_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnClose.hwnd, "This button will close the utility and all associated windows. It has the same functionality as clicking the 'x' button, top right.", _
                   TTIconInfo, "Help on Closing", , , , True
 End Sub
 
-Private Sub btnCloseIt_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnCloseIt_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnCloseIt.hwnd, "This button will close the utility and all associated windows. It has the same functionality as clicking the 'Close' button, bottom right.", _
                   TTIconInfo, "Help on Closing", , , , True
 End Sub
 
-Private Sub btnEmojiSet_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnEmojiSet_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnEmojiSet.hwnd, "The Emoji selection Drop Down. Select an Emoji and press SEND. This will send the emoji to your chat partner. If you open the Emoji panel, bottom right you can see your current Emoji state.", _
                   TTIconInfo, "Help on Emojis", , , , True
 End Sub
 
-Private Sub btnLid_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnLid_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     
      If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
@@ -6859,109 +6881,109 @@ Private Sub btnLid_MouseDown(Button As Integer, Shift As Integer, x As Single, y
     btnLid.Top = btnLid.Top + 10
 End Sub
 
-Private Sub btnLid_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnLid_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnLid.hwnd, "The speaker section has three buttons, one to record speech, one to play speech and the other to halt any current action. The small red lamp on the speaker panel will light up brightly when recording a message for your chat partner.", _
                   TTIconInfo, "Help on the Speaker Section", , , , True
 End Sub
 
-Private Sub btnLid_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnLid_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
     btnLid.Left = btnLid.Left - 10
     btnLid.Top = btnLid.Top - 10
 End Sub
 
-Private Sub btnMinimise_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnMinimise_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnMinimise.hwnd, "This button replaces the standard Window's minimise button but instead causes the program to fade to nothing. The program window then fades away and is replaced by an icon that sits on the desktop. You can place that icon anywhere you like on the desktop and it will remember its position when the program is next restarted.", _
                   TTIconInfo, "Help on Minimisation", , , , True
 End Sub
 
-Private Sub btnPicAttach_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicAttach_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicAttach.hwnd, "This allows you to select a single file to send to your chat partner. This will open a file selection box. Select a file, press OK and it will be sent. It will be copied to the FCW exchange folder. The chat partner will receive a notification.", _
                   TTIconInfo, "Help on Attaching", , , , True
 End Sub
 
-Private Sub btnPicBusy_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicBusy_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicBusy.hwnd, "Use this button to send an statement as to how busy you are in general.", _
                   TTIconInfo, "Help on the Busy Button", , , , True
 End Sub
 
-Private Sub btnPicCod_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicCod_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicCod.hwnd, "Use this button to send an statement as to how busy you are coding day and night...", _
                   TTIconInfo, "Help on the Coding Button", , , , True
 End Sub
 
-Private Sub btnPicConfig_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicConfig_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicConfig.hwnd, "The config button opens the Preferences Utility where you can change the program settings.", _
                   TTIconInfo, "Help on Configuration", , , , True
 End Sub
 
-Private Sub btnPicGdn_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicGdn_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicGdn.hwnd, "Use this button to send an statement as to how busy you are with your gardening tasks!", _
                   TTIconInfo, "Help on the TTFN Button", , , , True
 End Sub
 
-Private Sub btnPicHelp_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicHelp_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicHelp.hwnd, " This button will display the HTML help file. It will open the browser you have specified as your default browser.", _
                   TTIconInfo, "Help Button", , , , True
 End Sub
 
-Private Sub btnPicMorn_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicMorn_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicMorn.hwnd, "Use this button to send a Good morning.", _
                   TTIconInfo, "Help on the Morn Button", , , , True
 End Sub
 
-Private Sub btnPicNews_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicNews_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicNews.hwnd, "Use this button to send an inquiry as to the general news.", _
                   TTIconInfo, "Help on the News Button", , , , True
                   
 End Sub
 
-Private Sub btnPicOut_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicOut_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicOut.hwnd, "Use this button to send an statement as to your impending absence", _
                   TTIconInfo, "Help on the Out Button", , , , True
 End Sub
 
-Private Sub btnPicPrg_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicPrg_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicPrg.hwnd, "Use this button to send a statement as to how busy you currently are programming!", _
                   TTIconInfo, "Help on the TTFN Button", , , , True
 End Sub
 
-Private Sub btnPicTtfn_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicTtfn_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicTtfn.hwnd, "Use this button to send a Goodbye message to your chat partner.", _
                   TTIconInfo, "Help on the TTFN Button", , , , True
 End Sub
 
-Private Sub btnPicWell_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicWell_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicWell.hwnd, "Use this button to send an inquiry as to health of your chat partner.", _
                   TTIconInfo, "Help on the Well Button", , , , True
 End Sub
 
-Private Sub btnPicWot_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicWot_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPicWot.hwnd, "Use this button to send an inquiry as to what is happening.", _
                   TTIconInfo, "Help on the WOT Button", , , , True
 End Sub
 
-Private Sub BtnPicWth_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub BtnPicWth_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip BtnPicWth.hwnd, "Use this button to send an inquiry as to the weather.", _
                   TTIconInfo, "Help on the WTH Button", , , , True
 End Sub
 
-Private Sub btnPing_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPing_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnPing.hwnd, "If you click here then you will send a PING to your chat partner. Your partner's client will respond with a PING response giving date and time of the response.", _
                   TTIconInfo, "Help on the Ping Button", , , , True
 End Sub
 
-Private Sub btnSendText_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnSendText_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnSendText.hwnd, "Pressing the SEND button dispatches the text in the text box, a press on the return key will do the same.", _
                   TTIconInfo, "Help on the SEND Button", , , , True
 End Sub
 
-Private Sub btnStartRecord_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnStartRecord_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnStartRecord.hwnd, "The record button. The maximum length is 65 seconds. Be aware that if you utilise this facility a lot you will fill up your dropbox allocation rather quickly! Best to be brief with your messages and use this function infrequently...", _
                   TTIconInfo, "Help on Recording", , , , True
 End Sub
 
-Private Sub btnStop_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnStop_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip btnStop.hwnd, "The stop button will halt any current action.", _
                   TTIconInfo, "Help on the Stop Button", , , , True
 End Sub
@@ -7621,17 +7643,17 @@ Private Sub emailIconTimer_Timer()
     picWEmailIcon.ToolTipText = "An Email task is underway"
 End Sub
 
-Private Sub btnPicAttach_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicAttach_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
     btnPicAttach.Left = btnPicAttach.Left - 10
     btnPicAttach.Top = btnPicAttach.Top - 10
 End Sub
 
-Private Sub btnPicConfig_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicConfig_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
     btnPicConfig.Left = btnPicConfig.Left - 10
     btnPicConfig.Top = btnPicConfig.Top - 10
 End Sub
 
-Private Sub btnPicHelp_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub btnPicHelp_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
     btnPicHelp.Left = btnPicHelp.Left - 10
     btnPicHelp.Top = btnPicHelp.Top - 10
 End Sub
