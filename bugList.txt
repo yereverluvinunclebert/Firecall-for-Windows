@@ -367,7 +367,35 @@
 ' HIGH PRIORITY
 ' =============
 '
-'     build a setup2go file for FCW
+' instead of separate menu options that we hide or show dependant upon whether combined or split
+' we should have a separate menu for each - dimbo.
+
+' menu option to edit a line in the combined box - needs to know whether that line
+'      is part of the output, analyse the header?
+'      for the moment remove it from the menu options? YES
+' menu option to delete a line - WIP
+'      added line, now need to add code to rewrite the file
+
+' menu option to edit a line - WIP
+'      added line, now need to add code to rewrite the file
+
+'
+' settings.ini needs to be copied over from the users area to the sample item in the programs folder
+' default settings.ini to be standardised for new users - WIP
+'   the input and output files need to be directed to the initial text files so that the listboxes are not blank
+
+
+' modify the default top and tail to use debugLOG instead of msgbox for the duration of this project.
+
+' add top and tail to all functions plus descriptions WIP
+
+' document all functions - MODULE2 - monitor code that is largely unused
+' document all functions - MODULE3 - email module that is currently unused at the moment
+
+' MED. PRIORITY
+' =============
+
+'     build a setup2go file for FCW - WIP
 '     create a build process for FCW and document
 '     create an installer and test.
 '     test that a FCW built on a 64bit system does run without flaw on a 32 bit Win7 system
@@ -380,30 +408,9 @@
 '
 '     find an icon for the main form that is suitable for 32/64bit systems
 '     test the icon just on the main form and not on the project itself - is that possible?
-'
-' settings.ini needs to be copied over from the users area to the sample item in the programs folder
-' default settings.ini to be standardised for new users - WIP
-'   the input and output files need to be directed to the initial text files so that the listboxes are not blank
 
-
-
-' MED. PRIORITY
-' =============
-
-' instead of separate menu options that we hide or show dependant upon whether combined or split
-' we should have a separate menu for each - dimbo.
-
-' menu option to edit a line in the combined box - needs to know whether that line
-'      is part of the output, analyse the header?
-'      for the moment remove it from the menu options? YES
 
 ' modify the minimise button to something else - a stamp - DONE
-
-' menu option to delete a line - WIP
-'      added line, now need to add code to rewrite the file
-
-' menu option to edit a line - WIP
-'      added line, now need to add code to rewrite the file
 
 ' when the combined text box is being scrolled back a timed poll sets the page to the bottom automatically
 '    test the removal of the position setting to the final position when the slider is being used or when control has focus.
@@ -415,11 +422,7 @@
 
 ' rubberduck the code again
 
-' build an installer using setup2go - WIP
-
 ' too many spaces in the setting file
-
-
 
 ' LOW Priority
 ' ============
@@ -434,12 +437,6 @@
 
 ' HEIC image support, add native support to VB6 handling of HEIC files when the code is available.
 
-' modify the default top and tail to use debugLOG instead of msgbox for the duration of this project.
-
-' add top and tail to all functions plus descriptions WIP
-
-' document all functions - MODULE2 - monitor code that is largely unused
-' document all functions - MODULE3 - email module that is currently unused at the moment
 
 ' FCW move to front and back - test
 
