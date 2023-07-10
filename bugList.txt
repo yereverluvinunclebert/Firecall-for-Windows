@@ -355,6 +355,8 @@
 ' paste & go right click own menu from the output text - DONE
 ' update help file with broken functionality or not yet implemented - DONE
 
+' picButtonMouseUpEvent now uses correct control names byRef - DONE
+
 ' Tasks underway now
 ' ==================
 
@@ -366,9 +368,14 @@
 
 ' HIGH PRIORITY
 ' =============
-'
+
 ' instead of separate menu options that we hide or show dependant upon whether combined or split
 ' we should have a separate menu for each - dimbo.
+'
+' menu option to edit a line - WIP
+'      added line, now need to add code to rewrite the file
+
+
 
 ' menu option to edit a line in the combined box - needs to know whether that line
 '      is part of the output, analyse the header?
@@ -376,8 +383,7 @@
 ' menu option to delete a line - WIP
 '      added line, now need to add code to rewrite the file
 
-' menu option to edit a line - WIP
-'      added line, now need to add code to rewrite the file
+
 
 '
 ' settings.ini needs to be copied over from the users area to the sample item in the programs folder
