@@ -287,8 +287,8 @@ Dim gColorsUsed As Long
     End If
     
 ExitReadRoutine:
-If Err Then
-    Err.Clear           ' this is a GIF format, but the format is invalid
+If err Then
+    err.Clear           ' this is a GIF format, but the format is invalid
     cHost.DestroyDIB    ' something is wrong; don't allow it to continue
     ParseGIF = True     ' to other parsers
 End If
@@ -312,24 +312,24 @@ Private Function ConvertGIFto32bpp(ByVal TransIndex As Long, ByVal tblOffset As 
     ' Note: The c_GIFframe array was already processed/filled in the ParseGIF function
     
     Dim tPic As StdPicture
-Dim tBMP As BITMAP
+    Dim tBMP As BITMAP
 
     
     ' used for parsing a transparent gif
     Dim X As Long
-Dim Y As Long
-Dim m As Long
-Dim dX As Long
-Dim Index As Long
+    Dim Y As Long
+    Dim m As Long
+    Dim dX As Long
+    Dim Index As Long
 
     Dim gSA As SafeArray
-Dim dSA As SafeArray
-
+    Dim dSA As SafeArray
+    
     Dim Pow2(0 To 8) As Long
-Dim dibBytes() As Byte
-
+    Dim dibBytes() As Byte
+    
     Dim maskShift As Long
-Dim maskAND As Long
+    Dim maskAND As Long
 
     Dim hostDC As Long
     
@@ -339,7 +339,7 @@ Dim maskAND As Long
     If Not tPic Is Nothing Then
         
         ' a VB stdPicture is a DIB, therefore it has a handle to the DIB bits; get it
-        GetGDIObject tPic.Handle, Len(tBMP), tBMP
+        GetGDIObject tPic.handle, Len(tBMP), tBMP
         If Not tBMP.bmBits = 0& Then
         
             ' have host create application's 32bpp DIB

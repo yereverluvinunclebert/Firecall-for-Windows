@@ -356,6 +356,8 @@
 ' update help file with broken functionality or not yet implemented - DONE
 
 ' picButtonMouseUpEvent now uses correct control names byRef - DONE
+' added link to github on the development prefs - DONE
+' debug OFF on the dev prefs now shows an example vbp location - DONE
 
 ' Tasks underway now
 ' ==================

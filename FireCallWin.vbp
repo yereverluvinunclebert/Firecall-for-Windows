@@ -52,7 +52,7 @@ Description="A simple communication tool using intermediate network storage"
 CompatibleMode="0"
 MajorVer=0
 MinorVer=1
-RevisionVer=78
+RevisionVer=93
 AutoIncrementVer=1
 ServerSupportFiles=0
 VersionComments="Pre-release version. Alpha."
@@ -79,5 +79,3 @@ DebugStartupOption=0
 
 [Rubberduck]
 ProjectId=caca6907-3d12-4190-b721-c6724acb66f3
-
-

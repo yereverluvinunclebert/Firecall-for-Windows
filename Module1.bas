@@ -1065,7 +1065,7 @@ l_getInputLineCount: ' continue location
     FireCallMain.picTextChangeBright.Visible = True
     FireCallMain.picTextChangeDull.Visible = False
     
-    Call readInputFileAndWriteArray(FCWSharedInputFile)
+    Call readInputFileAndWriteArrayWriteListbox(FCWSharedInputFile)
 
 
 End Sub
@@ -1660,7 +1660,7 @@ Public Sub populateInputBox()
     End If
 
     ' read the defined input file and write the input array
-    Call readInputFileAndWriteArray(FCWSharedInputFile)
+    Call readInputFileAndWriteArrayWriteListbox(FCWSharedInputFile)
     
     ' the scrollbar config code needs to be here after the reading of the output data
     If FCWEnableScrollbars = 0 Then
@@ -1914,7 +1914,7 @@ End Function
 
 ' read the remote user's file line by line, read it into an interim array and thence into a listbox.
 ' called by checkAndReadInputFile during polling & populateInputBox during startup
-Public Sub readInputFileAndWriteArray(ByVal sFName As String)
+Public Sub readInputFileAndWriteArrayWriteListbox(ByVal sFName As String)
 
     Dim lIndex As Long
     'Dim fileString As String
@@ -2650,7 +2650,6 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     Dim outStm As ADODB.Stream
     Dim findStartPos As Integer
     Dim stringWithoutPrefix As String
-
     
     Const ForReading As Integer = 1
     
@@ -2659,8 +2658,6 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     
     ' resize the array to the new linecount
     ReDim outputFileArray(outputLineCount)
-    
-
     
     If ioMethodADO = False Then
     '     we use the FSO method rather than VB6 input as it is more friendly to unix crlf EOLs
@@ -2707,8 +2704,6 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
 '        MsgBox "Execution Time " & sngTime & " mS"
 '
 ' timer code ENDS
-    
-
 
     lbxCount = 0
     If Val(FCWLoadBottom) = 1 Then
@@ -2724,9 +2719,6 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     ' locks the input listbox whilst the listbox is updated from the array
     LockWindowUpdate FireCallMain.lbxOutputTextArea.hwnd
     
-    
-    
-        
     ' this reads the output array and populates the listbox
     For useloop = startLoc To endLoc Step stepNo
         stringToWrite = vbNullString
@@ -2784,7 +2776,7 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     Dim listCounter As Long
     listCounter = FireCallMain.lbxOutputTextArea.ListCount
     If listCounter > outputLineCount Then
-        'MsgBox "This message pops up to prevent a duplication occurring in the OUTPUT. Please report if this occurs."
+        MsgBox "This message pops up to prevent a duplication occurring in the OUTPUT. Please report if this occurs."
         For useloop = (listCounter + 1) To outputLineCount
             FireCallMain.lbxOutputTextArea.List(useloop) = ""
         Next useloop
@@ -4614,8 +4606,6 @@ Private Sub writeOutputFile(ByVal fileToUpdate As String, ByVal thisLineCount As
             End If
         Wend
         
-        
-
         With BinaryStream
             .Type = 1
             .Mode = 3 'adModeReadWrite
@@ -5390,72 +5380,55 @@ End Sub
 
 Public Sub houseKeepingTimerLogic()
     Dim lastInputVar As LASTINPUTINFO
-    Dim currentIdleTime As Long
+    Dim currentIdleTime As Long: currentIdleTime = 0
 
-    Dim lastHouseKeepDateTimeInSecs As Long
-    Dim findStr As Integer
-    Dim stampTimeInSecs As Long
-    Dim useloop As Long
-    Dim stampTimeDiffInSecs As Long
-    Dim emailBodyStr As String
-    Dim errBodyStr As String
-    Dim iFile As Integer
+    Dim lastHouseKeepDateTimeInSecs As Long: lastHouseKeepDateTimeInSecs = 0
+    Dim findStr As Integer: findStr = 0
+    Dim stampTimeInSecs As Long: stampTimeInSecs = 0
+    Dim useloop As Long: useloop = 0
+    Dim stampTimeDiffInSecs As Long: stampTimeDiffInSecs = 0
+    Dim emailBodyStr As String: emailBodyStr = vbNullString
+    Dim errBodyStr As String: errBodyStr = vbNullString
+    Dim iFile As Integer: iFile = 0
     
-    Dim maxLineLength As Integer
-    Dim outputArrayTimeStamp As String
-    Dim archiveTimeInSecs As Long
-    Dim nowInSecs As Long
-    Dim lastHouseKeepDiff As Long
-    Dim stampDiffInSecs As Long
+    Dim maxLineLength As Integer:  maxLineLength = 0
+    Dim outputArrayTimeStamp As String: outputArrayTimeStamp = ""
+    Dim archiveTimeInSecs As Long: archiveTimeInSecs = 0
+    Dim nowInSecs As Long: nowInSecs = 0
+    Dim lastHouseKeepDiff As Long: lastHouseKeepDiff = 0
+    Dim stampDiffInSecs As Long: stampTimeDiffInSecs = 0
     
-    Dim archiveArray() As String
+    Dim archiveArray() As String ' cannot initialise an array in VB6
     Dim temporaryArray() As String
-    Dim archiveFilePath As String
+    Dim archiveFilePath As String: archiveFilePath = vbNullString
     
-    Dim archiveLoc As Long
-    Dim tempLoc As Long
+    Dim archiveLoc As Long: archiveLoc = 0
+    Dim tempLoc As Long: tempLoc = 0
 
-    Dim a As String
-    Dim timestamp As String
-    Dim testArchiveExists As Boolean
+    Dim a As String: a = vbNullString
+    Dim timestamp As String: timestamp = vbNullString
+    Dim testArchiveExists As Boolean: testArchiveExists = False
     
     Const lngThousand As Long = 1000
     
-    ' initialise vars
-
-    maxLineLength = 0
-    archiveTimeInSecs = 0
-    outputArrayTimeStamp = ""
-    
-    useloop = 0
-    findStr = 0
-    lastHouseKeepDateTimeInSecs = 0
-    stampTimeDiffInSecs = 0
-    emailBodyStr = vbNullString
-    errBodyStr = vbNullString
-    iFile = 0
-    testArchiveExists = False
             
     If Val(FCWAutomaticHousekeeping) = 0 Then Exit Sub
     
     debugLog "running automatic housekeeping using code timer"
      
     ' check to see if the app has not been used for a while, ie. it has been idle
+    ' only allows the function to continue if FCW's user has been idle for more than 30 secs
     lastInputVar.cbSize = Len(lastInputVar)
     Call GetLastInputInfo(lastInputVar)
     currentIdleTime = GetTickCount - lastInputVar.dwTime
-    
-    ' only allows the function to continue if FCW's user has been idle for more than 30 secs
     If currentIdleTime < 30000 Then Exit Sub
     
     ' check the date/time of the last advice message
+    ' here we extract the time in seconds from the housekeeping archive period and exit immediately if the time is greater than the archive time
     lastHouseKeepDateTimeInSecs = fSecondsFromDateString(FCWLastHouseKeep) ' eg. FCWLastEmail="2022-02-03 13:18:08.185"
     nowInSecs = fSecondsFromDateString(Now)
     lastHouseKeepDiff = nowInSecs - lastHouseKeepDateTimeInSecs
-    
     archiveTimeInSecs = Val(FCWArchiveDays) * 24 * 3600
-    
-    ' here we extract the time in seconds from the housekeeping archive period
     If lastHouseKeepDiff > archiveTimeInSecs Then Exit Sub
 
     While pollingFlag = True  ' flag that indicates that polling is still underway

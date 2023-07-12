@@ -15,107 +15,338 @@ Begin VB.Form FireCallPrefs
    ScaleWidth      =   10905
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
-   Begin VB.Frame fraDevelopment 
-      Caption         =   "Development"
-      Height          =   4350
-      Left            =   825
-      TabIndex        =   287
-      Top             =   2085
-      Visible         =   0   'False
-      Width           =   9105
-      Begin VB.Frame fraDevelopmentInner 
+   Begin VB.Frame fraGeneral 
+      Caption         =   "General"
+      Height          =   7110
+      Left            =   2295
+      TabIndex        =   0
+      Top             =   1260
+      Width           =   8640
+      Begin VB.Frame fraGeneralInner 
          BorderStyle     =   0  'None
-         Height          =   3555
-         Left            =   1275
-         TabIndex        =   288
-         Top             =   345
-         Width           =   7320
-         Begin VB.Frame fraDefaultEditor 
-            BorderStyle     =   0  'None
-            Height          =   2430
-            Left            =   240
-            TabIndex        =   292
-            Top             =   1080
-            Width           =   6915
-            Begin VB.CommandButton btnDefaultEditor 
-               Caption         =   "..."
-               Height          =   300
-               Left            =   5115
-               Style           =   1  'Graphical
-               TabIndex        =   294
-               ToolTipText     =   "Click to select the .vbp file to edit the program - You need to have access to the source!"
-               Top             =   120
+         Height          =   6585
+         Left            =   930
+         TabIndex        =   78
+         Top             =   390
+         Width           =   5985
+         Begin VB.CheckBox chkServiceProcesses 
+            Caption         =   "Check the above network processes are running"
+            Height          =   225
+            Left            =   1485
+            TabIndex        =   281
+            ToolTipText     =   "Check this box to enable alarms when the above network processes are not running. Uncheck the check box to suppress the alarm."
+            Top             =   4695
+            Width           =   4035
+         End
+         Begin VB.CheckBox chkGenStartup 
+            Caption         =   "Run Fire Call at Windows Startup"
+            Height          =   225
+            Left            =   1485
+            TabIndex        =   279
+            ToolTipText     =   "Check this box to enable the automatic start of the program when Windows is started."
+            Top             =   5865
+            Width           =   3555
+         End
+         Begin VB.Frame fraServiceProvider 
+            Height          =   1575
+            Left            =   1500
+            TabIndex        =   189
+            Top             =   2940
+            Width           =   4005
+            Begin VB.Frame fraNone 
+               BorderStyle     =   0  'None
+               Height          =   345
+               Left            =   420
+               TabIndex        =   208
+               Top             =   1065
+               Width           =   1665
+               Begin VB.Label lblNone 
+                  Caption         =   "None"
+                  Height          =   270
+                  Left            =   105
+                  TabIndex        =   209
+                  Top             =   60
+                  Width           =   1020
+               End
+            End
+            Begin VB.Frame fraOneDrive 
+               BorderStyle     =   0  'None
+               Height          =   345
+               Left            =   420
+               TabIndex        =   206
+               Top             =   780
+               Width           =   1665
+               Begin VB.Label lblOneDrive 
+                  Caption         =   "One Drive"
+                  Height          =   270
+                  Left            =   105
+                  TabIndex        =   207
+                  Top             =   60
+                  Width           =   1020
+               End
+            End
+            Begin VB.Frame fraGoogleDrive 
+               BorderStyle     =   0  'None
+               Height          =   345
+               Left            =   420
+               TabIndex        =   204
+               Top             =   495
+               Width           =   1665
+               Begin VB.Label lblGoogleDrive 
+                  Caption         =   "Google Drive"
+                  Height          =   270
+                  Left            =   105
+                  TabIndex        =   205
+                  Top             =   60
+                  Width           =   1020
+               End
+            End
+            Begin VB.Frame fraDropbox 
+               BorderStyle     =   0  'None
+               Height          =   345
+               Left            =   420
+               TabIndex        =   202
+               Top             =   195
+               Width           =   1695
+               Begin VB.Label lblDropbox 
+                  Caption         =   "Dropbox"
+                  Height          =   270
+                  Left            =   120
+                  TabIndex        =   203
+                  Top             =   60
+                  Width           =   915
+               End
+            End
+            Begin VB.OptionButton optServiceProvider 
+               Height          =   285
+               Index           =   0
+               Left            =   195
+               TabIndex        =   201
+               ToolTipText     =   "Will report an error if the Dropbox processes are missing."
+               Top             =   225
+               Width           =   255
+            End
+            Begin VB.OptionButton optServiceProvider 
+               Enabled         =   0   'False
+               Height          =   315
+               Index           =   3
+               Left            =   195
+               TabIndex        =   192
+               ToolTipText     =   "Will not report missing process errors."
+               Top             =   1080
                Width           =   315
             End
-            Begin VB.TextBox txtDefaultEditor 
+            Begin VB.OptionButton optServiceProvider 
+               Enabled         =   0   'False
                Height          =   315
-               Left            =   1440
-               TabIndex        =   293
-               Text            =   " eg. E:\vb6\fire call\FireCallWin.vbp"
-               ToolTipText     =   $"Form2.frx":000C
-               Top             =   105
-               Width           =   3660
+               Index           =   2
+               Left            =   195
+               TabIndex        =   191
+               ToolTipText     =   "Will report an error if the OneDrive processes are missing."
+               Top             =   795
+               Width           =   315
             End
-            Begin VB.Label lblGitHub 
-               Caption         =   $"Form2.frx":009E
-               ForeColor       =   &H8000000D&
-               Height          =   930
-               Left            =   1440
-               TabIndex        =   316
-               ToolTipText     =   "Click to visit github"
-               Top             =   1755
-               Width           =   5430
+            Begin VB.OptionButton optServiceProvider 
+               Enabled         =   0   'False
+               Height          =   315
+               Index           =   1
+               Left            =   195
+               TabIndex        =   190
+               ToolTipText     =   "Will report an error if the Google Drive processes are missing."
+               Top             =   510
+               Width           =   270
             End
-            Begin VB.Label lblDebug 
-               Caption         =   "Default Editor :"
-               Height          =   255
-               Index           =   7
-               Left            =   285
-               TabIndex        =   296
-               Tag             =   "lblSharedInputFile"
-               Top             =   135
-               Width           =   1350
-            End
-            Begin VB.Label lblDebug 
-               Caption         =   $"Form2.frx":0130
-               Height          =   945
-               Index           =   9
-               Left            =   1440
-               TabIndex        =   295
-               Top             =   660
-               Width           =   3900
+            Begin VB.Label lblGeneralTab 
+               Caption         =   "Select which utility you are using to share the files and folders. Fire Call for Windows will check if the processes exist."
+               Height          =   1245
+               Index           =   8
+               Left            =   2145
+               TabIndex        =   210
+               Top             =   225
+               Width           =   1740
             End
          End
-         Begin VB.ComboBox cmbDebug 
+         Begin VB.TextBox txtSharedInputFile 
             Height          =   315
-            ItemData        =   "Form2.frx":01D5
-            Left            =   1680
-            List            =   "Form2.frx":01D7
-            Style           =   2  'Dropdown List
-            TabIndex        =   289
-            ToolTipText     =   "Choose to set debug mode."
-            Top             =   -15
-            Width           =   2160
+            Left            =   1470
+            TabIndex        =   85
+            ToolTipText     =   "Select the shared input file."
+            Top             =   15
+            Width           =   3660
          End
-         Begin VB.Label lblDebug 
-            Caption         =   "Debug :"
+         Begin VB.CommandButton btnSharedInputFile 
+            Caption         =   "..."
+            Height          =   300
+            Left            =   5145
+            Style           =   1  'Graphical
+            TabIndex        =   84
+            ToolTipText     =   "Select the shared input file."
+            Top             =   15
+            Width           =   315
+         End
+         Begin VB.TextBox txtSharedOutputFile 
+            Height          =   315
+            Left            =   1485
+            TabIndex        =   83
+            ToolTipText     =   "Select the shared output file."
+            Top             =   705
+            Width           =   3660
+         End
+         Begin VB.CommandButton btnSharedOutputFile 
+            Caption         =   "..."
+            Height          =   300
+            Left            =   5145
+            Style           =   1  'Graphical
+            TabIndex        =   82
+            ToolTipText     =   "Select the shared output file."
+            Top             =   720
+            Width           =   315
+         End
+         Begin VB.TextBox txtExchangeFolder 
+            Height          =   315
+            Left            =   1485
+            TabIndex        =   81
+            ToolTipText     =   "Choose a shared folder for the exchange of images and text files."
+            Top             =   1470
+            Width           =   3660
+         End
+         Begin VB.CommandButton btnExchangeFolder 
+            Caption         =   "..."
+            Height          =   300
+            Left            =   5160
+            Style           =   1  'Graphical
+            TabIndex        =   80
+            ToolTipText     =   "Choose a shared folder for the exchange of images and text files."
+            Top             =   1485
+            Width           =   315
+         End
+         Begin VB.ComboBox cmbRefreshInterval 
+            Height          =   315
+            ItemData        =   "Form2.frx":000C
+            Left            =   1485
+            List            =   "Form2.frx":000E
+            Style           =   2  'Dropdown List
+            TabIndex        =   79
+            ToolTipText     =   "Set the refresh interval"
+            Top             =   5085
+            Width           =   4035
+         End
+         Begin VB.Label lblGeneralTab 
+            Caption         =   "Test Provider :"
+            Height          =   255
+            Index           =   10
+            Left            =   375
+            TabIndex        =   282
+            Tag             =   "lblServiceProvider"
+            ToolTipText     =   "Check this box to enable regular testing of the above network processes."
+            Top             =   4695
+            Width           =   1470
+         End
+         Begin VB.Label lblGeneralTab 
+            Caption         =   "Auto Start :"
             Height          =   375
-            Index           =   0
-            Left            =   1005
-            TabIndex        =   291
-            Tag             =   "lblAlarmSound"
-            Top             =   45
+            Index           =   11
+            Left            =   615
+            TabIndex        =   280
+            Tag             =   "lblRefreshInterval"
+            Top             =   5865
             Width           =   1740
          End
-         Begin VB.Label lblDebug 
-            Caption         =   "Turning on the debugging will provide extra information in the debug window.  *"
-            Height          =   495
+         Begin VB.Label lblGeneralTab 
+            Caption         =   "Process to Check :"
+            Height          =   255
+            Index           =   3
+            Left            =   90
+            TabIndex        =   193
+            Tag             =   "lblServiceProvider"
+            Top             =   3135
+            Width           =   1350
+         End
+         Begin VB.Label lblGeneralTab 
+            Caption         =   "Shared Input File :"
+            Height          =   255
+            Index           =   0
+            Left            =   105
+            TabIndex        =   94
+            Tag             =   "lblSharedInputFile"
+            Top             =   45
+            Width           =   1350
+         End
+         Begin VB.Label lblGeneralTab 
+            Caption         =   "Select the shared input file."
+            Height          =   300
+            Index           =   5
+            Left            =   1515
+            TabIndex        =   93
+            Tag             =   "lblSharedInputFileDesc"
+            Top             =   420
+            Width           =   3420
+         End
+         Begin VB.Label lblGeneralTab 
+            Caption         =   "Shared Output File :"
+            Height          =   255
+            Index           =   1
+            Left            =   0
+            TabIndex        =   92
+            Tag             =   "lblSharedOutputFolder"
+            Top             =   750
+            Width           =   1440
+         End
+         Begin VB.Label lblGeneralTab 
+            Caption         =   "Select the shared output file."
+            Height          =   300
+            Index           =   6
+            Left            =   1515
+            TabIndex        =   91
+            Tag             =   "lblSharedOutputFileDesc"
+            Top             =   1125
+            Width           =   3420
+         End
+         Begin VB.Label lblGeneralTab 
+            Caption         =   "Exchange Folder :"
+            Height          =   255
             Index           =   2
-            Left            =   1695
-            TabIndex        =   290
-            Tag             =   "lblAlarmSoundDesc"
-            Top             =   450
-            Width           =   4455
+            Left            =   120
+            TabIndex        =   90
+            Tag             =   "lblExchangeFolder"
+            Top             =   1515
+            Width           =   1350
+         End
+         Begin VB.Label lblGeneralTab 
+            Caption         =   $"Form2.frx":0010
+            Height          =   900
+            Index           =   7
+            Left            =   1545
+            TabIndex        =   89
+            Tag             =   "lblExchangeFolderDesc"
+            Top             =   1980
+            Width           =   3600
+         End
+         Begin VB.Label lblGeneralTab 
+            Caption         =   "Refresh Interval :"
+            Height          =   375
+            Index           =   4
+            Left            =   195
+            TabIndex        =   88
+            Tag             =   "lblRefreshInterval"
+            Top             =   5145
+            Width           =   1740
+         End
+         Begin VB.Label lblGeneralTab 
+            Caption         =   "Set the program's refresh interval"
+            Height          =   300
+            Index           =   9
+            Left            =   1470
+            TabIndex        =   87
+            Top             =   5535
+            Width           =   3750
+         End
+         Begin VB.Label lblExchangeFolderDesc2 
+            Height          =   450
+            Left            =   1530
+            TabIndex        =   86
+            Top             =   2415
+            Width           =   3945
          End
       End
    End
@@ -131,7 +362,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":01D9
+         Picture         =   "Form2.frx":00BD
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   318
@@ -161,7 +392,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   195
-         Picture         =   "Form2.frx":0791
+         Picture         =   "Form2.frx":0675
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   317
@@ -202,7 +433,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   165
-         Picture         =   "Form2.frx":0D49
+         Picture         =   "Form2.frx":0C2D
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   182
@@ -242,7 +473,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   630
          Left            =   165
-         Picture         =   "Form2.frx":1969
+         Picture         =   "Form2.frx":184D
          ScaleHeight     =   630
          ScaleWidth      =   630
          TabIndex        =   31
@@ -271,7 +502,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   630
          Left            =   165
-         Picture         =   "Form2.frx":1F28
+         Picture         =   "Form2.frx":1E0C
          ScaleHeight     =   630
          ScaleWidth      =   630
          TabIndex        =   28
@@ -316,7 +547,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   165
-         Picture         =   "Form2.frx":252A
+         Picture         =   "Form2.frx":240E
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   17
@@ -345,7 +576,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":2D72
+         Picture         =   "Form2.frx":2C56
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   14
@@ -374,7 +605,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":355E
+         Picture         =   "Form2.frx":3442
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   11
@@ -403,7 +634,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":3A41
+         Picture         =   "Form2.frx":3925
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   8
@@ -435,7 +666,7 @@ Begin VB.Form FireCallPrefs
          ForeColor       =   &H80000008&
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":3FDD
+         Picture         =   "Form2.frx":3EC1
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   5
@@ -463,7 +694,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   405
          Left            =   240
-         Picture         =   "Form2.frx":483F
+         Picture         =   "Form2.frx":4723
          ScaleHeight     =   405
          ScaleWidth      =   420
          TabIndex        =   2
@@ -496,9 +727,9 @@ Begin VB.Form FireCallPrefs
          Width           =   5565
          Begin VB.ComboBox cmbEmojiSet 
             Height          =   315
-            ItemData        =   "Form2.frx":4DD5
+            ItemData        =   "Form2.frx":4CB9
             Left            =   2190
-            List            =   "Form2.frx":4DD7
+            List            =   "Form2.frx":4CBB
             Style           =   2  'Dropdown List
             TabIndex        =   107
             ToolTipText     =   "Choose the emoji set to use"
@@ -535,7 +766,7 @@ Begin VB.Form FireCallPrefs
             Width           =   3750
          End
          Begin VB.Label lblEmojiTab 
-            Caption         =   $"Form2.frx":4DD9
+            Caption         =   $"Form2.frx":4CBD
             Height          =   825
             Index           =   4
             Left            =   2175
@@ -833,9 +1064,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbCaptureDevices 
             Height          =   315
-            ItemData        =   "Form2.frx":4E9F
+            ItemData        =   "Form2.frx":4D83
             Left            =   1365
-            List            =   "Form2.frx":4EA1
+            List            =   "Form2.frx":4D85
             TabIndex        =   211
             Text            =   "cmbCaptureDevices"
             Top             =   4455
@@ -844,7 +1075,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnMute 
             Height          =   285
             Left            =   5385
-            Picture         =   "Form2.frx":4EA3
+            Picture         =   "Form2.frx":4D87
             Style           =   1  'Graphical
             TabIndex        =   171
             TabStop         =   0   'False
@@ -872,9 +1103,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbAlarmSound 
             Height          =   315
-            ItemData        =   "Form2.frx":50D0
+            ItemData        =   "Form2.frx":4FB4
             Left            =   1365
-            List            =   "Form2.frx":50D2
+            List            =   "Form2.frx":4FB6
             Style           =   2  'Dropdown List
             TabIndex        =   53
             ToolTipText     =   "Choose the alarm sound."
@@ -884,7 +1115,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnPlaySound 
             Height          =   285
             Left            =   5055
-            Picture         =   "Form2.frx":50D4
+            Picture         =   "Form2.frx":4FB8
             Style           =   1  'Graphical
             TabIndex        =   52
             TabStop         =   0   'False
@@ -1130,7 +1361,7 @@ Begin VB.Form FireCallPrefs
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   298
-         Text            =   "Form2.frx":52DE
+         Text            =   "Form2.frx":51C2
          Top             =   2205
          Width           =   9945
       End
@@ -1520,7 +1751,7 @@ Begin VB.Form FireCallPrefs
                Width           =   3960
             End
             Begin VB.Label lblConfigurationTab 
-               Caption         =   $"Form2.frx":677F
+               Caption         =   $"Form2.frx":6663
                Height          =   660
                Index           =   8
                Left            =   270
@@ -1609,9 +1840,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbMaxLineLength 
             Height          =   315
-            ItemData        =   "Form2.frx":681D
+            ItemData        =   "Form2.frx":6701
             Left            =   1710
-            List            =   "Form2.frx":681F
+            List            =   "Form2.frx":6703
             Style           =   2  'Dropdown List
             TabIndex        =   96
             ToolTipText     =   "The program will cut your text to a new line when this limit is reached"
@@ -1740,7 +1971,7 @@ Begin VB.Form FireCallPrefs
             Left            =   1305
             Style           =   2  'Dropdown List
             TabIndex        =   38
-            ToolTipText     =   $"Form2.frx":6821
+            ToolTipText     =   $"Form2.frx":6705
             Top             =   0
             Width           =   3960
          End
@@ -1902,7 +2133,7 @@ Begin VB.Form FireCallPrefs
             Width           =   780
          End
          Begin VB.Label lblWindowLevelDescription 
-            Caption         =   $"Form2.frx":68BC
+            Caption         =   $"Form2.frx":67A0
             Height          =   870
             Left            =   1365
             TabIndex        =   44
@@ -1970,9 +2201,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbSmtpConfig 
             Height          =   315
-            ItemData        =   "Form2.frx":6957
+            ItemData        =   "Form2.frx":683B
             Left            =   2025
-            List            =   "Form2.frx":6959
+            List            =   "Form2.frx":683D
             Style           =   2  'Dropdown List
             TabIndex        =   246
             ToolTipText     =   "Select which SMTP configuration slot you would like to operate."
@@ -2026,7 +2257,7 @@ Begin VB.Form FireCallPrefs
                Height          =   210
                Index           =   1
                Left            =   4920
-               Picture         =   "Form2.frx":695B
+               Picture         =   "Form2.frx":683F
                ScaleHeight     =   210
                ScaleWidth      =   225
                TabIndex        =   241
@@ -2040,7 +2271,7 @@ Begin VB.Form FireCallPrefs
                Height          =   240
                Index           =   0
                Left            =   90
-               Picture         =   "Form2.frx":6B88
+               Picture         =   "Form2.frx":6A6C
                ScaleHeight     =   240
                ScaleWidth      =   255
                TabIndex        =   240
@@ -2105,7 +2336,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnSeePassword 
             Height          =   315
             Left            =   6045
-            Picture         =   "Form2.frx":7012
+            Picture         =   "Form2.frx":6EF6
             Style           =   1  'Graphical
             TabIndex        =   223
             ToolTipText     =   "Click here to expose the password to prying eyes..."
@@ -2182,9 +2413,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbAdviceInterval 
             Height          =   315
-            ItemData        =   "Form2.frx":72D3
+            ItemData        =   "Form2.frx":71B7
             Left            =   2025
-            List            =   "Form2.frx":72D5
+            List            =   "Form2.frx":71B9
             Style           =   2  'Dropdown List
             TabIndex        =   75
             ToolTipText     =   "Advice messages are sent when new data is received but not more often than at the specified interval."
@@ -2204,7 +2435,7 @@ Begin VB.Form FireCallPrefs
                Left            =   1260
                TabIndex        =   230
                Text            =   "This is the SMTP server name as supplied by your email provider"
-               ToolTipText     =   $"Form2.frx":72D7
+               ToolTipText     =   $"Form2.frx":71BB
                Top             =   30
                Width           =   3960
             End
@@ -2410,341 +2641,6 @@ Begin VB.Form FireCallPrefs
             ToolTipText     =   "Advice messages are sent when new data is received but not more often than at the specified interval."
             Top             =   870
             Width           =   1740
-         End
-      End
-   End
-   Begin VB.Frame fraGeneral 
-      Caption         =   "General"
-      Height          =   7110
-      Left            =   2295
-      TabIndex        =   0
-      Top             =   1260
-      Width           =   8640
-      Begin VB.Frame fraGeneralInner 
-         BorderStyle     =   0  'None
-         Height          =   6585
-         Left            =   930
-         TabIndex        =   78
-         Top             =   390
-         Width           =   5985
-         Begin VB.CheckBox chkServiceProcesses 
-            Caption         =   "Check the above network processes are running"
-            Height          =   225
-            Left            =   1485
-            TabIndex        =   281
-            ToolTipText     =   "Check this box to enable alarms when the above network processes are not running. Uncheck the check box to suppress the alarm."
-            Top             =   4695
-            Width           =   4035
-         End
-         Begin VB.CheckBox chkGenStartup 
-            Caption         =   "Run Fire Call at Windows Startup"
-            Height          =   225
-            Left            =   1485
-            TabIndex        =   279
-            ToolTipText     =   "Check this box to enable the automatic start of the program when Windows is started."
-            Top             =   5865
-            Width           =   3555
-         End
-         Begin VB.Frame fraServiceProvider 
-            Height          =   1575
-            Left            =   1500
-            TabIndex        =   189
-            Top             =   2940
-            Width           =   4005
-            Begin VB.Frame fraNone 
-               BorderStyle     =   0  'None
-               Height          =   345
-               Left            =   420
-               TabIndex        =   208
-               Top             =   1065
-               Width           =   1665
-               Begin VB.Label lblNone 
-                  Caption         =   "None"
-                  Height          =   270
-                  Left            =   105
-                  TabIndex        =   209
-                  Top             =   60
-                  Width           =   1020
-               End
-            End
-            Begin VB.Frame fraOneDrive 
-               BorderStyle     =   0  'None
-               Height          =   345
-               Left            =   420
-               TabIndex        =   206
-               Top             =   780
-               Width           =   1665
-               Begin VB.Label lblOneDrive 
-                  Caption         =   "One Drive"
-                  Height          =   270
-                  Left            =   105
-                  TabIndex        =   207
-                  Top             =   60
-                  Width           =   1020
-               End
-            End
-            Begin VB.Frame fraGoogleDrive 
-               BorderStyle     =   0  'None
-               Height          =   345
-               Left            =   420
-               TabIndex        =   204
-               Top             =   495
-               Width           =   1665
-               Begin VB.Label lblGoogleDrive 
-                  Caption         =   "Google Drive"
-                  Height          =   270
-                  Left            =   105
-                  TabIndex        =   205
-                  Top             =   60
-                  Width           =   1020
-               End
-            End
-            Begin VB.Frame fraDropbox 
-               BorderStyle     =   0  'None
-               Height          =   345
-               Left            =   420
-               TabIndex        =   202
-               Top             =   195
-               Width           =   1695
-               Begin VB.Label lblDropbox 
-                  Caption         =   "Dropbox"
-                  Height          =   270
-                  Left            =   120
-                  TabIndex        =   203
-                  Top             =   60
-                  Width           =   915
-               End
-            End
-            Begin VB.OptionButton optServiceProvider 
-               Height          =   285
-               Index           =   0
-               Left            =   195
-               TabIndex        =   201
-               ToolTipText     =   "Will report an error if the Dropbox processes are missing."
-               Top             =   225
-               Width           =   255
-            End
-            Begin VB.OptionButton optServiceProvider 
-               Enabled         =   0   'False
-               Height          =   315
-               Index           =   3
-               Left            =   195
-               TabIndex        =   192
-               ToolTipText     =   "Will not report missing process errors."
-               Top             =   1080
-               Width           =   315
-            End
-            Begin VB.OptionButton optServiceProvider 
-               Enabled         =   0   'False
-               Height          =   315
-               Index           =   2
-               Left            =   195
-               TabIndex        =   191
-               ToolTipText     =   "Will report an error if the OneDrive processes are missing."
-               Top             =   795
-               Width           =   315
-            End
-            Begin VB.OptionButton optServiceProvider 
-               Enabled         =   0   'False
-               Height          =   315
-               Index           =   1
-               Left            =   195
-               TabIndex        =   190
-               ToolTipText     =   "Will report an error if the Google Drive processes are missing."
-               Top             =   510
-               Width           =   270
-            End
-            Begin VB.Label lblGeneralTab 
-               Caption         =   "Select which utility you are using to share the files and folders. Fire Call for Windows will check if the processes exist."
-               Height          =   1245
-               Index           =   8
-               Left            =   2145
-               TabIndex        =   210
-               Top             =   225
-               Width           =   1740
-            End
-         End
-         Begin VB.TextBox txtSharedInputFile 
-            Height          =   315
-            Left            =   1485
-            TabIndex        =   85
-            ToolTipText     =   "Select the shared input file."
-            Top             =   0
-            Width           =   3660
-         End
-         Begin VB.CommandButton btnSharedInputFile 
-            Caption         =   "..."
-            Height          =   300
-            Left            =   5145
-            Style           =   1  'Graphical
-            TabIndex        =   84
-            ToolTipText     =   "Select the shared input file."
-            Top             =   15
-            Width           =   315
-         End
-         Begin VB.TextBox txtSharedOutputFile 
-            Height          =   315
-            Left            =   1485
-            TabIndex        =   83
-            ToolTipText     =   "Select the shared output file."
-            Top             =   705
-            Width           =   3660
-         End
-         Begin VB.CommandButton btnSharedOutputFile 
-            Caption         =   "..."
-            Height          =   300
-            Left            =   5145
-            Style           =   1  'Graphical
-            TabIndex        =   82
-            ToolTipText     =   "Select the shared output file."
-            Top             =   720
-            Width           =   315
-         End
-         Begin VB.TextBox txtExchangeFolder 
-            Height          =   315
-            Left            =   1485
-            TabIndex        =   81
-            ToolTipText     =   "Choose a shared folder for the exchange of images and text files."
-            Top             =   1470
-            Width           =   3660
-         End
-         Begin VB.CommandButton btnExchangeFolder 
-            Caption         =   "..."
-            Height          =   300
-            Left            =   5160
-            Style           =   1  'Graphical
-            TabIndex        =   80
-            ToolTipText     =   "Choose a shared folder for the exchange of images and text files."
-            Top             =   1485
-            Width           =   315
-         End
-         Begin VB.ComboBox cmbRefreshInterval 
-            Height          =   315
-            ItemData        =   "Form2.frx":7364
-            Left            =   1485
-            List            =   "Form2.frx":7366
-            Style           =   2  'Dropdown List
-            TabIndex        =   79
-            ToolTipText     =   "Set the refresh interval"
-            Top             =   5085
-            Width           =   4035
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   "Test Provider :"
-            Height          =   255
-            Index           =   10
-            Left            =   375
-            TabIndex        =   282
-            Tag             =   "lblServiceProvider"
-            ToolTipText     =   "Check this box to enable regular testing of the above network processes."
-            Top             =   4695
-            Width           =   1470
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   "Auto Start :"
-            Height          =   375
-            Index           =   11
-            Left            =   615
-            TabIndex        =   280
-            Tag             =   "lblRefreshInterval"
-            Top             =   5865
-            Width           =   1740
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   "Process to Check :"
-            Height          =   255
-            Index           =   3
-            Left            =   90
-            TabIndex        =   193
-            Tag             =   "lblServiceProvider"
-            Top             =   3135
-            Width           =   1350
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   "Shared Input File :"
-            Height          =   255
-            Index           =   0
-            Left            =   105
-            TabIndex        =   94
-            Tag             =   "lblSharedInputFile"
-            Top             =   45
-            Width           =   1350
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   "Select the shared input file."
-            Height          =   300
-            Index           =   5
-            Left            =   1515
-            TabIndex        =   93
-            Tag             =   "lblSharedInputFileDesc"
-            Top             =   420
-            Width           =   3420
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   "Shared Output File :"
-            Height          =   255
-            Index           =   1
-            Left            =   0
-            TabIndex        =   92
-            Tag             =   "lblSharedOutputFolder"
-            Top             =   750
-            Width           =   1440
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   "Select the shared output file."
-            Height          =   300
-            Index           =   6
-            Left            =   1515
-            TabIndex        =   91
-            Tag             =   "lblSharedOutputFileDesc"
-            Top             =   1125
-            Width           =   3420
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   "Exchange Folder :"
-            Height          =   255
-            Index           =   2
-            Left            =   120
-            TabIndex        =   90
-            Tag             =   "lblExchangeFolder"
-            Top             =   1515
-            Width           =   1350
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   $"Form2.frx":7368
-            Height          =   900
-            Index           =   7
-            Left            =   1545
-            TabIndex        =   89
-            Tag             =   "lblExchangeFolderDesc"
-            Top             =   1980
-            Width           =   3600
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   "Refresh Interval :"
-            Height          =   375
-            Index           =   4
-            Left            =   195
-            TabIndex        =   88
-            Tag             =   "lblRefreshInterval"
-            Top             =   5145
-            Width           =   1740
-         End
-         Begin VB.Label lblGeneralTab 
-            Caption         =   "Set the program's refresh interval"
-            Height          =   300
-            Index           =   9
-            Left            =   1470
-            TabIndex        =   87
-            Top             =   5535
-            Width           =   3750
-         End
-         Begin VB.Label lblExchangeFolderDesc2 
-            Height          =   450
-            Left            =   1530
-            TabIndex        =   86
-            Top             =   2415
-            Width           =   3945
          End
       End
    End
@@ -3209,6 +3105,110 @@ Begin VB.Form FireCallPrefs
          End
       End
    End
+   Begin VB.Frame fraDevelopment 
+      Caption         =   "Development"
+      Height          =   4350
+      Left            =   825
+      TabIndex        =   287
+      Top             =   2085
+      Visible         =   0   'False
+      Width           =   9105
+      Begin VB.Frame fraDevelopmentInner 
+         BorderStyle     =   0  'None
+         Height          =   3555
+         Left            =   1275
+         TabIndex        =   288
+         Top             =   345
+         Width           =   7320
+         Begin VB.Frame fraDefaultEditor 
+            BorderStyle     =   0  'None
+            Height          =   2430
+            Left            =   240
+            TabIndex        =   292
+            Top             =   1080
+            Width           =   6915
+            Begin VB.CommandButton btnDefaultEditor 
+               Caption         =   "..."
+               Height          =   300
+               Left            =   5115
+               Style           =   1  'Graphical
+               TabIndex        =   294
+               ToolTipText     =   "Click to select the .vbp file to edit the program - You need to have access to the source!"
+               Top             =   120
+               Width           =   315
+            End
+            Begin VB.TextBox txtDefaultEditor 
+               Height          =   315
+               Left            =   1440
+               TabIndex        =   293
+               Text            =   " eg. E:\vb6\fire call\FireCallWin.vbp"
+               ToolTipText     =   $"Form2.frx":7248
+               Top             =   105
+               Width           =   3660
+            End
+            Begin VB.Label lblGitHub 
+               Caption         =   $"Form2.frx":72DA
+               ForeColor       =   &H8000000D&
+               Height          =   930
+               Left            =   1440
+               TabIndex        =   316
+               ToolTipText     =   "Click to visit github"
+               Top             =   1755
+               Width           =   5430
+            End
+            Begin VB.Label lblDebug 
+               Caption         =   "Default Editor :"
+               Height          =   255
+               Index           =   7
+               Left            =   285
+               TabIndex        =   296
+               Tag             =   "lblSharedInputFile"
+               Top             =   135
+               Width           =   1350
+            End
+            Begin VB.Label lblDebug 
+               Caption         =   $"Form2.frx":736C
+               Height          =   945
+               Index           =   9
+               Left            =   1440
+               TabIndex        =   295
+               Top             =   660
+               Width           =   3900
+            End
+         End
+         Begin VB.ComboBox cmbDebug 
+            Height          =   315
+            ItemData        =   "Form2.frx":7411
+            Left            =   1680
+            List            =   "Form2.frx":7413
+            Style           =   2  'Dropdown List
+            TabIndex        =   289
+            ToolTipText     =   "Choose to set debug mode."
+            Top             =   -15
+            Width           =   2160
+         End
+         Begin VB.Label lblDebug 
+            Caption         =   "Debug :"
+            Height          =   375
+            Index           =   0
+            Left            =   1005
+            TabIndex        =   291
+            Tag             =   "lblAlarmSound"
+            Top             =   45
+            Width           =   1740
+         End
+         Begin VB.Label lblDebug 
+            Caption         =   "Turning on the debugging will provide extra information in the debug window.  *"
+            Height          =   495
+            Index           =   2
+            Left            =   1695
+            TabIndex        =   290
+            Tag             =   "lblAlarmSoundDesc"
+            Top             =   450
+            Width           =   4455
+         End
+      End
+   End
    Begin VB.Menu prefsMnuPopmenu 
       Caption         =   "The main menu"
       Visible         =   0   'False
@@ -3526,10 +3526,6 @@ Private Sub fraAbout_MouseMove(Button As Integer, Shift As Integer, X As Single,
                   TTIconInfo, "Help on the About Tab", , , , True
 End Sub
 
-
-Private Sub fraDefaultEditor_DragDrop(Source As Control, X As Single, Y As Single)
-
-End Sub
 
 Private Sub fraDefaultEditor_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     lblGitHub.ForeColor = &H80000012
