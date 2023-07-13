@@ -382,6 +382,7 @@
 ' menu option to edit a line in the combined box - needs to know whether that line
 '      is part of the output, analyse the header?
 '      for the moment remove it from the menu options? YES
+
 ' menu option to delete a line - WIP
 '      added line, now need to add code to rewrite the file
 
