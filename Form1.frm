@@ -1609,6 +1609,9 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuInputListBoxOpenSharedInputFile 
          Caption         =   "Open the Shared Input File"
       End
+      Begin VB.Menu mnuInputListBoxOpenSharedExchangeFolder 
+         Caption         =   "Open the Shared Exchange Folder"
+      End
       Begin VB.Menu mnuInputListBoxRefresh 
          Caption         =   "Refresh the Chat boxes (F5)"
       End
