@@ -1616,6 +1616,78 @@ Begin VB.Form FireCallMain
          Caption         =   "Refresh the Chat boxes (F5)"
       End
    End
+   Begin VB.Menu outputListBoxMnuPopmenu 
+      Caption         =   "Output List Box Menu"
+      Begin VB.Menu mnuOutputListBoxSendPingRequest 
+         Caption         =   "Send a Ping Request"
+      End
+      Begin VB.Menu mnuOutputListBoxSendAwakeCall 
+         Caption         =   "Send an Awake Call"
+      End
+      Begin VB.Menu mnuOutputListBoxSendShutdownRequest 
+         Caption         =   "Send Shutdown Request"
+      End
+      Begin VB.Menu mnuOutputBlankLine18 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuOutputListBoxCopyLine 
+         Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
+      End
+      Begin VB.Menu mnuOutputListBoxQuoteLine 
+         Caption         =   "Copy and Quote Line"
+      End
+      Begin VB.Menu mnuOutputListBoxSwitchChatBoxes 
+         Caption         =   "Switch to Single Chat Box"
+      End
+      Begin VB.Menu mnuOutputListBoxFind 
+         Caption         =   "Find (Ctrl+F)"
+      End
+      Begin VB.Menu mnuOutputListBoxOpenSharedInputFile 
+         Caption         =   "Open the Shared Output File"
+      End
+      Begin VB.Menu mnuOutputListBoxOpenSharedExchangeFolder 
+         Caption         =   "Open the Shared Exchange Folder"
+      End
+      Begin VB.Menu mnuOutputListBoxRefresh 
+         Caption         =   "Refresh the Chat boxes (F5)"
+      End
+   End
+   Begin VB.Menu combinedListBoxMnuPopmenu 
+      Caption         =   "Combined List Box Menu"
+      Begin VB.Menu mnuCombinedListBoxSendPingRequest 
+         Caption         =   "Send a Ping Request"
+      End
+      Begin VB.Menu mnuCombinedListBoxSendAwakeCall 
+         Caption         =   "Send an Awake Call"
+      End
+      Begin VB.Menu mnuCombinedListBoxSendShutdownRequest 
+         Caption         =   "Send Shutdown Request"
+      End
+      Begin VB.Menu mnuCombinedBlankLine18 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuCombinedListBoxCopyLine 
+         Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
+      End
+      Begin VB.Menu mnuCombinedListBoxQuoteLine 
+         Caption         =   "Copy and Quote Line"
+      End
+      Begin VB.Menu mnuCombinedListBoxSwitchChatBoxes 
+         Caption         =   "Switch to Single Chat Box"
+      End
+      Begin VB.Menu mnuCombinedListBoxFind 
+         Caption         =   "Find (Ctrl+F)"
+      End
+      Begin VB.Menu mnuCombinedListBoxOpenSharedInputFile 
+         Caption         =   "Open the Shared Output File"
+      End
+      Begin VB.Menu mnuCombinedListBoxOpenSharedExchangeFolder 
+         Caption         =   "Open the Shared Exchange Folder"
+      End
+      Begin VB.Menu mnuCombinedListBoxRefresh 
+         Caption         =   "Refresh the Chat boxes (F5)"
+      End
+   End
    Begin VB.Menu listBoxMnuPopmenu 
       Caption         =   "List Box Menu"
       Visible         =   0   'False
