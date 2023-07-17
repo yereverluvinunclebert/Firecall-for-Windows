@@ -1600,6 +1600,9 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuInputListBoxQuoteLine 
          Caption         =   "Copy and Quote Line"
       End
+      Begin VB.Menu mnuInputListBoxBlankLine9 
+         Caption         =   "-"
+      End
       Begin VB.Menu mnuInputListBoxSwitchChatBoxes 
          Caption         =   "Switch to Single Chat Box"
       End
@@ -1630,11 +1633,20 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuOutputBlankLine18 
          Caption         =   "-"
       End
+      Begin VB.Menu mnuOutputListBoxEditLine 
+         Caption         =   "Edit This Line"
+      End
+      Begin VB.Menu mnuOutputListBoxDeleteLine 
+         Caption         =   "Delete This Line"
+      End
       Begin VB.Menu mnuOutputListBoxCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
       End
       Begin VB.Menu mnuOutputListBoxQuoteLine 
          Caption         =   "Copy and Quote Line"
+      End
+      Begin VB.Menu mnuOutputListBoxBlankLine9 
+         Caption         =   "-"
       End
       Begin VB.Menu mnuOutputListBoxSwitchChatBoxes 
          Caption         =   "Switch to Single Chat Box"
@@ -1672,6 +1684,9 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuCombinedListBoxQuoteLine 
          Caption         =   "Copy and Quote Line"
       End
+      Begin VB.Menu mnuCombinedListBoxBlankLine9 
+         Caption         =   "-"
+      End
       Begin VB.Menu mnuCombinedListBoxSwitchChatBoxes 
          Caption         =   "Switch to Single Chat Box"
       End
@@ -1690,7 +1705,6 @@ Begin VB.Form FireCallMain
    End
    Begin VB.Menu listBoxMnuPopmenu 
       Caption         =   "List Box Menu"
-      Visible         =   0   'False
       Begin VB.Menu mnuLBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
       End
@@ -2333,6 +2347,11 @@ Public Sub formLoadTasks()
     recordingTimerCount = 0
     recording = False
     playing = False
+    
+    inputListBoxMnuPopmenu.Visible = False
+    outputListBoxMnuPopmenu.Visible = False
+    combinedListBoxMnuPopmenu.Visible = False
+    listBoxMnuPopmenu.Visible = False
     
     'add known executables to a VB6 collection
     Call addExecutableSuffixArrayList
@@ -3396,14 +3415,73 @@ Private Sub lbxOutputTextArea_Scroll()
     lbxOutputTextArea.ToolTipText = ""
 End Sub
 
+Private Sub mnuCombinedListBoxCopyLine_Click()
+    Call copyText(lbxCombinedTextArea, True)
+    Call pasteAndGoHandler
+End Sub
+
+Private Sub mnuCombinedListBoxQuoteLine_Click()
+    Call copyText(lbxCombinedTextArea, True)
+    Call pasteAndGoHandler
+End Sub
+
+Private Sub mnuInputListBoxCopyLine_Click()
+    Call copyText(lbxInputTextArea)
+End Sub
+
+Private Sub mnuInputListBoxQuoteLine_Click()
+    Call copyText(lbxInputTextArea, True)
+    Call pasteAndGoHandler
+End Sub
+
 'add ping request to the listBox right click menus
 Private Sub mnuLBoxSendPingRequest_Click()
     Call mnuSendPingRequest_Click
 End Sub
+
+'add ping request to the listBox right click menus
+Private Sub mnuInputListBoxSendPingRequest_Click()
+    Call mnuSendPingRequest_Click
+End Sub
+
+Private Sub mnuOutputListBoxCopyLine_Click()
+    Call copyText(lbxOutputTextArea)
+End Sub
+
+'add ping request to the listBox right click menus
+Private Sub mnuOutputListBoxSendPingRequest_Click()
+    Call mnuSendPingRequest_Click
+End Sub
+
+
+'add ping request to the listBox right click menus
+Private Sub mnuCombinedListBoxSendPingRequest_Click()
+    Call mnuSendPingRequest_Click
+End Sub
+
+
 'add awake call to the listBox right click menus
 Private Sub mnuLBoxSendAwakeCall_Click()
     Call mnuSendAwakeCall_click
 End Sub
+
+'add awake call to the listBox right click menus
+Private Sub mnuInputListBoxSendAwakeCall_Click()
+    Call mnuSendAwakeCall_click
+End Sub
+
+
+'add awake call to the listBox right click menus
+Private Sub mnuOutputListBoxSendAwakeCall_Click()
+    Call mnuSendAwakeCall_click
+End Sub
+
+
+'add awake call to the listBox right click menus
+Private Sub mnuCombinedListBoxSendAwakeCall_Click()
+    Call mnuSendAwakeCall_click
+End Sub
+
 
 
 ' hides the main form by starting the timer to fade the form out
@@ -5952,6 +6030,18 @@ Private Sub mnuSendPingRequest_Click()
 End Sub
 
 Private Sub mnuLBoxSendShutdownRequest_Click()
+    mnuSendShutdownRequest_Click
+End Sub
+
+Private Sub mnuInputListBoxSendShutdownRequest_Click()
+    mnuSendShutdownRequest_Click
+End Sub
+
+Private Sub mnuOutputListBoxSendShutdownRequest_Click()
+    mnuSendShutdownRequest_Click
+End Sub
+
+Private Sub mnuCombinedputListBoxSendShutdownRequest_Click()
     mnuSendShutdownRequest_Click
 End Sub
 
