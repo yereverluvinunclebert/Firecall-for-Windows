@@ -1593,7 +1593,6 @@ Begin VB.Form FireCallMain
    End
    Begin VB.Menu inputListBoxMnuPopmenu 
       Caption         =   "Input List Box Menu"
-      Visible         =   0   'False
       Begin VB.Menu mnuInputListBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
       End
@@ -1612,7 +1611,7 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuInputListBoxQuoteLine 
          Caption         =   "Copy and Quote Line"
       End
-      Begin VB.Menu mnuInputListBoxBlankLine9 
+      Begin VB.Menu mnuInputListBoxCopyBlankLine 
          Caption         =   ""
       End
       Begin VB.Menu mnuInputListBoxSwitchChatBoxes 
@@ -1651,7 +1650,7 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuOutputListBoxDeleteLine 
          Caption         =   "Delete This Line"
       End
-      Begin VB.Menu mnuOutputBlankLine22 
+      Begin VB.Menu mnuOutputListBoxEditBlankLine 
          Caption         =   ""
       End
       Begin VB.Menu mnuOutputListBoxCopyLine 
@@ -1809,6 +1808,9 @@ Begin VB.Form FireCallMain
       End
       Begin VB.Menu mnuTextEntryPasteLine 
          Caption         =   "Paste From Clipboard (Ctrl+V)"
+      End
+      Begin VB.Menu mnuTextEntryNothing 
+         Caption         =   "Nothing to Paste"
       End
    End
 End
@@ -3210,15 +3212,20 @@ Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x
             theText = Left$(getCurrentLine(lbxCombinedTextArea), 25)
 
             mnuCombinedListBoxEditLine.Caption = "Edit The Line - """ & theText & """"
-            mnuCombinedListBoxEditLine.Visible = True
             mnuCombinedListBoxDeleteLine.Caption = "Delete Line - """ & theText & """?"
             mnuCombinedListBoxDeleteLine.Visible = True
+            
+            mnuCombinedListBoxEditLine.Visible = True
+            mnuCombinedListBoxCopyLine.Visible = True
+            mnuCombinedListBoxQuoteLine.Visible = True
             
             mnuCombinedEditBlankLine.Visible = True
         Else
             'nothing or everything has selected
             mnuCombinedListBoxEditLine.Visible = False
             mnuCombinedListBoxDeleteLine.Visible = False
+            mnuCombinedListBoxCopyLine.Visible = False
+            mnuCombinedListBoxQuoteLine.Visible = False
             mnuCombinedEditBlankLine.Visible = False
         End If
         
@@ -4915,13 +4922,22 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxInputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
-   On Error GoTo lbxInputTextArea_MouseDown_Error
+    On Error GoTo lbxInputTextArea_MouseDown_Error
 
-    If Button = 2 Then
-
+     If Button = 2 Then
+        If lbxInputTextArea.SelCount = 1 Then 'a single line has been selected
+            mnuInputListBoxCopyLine.Visible = True
+            mnuInputListBoxQuoteLine.Visible = True
+            mnuInputListBoxCopyBlankLine.Visible = True
+        Else
+            'nothing or everything has selected
+            mnuInputListBoxCopyLine.Visible = False
+            mnuInputListBoxQuoteLine.Visible = False
+            mnuInputListBoxCopyBlankLine.Visible = False
+        End If
         Me.PopupMenu inputListBoxMnuPopmenu, vbPopupMenuRightButton
-        'Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
     End If
+    
     
     picTextChangeBright.Visible = False
     picTextChangeDull.Visible = True
@@ -4952,10 +4968,17 @@ Private Sub lbxOutputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As 
             mnuOutputListBoxEditLine.Visible = True
             mnuOutputListBoxDeleteLine.Caption = "Delete Line - """ & theText & """?"
             mnuOutputListBoxDeleteLine.Visible = True
+            
+            mnuOutputListBoxCopyLine.Visible = True
+            mnuOutputListBoxQuoteLine.Visible = True
+            mnuOutputListBoxEditBlankLine.Visible = True
         Else
             'nothing or everything has selected
             mnuOutputListBoxEditLine.Visible = False
             mnuOutputListBoxDeleteLine.Visible = False
+            mnuOutputListBoxCopyLine.Visible = False
+            mnuOutputListBoxQuoteLine.Visible = False
+            mnuOutputListBoxEditBlankLine.Visible = False
         End If
 
         DoEvents
@@ -6224,15 +6247,15 @@ Private Sub txtTextEntry_MouseDown(Button As Integer, Shift As Integer, x As Sin
         txtTextEntry.Enabled = True
         
         If Clipboard.GetText <> "" Then
-            'mnuTextEntryPasteAndGo.Visible = True
-            Me.PopupMenu mnuTextEntryPopmenu, vbPopupMenuRightButton
-            'mnuTextEntryPasteAndGo.Visible = True
+            mnuTextEntryPasteAndGo.Visible = True
+            mnuTextEntryNothing.Visible = False
+            mnuTextEntryPasteLine.Visible = True
         Else
-            'mnuOutputPasteAndGo.Visible = False
-            'mnuOutputPasteLine.Visible = False
+            mnuTextEntryPasteAndGo.Visible = False
+            mnuTextEntryNothing.Visible = True
+            mnuTextEntryPasteLine.Visible = False
         End If
-        
-        
+        Me.PopupMenu mnuTextEntryPopmenu, vbPopupMenuRightButton
     End If
 End Sub
 
