@@ -4,7 +4,7 @@ Begin VB.Form FireCallMain
    Caption         =   "Fire Call Win"
    ClientHeight    =   10185
    ClientLeft      =   3120
-   ClientTop       =   2370
+   ClientTop       =   2070
    ClientWidth     =   10065
    Icon            =   "Form1.frx":0000
    KeyPreview      =   -1  'True
@@ -1582,6 +1582,7 @@ Begin VB.Form FireCallMain
    End
    Begin VB.Menu inputListBoxMnuPopmenu 
       Caption         =   "Input List Box Menu"
+      Visible         =   0   'False
       Begin VB.Menu mnuInputListBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
       End
@@ -1621,6 +1622,7 @@ Begin VB.Form FireCallMain
    End
    Begin VB.Menu outputListBoxMnuPopmenu 
       Caption         =   "Output List Box Menu"
+      Visible         =   0   'False
       Begin VB.Menu mnuOutputListBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
       End
@@ -1666,6 +1668,7 @@ Begin VB.Form FireCallMain
    End
    Begin VB.Menu combinedListBoxMnuPopmenu 
       Caption         =   "Combined List Box Menu"
+      Visible         =   0   'False
       Begin VB.Menu mnuCombinedListBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
       End
@@ -1705,6 +1708,7 @@ Begin VB.Form FireCallMain
    End
    Begin VB.Menu listBoxMnuPopmenu 
       Caption         =   "List Box Menu"
+      Visible         =   0   'False
       Begin VB.Menu mnuLBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
       End
@@ -2619,20 +2623,31 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub formResizeSub()
-' credit Magic Ink
-' https://www.vbforums.com/showthread.php?824699-RESOLVED-Form-Placement-Considering-Aero-Borders
     
     Dim desiredClientHeight As Long: desiredClientHeight = 0
     Dim desiredClientMinWidth As Long: desiredClientMinWidth = 0
     Dim desiredClientMaxWidth As Long: desiredClientMaxWidth = 0
     Dim windowBorderWidth As Long: windowBorderWidth = 0
-    Dim a As Long: a = 0
+    Dim captionHeight As Long: captionHeight = 0
     
     On Error GoTo formResizeSub_Error
-
-    desiredClientMinWidth = 10065
-    desiredClientHeight = 10185
+    
+    desiredClientMinWidth = 10290 ' if you change this then check form_unload too
+    desiredClientHeight = 10200 '
     desiredClientMaxWidth = 25000
+    
+'    Dim Padding As Long: Padding = 0
+'    Dim borderWidth As Long: borderWidth = 0
+'    Dim captionHeight As Long: captionHeight = 0
+'
+'    borderWidth = (Me.Width - Me.ScaleWidth) / 2
+'    captionHeight = Me.Height - Me.ScaleHeight - borderWidth
+'
+'    ' under windows 10+ the internal window calcs are all wrong due to the bigger title bars
+'    Padding = 0 ' add normal padding below the help button to position the bottom of the form
+'
+'    FireCallMain.Height = 10560 + captionHeight + borderWidth + Padding
+
     
     ' Width and Heigth are the size of the component, including the borders
     ' ScaleWidth and ScaleHeight works together with ScaleLeft, ScaleTop and
@@ -2642,7 +2657,8 @@ Private Sub formResizeSub()
     
     ' width         = full window + theme border
     ' ScaleWidth    = window without any theme border
-    windowBorderWidth = Me.Width - Me.ScaleWidth
+    windowBorderWidth = (Me.Width - Me.ScaleWidth) / 2
+    captionHeight = Me.Height - Me.ScaleHeight - windowBorderWidth
     '
 '    borderSizeLeft = fBorderSize(FireCallMain).Left
 '    borderSizeRight = fBorderSize(FireCallMain).Right
@@ -2650,40 +2666,25 @@ Private Sub formResizeSub()
 '    borderSizeBottom = fBorderSize(FireCallMain).Bottom
     
     If Me.Width > 25000 Then ' maximum
-        windowBorderWidth = Me.Width - Me.ScaleWidth
-        Me.Width = windowBorderWidth + desiredClientMaxWidth
-        Exit Sub
+        'windowBorderWidth = Me.Width - Me.ScaleWidth / 2
+        Me.Width = desiredClientMaxWidth + windowBorderWidth
     End If
-    If Me.Width < 10185 Then ' minimum
-        Me.Width = windowBorderWidth + desiredClientMinWidth
+    If Me.Width < desiredClientMinWidth Then ' minimum
+        Me.Width = desiredClientMinWidth + windowBorderWidth
         Exit Sub
     End If
     
-    Me.Height = Me.Height - Me.ScaleHeight + desiredClientHeight
-    
-'     Me.Width = WidthInPixels * (Width / ScaleWidth)
-'    Me.Height = HeightInPixels * (Height / ScaleHeight)
+    'Me.Height = Me.Height - Me.ScaleHeight + desiredClientHeight
+    Me.Height = desiredClientHeight + captionHeight + windowBorderWidth
     
     txtTextEntry.Width = Me.ScaleWidth - 3700
     btnSendText.Left = txtTextEntry.Width + 355
-    ' 10185  9945 240
-    ' 14590  14355 235
-    ' 10305  10065 240
-    
-    ' 10905  10785 = 120
-    ' 11100 - 10980 = 120
     
     picSideBar.Left = Me.ScaleWidth - 2655 '+ Abs(fBorderSize(Me).Right)  ' 2715
-    'picSideBar.Left = 9945 - 2655
     
     lbxOutputTextArea.Width = picSideBar.Left - 120
     lbxInputTextArea.Width = picSideBar.Left - 120
     lbxCombinedTextArea.Width = picSideBar.Left - 120
-    'Me.Refresh
-    'picSideBar.Refresh
-    
-    'DoEvents
-    
 
    On Error GoTo 0
    Exit Sub
@@ -2708,8 +2709,8 @@ Private Sub Form_Unload(Cancel As Integer)
 
     FCWMaximiseFormX = Str$(FireCallMain.Left)
     FCWMaximiseFormY = Str$(FireCallMain.Top)
-    If Val(FCWFormWidth) <= 10185 Then
-        FCWFormWidth = "10185"
+    If Val(FCWFormWidth) <= 10290 Then
+        FCWFormWidth = "10290"
     Else
         FCWFormWidth = Str$(FireCallMain.Width)
     End If

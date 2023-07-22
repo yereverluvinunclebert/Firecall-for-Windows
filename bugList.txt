@@ -358,11 +358,16 @@
 ' picButtonMouseUpEvent now uses correct control names byRef - DONE
 ' added link to github on the development prefs - DONE
 ' debug OFF on the dev prefs now shows an example vbp location - DONE
+' sizing of main form taking into account Win10+ borders - as per PzEarth - DONE
 
 ' Tasks underway now
 ' ==================
 
-' sizing of main form taking into account Win10+ borders - as per PzEarth
+' instead of separate menu options that we hide or show dependant upon whether combined or split
+' we should have a separate menu for each - dimbo.
+
+' menu option to delete a line - WIP
+'      added line, now need to add code to rewrite the file
 
 ' help file - update credits
 ' credit area - update credits
@@ -370,22 +375,13 @@
 
 ' HIGH PRIORITY
 ' =============
-
-' instead of separate menu options that we hide or show dependant upon whether combined or split
-' we should have a separate menu for each - dimbo.
 '
 ' menu option to edit a line - WIP
 '      added line, now need to add code to rewrite the file
 
-
-
 ' menu option to edit a line in the combined box - needs to know whether that line
 '      is part of the output, analyse the header?
 '      for the moment remove it from the menu options? YES
-
-' menu option to delete a line - WIP
-'      added line, now need to add code to rewrite the file
-
 
 
 '
@@ -418,7 +414,6 @@
 '     find an icon for the main form that is suitable for 32/64bit systems
 '     test the icon just on the main form and not on the project itself - is that possible?
 
-
 ' modify the minimise button to something else - a stamp - DONE
 
 ' when the combined text box is being scrolled back a timed poll sets the page to the bottom automatically
@@ -436,16 +431,14 @@
 ' LOW Priority
 ' ============
 
-' add an Rc5 about image, same as PzEarth, transparent background
+' add an RC5 about image, same as PzEarth, transparent background
 
 ' add RC5 auto-register of DLLs module
 
 '       Elroy's code to add balloon tips to comboBox
 '       https://www.vbforums.com/showthread.php?893844-VB6-QUESTION-How-to-capture-the-MouseOver-Event-on-a-comboBox
-'
 
 ' HEIC image support, add native support to VB6 handling of HEIC files when the code is available.
-
 
 ' FCW move to front and back - test
 
