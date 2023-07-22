@@ -217,7 +217,7 @@ Begin VB.Form FireCallMain
       Begin VB.Label lblopacityFadeOutTimer 
          Caption         =   "opacityFadeToTimer"
          Height          =   285
-         Index           =   1
+         Index           =   96
          Left            =   3210
          TabIndex        =   96
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
@@ -247,7 +247,7 @@ Begin VB.Form FireCallMain
       Begin VB.Label lblTimer 
          Caption         =   "emailIconTimer"
          Height          =   285
-         Index           =   1
+         Index           =   97
          Left            =   3240
          TabIndex        =   93
          Tag             =   "turns a lit lamp off"
@@ -257,7 +257,7 @@ Begin VB.Form FireCallMain
       Begin VB.Label lblTimer 
          Caption         =   "EmailTimer"
          Height          =   285
-         Index           =   0
+         Index           =   99
          Left            =   885
          TabIndex        =   90
          Tag             =   "turns a lit lamp off"
@@ -274,16 +274,17 @@ Begin VB.Form FireCallMain
          Top             =   3240
          Width           =   1710
       End
-      Begin VB.Label lblPlayTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "playTimer"
          Height          =   285
+         Index           =   0
          Left            =   855
          TabIndex        =   85
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   765
          Width           =   1785
       End
-      Begin VB.Label lblEmailTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "recordTimer"
          Height          =   285
          Index           =   2
@@ -329,27 +330,30 @@ Begin VB.Form FireCallMain
          Top             =   360
          Width           =   1290
       End
-      Begin VB.Label lblclockTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "clockTimer"
          Height          =   285
+         Index           =   11
          Left            =   3240
          TabIndex        =   33
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   3105
          Width           =   1710
       End
-      Begin VB.Label lblpausePrinterTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "pausePrinterTimer"
          Height          =   285
+         Index           =   10
          Left            =   3240
          TabIndex        =   32
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   2625
          Width           =   1710
       End
-      Begin VB.Label lblshredderTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "shredderTimer"
          Height          =   285
+         Index           =   9
          Left            =   3255
          TabIndex        =   31
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
@@ -366,27 +370,30 @@ Begin VB.Form FireCallMain
          Top             =   3090
          Width           =   1140
       End
-      Begin VB.Label lbldropTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "dropTimer"
          Height          =   285
+         Index           =   5
          Left            =   885
          TabIndex        =   29
          Tag             =   "turns a lit lamp off"
          Top             =   2595
          Width           =   1140
       End
-      Begin VB.Label lblPrinterTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "printerTimer"
          Height          =   285
+         Index           =   4
          Left            =   870
          TabIndex        =   28
          Tag             =   "turns a lit lamp off"
          Top             =   2130
          Width           =   1140
       End
-      Begin VB.Label lblPollingTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "pollingTimer *"
          Height          =   285
+         Index           =   8
          Left            =   3255
          TabIndex        =   27
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
@@ -401,18 +408,20 @@ Begin VB.Form FireCallMain
          Top             =   4650
          Width           =   6330
       End
-      Begin VB.Label lblzOrderTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "zOrderTimer"
          Height          =   285
+         Index           =   7
          Left            =   3255
          TabIndex        =   25
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   1260
          Width           =   1260
       End
-      Begin VB.Label lblopacityFadeInTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "opacityFadeInTimer"
          Height          =   285
+         Index           =   6
          Left            =   3240
          TabIndex        =   24
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
@@ -422,16 +431,17 @@ Begin VB.Form FireCallMain
       Begin VB.Label lblopacityFadeOutTimer 
          Caption         =   "opacityFadeOutTimer"
          Height          =   285
-         Index           =   0
+         Index           =   98
          Left            =   3195
          TabIndex        =   23
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   315
          Width           =   1785
       End
-      Begin VB.Label lbliconiseTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "iconiseTimer *"
          Height          =   285
+         Index           =   3
          Left            =   885
          TabIndex        =   22
          Tag             =   "iconises the main application to a small stamp image"
@@ -456,9 +466,10 @@ Begin VB.Form FireCallMain
          Top             =   1815
          Width           =   1785
       End
-      Begin VB.Label lbllampTimer 
+      Begin VB.Label lbTimer 
          Caption         =   "lampTimer"
          Height          =   285
+         Index           =   1
          Left            =   885
          TabIndex        =   19
          Tag             =   "turns a lit lamp off"
@@ -1641,11 +1652,20 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuOutputListBoxDeleteLine 
          Caption         =   "Delete This Line"
       End
+      Begin VB.Menu mnuOutputBlankLine22 
+         Caption         =   "-"
+      End
       Begin VB.Menu mnuOutputListBoxCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
       End
       Begin VB.Menu mnuOutputListBoxQuoteLine 
          Caption         =   "Copy and Quote Line"
+      End
+      Begin VB.Menu mnuOutputListBoxPasteLine 
+         Caption         =   "Paste From Clipboard (Ctrl+V)"
+      End
+      Begin VB.Menu mnuOutputListBoxPasteAndGo 
+         Caption         =   "Paste && Go"
       End
       Begin VB.Menu mnuOutputListBoxBlankLine9 
          Caption         =   "-"
@@ -1656,7 +1676,7 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuOutputListBoxFind 
          Caption         =   "Find (Ctrl+F)"
       End
-      Begin VB.Menu mnuOutputListBoxOpenSharedInputFile 
+      Begin VB.Menu mnuOutputListBoxOpenSharedOutputFile 
          Caption         =   "Open the Shared Output File"
       End
       Begin VB.Menu mnuOutputListBoxOpenSharedExchangeFolder 
@@ -1684,11 +1704,17 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuCombinedListBoxEditLine 
          Caption         =   "Edit This Line"
       End
+      Begin VB.Menu mnuCombinedListBoxQuoteLine 
+         Caption         =   "Copy and Quote Line"
+      End
       Begin VB.Menu mnuCombinedListBoxCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
       End
-      Begin VB.Menu mnuCombinedListBoxQuoteLine 
-         Caption         =   "Copy and Quote Line"
+      Begin VB.Menu mnuCombinedListBoxPasteLine 
+         Caption         =   "Paste From Clipboard (Ctrl+V)"
+      End
+      Begin VB.Menu mnuCombinedListBoxPasteAndGo 
+         Caption         =   "Paste && Go"
       End
       Begin VB.Menu mnuCombinedListBoxBlankLine9 
          Caption         =   "-"
@@ -1700,6 +1726,9 @@ Begin VB.Form FireCallMain
          Caption         =   "Find (Ctrl+F)"
       End
       Begin VB.Menu mnuCombinedListBoxOpenSharedInputFile 
+         Caption         =   "Open the Shared Input File"
+      End
+      Begin VB.Menu mnuCombinedListBoxOpenSharedOutputFile 
          Caption         =   "Open the Shared Output File"
       End
       Begin VB.Menu mnuCombinedListBoxOpenSharedExchangeFolder 
@@ -1714,60 +1743,76 @@ Begin VB.Form FireCallMain
       Visible         =   0   'False
       Begin VB.Menu mnuLBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuLBoxSendAwakeCall 
          Caption         =   "Send an Awake Call"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuLBoxSendShutdownRequest 
          Caption         =   "Send Shutdown Request"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuBlankLine8 
          Caption         =   "-"
       End
       Begin VB.Menu mnuCombinedEditLine 
          Caption         =   "Edit This Line"
+         Enabled         =   0   'False
          Visible         =   0   'False
       End
       Begin VB.Menu mnuOutputEditLine 
          Caption         =   "Edit This Line"
+         Enabled         =   0   'False
          Visible         =   0   'False
       End
       Begin VB.Menu mnuCombinedDeleteLine 
          Caption         =   "Delete This Line"
+         Enabled         =   0   'False
          Visible         =   0   'False
       End
       Begin VB.Menu mnuOutputDeleteLine 
          Caption         =   "Delete This Line"
+         Enabled         =   0   'False
          Visible         =   0   'False
       End
       Begin VB.Menu mnuOutputCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuInputCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuInputQuoteLine 
          Caption         =   "Copy and Quote Line"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuCombinedQuoteLine 
          Caption         =   "Copy and Quote Line"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuCombinedCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuCombinedPasteLine 
          Caption         =   "Paste From Clipboard (Ctrl+V)"
+         Enabled         =   0   'False
          Visible         =   0   'False
       End
       Begin VB.Menu mnuOutputPasteLine 
          Caption         =   "Paste From Clipboard (Ctrl+V)"
+         Enabled         =   0   'False
          Visible         =   0   'False
       End
       Begin VB.Menu mnuCombinedPasteAndGo 
          Caption         =   "Paste && Go"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuOutputPasteAndGo 
          Caption         =   "Paste && Go"
+         Enabled         =   0   'False
          Visible         =   0   'False
       End
       Begin VB.Menu mnuBlankLine9 
@@ -1775,30 +1820,38 @@ Begin VB.Form FireCallMain
       End
       Begin VB.Menu mnuSwitchChatBoxes 
          Caption         =   "Switch to Single Chat Box"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuBlankLine10 
          Caption         =   "-"
       End
       Begin VB.Menu mnuFindInput 
          Caption         =   "Find (Ctrl+F)"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuFindOutput 
          Caption         =   "Find (Ctrl+F)"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuFindCombined 
          Caption         =   "Find (Ctrl+F)"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuLBOpenSharedInputFile 
          Caption         =   "Open the Shared Input File"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuLBOpenSharedOutputFile 
          Caption         =   "Open the Shared Output File"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuLBOpenSharedExchangeFolder 
          Caption         =   "Open the Shared Exchange Folder"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuLBRefresh 
          Caption         =   "Refresh the Chat boxes (F5)"
+         Enabled         =   0   'False
       End
    End
    Begin VB.Menu ClockMnuPopmenu 
@@ -1860,13 +1913,13 @@ Begin VB.Form FireCallMain
          Caption         =   "Text 10"
       End
    End
-   Begin VB.Menu mnuTextInputPopmenu 
+   Begin VB.Menu mnuTextEntryPopmenu 
       Caption         =   "The Input Box Menu"
       Visible         =   0   'False
-      Begin VB.Menu mnuTextInputPasteAndGo 
+      Begin VB.Menu mnuTextEntryPasteAndGo 
          Caption         =   "Paste && Go"
       End
-      Begin VB.Menu mnuTextInputPasteLine 
+      Begin VB.Menu mnuTextEntryPasteLine 
          Caption         =   "Paste From Clipboard (Ctrl+V)"
       End
    End
@@ -2358,7 +2411,7 @@ Public Sub formLoadTasks()
     inputListBoxMnuPopmenu.Visible = False
     outputListBoxMnuPopmenu.Visible = False
     combinedListBoxMnuPopmenu.Visible = False
-    listBoxMnuPopmenu.Visible = False
+    'listBoxMnuPopmenu.Visible = False
     
     'add known executables to a VB6 collection
     Call addExecutableSuffixArrayList
@@ -3203,6 +3256,10 @@ IconiseTimer_Timer_Error:
 End Sub
 
 
+Private Sub lblzOrderTimer_Click()
+
+End Sub
+
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxCombinedTextArea_DblClick
 ' Author    : beededea
@@ -3255,36 +3312,37 @@ Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x
    On Error GoTo lbxCombinedTextArea_MouseDown_Error
 
     If Button = 2 Then
-        mnuLBOpenSharedInputFile.Visible = True
-        mnuLBOpenSharedOutputFile.Visible = True
-        
-        mnuOutputEditLine.Visible = False
-        mnuOutputDeleteLine.Visible = False
-        mnuInputCopyLine.Visible = False
-        mnuInputQuoteLine.Visible = False
-        mnuOutputCopyLine.Visible = False
-        mnuOutputPasteLine.Visible = False
-        mnuFindInput.Visible = False
-        mnuFindOutput.Visible = False
-        mnuOutputPasteLine.Visible = False
-        mnuOutputPasteAndGo.Visible = False
-        
-'        mnuCombinedDeleteLine.Visible = True
-'        mnuCombinedEditLine.Visible = True
-        mnuCombinedCopyLine.Visible = True
-        mnuCombinedQuoteLine.Visible = True
-        mnuFindCombined.Visible = True
+'        mnuLBOpenSharedInputFile.Visible = True
+'        mnuLBOpenSharedOutputFile.Visible = True
+'
+'        mnuOutputEditLine.Visible = False
+'        mnuOutputDeleteLine.Visible = False
+'        mnuInputCopyLine.Visible = False
+'        mnuInputQuoteLine.Visible = False
+'        mnuOutputCopyLine.Visible = False
+'        mnuOutputPasteLine.Visible = False
+'        mnuFindInput.Visible = False
+'        mnuFindOutput.Visible = False
+'        mnuOutputPasteLine.Visible = False
+'        mnuOutputPasteAndGo.Visible = False
+'
+''        mnuCombinedDeleteLine.Visible = True
+''        mnuCombinedEditLine.Visible = True
+'        mnuCombinedCopyLine.Visible = True
+'        mnuCombinedQuoteLine.Visible = True
+'        mnuFindCombined.Visible = True
         
         DoEvents
         If Clipboard.GetText <> "" Then
-            mnuCombinedPasteLine.Visible = True
-            mnuCombinedPasteAndGo.Visible = True
+            mnuCombinedListBoxPasteLine.Visible = True
+            mnuCombinedListBoxPasteAndGo.Visible = True
         Else
-            mnuCombinedPasteLine.Visible = False
-            mnuCombinedPasteAndGo.Visible = False
+            mnuCombinedListBoxPasteLine.Visible = False
+            mnuCombinedListBoxPasteAndGo.Visible = False
         End If
         
-        Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
+        Me.PopupMenu outputListBoxMnuPopmenu, vbPopupMenuRightButton
+        'Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
     End If
     
     picTextChangeBright.Visible = False
@@ -3421,8 +3479,24 @@ End Sub
 
 
 
+
+Private Sub mnuInputListBoxCopyLine_Click()
+    Call copyText(lbxInputTextArea)
+End Sub
+
 Private Sub mnuCombinedListBoxCopyLine_Click()
     Call copyText(lbxCombinedTextArea, True)
+    Call pasteAndGoHandler
+End Sub
+
+
+Private Sub mnuInputListBoxQuoteLine_Click()
+    Call copyText(lbxInputTextArea, True)
+    Call pasteAndGoHandler
+End Sub
+
+Private Sub mnuOutputListBoxQuoteLine_Click()
+    Call copyText(lbxOutputTextArea, True)
     Call pasteAndGoHandler
 End Sub
 
@@ -3431,12 +3505,14 @@ Private Sub mnuCombinedListBoxQuoteLine_Click()
     Call pasteAndGoHandler
 End Sub
 
-Private Sub mnuInputListBoxCopyLine_Click()
-    Call copyText(lbxInputTextArea)
+Private Sub mnuInputQuoteLine_click()
+    Call copyText(lbxInputTextArea, True)
+    Call pasteAndGoHandler
+
 End Sub
 
-Private Sub mnuInputListBoxQuoteLine_Click()
-    Call copyText(lbxInputTextArea, True)
+Private Sub mnuCombinedQuoteLine_click()
+    Call copyText(lbxCombinedTextArea, True)
     Call pasteAndGoHandler
 End Sub
 
@@ -4556,20 +4632,32 @@ VBCopyFolder_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure VBCopyFolder of Form FireCallMain"
 
 End Sub
-' menu options to do this and that
-Private Sub mnuRefresh_Click()
-    If lbxOutputTextArea.Visible = True Then lbxOutputTextArea.Clear
-    If lbxInputTextArea.Visible = True Then lbxInputTextArea.Clear
-    If lbxCombinedTextArea.Visible = True Then lbxCombinedTextArea.Clear
-    Call btnRefresh_Click
-End Sub
-Private Sub mnuLBRefresh_Click()
-    If lbxOutputTextArea.Visible = True Then lbxOutputTextArea.Clear
-    If lbxInputTextArea.Visible = True Then lbxInputTextArea.Clear
-    If lbxCombinedTextArea.Visible = True Then lbxCombinedTextArea.Clear
-    Call btnRefresh_Click
+' menu options to refesh the chat boxes
+Private Sub mnuInputListBoxRefresh_Click()
+    Call menuRefresh
 End Sub
 
+Private Sub mnuOutputListBoxRefresh_Click()
+    Call menuRefresh
+End Sub
+
+Private Sub mnuCombinedListBoxRefresh_Click()
+    Call menuRefresh
+End Sub
+
+Private Sub mnuRefresh_Click()
+    Call menuRefresh
+End Sub
+
+Private Sub mnuLBRefresh_Click()
+    Call menuRefresh
+End Sub
+Private Sub menuRefresh()
+    If lbxOutputTextArea.Visible = True Then lbxOutputTextArea.Clear
+    If lbxInputTextArea.Visible = True Then lbxInputTextArea.Clear
+    If lbxCombinedTextArea.Visible = True Then lbxCombinedTextArea.Clear
+    Call btnRefresh_Click
+End Sub
 
 Private Sub mnuInputListBoxOpenSharedInputFile_Click()
     Call OpenSharedInputFile
@@ -4590,9 +4678,6 @@ Private Sub OpenSharedInputFile()
 End Sub
 
 
-Private Sub mnuLBOpenSharedOutputFile_Click()
-    Call mnuOpenSharedOutputFile_Click
-End Sub
 Private Sub mnuCloseProgram_Click()
     Call btnClose_Click
 End Sub
@@ -4916,27 +5001,27 @@ Private Sub lbxInputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As I
    On Error GoTo lbxInputTextArea_MouseDown_Error
 
     If Button = 2 Then
-        mnuLBOpenSharedInputFile.Visible = True
-        mnuLBOpenSharedOutputFile.Visible = False
-        
-        mnuInputCopyLine.Visible = True
-        mnuInputQuoteLine.Visible = True
-        mnuFindInput.Visible = True
-        
-        mnuOutputCopyLine.Visible = False
-        mnuFindOutput.Visible = False
-        mnuOutputPasteLine.Visible = False
-        mnuOutputPasteAndGo.Visible = False
-        mnuOutputEditLine.Visible = False
-        mnuOutputDeleteLine.Visible = False
-        
-'        mnuCombinedDeleteLine.Visible = False
-'        mnuCombinedEditLine.Visible = False
-        mnuFindCombined.Visible = False
-        mnuCombinedPasteLine.Visible = False
-        mnuCombinedPasteAndGo.Visible = False
-        mnuCombinedCopyLine.Visible = False
-        mnuCombinedQuoteLine.Visible = False
+'        mnuLBOpenSharedInputFile.Visible = True
+'        mnuLBOpenSharedOutputFile.Visible = False
+'
+'        mnuInputCopyLine.Visible = True
+'        mnuInputQuoteLine.Visible = True
+'        mnuFindInput.Visible = True
+'
+'        mnuOutputCopyLine.Visible = False
+'        mnuFindOutput.Visible = False
+'        mnuOutputPasteLine.Visible = False
+'        mnuOutputPasteAndGo.Visible = False
+'        mnuOutputEditLine.Visible = False
+'        mnuOutputDeleteLine.Visible = False
+'
+''        mnuCombinedDeleteLine.Visible = False
+''        mnuCombinedEditLine.Visible = False
+'        mnuFindCombined.Visible = False
+'        mnuCombinedPasteLine.Visible = False
+'        mnuCombinedPasteAndGo.Visible = False
+'        mnuCombinedCopyLine.Visible = False
+'        mnuCombinedQuoteLine.Visible = False
 
         Me.PopupMenu inputListBoxMnuPopmenu, vbPopupMenuRightButton
         'Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
@@ -4967,44 +5052,47 @@ Private Sub lbxOutputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As 
             
             theText = Left$(getCurrentLine(lbxOutputTextArea), 25)
 
-            mnuOutputEditLine.Caption = "Edit The Line - """ & theText & """"
-            mnuOutputEditLine.Visible = True
-            mnuOutputDeleteLine.Visible = True
+            mnuOutputListBoxEditLine.Caption = "Edit The Line - """ & theText & """"
+            mnuOutputListBoxEditLine.Visible = True
+            mnuOutputListBoxDeleteLine.Visible = True
         Else
             'nothing or everything has selected
-            mnuOutputEditLine.Visible = False
-            mnuOutputDeleteLine.Visible = False
+            mnuOutputListBoxEditLine.Visible = False
+            mnuOutputListBoxDeleteLine.Visible = False
         End If
 
-        mnuLBOpenSharedOutputFile.Visible = True
-        mnuOutputCopyLine.Visible = True
-        mnuFindOutput.Visible = True
-
-        mnuLBOpenSharedInputFile.Visible = False
-        mnuInputCopyLine.Visible = False
-        mnuInputQuoteLine.Visible = False
-        mnuFindInput.Visible = False
-        mnuCombinedCopyLine.Visible = False
-        mnuCombinedPasteLine.Visible = False
-        mnuCombinedPasteAndGo.Visible = False
-        mnuFindCombined.Visible = False
-        mnuCombinedQuoteLine.Visible = False
-        mnuCombinedEditLine.Visible = False
-        mnuCombinedDeleteLine.Visible = False
+'        mnuLBOpenSharedOutputFile.Visible = True
+'        mnuOutputCopyLine.Visible = True
+'        mnuFindOutput.Visible = True
+'
+'        mnuLBOpenSharedInputFile.Visible = False
+'        mnuInputCopyLine.Visible = False
+'        mnuInputQuoteLine.Visible = False
+'        mnuFindInput.Visible = False
+'        mnuCombinedCopyLine.Visible = False
+'        mnuCombinedPasteLine.Visible = False
+'        mnuCombinedPasteAndGo.Visible = False
+'        mnuFindCombined.Visible = False
+'        mnuCombinedQuoteLine.Visible = False
+'        mnuCombinedEditLine.Visible = False
+'        mnuCombinedDeleteLine.Visible = False
         
         DoEvents
         If Clipboard.GetText <> "" Then
-            mnuOutputPasteLine.Visible = True
-            mnuOutputPasteAndGo.Visible = True
+            mnuOutputListBoxPasteLine.Visible = True
+            mnuOutputListBoxPasteAndGo.Visible = True
         Else
-            mnuOutputPasteAndGo.Visible = False
-            mnuOutputPasteLine.Visible = False
+            mnuOutputListBoxPasteAndGo.Visible = False
+            mnuOutputListBoxPasteLine.Visible = False
         End If
 
-        Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
+        'Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
+        Me.PopupMenu outputListBoxMnuPopmenu, vbPopupMenuRightButton
     End If
 
 End Sub
+
+
 
 
 'menu options follow
@@ -5015,20 +5103,51 @@ Private Sub mnuAboutFireCallWin_Click()
 End Sub
 
 
+Private Sub mnuOutputListBoxOpenSharedOutputFile_click()
+    Call OpenSharedOutputFile
+End Sub
+
+Private Sub mnuLBOpenSharedOutputFile_Click()
+    Call OpenSharedOutputFile
+End Sub
 
 ' menu option to open the shared output file in an an editor or default application
 Private Sub mnuOpenSharedOutputFile_Click()
+    Call OpenSharedOutputFile
+End Sub
+
+' menu option to open the shared output file in an an editor or default application
+Private Sub OpenSharedOutputFile()
     Call ShellExecute(Me.hwnd, "Open", FCWSharedOutputFile, vbNullString, App.Path, 1)
+End Sub
+
+
+' menu option to open the shared folder in a file manager window
+Private Sub mnuInputListBoxOpenSharedExchangeFolder_Click()
+    Call OpenSharedExchangeFolder
+End Sub
+' menu option to open the shared folder in a file manager window
+Private Sub mnuOutputListBoxOpenSharedExchangeFolder_Click()
+    Call OpenSharedExchangeFolder
+End Sub
+' menu option to open the shared folder in a file manager window
+Private Sub mnuCombinedListBoxOpenSharedExchangeFolder_Click()
+    Call OpenSharedExchangeFolder
 End Sub
 
 ' menu option to open the shared folder in a file manager window
 Private Sub mnuOpenSharedExchangeFolder_Click()
-    Call ShellExecute(Me.hwnd, "Open", FCWExchangeFolder, vbNullString, App.Path, 1)
+    Call OpenSharedExchangeFolder
 End Sub
 ' menu option to open the shared folder in a file manager window
 Private Sub mnuLBOpenSharedExchangeFolder_Click()
+    Call OpenSharedExchangeFolder
+End Sub
+' open the shared folder in a file manager window
+Private Sub OpenSharedExchangeFolder()
     Call ShellExecute(Me.hwnd, "Open", FCWExchangeFolder, vbNullString, App.Path, 1)
 End Sub
+
 '---------------------------------------------------------------------------------------
 ' Procedure : mnuCoffee_Click
 ' Author    : beededea
@@ -6225,9 +6344,9 @@ Private Sub txtTextEntry_MouseDown(Button As Integer, Shift As Integer, x As Sin
         txtTextEntry.Enabled = True
         
         If Clipboard.GetText <> "" Then
-            'mnuTextInputPasteAndGo.Visible = True
-            Me.PopupMenu mnuTextInputPopmenu, vbPopupMenuRightButton
-            'mnuTextInputPasteAndGo.Visible = True
+            'mnuTextEntryPasteAndGo.Visible = True
+            Me.PopupMenu mnuTextEntryPopmenu, vbPopupMenuRightButton
+            'mnuTextEntryPasteAndGo.Visible = True
         Else
             'mnuOutputPasteAndGo.Visible = False
             'mnuOutputPasteLine.Visible = False
@@ -6237,14 +6356,21 @@ Private Sub txtTextEntry_MouseDown(Button As Integer, Shift As Integer, x As Sin
     End If
 End Sub
 
-Private Sub mnuTextInputPasteAndGo_click()
+Private Sub mnuTextEntryPasteAndGo_click()
     Call pasteAndGoHandler
 End Sub
 
-Private Sub mnuTextInputPasteLine_click()
+Private Sub mnuTextEntryPasteLine_click()
     Call mnuOutputPasteLine_click_event
 End Sub
 
+Private Sub mnuOutputListBoxPasteLine_click()
+    Call mnuOutputPasteLine_click_event
+End Sub
+
+Private Sub mnuOutputPasteLine_click()
+    Call mnuOutputPasteLine_click_event
+End Sub
 Private Sub txtTextEntry_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip txtTextEntry.hwnd, "This is the text box where you type your messages, pressing the SEND button to dispatch the text.", _
                   TTIconInfo, "Help on Text entry", , , , True
@@ -6604,14 +6730,22 @@ End Sub
 Private Sub mnuCombinedPasteLine_click()
     Call mnuOutputPasteLine_click_event
 End Sub
-Private Sub mnuOutputPasteLine_click()
-    Call mnuOutputPasteLine_click_event
-End Sub
+'Private Sub mnuOutputPasteLine_click()
+'    Call mnuOutputPasteLine_click_event
+'End Sub
 
 Private Sub mnuOutputPasteLine_click_event()
     DoEvents
     txtTextEntry.Text = Clipboard.GetText
     txtTextEntry.SetFocus ' set focus back to the text entry box
+End Sub
+
+Private Sub mnuOutputListBoxPasteAndGo_click()
+    Call pasteAndGoHandler
+End Sub
+
+Private Sub mnuCombinedListBoxPasteAndGo_click()
+    Call pasteAndGoHandler
 End Sub
 
 Private Sub mnuCombinedPasteAndGo_click()
@@ -8355,16 +8489,7 @@ Private Sub mnuText10_click()
 End Sub
 
 
-Private Sub mnuInputQuoteLine_click()
-    Call copyText(lbxInputTextArea, True)
-    Call pasteAndGoHandler
 
-End Sub
-
-Private Sub mnuCombinedQuoteLine_click()
-    Call copyText(lbxCombinedTextArea, True)
-    Call pasteAndGoHandler
-End Sub
 
 
 '---------------------------------------------------------------------------------------
