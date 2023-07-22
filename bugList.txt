@@ -323,6 +323,7 @@
 ' added timer and vars necessary to allow the animation on the config button - DONE
 ' move iconiseTimer to final prefs page where it can be merged to the opacity setting - DONE
 ' setting opacity to a pre-defined level as an option instead of automatically iconising - DONE
+' modify the minimise button to something else - a stamp - DONE
 
 ' Addition of temporary menu options to reveal the program folder - DONE
 ' Addition of temporary menu options to edit using the vbp file - DONE
@@ -360,19 +361,24 @@
 ' debug OFF on the dev prefs now shows an example vbp location - DONE
 ' sizing of main form taking into account Win10+ borders - as per PzEarth - DONE
 
+' new input menu - DONE
+' new output menu - DONE
+' deleted old menu - DONE
+
 ' Tasks underway now
 ' ==================
 
-' instead of separate menu options that we hide or show dependant upon whether combined or split
-' we should have a separate menu for each - wip
-'    the old menu inserted into the new menus from the top to find(Ctrl+f)
-
+' new combined menu - wip edit, copy and quote,  copy selected, paste from,  paste & go
+'
 ' menu option to delete a line - WIP
 '      added line, now need to add code to rewrite the file
 
 ' help file - update credits
 ' credit area - update credits
-' create CHM file and link that.
+' create CHM file
+' link CHM file that on the main menu
+' link CHM file that on the main help button
+' link CHM file that on the prefs help button
 
 ' HIGH PRIORITY
 ' =============
@@ -383,8 +389,6 @@
 ' menu option to edit a line in the combined box - needs to know whether that line
 '      is part of the output, analyse the header?
 '      for the moment remove it from the menu options? YES
-
-
 '
 ' settings.ini needs to be copied over from the users area to the sample item in the programs folder
 ' default settings.ini to be standardised for new users - WIP
@@ -415,8 +419,6 @@
 '     find an icon for the main form that is suitable for 32/64bit systems
 '     test the icon just on the main form and not on the project itself - is that possible?
 
-' modify the minimise button to something else - a stamp - DONE
-
 ' when the combined text box is being scrolled back a timed poll sets the page to the bottom automatically
 '    test the removal of the position setting to the final position when the slider is being used or when control has focus.
 '    or perhaps when the slider position is not at max.
@@ -431,10 +433,6 @@
 
 ' LOW Priority
 ' ============
-
-' add an RC5 about image, same as PzEarth, transparent background
-
-' add RC5 auto-register of DLLs module
 
 '       Elroy's code to add balloon tips to comboBox
 '       https://www.vbforums.com/showthread.php?893844-VB6-QUESTION-How-to-capture-the-MouseOver-Event-on-a-comboBox

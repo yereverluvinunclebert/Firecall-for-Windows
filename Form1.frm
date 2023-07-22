@@ -1604,7 +1604,7 @@ Begin VB.Form FireCallMain
          Caption         =   "Send Shutdown Request"
       End
       Begin VB.Menu mnuBlankLine18 
-         Caption         =   "-"
+         Caption         =   ""
       End
       Begin VB.Menu mnuInputListBoxCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
@@ -1613,7 +1613,7 @@ Begin VB.Form FireCallMain
          Caption         =   "Copy and Quote Line"
       End
       Begin VB.Menu mnuInputListBoxBlankLine9 
-         Caption         =   "-"
+         Caption         =   ""
       End
       Begin VB.Menu mnuInputListBoxSwitchChatBoxes 
          Caption         =   "Switch to Single Chat Box"
@@ -1633,7 +1633,6 @@ Begin VB.Form FireCallMain
    End
    Begin VB.Menu outputListBoxMnuPopmenu 
       Caption         =   "Output List Box Menu"
-      Visible         =   0   'False
       Begin VB.Menu mnuOutputListBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
       End
@@ -1644,7 +1643,7 @@ Begin VB.Form FireCallMain
          Caption         =   "Send Shutdown Request"
       End
       Begin VB.Menu mnuOutputBlankLine18 
-         Caption         =   "-"
+         Caption         =   ""
       End
       Begin VB.Menu mnuOutputListBoxEditLine 
          Caption         =   "Edit This Line"
@@ -1653,7 +1652,7 @@ Begin VB.Form FireCallMain
          Caption         =   "Delete This Line"
       End
       Begin VB.Menu mnuOutputBlankLine22 
-         Caption         =   "-"
+         Caption         =   ""
       End
       Begin VB.Menu mnuOutputListBoxCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
@@ -1668,7 +1667,7 @@ Begin VB.Form FireCallMain
          Caption         =   "Paste && Go"
       End
       Begin VB.Menu mnuOutputListBoxBlankLine9 
-         Caption         =   "-"
+         Caption         =   ""
       End
       Begin VB.Menu mnuOutputListBoxSwitchChatBoxes 
          Caption         =   "Switch to Single Chat Box"
@@ -1698,16 +1697,22 @@ Begin VB.Form FireCallMain
          Caption         =   "Send Shutdown Request"
       End
       Begin VB.Menu mnuCombinedBlankLine18 
-         Caption         =   "-"
+         Caption         =   ""
       End
       Begin VB.Menu mnuCombinedListBoxEditLine 
          Caption         =   "Edit This Line"
       End
-      Begin VB.Menu mnuCombinedListBoxQuoteLine 
-         Caption         =   "Copy and Quote Line"
+      Begin VB.Menu mnuCombinedListBoxDeleteLine 
+         Caption         =   "Delete This Line"
+      End
+      Begin VB.Menu mnuCombinedEditBlankLine 
+         Caption         =   ""
       End
       Begin VB.Menu mnuCombinedListBoxCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
+      End
+      Begin VB.Menu mnuCombinedListBoxQuoteLine 
+         Caption         =   "Copy and Quote Line"
       End
       Begin VB.Menu mnuCombinedListBoxPasteLine 
          Caption         =   "Paste From Clipboard (Ctrl+V)"
@@ -1716,7 +1721,7 @@ Begin VB.Form FireCallMain
          Caption         =   "Paste && Go"
       End
       Begin VB.Menu mnuCombinedListBoxBlankLine9 
-         Caption         =   "-"
+         Caption         =   ""
       End
       Begin VB.Menu mnuCombinedListBoxSwitchChatBoxes 
          Caption         =   "Switch to Split Chat Box Mode"
@@ -3195,30 +3200,28 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-   On Error GoTo lbxCombinedTextArea_MouseDown_Error
+    Dim theText As String: theText = vbNullString
+   
+    On Error GoTo lbxCombinedTextArea_MouseDown_Error
 
     If Button = 2 Then
-'        mnuLBOpenSharedInputFile.Visible = True
-'        mnuLBOpenSharedOutputFile.Visible = True
-'
-'        mnuOutputEditLine.Visible = False
-'        mnuOutputDeleteLine.Visible = False
-'        mnuInputCopyLine.Visible = False
-'        mnuInputQuoteLine.Visible = False
-'        mnuOutputCopyLine.Visible = False
-'        mnuOutputPasteLine.Visible = False
-'        mnuFindInput.Visible = False
-'        mnuFindOutput.Visible = False
-'        mnuOutputPasteLine.Visible = False
-'        mnuOutputPasteAndGo.Visible = False
-'
-''        mnuCombinedDeleteLine.Visible = True
-''        mnuCombinedEditLine.Visible = True
-'        mnuCombinedCopyLine.Visible = True
-'        mnuCombinedQuoteLine.Visible = True
-'        mnuFindCombined.Visible = True
-'        mnuCombinedListBoxOpenSharedInputFile.Visible = True
-        'arse.Visible = True
+        If lbxCombinedTextArea.SelCount = 1 Then 'a single line has been selected
+                     
+            theText = Left$(getCurrentLine(lbxCombinedTextArea), 25)
+
+            mnuCombinedListBoxEditLine.Caption = "Edit The Line - """ & theText & """"
+            mnuCombinedListBoxEditLine.Visible = True
+            mnuCombinedListBoxDeleteLine.Caption = "Delete Line - """ & theText & """?"
+            mnuCombinedListBoxDeleteLine.Visible = True
+            
+            mnuCombinedEditBlankLine.Visible = True
+        Else
+            'nothing or everything has selected
+            mnuCombinedListBoxEditLine.Visible = False
+            mnuCombinedListBoxDeleteLine.Visible = False
+            mnuCombinedEditBlankLine.Visible = False
+        End If
+        
         DoEvents
         If Clipboard.GetText <> "" Then
             mnuCombinedListBoxPasteLine.Visible = True
@@ -3367,6 +3370,12 @@ End Sub
 
 
 
+
+
+Private Sub mnuCombinedBlankLine23_Click()
+
+End Sub
+
 Private Sub mnuCombinedListBoxOpenSharedInputFile_Click()
     Call OpenSharedInputFile
 End Sub
@@ -3375,13 +3384,26 @@ Private Sub mnuCombinedListBoxOpenSharedOutputFile_Click()
     Call OpenSharedOutputFile
 End Sub
 
+Private Sub mnuCombinedListBoxPasteLine_Click()
+    Call mnuOutputPasteLine_click_event
+End Sub
+
+Private Sub mnuCombinedPasteLine_click()
+    Call mnuOutputPasteLine_click_event
+End Sub
+
+Private Sub mnuOutputPasteLine_click_event()
+    DoEvents
+    txtTextEntry.Text = Clipboard.GetText
+    txtTextEntry.SetFocus ' set focus back to the text entry box
+End Sub
+
 Private Sub mnuInputListBoxCopyLine_Click()
-    Call copyText(lbxInputTextArea)
+    Call copyText(lbxInputTextArea, False)
 End Sub
 
 Private Sub mnuCombinedListBoxCopyLine_Click()
-    Call copyText(lbxCombinedTextArea, True)
-    Call pasteAndGoHandler
+    Call copyText(lbxCombinedTextArea, False)
 End Sub
 
 
@@ -3422,7 +3444,7 @@ Private Sub mnuInputListBoxSendPingRequest_Click()
 End Sub
 
 Private Sub mnuOutputListBoxCopyLine_Click()
-    Call copyText(lbxOutputTextArea)
+    Call copyText(lbxOutputTextArea, False)
 End Sub
 
 'add ping request to the listBox right click menus
@@ -4896,27 +4918,6 @@ Private Sub lbxInputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As I
    On Error GoTo lbxInputTextArea_MouseDown_Error
 
     If Button = 2 Then
-'        mnuLBOpenSharedInputFile.Visible = True
-'        mnuLBOpenSharedOutputFile.Visible = False
-'
-'        mnuInputCopyLine.Visible = True
-'        mnuInputQuoteLine.Visible = True
-'        mnuFindInput.Visible = True
-'
-'        mnuOutputCopyLine.Visible = False
-'        mnuFindOutput.Visible = False
-'        mnuOutputPasteLine.Visible = False
-'        mnuOutputPasteAndGo.Visible = False
-'        mnuOutputEditLine.Visible = False
-'        mnuOutputDeleteLine.Visible = False
-'
-''        mnuCombinedDeleteLine.Visible = False
-''        mnuCombinedEditLine.Visible = False
-'        mnuFindCombined.Visible = False
-'        mnuCombinedPasteLine.Visible = False
-'        mnuCombinedPasteAndGo.Visible = False
-'        mnuCombinedCopyLine.Visible = False
-'        mnuCombinedQuoteLine.Visible = False
 
         Me.PopupMenu inputListBoxMnuPopmenu, vbPopupMenuRightButton
         'Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
@@ -4949,6 +4950,7 @@ Private Sub lbxOutputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As 
 
             mnuOutputListBoxEditLine.Caption = "Edit The Line - """ & theText & """"
             mnuOutputListBoxEditLine.Visible = True
+            mnuOutputListBoxDeleteLine.Caption = "Delete Line - """ & theText & """?"
             mnuOutputListBoxDeleteLine.Visible = True
         Else
             'nothing or everything has selected
@@ -4956,22 +4958,6 @@ Private Sub lbxOutputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As 
             mnuOutputListBoxDeleteLine.Visible = False
         End If
 
-'        mnuLBOpenSharedOutputFile.Visible = True
-'        mnuOutputCopyLine.Visible = True
-'        mnuFindOutput.Visible = True
-'
-'        mnuLBOpenSharedInputFile.Visible = False
-'        mnuInputCopyLine.Visible = False
-'        mnuInputQuoteLine.Visible = False
-'        mnuFindInput.Visible = False
-'        mnuCombinedCopyLine.Visible = False
-'        mnuCombinedPasteLine.Visible = False
-'        mnuCombinedPasteAndGo.Visible = False
-'        mnuFindCombined.Visible = False
-'        mnuCombinedQuoteLine.Visible = False
-'        mnuCombinedEditLine.Visible = False
-'        mnuCombinedDeleteLine.Visible = False
-        
         DoEvents
         If Clipboard.GetText <> "" Then
             mnuOutputListBoxPasteLine.Visible = True
@@ -4981,7 +4967,6 @@ Private Sub lbxOutputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As 
             mnuOutputListBoxPasteLine.Visible = False
         End If
 
-        'Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
         Me.PopupMenu outputListBoxMnuPopmenu, vbPopupMenuRightButton
     End If
 
@@ -6543,16 +6528,16 @@ Private Sub setTooltips()
 End Sub
 ' copy text from the input listbox via the menu
 Private Sub mnuInputCopyLine_click()
-    Call copyText(lbxInputTextArea)
+    Call copyText(lbxInputTextArea, False)
 End Sub
 ' copy text from the output listbox via the menu
 Private Sub mnuOutputCopyLine_click()
-    Call copyText(lbxOutputTextArea)
+    Call copyText(lbxOutputTextArea, False)
 End Sub
 
 ' copy text from the combined listbox via the menu
 Private Sub mnuCombinedCopyLine_click()
-    Call copyText(lbxCombinedTextArea)
+    Call copyText(lbxCombinedTextArea, False)
 End Sub
 
 ' copy text from either of the two listboxes
@@ -6622,18 +6607,6 @@ End Sub
 
 
 
-Private Sub mnuCombinedPasteLine_click()
-    Call mnuOutputPasteLine_click_event
-End Sub
-'Private Sub mnuOutputPasteLine_click()
-'    Call mnuOutputPasteLine_click_event
-'End Sub
-
-Private Sub mnuOutputPasteLine_click_event()
-    DoEvents
-    txtTextEntry.Text = Clipboard.GetText
-    txtTextEntry.SetFocus ' set focus back to the text entry box
-End Sub
 
 Private Sub mnuOutputListBoxPasteAndGo_click()
     Call pasteAndGoHandler
@@ -8597,13 +8570,7 @@ Private Sub btnPicHelp_MouseUp(Button As Integer, Shift As Integer, x As Single,
     btnPicHelp.Top = btnPicHelp.Top - 10
 End Sub
 
-Private Sub mnuCombinedListBoxEditLine_click()
-    ' waiting for code
-End Sub
 
-Private Sub mnuCombinedEditLine_click()
-    ' this code will be deleted as it is from the old listbox
-End Sub
 
 Private Sub mnuOutputDeleteLine_click()
     ' waiting for code
@@ -8613,12 +8580,18 @@ Private Sub mnuCombinedDeleteLine_click()
     ' waiting for code
 End Sub
 
+Private Sub mnuCombinedListBoxEditLine_click()
+    Call editLine(lbxCombinedTextArea)
+    'Call copyText(lbxCombinedTextArea, False)
+End Sub
 Private Sub mnuOutputListBoxEditLine_click()
-    Call outputEditLine
+    Call editLine(lbxOutputTextArea)
 End Sub
 Private Sub mnuOutputEditLine_click()
-    Call outputEditLine
+    Call editLine(lbxOutputTextArea)
 End Sub
+
+
 '---------------------------------------------------------------------------------------
 ' Procedure : outputEditLine
 ' Author    : beededea
@@ -8626,7 +8599,7 @@ End Sub
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Private Sub outputEditLine()
+Private Sub editLine(ByRef srcBox As ListBox, Optional quote As Boolean)
     Dim editedText As String
     Dim theText As String
     
@@ -8635,7 +8608,10 @@ Private Sub outputEditLine()
     ' get the current line from the chosen list box
    On Error GoTo outputEditLine_Error
 
-    theText = getCurrentLine(lbxOutputTextArea)
+    If srcBox.SelCount = 0 Then Exit Sub
+    'textToWorkOn = srcBox.Text
+
+    theText = getCurrentLine(srcBox)
 
     ' uses an ordinary inputbox to allow the user to edit the text, might do a custom form later.
     editedText = InputBox("Edit Current Line", "Editing The Output", theText)
@@ -8915,3 +8891,5 @@ btnAboutDebugInfo_Click_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnAboutDebugInfo_Click of form PanzerEarthPrefs"
 End Sub
+
+
