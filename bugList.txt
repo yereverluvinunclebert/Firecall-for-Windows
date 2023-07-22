@@ -364,7 +364,8 @@
 ' ==================
 
 ' instead of separate menu options that we hide or show dependant upon whether combined or split
-' we should have a separate menu for each - dimbo.
+' we should have a separate menu for each - wip
+'    the old menu inserted into the new menus from the top to find(Ctrl+f)
 
 ' menu option to delete a line - WIP
 '      added line, now need to add code to rewrite the file

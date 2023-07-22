@@ -1681,6 +1681,9 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuCombinedBlankLine18 
          Caption         =   "-"
       End
+      Begin VB.Menu mnuCombinedListBoxEditLine 
+         Caption         =   "Edit This Line"
+      End
       Begin VB.Menu mnuCombinedListBoxCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
       End
@@ -1707,7 +1710,7 @@ Begin VB.Form FireCallMain
       End
    End
    Begin VB.Menu listBoxMnuPopmenu 
-      Caption         =   "List Box Menu"
+      Caption         =   "OLD List Box Menu"
       Visible         =   0   'False
       Begin VB.Menu mnuLBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
@@ -3416,6 +3419,8 @@ Private Sub lbxOutputTextArea_Scroll()
     lbxOutputTextArea.ToolTipText = ""
 End Sub
 
+
+
 Private Sub mnuCombinedListBoxCopyLine_Click()
     Call copyText(lbxCombinedTextArea, True)
     Call pasteAndGoHandler
@@ -4564,9 +4569,27 @@ Private Sub mnuLBRefresh_Click()
     If lbxCombinedTextArea.Visible = True Then lbxCombinedTextArea.Clear
     Call btnRefresh_Click
 End Sub
-Private Sub mnuLBOpenSharedInputFile_Click()
-    Call mnuOpenSharedInputFile_Click
+
+
+Private Sub mnuInputListBoxOpenSharedInputFile_Click()
+    Call OpenSharedInputFile
 End Sub
+
+Private Sub mnuLBOpenSharedInputFile_Click()
+    Call OpenSharedInputFile
+End Sub
+
+' menu option to open the shared input file in an an editor or default application
+Private Sub mnuOpenSharedInputFile_Click()
+    Call OpenSharedInputFile
+End Sub
+
+' open the shared input file in an an editor or default application
+Private Sub OpenSharedInputFile()
+    Call ShellExecute(Me.hwnd, "Open", FCWSharedInputFile, vbNullString, App.Path, 1)
+End Sub
+
+
 Private Sub mnuLBOpenSharedOutputFile_Click()
     Call mnuOpenSharedOutputFile_Click
 End Sub
@@ -4915,8 +4938,8 @@ Private Sub lbxInputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As I
         mnuCombinedCopyLine.Visible = False
         mnuCombinedQuoteLine.Visible = False
 
-        
-        Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
+        Me.PopupMenu inputListBoxMnuPopmenu, vbPopupMenuRightButton
+        'Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
     End If
     
     picTextChangeBright.Visible = False
@@ -4991,10 +5014,7 @@ Private Sub mnuAboutFireCallWin_Click()
     about.Show
 End Sub
 
-' menu option to open the shared input file in an an editor or default application
-Private Sub mnuOpenSharedInputFile_Click()
-    Call ShellExecute(Me.hwnd, "Open", FCWSharedInputFile, vbNullString, App.Path, 1)
-End Sub
+
 
 ' menu option to open the shared output file in an an editor or default application
 Private Sub mnuOpenSharedOutputFile_Click()
@@ -6631,7 +6651,26 @@ Clip_Error:
 
 End Sub
 
+
+
 Private Sub mnuSwitchChatBoxes_click()
+    Call switchChatBoxes
+End Sub
+
+Private Sub mnuInputListBoxSwitchChatBoxes_click()
+    Call switchChatBoxes
+End Sub
+
+Private Sub mnuOutputListBoxSwitchChatBoxes_click()
+    Call switchChatBoxes
+End Sub
+
+Private Sub mnuCombinedListBoxSwitchChatBoxes_click()
+    Call switchChatBoxes
+End Sub
+
+
+Private Sub switchChatBoxes()
     If FCWSingleListBox = "0" Then
         FCWSingleListBox = "1"
         mnuSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
@@ -7031,16 +7070,31 @@ End Sub
 
 
 ' menu option to find the first occurrence of a string on the input listbox
+Private Sub mnuInputListBoxFind_click()
+    Call mnuFind(lbxInputTextArea, inputLineCount, "first")
+End Sub
+
+' menu option to find the first occurrence of a string on the input listbox
+Private Sub mnuOutputListBoxFind_click()
+    Call mnuFind(lbxOutputTextArea, outputLineCount, "first")
+End Sub
+
+' menu option to find the first occurrence of a string on the input listbox
+Private Sub mnuCombinedListBoxFind_click()
+    Call mnuFind(lbxCombinedTextArea, inputLineCount + outputLineCount, "first")
+End Sub
+
+' menu option to find the first occurrence of a string on the input listbox
 Private Sub mnuFindInput_click()
-    Call mnuFind(lbxInputTextArea, "first")
+    Call mnuFind(lbxInputTextArea, inputLineCount, "first")
 End Sub
 ' menu option to find the first occurrence of a string on the output listbox
 Private Sub mnuFindOutput_click()
-    Call mnuFind(lbxOutputTextArea, "first")
+    Call mnuFind(lbxOutputTextArea, outputLineCount, "first")
 End Sub
 ' menu option to find the first occurrence of a string on the combined listbox
 Private Sub mnuFindCombined_click()
-    Call mnuFind(lbxCombinedTextArea, "first")
+    Call mnuFind(lbxCombinedTextArea, inputLineCount + outputLineCount, "first")
 End Sub
 
 
@@ -7049,7 +7103,7 @@ Private Sub mnuShowClock_click()
     Call picClockSwitch_Click
 End Sub
 ' find option on the listboxes also called by Ctrl/F
-Private Sub mnuFind(ByRef thisListBox As ListBox, noOfLines As Long, Optional ByVal searchType As String)
+Private Sub mnuFind(ByRef thisListBox As ListBox, noOfLines As Long, ByVal searchType As String)
 
     Dim strToFind As String
     Dim useloop As Integer
@@ -8522,13 +8576,44 @@ Private Sub btnPicHelp_MouseUp(Button As Integer, Shift As Integer, x As Single,
     btnPicHelp.Top = btnPicHelp.Top - 10
 End Sub
 
+Private Sub mnuCombinedListBoxEditLine_click()
+    ' waiting for code
+End Sub
+
+Private Sub mnuCombinedEditLine_click()
+    ' this code will be deleted as it is from the old listbox
+End Sub
+
+Private Sub mnuOutputDeleteLine_click()
+    ' waiting for code
+End Sub
+
+Private Sub mnuCombinedDeleteLine_click()
+    ' waiting for code
+End Sub
+
+Private Sub mnuOutputListBoxEditLine_click()
+    Call outputEditLine
+End Sub
 Private Sub mnuOutputEditLine_click()
+    Call outputEditLine
+End Sub
+'---------------------------------------------------------------------------------------
+' Procedure : outputEditLine
+' Author    : beededea
+' Date      : 22/07/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub outputEditLine()
     Dim editedText As String
     Dim theText As String
     
     'theText = lbxOutputTextArea.List(lbxOutputTextArea.ListIndex)
     
     ' get the current line from the chosen list box
+   On Error GoTo outputEditLine_Error
+
     theText = getCurrentLine(lbxOutputTextArea)
 
     ' uses an ordinary inputbox to allow the user to edit the text, might do a custom form later.
@@ -8555,6 +8640,13 @@ Private Sub mnuOutputEditLine_click()
     ' write the same
     ' insert the newly edited line
     ' write the remaining lines
+
+   On Error GoTo 0
+   Exit Sub
+
+outputEditLine_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure outputEditLine of Form FireCallMain"
     
 End Sub
 
