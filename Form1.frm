@@ -4,7 +4,7 @@ Begin VB.Form FireCallMain
    Caption         =   "Fire Call Win"
    ClientHeight    =   10185
    ClientLeft      =   3120
-   ClientTop       =   2070
+   ClientTop       =   2370
    ClientWidth     =   10065
    Icon            =   "Form1.frx":0000
    KeyPreview      =   -1  'True
@@ -1688,7 +1688,6 @@ Begin VB.Form FireCallMain
    End
    Begin VB.Menu combinedListBoxMnuPopmenu 
       Caption         =   "Combined List Box Menu"
-      Visible         =   0   'False
       Begin VB.Menu mnuCombinedListBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
       End
@@ -1720,7 +1719,7 @@ Begin VB.Form FireCallMain
          Caption         =   "-"
       End
       Begin VB.Menu mnuCombinedListBoxSwitchChatBoxes 
-         Caption         =   "Switch to Single Chat Box"
+         Caption         =   "Switch to Split Chat Box Mode"
       End
       Begin VB.Menu mnuCombinedListBoxFind 
          Caption         =   "Find (Ctrl+F)"
@@ -1736,122 +1735,6 @@ Begin VB.Form FireCallMain
       End
       Begin VB.Menu mnuCombinedListBoxRefresh 
          Caption         =   "Refresh the Chat boxes (F5)"
-      End
-   End
-   Begin VB.Menu listBoxMnuPopmenu 
-      Caption         =   "OLD List Box Menu"
-      Visible         =   0   'False
-      Begin VB.Menu mnuLBoxSendPingRequest 
-         Caption         =   "Send a Ping Request"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuLBoxSendAwakeCall 
-         Caption         =   "Send an Awake Call"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuLBoxSendShutdownRequest 
-         Caption         =   "Send Shutdown Request"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuBlankLine8 
-         Caption         =   "-"
-      End
-      Begin VB.Menu mnuCombinedEditLine 
-         Caption         =   "Edit This Line"
-         Enabled         =   0   'False
-         Visible         =   0   'False
-      End
-      Begin VB.Menu mnuOutputEditLine 
-         Caption         =   "Edit This Line"
-         Enabled         =   0   'False
-         Visible         =   0   'False
-      End
-      Begin VB.Menu mnuCombinedDeleteLine 
-         Caption         =   "Delete This Line"
-         Enabled         =   0   'False
-         Visible         =   0   'False
-      End
-      Begin VB.Menu mnuOutputDeleteLine 
-         Caption         =   "Delete This Line"
-         Enabled         =   0   'False
-         Visible         =   0   'False
-      End
-      Begin VB.Menu mnuOutputCopyLine 
-         Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuInputCopyLine 
-         Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuInputQuoteLine 
-         Caption         =   "Copy and Quote Line"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuCombinedQuoteLine 
-         Caption         =   "Copy and Quote Line"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuCombinedCopyLine 
-         Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuCombinedPasteLine 
-         Caption         =   "Paste From Clipboard (Ctrl+V)"
-         Enabled         =   0   'False
-         Visible         =   0   'False
-      End
-      Begin VB.Menu mnuOutputPasteLine 
-         Caption         =   "Paste From Clipboard (Ctrl+V)"
-         Enabled         =   0   'False
-         Visible         =   0   'False
-      End
-      Begin VB.Menu mnuCombinedPasteAndGo 
-         Caption         =   "Paste && Go"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuOutputPasteAndGo 
-         Caption         =   "Paste && Go"
-         Enabled         =   0   'False
-         Visible         =   0   'False
-      End
-      Begin VB.Menu mnuBlankLine9 
-         Caption         =   "-"
-      End
-      Begin VB.Menu mnuSwitchChatBoxes 
-         Caption         =   "Switch to Single Chat Box"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuBlankLine10 
-         Caption         =   "-"
-      End
-      Begin VB.Menu mnuFindInput 
-         Caption         =   "Find (Ctrl+F)"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuFindOutput 
-         Caption         =   "Find (Ctrl+F)"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuFindCombined 
-         Caption         =   "Find (Ctrl+F)"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuLBOpenSharedInputFile 
-         Caption         =   "Open the Shared Input File"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuLBOpenSharedOutputFile 
-         Caption         =   "Open the Shared Output File"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuLBOpenSharedExchangeFolder 
-         Caption         =   "Open the Shared Exchange Folder"
-         Enabled         =   0   'False
-      End
-      Begin VB.Menu mnuLBRefresh 
-         Caption         =   "Refresh the Chat boxes (F5)"
-         Enabled         =   0   'False
       End
    End
    Begin VB.Menu ClockMnuPopmenu 
@@ -2489,10 +2372,13 @@ Public Sub formLoadTasks()
     ' populate the combined listbox
     If FCWSingleListBox = "1" Then Call populateCombinedBox
     
+
+    
     If FCWSingleListBox = "1" Then
-        mnuSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
+        mnuInputListBoxSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
+        mnuOutputListBoxSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
     Else
-        mnuSwitchChatBoxes.Caption = "Switch to Single Chat Box"
+        mnuCombinedListBoxSwitchChatBoxes.Caption = "Switch to Single Chat Box"
     End If
     
     'enable/disable the scrollbars for the input and output listboxes
@@ -3331,7 +3217,8 @@ Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x
 '        mnuCombinedCopyLine.Visible = True
 '        mnuCombinedQuoteLine.Visible = True
 '        mnuFindCombined.Visible = True
-        
+'        mnuCombinedListBoxOpenSharedInputFile.Visible = True
+        'arse.Visible = True
         DoEvents
         If Clipboard.GetText <> "" Then
             mnuCombinedListBoxPasteLine.Visible = True
@@ -3341,7 +3228,7 @@ Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x
             mnuCombinedListBoxPasteAndGo.Visible = False
         End If
         
-        Me.PopupMenu outputListBoxMnuPopmenu, vbPopupMenuRightButton
+        Me.PopupMenu combinedListBoxMnuPopmenu, vbPopupMenuRightButton
         'Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
     End If
     
@@ -3479,6 +3366,14 @@ End Sub
 
 
 
+
+Private Sub mnuCombinedListBoxOpenSharedInputFile_Click()
+    Call OpenSharedInputFile
+End Sub
+
+Private Sub mnuCombinedListBoxOpenSharedOutputFile_Click()
+    Call OpenSharedOutputFile
+End Sub
 
 Private Sub mnuInputListBoxCopyLine_Click()
     Call copyText(lbxInputTextArea)
@@ -6807,10 +6702,11 @@ End Sub
 Private Sub switchChatBoxes()
     If FCWSingleListBox = "0" Then
         FCWSingleListBox = "1"
-        mnuSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
+        mnuCombinedListBoxSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
     Else
         FCWSingleListBox = "0"
-        mnuSwitchChatBoxes.Caption = "Switch to Single Chat Box"
+        mnuInputListBoxSwitchChatBoxes.Caption = "Switch to Single Chat Box Mode"
+        mnuOutputListBoxSwitchChatBoxes.Caption = "Switch to Single Chat Box Mode"
     End If
     PutINISetting "Software\FireCallWin", "singleListBox", FCWSingleListBox, FCWSettingsFile
     
