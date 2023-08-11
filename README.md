@@ -91,6 +91,8 @@ Tested on :
     Windows 10 Home 64bit on Intel
     Windows 10 Home 64bit on AMD
 
+![vb6-logo](https://github.com/yereverluvinunclebert/Firecall-for-Windows/assets/2788342/25856b3a-c844-49c5-baad-cd4d823f6106)
+    
 Dependencies:
 
 Krools replacement for the Microsoft Windows Common Controls found in mscomctl.ocx (slider) is replicated
