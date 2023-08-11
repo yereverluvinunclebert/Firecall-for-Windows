@@ -22,6 +22,8 @@ This program is free and FOSS. The basic file and folder sharing services are
 free, this program uses Dropbox out of the box but Google Drive and Microsofts
 Onedrive all provide basic file and folder sharing facilities for free.
 
+![FCWPrefs01](https://github.com/yereverluvinunclebert/Firecall-for-Windows/assets/2788342/7f87be57-dcc0-405c-a98e-3ba93837aa8c)
+
 Firecall for Windows is Beta-grade software, under development, not yet
 ready to use on a production system - use at your own risk.
 
@@ -135,6 +137,8 @@ The VB6 non native images (PNGs &c) are displayed using Lavolpes transparent DIB
 except for the .ico files which use his earlier StdPictureEx class.
 Lavolpes later ico code caused many strange visual artifacts and complete failures to show .ico files.
 especially when other image types were displayed on screen simultaneously.
+
+![FCWPrefsEmail](https://github.com/yereverluvinunclebert/Firecall-for-Windows/assets/2788342/9b0dbd92-0e38-4fcc-9bd1-ff09b98a260d)
 
 The sound is recorded using theTricks sound code. It previously used MCISendString to record but Cortana on Win10+
 hijacks the sound device so it does not work on those oses.
