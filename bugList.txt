@@ -364,11 +364,10 @@
 ' new input menu - DONE
 ' new output menu - DONE
 ' deleted old menu - DONE
+' new combined menu - wip edit, copy and quote,  copy selected, paste from,  paste & go - DONE
 
 ' Tasks underway now
 ' ==================
-
-' new combined menu - wip edit, copy and quote,  copy selected, paste from,  paste & go
 '
 ' menu option to delete a line - WIP
 '      added line, now need to add code to rewrite the file
@@ -393,7 +392,6 @@
 ' settings.ini needs to be copied over from the users area to the sample item in the programs folder
 ' default settings.ini to be standardised for new users - WIP
 '   the input and output files need to be directed to the initial text files so that the listboxes are not blank
-
 
 ' modify the default top and tail to use debugLOG instead of msgbox for the duration of this project.
 

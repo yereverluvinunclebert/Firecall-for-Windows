@@ -2254,8 +2254,7 @@ Private Sub Form_Load()
     msgBoxOut = True
     msgLogOut = True
     
-    ' read available audio input devices
-    Call enumerateRecordingDevices
+
     
     Call formLoadTasks ' < just so we can call the same routine from other places, you cannot call Form_Load
 
@@ -2302,6 +2301,9 @@ Public Sub formLoadTasks()
     outputListBoxMnuPopmenu.Visible = False
     combinedListBoxMnuPopmenu.Visible = False
     'listBoxMnuPopmenu.Visible = False
+    
+    ' read available audio input devices
+    Call enumerateRecordingDevices
     
     'add known executables to a VB6 collection
     Call addExecutableSuffixArrayList
