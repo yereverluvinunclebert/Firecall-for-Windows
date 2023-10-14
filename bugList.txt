@@ -366,6 +366,8 @@
 ' deleted old menu - DONE
 ' new combined menu - wip edit, copy and quote,  copy selected, paste from,  paste & go - DONE
 
+' edit program using... .vbp - done
+
 ' Tasks underway now
 ' ==================
 '
@@ -431,6 +433,10 @@
 
 ' LOW Priority
 ' ============
+
+' btnClose_Click
+'    Set frmTimer = Nothing
+'    Set menuForm = Nothing
 
 '       Elroy's code to add balloon tips to comboBox
 '       https://www.vbforums.com/showthread.php?893844-VB6-QUESTION-How-to-capture-the-MouseOver-Event-on-a-comboBox

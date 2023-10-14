@@ -847,9 +847,9 @@ Public Sub iconiseTimer_TimerA()
         If FCWIconiseDesktop = "True" Then
             FireCallMain.opacityFadeOutTimer.Enabled = True
             MinimiseForm.Visible = True
-'        Else
-'            ' just set the opacity of the window
-'            Call setMainWindowOpacity
+        Else
+            ' just set the opacity of the window
+            Call setMainWindowOpacity
         End If
         Call stopIconiseTimer
         

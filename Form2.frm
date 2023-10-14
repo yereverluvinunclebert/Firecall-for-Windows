@@ -15,6 +15,265 @@ Begin VB.Form FireCallPrefs
    ScaleWidth      =   10905
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
+   Begin VB.Frame fraWindow 
+      Caption         =   "Window"
+      Height          =   8205
+      Left            =   1155
+      TabIndex        =   25
+      Top             =   1380
+      Width           =   8640
+      Begin VB.Frame fraWindowInner 
+         BorderStyle     =   0  'None
+         Height          =   7500
+         Left            =   1050
+         TabIndex        =   34
+         Top             =   345
+         Width           =   6900
+         Begin VB.Frame fraIconise 
+            BorderStyle     =   0  'None
+            Height          =   1470
+            Left            =   1065
+            TabIndex        =   275
+            Top             =   3285
+            Width           =   4005
+            Begin VB.OptionButton optIconiseDesktop 
+               Caption         =   "Iconise to Desktop"
+               Height          =   330
+               Left            =   270
+               TabIndex        =   277
+               ToolTipText     =   "Minimise to desktop"
+               Top             =   60
+               Width           =   2790
+            End
+            Begin VB.OptionButton optIconiseOpacity 
+               Caption         =   "Iconise to Defined Opacity"
+               Height          =   330
+               Left            =   270
+               TabIndex        =   276
+               ToolTipText     =   "Fade to a defined opacity"
+               Top             =   465
+               Width           =   2790
+            End
+            Begin VB.Label lblOptIconiseOpacity 
+               Caption         =   "Select whether to minimise to desktop or opacity."
+               Height          =   600
+               Left            =   270
+               TabIndex        =   278
+               Top             =   885
+               Width           =   3900
+            End
+         End
+         Begin VB.ComboBox cmbWindowLevel 
+            Height          =   315
+            Left            =   1305
+            Style           =   2  'Dropdown List
+            TabIndex        =   38
+            ToolTipText     =   $"Form2.frx":000C
+            Top             =   0
+            Width           =   3960
+         End
+         Begin VB.CheckBox chkPreventDragging 
+            Caption         =   "Ignore Mouse"
+            Enabled         =   0   'False
+            Height          =   225
+            Left            =   1335
+            TabIndex        =   36
+            ToolTipText     =   "Checking this box turns off the ability to drag the program with the mouse. "
+            Top             =   2250
+            Width           =   225
+         End
+         Begin VB.CheckBox chkIgnoreMouse 
+            Caption         =   "Ignore Mouse"
+            Enabled         =   0   'False
+            Height          =   225
+            Left            =   1320
+            TabIndex        =   35
+            ToolTipText     =   "Checking this box causes the program to ignore all mouse events."
+            Top             =   1215
+            Width           =   225
+         End
+         Begin vb6projectCCRSlider.Slider sliOpacity 
+            Height          =   390
+            Left            =   1245
+            TabIndex        =   37
+            ToolTipText     =   "Set the transparency of the Program."
+            Top             =   4635
+            Width           =   3870
+            _ExtentX        =   6826
+            _ExtentY        =   688
+            Min             =   20
+            Max             =   100
+            Value           =   100
+            TickFrequency   =   6
+            SelStart        =   20
+         End
+         Begin vb6projectCCRSlider.Slider sliIconiseDelay 
+            Height          =   420
+            Left            =   1260
+            TabIndex        =   266
+            ToolTipText     =   "Choose the delay (seconds) before auto-iconisation occurs. Set to 0 to disable,"
+            Top             =   6060
+            Width           =   3870
+            _ExtentX        =   6826
+            _ExtentY        =   741
+            Max             =   600
+            Value           =   100
+            TickFrequency   =   30
+            SelStart        =   20
+         End
+         Begin VB.Label lblIconiseDelay450 
+            Caption         =   "450"
+            Height          =   345
+            Left            =   3930
+            TabIndex        =   273
+            Top             =   6570
+            Width           =   495
+         End
+         Begin VB.Label lblIconiseDelay150 
+            Caption         =   "150"
+            Height          =   345
+            Left            =   2205
+            TabIndex        =   272
+            Top             =   6570
+            Width           =   345
+         End
+         Begin VB.Label lblIconiseDelay0 
+            Caption         =   "0"
+            Height          =   345
+            Left            =   1395
+            TabIndex        =   271
+            Top             =   6570
+            Width           =   345
+         End
+         Begin VB.Label lblIconiseDelay600 
+            Caption         =   "600"
+            Height          =   345
+            Left            =   4740
+            TabIndex        =   270
+            Top             =   6570
+            Width           =   405
+         End
+         Begin VB.Label lblIconiseDelay300 
+            Caption         =   "300"
+            Height          =   345
+            Left            =   3075
+            TabIndex        =   269
+            Top             =   6570
+            Width           =   840
+         End
+         Begin VB.Label lblConfigurationTab 
+            Caption         =   "Iconise Delay :"
+            Height          =   345
+            Index           =   3
+            Left            =   -15
+            TabIndex        =   268
+            Tag             =   "lblIconiseDelay"
+            Top             =   6135
+            Width           =   1800
+         End
+         Begin VB.Label lblConfigurationTab 
+            Caption         =   "Choose the delay (seconds) before auto-iconisation occurs. Set to 0 to disable,"
+            Height          =   360
+            Index           =   9
+            Left            =   1365
+            TabIndex        =   267
+            Top             =   6900
+            Width           =   3810
+         End
+         Begin VB.Label lblIgnoreMouse 
+            Caption         =   "Ignore Mouse"
+            Enabled         =   0   'False
+            Height          =   270
+            Left            =   1650
+            TabIndex        =   39
+            Top             =   1215
+            Width           =   1725
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "Window Level"
+            Height          =   345
+            Left            =   0
+            TabIndex        =   49
+            Top             =   60
+            Width           =   1740
+         End
+         Begin VB.Label lblOpacity20 
+            Caption         =   "20%"
+            Height          =   315
+            Left            =   1335
+            TabIndex        =   48
+            Top             =   5145
+            Width           =   345
+         End
+         Begin VB.Label lblOpacityLabel100 
+            Caption         =   "100%"
+            Height          =   315
+            Left            =   4695
+            TabIndex        =   47
+            Top             =   5145
+            Width           =   405
+         End
+         Begin VB.Label lblOpacityText 
+            Caption         =   "Opacity"
+            Height          =   315
+            Left            =   2820
+            TabIndex        =   46
+            Top             =   5145
+            Width           =   840
+         End
+         Begin VB.Label lblOpacityLabel 
+            Caption         =   "Opacity:"
+            Height          =   315
+            Left            =   600
+            TabIndex        =   45
+            Top             =   4695
+            Width           =   780
+         End
+         Begin VB.Label lblWindowLevelDescription 
+            Caption         =   $"Form2.frx":00A7
+            Height          =   870
+            Left            =   1365
+            TabIndex        =   44
+            Top             =   450
+            Width           =   3930
+         End
+         Begin VB.Label lblOpacityLabelDesc 
+            Caption         =   "Set the program transparency level."
+            Height          =   330
+            Left            =   1380
+            TabIndex        =   43
+            Top             =   5460
+            Width           =   3810
+         End
+         Begin VB.Label lblPreventDraggingText 
+            Caption         =   "Checking this box turns off the ability to drag the program with the mouse. "
+            Enabled         =   0   'False
+            Height          =   600
+            Left            =   1335
+            TabIndex        =   42
+            Top             =   2625
+            Width           =   3900
+         End
+         Begin VB.Label lblPreventDragging 
+            Caption         =   "Prevent Dragging"
+            Enabled         =   0   'False
+            Height          =   270
+            Left            =   1665
+            TabIndex        =   41
+            Top             =   2250
+            Width           =   1725
+         End
+         Begin VB.Label lblIgnoreMouseText 
+            Caption         =   "Checking this box causes the program to ignore all mouse events."
+            Enabled         =   0   'False
+            Height          =   660
+            Left            =   1320
+            TabIndex        =   40
+            Top             =   1590
+            Width           =   3810
+         End
+      End
+   End
    Begin VB.Frame fraHousekeeping 
       Caption         =   "Housekeeping"
       Height          =   7890
@@ -451,9 +710,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbRefreshInterval 
             Height          =   315
-            ItemData        =   "Form2.frx":000C
+            ItemData        =   "Form2.frx":0142
             Left            =   1485
-            List            =   "Form2.frx":000E
+            List            =   "Form2.frx":0144
             Style           =   2  'Dropdown List
             TabIndex        =   79
             ToolTipText     =   "Set the refresh interval"
@@ -542,7 +801,7 @@ Begin VB.Form FireCallPrefs
             Width           =   1350
          End
          Begin VB.Label lblGeneralTab 
-            Caption         =   $"Form2.frx":0010
+            Caption         =   $"Form2.frx":0146
             Height          =   900
             Index           =   7
             Left            =   1545
@@ -591,7 +850,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":00BD
+         Picture         =   "Form2.frx":01F3
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   318
@@ -621,7 +880,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   195
-         Picture         =   "Form2.frx":0675
+         Picture         =   "Form2.frx":07AB
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   317
@@ -662,7 +921,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   165
-         Picture         =   "Form2.frx":0C2D
+         Picture         =   "Form2.frx":0D63
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   182
@@ -702,7 +961,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   630
          Left            =   165
-         Picture         =   "Form2.frx":184D
+         Picture         =   "Form2.frx":1983
          ScaleHeight     =   630
          ScaleWidth      =   630
          TabIndex        =   31
@@ -731,7 +990,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   630
          Left            =   165
-         Picture         =   "Form2.frx":1E0C
+         Picture         =   "Form2.frx":1F42
          ScaleHeight     =   630
          ScaleWidth      =   630
          TabIndex        =   28
@@ -776,7 +1035,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   165
-         Picture         =   "Form2.frx":240E
+         Picture         =   "Form2.frx":2544
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   17
@@ -805,7 +1064,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":2C56
+         Picture         =   "Form2.frx":2D8C
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   14
@@ -834,7 +1093,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":3442
+         Picture         =   "Form2.frx":3578
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   11
@@ -863,7 +1122,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":3925
+         Picture         =   "Form2.frx":3A5B
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   8
@@ -895,7 +1154,7 @@ Begin VB.Form FireCallPrefs
          ForeColor       =   &H80000008&
          Height          =   600
          Left            =   180
-         Picture         =   "Form2.frx":3EC1
+         Picture         =   "Form2.frx":3FF7
          ScaleHeight     =   600
          ScaleWidth      =   600
          TabIndex        =   5
@@ -923,7 +1182,7 @@ Begin VB.Form FireCallPrefs
          BorderStyle     =   0  'None
          Height          =   405
          Left            =   240
-         Picture         =   "Form2.frx":4723
+         Picture         =   "Form2.frx":4859
          ScaleHeight     =   405
          ScaleWidth      =   420
          TabIndex        =   2
@@ -956,9 +1215,9 @@ Begin VB.Form FireCallPrefs
          Width           =   5565
          Begin VB.ComboBox cmbEmojiSet 
             Height          =   315
-            ItemData        =   "Form2.frx":4CB9
+            ItemData        =   "Form2.frx":4DEF
             Left            =   2190
-            List            =   "Form2.frx":4CBB
+            List            =   "Form2.frx":4DF1
             Style           =   2  'Dropdown List
             TabIndex        =   107
             ToolTipText     =   "Choose the emoji set to use"
@@ -995,7 +1254,7 @@ Begin VB.Form FireCallPrefs
             Width           =   3750
          End
          Begin VB.Label lblEmojiTab 
-            Caption         =   $"Form2.frx":4CBD
+            Caption         =   $"Form2.frx":4DF3
             Height          =   825
             Index           =   4
             Left            =   2175
@@ -1064,9 +1323,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbCaptureDevices 
             Height          =   315
-            ItemData        =   "Form2.frx":4D83
+            ItemData        =   "Form2.frx":4EB9
             Left            =   1365
-            List            =   "Form2.frx":4D85
+            List            =   "Form2.frx":4EBB
             TabIndex        =   211
             Text            =   "cmbCaptureDevices"
             Top             =   4455
@@ -1075,7 +1334,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnMute 
             Height          =   285
             Left            =   5385
-            Picture         =   "Form2.frx":4D87
+            Picture         =   "Form2.frx":4EBD
             Style           =   1  'Graphical
             TabIndex        =   171
             TabStop         =   0   'False
@@ -1103,9 +1362,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbAlarmSound 
             Height          =   315
-            ItemData        =   "Form2.frx":4FB4
+            ItemData        =   "Form2.frx":50EA
             Left            =   1365
-            List            =   "Form2.frx":4FB6
+            List            =   "Form2.frx":50EC
             Style           =   2  'Dropdown List
             TabIndex        =   53
             ToolTipText     =   "Choose the alarm sound."
@@ -1115,7 +1374,7 @@ Begin VB.Form FireCallPrefs
          Begin VB.CommandButton btnPlaySound 
             Height          =   285
             Left            =   5055
-            Picture         =   "Form2.frx":4FB8
+            Picture         =   "Form2.frx":50EE
             Style           =   1  'Graphical
             TabIndex        =   52
             TabStop         =   0   'False
@@ -1361,7 +1620,7 @@ Begin VB.Form FireCallPrefs
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   298
-         Text            =   "Form2.frx":51C2
+         Text            =   "Form2.frx":52F8
          Top             =   2205
          Width           =   9945
       End
@@ -1751,7 +2010,7 @@ Begin VB.Form FireCallPrefs
                Width           =   3960
             End
             Begin VB.Label lblConfigurationTab 
-               Caption         =   $"Form2.frx":6663
+               Caption         =   $"Form2.frx":6799
                Height          =   660
                Index           =   8
                Left            =   270
@@ -1840,9 +2099,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbMaxLineLength 
             Height          =   315
-            ItemData        =   "Form2.frx":6701
+            ItemData        =   "Form2.frx":6837
             Left            =   1710
-            List            =   "Form2.frx":6703
+            List            =   "Form2.frx":6839
             Style           =   2  'Dropdown List
             TabIndex        =   96
             ToolTipText     =   "The program will cut your text to a new line when this limit is reached"
@@ -1915,265 +2174,6 @@ Begin VB.Form FireCallPrefs
             TabIndex        =   101
             Top             =   3780
             Width           =   3750
-         End
-      End
-   End
-   Begin VB.Frame fraWindow 
-      Caption         =   "Window"
-      Height          =   8205
-      Left            =   1155
-      TabIndex        =   25
-      Top             =   1380
-      Width           =   8640
-      Begin VB.Frame fraWindowInner 
-         BorderStyle     =   0  'None
-         Height          =   7500
-         Left            =   1050
-         TabIndex        =   34
-         Top             =   345
-         Width           =   6900
-         Begin VB.Frame fraIconise 
-            BorderStyle     =   0  'None
-            Height          =   1470
-            Left            =   1065
-            TabIndex        =   275
-            Top             =   3285
-            Width           =   4005
-            Begin VB.OptionButton optIconiseDesktop 
-               Caption         =   "Iconise to Desktop"
-               Height          =   330
-               Left            =   270
-               TabIndex        =   277
-               ToolTipText     =   "Minimise to desktop"
-               Top             =   60
-               Width           =   2790
-            End
-            Begin VB.OptionButton optIconiseOpacity 
-               Caption         =   "Iconise to Defined Opacity"
-               Height          =   330
-               Left            =   270
-               TabIndex        =   276
-               ToolTipText     =   "Fade to a defined opacity"
-               Top             =   465
-               Width           =   2790
-            End
-            Begin VB.Label lblOptIconiseOpacity 
-               Caption         =   "Select whether to minimise to desktop or opacity."
-               Height          =   600
-               Left            =   270
-               TabIndex        =   278
-               Top             =   885
-               Width           =   3900
-            End
-         End
-         Begin VB.ComboBox cmbWindowLevel 
-            Height          =   315
-            Left            =   1305
-            Style           =   2  'Dropdown List
-            TabIndex        =   38
-            ToolTipText     =   $"Form2.frx":6705
-            Top             =   0
-            Width           =   3960
-         End
-         Begin VB.CheckBox chkPreventDragging 
-            Caption         =   "Ignore Mouse"
-            Enabled         =   0   'False
-            Height          =   225
-            Left            =   1335
-            TabIndex        =   36
-            ToolTipText     =   "Checking this box turns off the ability to drag the program with the mouse. "
-            Top             =   2250
-            Width           =   225
-         End
-         Begin VB.CheckBox chkIgnoreMouse 
-            Caption         =   "Ignore Mouse"
-            Enabled         =   0   'False
-            Height          =   225
-            Left            =   1320
-            TabIndex        =   35
-            ToolTipText     =   "Checking this box causes the program to ignore all mouse events."
-            Top             =   1215
-            Width           =   225
-         End
-         Begin vb6projectCCRSlider.Slider sliOpacity 
-            Height          =   390
-            Left            =   1245
-            TabIndex        =   37
-            ToolTipText     =   "Set the transparency of the Program."
-            Top             =   4635
-            Width           =   3870
-            _ExtentX        =   6826
-            _ExtentY        =   688
-            Min             =   20
-            Max             =   100
-            Value           =   100
-            TickFrequency   =   6
-            SelStart        =   20
-         End
-         Begin vb6projectCCRSlider.Slider sliIconiseDelay 
-            Height          =   420
-            Left            =   1260
-            TabIndex        =   266
-            ToolTipText     =   "Choose the delay (seconds) before auto-iconisation occurs. Set to 0 to disable,"
-            Top             =   6060
-            Width           =   3870
-            _ExtentX        =   6826
-            _ExtentY        =   741
-            Max             =   600
-            Value           =   100
-            TickFrequency   =   30
-            SelStart        =   20
-         End
-         Begin VB.Label lblIconiseDelay450 
-            Caption         =   "450"
-            Height          =   345
-            Left            =   3930
-            TabIndex        =   273
-            Top             =   6570
-            Width           =   495
-         End
-         Begin VB.Label lblIconiseDelay150 
-            Caption         =   "150"
-            Height          =   345
-            Left            =   2205
-            TabIndex        =   272
-            Top             =   6570
-            Width           =   345
-         End
-         Begin VB.Label lblIconiseDelay0 
-            Caption         =   "0"
-            Height          =   345
-            Left            =   1395
-            TabIndex        =   271
-            Top             =   6570
-            Width           =   345
-         End
-         Begin VB.Label lblIconiseDelay600 
-            Caption         =   "600"
-            Height          =   345
-            Left            =   4740
-            TabIndex        =   270
-            Top             =   6570
-            Width           =   405
-         End
-         Begin VB.Label lblIconiseDelay300 
-            Caption         =   "300"
-            Height          =   345
-            Left            =   3075
-            TabIndex        =   269
-            Top             =   6570
-            Width           =   840
-         End
-         Begin VB.Label lblConfigurationTab 
-            Caption         =   "Iconise Delay :"
-            Height          =   345
-            Index           =   3
-            Left            =   -15
-            TabIndex        =   268
-            Tag             =   "lblIconiseDelay"
-            Top             =   6135
-            Width           =   1800
-         End
-         Begin VB.Label lblConfigurationTab 
-            Caption         =   "Choose the delay (seconds) before auto-iconisation occurs. Set to 0 to disable,"
-            Height          =   360
-            Index           =   9
-            Left            =   1365
-            TabIndex        =   267
-            Top             =   6900
-            Width           =   3810
-         End
-         Begin VB.Label lblIgnoreMouse 
-            Caption         =   "Ignore Mouse"
-            Enabled         =   0   'False
-            Height          =   270
-            Left            =   1650
-            TabIndex        =   39
-            Top             =   1215
-            Width           =   1725
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   "Window Level"
-            Height          =   345
-            Left            =   0
-            TabIndex        =   49
-            Top             =   60
-            Width           =   1740
-         End
-         Begin VB.Label lblOpacity20 
-            Caption         =   "20%"
-            Height          =   315
-            Left            =   1335
-            TabIndex        =   48
-            Top             =   5145
-            Width           =   345
-         End
-         Begin VB.Label lblOpacityLabel100 
-            Caption         =   "100%"
-            Height          =   315
-            Left            =   4695
-            TabIndex        =   47
-            Top             =   5145
-            Width           =   405
-         End
-         Begin VB.Label lblOpacityText 
-            Caption         =   "Opacity"
-            Height          =   315
-            Left            =   2820
-            TabIndex        =   46
-            Top             =   5145
-            Width           =   840
-         End
-         Begin VB.Label lblOpacityLabel 
-            Caption         =   "Opacity:"
-            Height          =   315
-            Left            =   600
-            TabIndex        =   45
-            Top             =   4695
-            Width           =   780
-         End
-         Begin VB.Label lblWindowLevelDescription 
-            Caption         =   $"Form2.frx":67A0
-            Height          =   870
-            Left            =   1365
-            TabIndex        =   44
-            Top             =   450
-            Width           =   3930
-         End
-         Begin VB.Label lblOpacityLabelDesc 
-            Caption         =   "Set the program transparency level."
-            Height          =   330
-            Left            =   1380
-            TabIndex        =   43
-            Top             =   5460
-            Width           =   3810
-         End
-         Begin VB.Label lblPreventDraggingText 
-            Caption         =   "Checking this box turns off the ability to drag the program with the mouse. "
-            Enabled         =   0   'False
-            Height          =   600
-            Left            =   1335
-            TabIndex        =   42
-            Top             =   2625
-            Width           =   3900
-         End
-         Begin VB.Label lblPreventDragging 
-            Caption         =   "Prevent Dragging"
-            Enabled         =   0   'False
-            Height          =   270
-            Left            =   1665
-            TabIndex        =   41
-            Top             =   2250
-            Width           =   1725
-         End
-         Begin VB.Label lblIgnoreMouseText 
-            Caption         =   "Checking this box causes the program to ignore all mouse events."
-            Enabled         =   0   'False
-            Height          =   660
-            Left            =   1320
-            TabIndex        =   40
-            Top             =   1590
-            Width           =   3810
          End
       End
    End
