@@ -3021,71 +3021,247 @@ btnBackupNow_Click_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnBackupNow_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkEnableAlarmSound_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkEnableAlarmSound_Click()
+   On Error GoTo chkEnableAlarmSound_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     FCWEnableAlarmSound = LTrim$(Str$(chkEnableAlarmSound.Value))
+
+   On Error GoTo 0
+   Exit Sub
+
+chkEnableAlarmSound_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkEnableAlarmSound_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkGenStartup_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkGenStartup_Click()
+   On Error GoTo chkGenStartup_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     
     FCWStartup = LTrim$(Str$(chkGenStartup.Value))
 
+   On Error GoTo 0
+   Exit Sub
+
+chkGenStartup_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkGenStartup_Click of Form FireCallPrefs"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkServiceProcesses_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkServiceProcesses_Click()
+   On Error GoTo chkServiceProcesses_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     
     FCWCheckServiceProcesses = LTrim$(Str$(chkServiceProcesses.Value))
 
+   On Error GoTo 0
+   Exit Sub
+
+chkServiceProcesses_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkServiceProcesses_Click of Form FireCallPrefs"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : optIconiseDesktop_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub optIconiseDesktop_Click()
+   On Error GoTo optIconiseDesktop_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     Call checkIconiseOpacityLevel
+
+   On Error GoTo 0
+   Exit Sub
+
+optIconiseDesktop_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure optIconiseDesktop_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : optIconiseOpacity_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub optIconiseOpacity_Click()
+   On Error GoTo optIconiseOpacity_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     
     Call checkIconiseOpacityLevel
+
+   On Error GoTo 0
+   Exit Sub
+
+optIconiseOpacity_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure optIconiseOpacity_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkPreventDragging_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkPreventDragging_Click()
+   On Error GoTo chkPreventDragging_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkPreventDragging_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkPreventDragging_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : cmbArchiveDays_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbArchiveDays_Click()
+   On Error GoTo cmbArchiveDays_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbArchiveDays_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbArchiveDays_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : m_oProxy_RecvFromClient
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub m_oProxy_RecvFromClient(Data() As Byte)
     Dim sText           As String
     
+   On Error GoTo m_oProxy_RecvFromClient_Error
+
     sText = StrConv(Data, vbUnicode)
     If Right$(sText, 2) = vbCrLf Then
         sText = Left$(sText, Len(sText) - 2)
     End If
     pvLog "->" & Replace(sText, vbCrLf, vbCrLf & "  ")
+
+   On Error GoTo 0
+   Exit Sub
+
+m_oProxy_RecvFromClient_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure m_oProxy_RecvFromClient of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : m_oProxy_RecvFromServer
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub m_oProxy_RecvFromServer(Data() As Byte)
     Dim sText           As String
     
+   On Error GoTo m_oProxy_RecvFromServer_Error
+
     sText = StrConv(Data, vbUnicode)
     If Right$(sText, 2) = vbCrLf Then
         sText = Left$(sText, Len(sText) - 2)
     End If
     pvLog "<-" & Replace(sText, vbCrLf, vbCrLf & "  ")
+
+   On Error GoTo 0
+   Exit Sub
+
+m_oProxy_RecvFromServer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure m_oProxy_RecvFromServer of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : pvLog
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub pvLog(sText As String)
+   On Error GoTo pvLog_Error
+
     txtEmailLog.SelStart = &H7FFF
     txtEmailLog.SelText = sText & vbCrLf
     txtEmailLog.SelStart = &H7FFF
+
+   On Error GoTo 0
+   Exit Sub
+
+pvLog_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure pvLog of Form FireCallPrefs"
 End Sub
+'---------------------------------------------------------------------------------------
+' Procedure : cmbCaptureDevices_KeyPress
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbCaptureDevices_KeyPress(KeyAscii As Integer)
+   On Error GoTo cmbCaptureDevices_KeyPress_Error
+
     KeyAscii = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbCaptureDevices_KeyPress_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbCaptureDevices_KeyPress of Form FireCallPrefs"
 End Sub
 
 
@@ -3121,7 +3297,16 @@ End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : btnSeePassword_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnSeePassword_Click()
+   On Error GoTo btnSeePassword_Click_Error
+
     If txtSMTPNoPassword.Visible = False Then
         txtSMTPNoPassword.Visible = True
         txtSmtpPassword.Visible = False
@@ -3129,11 +3314,27 @@ Private Sub btnSeePassword_Click()
         txtSMTPNoPassword.Visible = False
         txtSmtpPassword.Visible = True
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+btnSeePassword_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnSeePassword_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : btnTestEmail_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnTestEmail_Click()
     Dim a As Boolean
     
+   On Error GoTo btnTestEmail_Click_Error
+
     MsgBox "Test email message sent. Error from the server, if any, should appear within 30 seconds. Check your Email and press get new messages!"
     
     'if the starttls option is selected then do this
@@ -3153,38 +3354,141 @@ Private Sub btnTestEmail_Click()
                         txtRecipientEmail.Text, _
                         txtEmailSubject.Text, _
                         txtEmailMessage.Text)
+
+   On Error GoTo 0
+   Exit Sub
+
+btnTestEmail_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnTestEmail_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : btnTestEmail_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnTestEmail_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo btnTestEmail_MouseMove_Error
+
     CreateToolTip btnTestEmail.hwnd, "Error messages will only appear 30 secs after the button is pressed. A success can only be checked by viewing the email client to see if an email has arrived. Please note that STARTTLS on port 587 is not currently supported. Port 25 and SSL is tested and operates successfully on Hotmail.", _
                   TTIconInfo, "Help on Testing Email", , , , True
 
+   On Error GoTo 0
+   Exit Sub
+
+btnTestEmail_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnTestEmail_MouseMove of Form FireCallPrefs"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkSendEmails_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkSendEmails_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo chkSendEmails_MouseMove_Error
+
     CreateToolTip chkSendEmails.hwnd, "Messages are sent by email using the SMTP details entered.  Extract these from your email client, Outlook or Thunderbird for example.", _
                   TTIconInfo, "Help on Advice Messages", , , , True
 
+   On Error GoTo 0
+   Exit Sub
+
+chkSendEmails_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkSendEmails_MouseMove of Form FireCallPrefs"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkSendErrorEmails_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkSendErrorEmails_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo chkSendErrorEmails_MouseMove_Error
+
     CreateToolTip chkSendErrorEmails.hwnd, "Error messages are sent when an error is generated as long as FCW is still running. Messages are sent by email using the SMTP details entered below.", _
                   TTIconInfo, "Help on Error Messages", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+chkSendErrorEmails_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkSendErrorEmails_MouseMove of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : cmbCaptureDevices_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbCaptureDevices_Click()
+   On Error GoTo cmbCaptureDevices_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbCaptureDevices_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbCaptureDevices_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkAllowShutdowns_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkAllowShutdowns_Click()
+   On Error GoTo chkAllowShutdowns_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     FCWAllowShutdowns = LTrim$(Str$(chkAllowShutdowns.Value))
 
+   On Error GoTo 0
+   Exit Sub
+
+chkAllowShutdowns_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkAllowShutdowns_Click of Form FireCallPrefs"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkAllowShutdowns_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkAllowShutdowns_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo chkAllowShutdowns_MouseMove_Error
+
     CreateToolTip chkAllowShutdowns.hwnd, "This determines whether your remote partner has the capability of issuing shutdown requests to your copy of Fire Call prior to him performing administration or housekeeping tasks such as reducing the size of the text files used to store the chat text. If these tasks are carried out whilst FCW is running it could cause the app some problems. Having the ability to indicate the need for a shutdown to your partner is a useful tool. This is really only needed if your chat partner performs the housekeeping tasks manually.", _
                   TTIconInfo, "Help on Remote Shutdown Requests", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+chkAllowShutdowns_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkAllowShutdowns_MouseMove of Form FireCallPrefs"
 End Sub
 
 
@@ -3193,13 +3497,29 @@ End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : cmbSmtpAuthenticate_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbSmtpAuthenticate_Click()
     'smtpauthenticate Type of Authenthication
     '0 - None
     '1 - Base 64 encoded (Normal)
     '2 - NTLM
+   On Error GoTo cmbSmtpAuthenticate_Click_Error
+
     btnTestEmail.Enabled = False
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbSmtpAuthenticate_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbSmtpAuthenticate_Click of Form FireCallPrefs"
 End Sub
 
 
@@ -3208,7 +3528,16 @@ End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : cmbSmtpConfig_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbSmtpConfig_Click()
+   On Error GoTo cmbSmtpConfig_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     ' read the listindex value
     ' open the settings file and read the specific settings chosen
@@ -3218,12 +3547,28 @@ Private Sub cmbSmtpConfig_Click()
     Call adjustPrefsSmtpControls
     
     btnTestEmail.Enabled = True
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbSmtpConfig_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbSmtpConfig_Click of Form FireCallPrefs"
     
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : adjustPrefsSmtpControls
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub adjustPrefsSmtpControls()
     
+   On Error GoTo adjustPrefsSmtpControls_Error
+
     txtSmtpServer.Text = FCWSmtpServer
     txtSmtpUsername.Text = FCWSmtpUsername
     txtSmtpPassword.Text = AesDecryptString(FCWSmtpPassword, emailTString)
@@ -3242,53 +3587,213 @@ Public Sub adjustPrefsSmtpControls()
     txtRecipientEmail.Text = FCWRecipientEmail
     txtEmailSubject.Text = FCWEmailSubject
     txtEmailMessage.Text = FCWEmailMessage
+
+   On Error GoTo 0
+   Exit Sub
+
+adjustPrefsSmtpControls_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure adjustPrefsSmtpControls of Form FireCallPrefs"
 End Sub
+'---------------------------------------------------------------------------------------
+' Procedure : cmbSmtpSecurity_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbSmtpSecurity_Click()
+   On Error GoTo cmbSmtpSecurity_Click_Error
+
     btnTestEmail.Enabled = False
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbSmtpSecurity_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbSmtpSecurity_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : btnCloseEmailFra_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnCloseEmailFra_Click()
+   On Error GoTo btnCloseEmailFra_Click_Error
+
     fraEmailfra.Visible = False
+
+   On Error GoTo 0
+   Exit Sub
+
+btnCloseEmailFra_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnCloseEmailFra_Click of Form FireCallPrefs"
 End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : Command2_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub Command2_Click()
+   On Error GoTo Command2_Click_Error
+
     txtEmailLog.Text = ""
+
+   On Error GoTo 0
+   Exit Sub
+
+Command2_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Command2_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraAllowShutdowns_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraAllowShutdowns_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraAllowShutdowns_MouseMove_Error
+
     CreateToolTip fraAllowShutdowns.hwnd, "This determines whether your remote partner has the capability of issuing shutdown requests to your copy of Fire Call prior to him performing administration or housekeeping tasks such as reducing the size of the text files used to store the chat text. If these tasks are carried out whilst FCW is running it could cause the app some problems. Having the ability to indicate the need for a shutdown to your partner is a useful tool. This is really only needed if your chat partner performs the housekeeping tasks manually.", _
                   TTIconInfo, "Help on Remote Shutdown Requests", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraAllowShutdowns_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraAllowShutdowns_MouseMove of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkAutomaticBackups_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkAutomaticBackups_Click()
+   On Error GoTo chkAutomaticBackups_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkAutomaticBackups_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkAutomaticBackups_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkAutomaticHousekeeping_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkAutomaticHousekeeping_Click()
+   On Error GoTo chkAutomaticHousekeeping_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkAutomaticHousekeeping_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkAutomaticHousekeeping_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkBackupOnStart_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkBackupOnStart_Click()
+   On Error GoTo chkBackupOnStart_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkBackupOnStart_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkBackupOnStart_Click of Form FireCallPrefs"
 End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkEnableBalloonTooltips_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkEnableBalloonTooltips_Click()
+   On Error GoTo chkEnableBalloonTooltips_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkEnableBalloonTooltips_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkEnableBalloonTooltips_Click of Form FireCallPrefs"
 
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : Command1_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub Command1_Click()
+   On Error GoTo Command1_Click_Error
+
         If fDirExists(FCWArchiveFolder) Then
             Call ShellExecute(Me.hwnd, "Open", FCWArchiveFolder, vbNullString, App.Path, 1)
         End If
+
+   On Error GoTo 0
+   Exit Sub
+
+Command1_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Command1_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : Form_Load
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub Form_Load()
+
+   On Error GoTo Form_Load_Error
 
     Set Bas64 = New Base64
     
@@ -3327,11 +3832,27 @@ Private Sub Form_Load()
     
     btnSave.Enabled = False ' disable the save button
 
+   On Error GoTo 0
+   Exit Sub
+
+Form_Load_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Form_Load of Form FireCallPrefs"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : showLastTab
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub showLastTab()
 
     ' make the last used tab appear on startup
+   On Error GoTo showLastTab_Error
+
     If FCWLastSelectedTab = "general" Then Call picGeneral_Click
     If FCWLastSelectedTab = "config" Then Call picConfig_Click
     If FCWLastSelectedTab = "email" Then Call picEmail_Click
@@ -3342,15 +3863,31 @@ Private Sub showLastTab()
     If FCWLastSelectedTab = "housekeeping" Then Call picHouseKeeping_Click
     If FCWLastSelectedTab = "window" Then Call picWindow_Click
 
+   On Error GoTo 0
+   Exit Sub
+
+showLastTab_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure showLastTab of Form FireCallPrefs"
+
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : positionThings
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub positionThings()
 
     Dim frameWidth As Integer
     
     ' size and position the frames and buttons
     
+   On Error GoTo positionThings_Error
+
     Me.Width = 9000
     
     fraGeneral.Top = 1050
@@ -3404,14 +3941,30 @@ Private Sub positionThings()
     txtSMTPNoPassword.Left = txtSmtpPassword.Left
     txtSMTPNoPassword.Top = txtSmtpPassword.Top
 
+   On Error GoTo 0
+   Exit Sub
+
+positionThings_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure positionThings of Form FireCallPrefs"
+
 End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : toggleAllEmailControls
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Function toggleAllEmailControls(setting As String) As String
 Dim ctrl As Control
     Dim a As String
     
+   On Error GoTo toggleAllEmailControls_Error
+
     If setting = "hide" Then
         toggleAllEmailControls = "hidden"
         
@@ -3448,11 +4001,27 @@ Dim ctrl As Control
     chkSendErrorEmails.Enabled = True
     'lblEmailsDesc.Enabled = True
     toggleAllEmailControls = True
+
+   On Error GoTo 0
+   Exit Function
+
+toggleAllEmailControls_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure toggleAllEmailControls of Form FireCallPrefs"
     
 End Function
 
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnBusyAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnBusyAdd_Click()
+   On Error GoTo btnBusyAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         cmbBusy.AddItem txtStringToAdd.Text, 0
     Else
@@ -3460,9 +4029,25 @@ Private Sub btnBusyAdd_Click()
     End If
     cmbBusy.ListIndex = 0
 
+   On Error GoTo 0
+   Exit Sub
+
+btnBusyAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnBusyAdd_Click of Form FireCallPrefs"
+
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnBusyRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnBusyRemove_Click()
+   On Error GoTo btnBusyRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     If cmbBusy.ListIndex <> 0 Then
         cmbBusy.RemoveItem (cmbBusy.ListIndex)
@@ -3471,17 +4056,49 @@ Private Sub btnBusyRemove_Click()
     End If
         
     cmbBusy.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnBusyRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnBusyRemove_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : btnCancel_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnCancel_Click()
+   On Error GoTo btnCancel_Click_Error
+
     btnSave.Enabled = False ' disable the save button
     FireCallPrefs.themeTimer.Enabled = False
     Call startThePollingTimers
 
     Unload Me
+
+   On Error GoTo 0
+   Exit Sub
+
+btnCancel_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnCancel_Click of Form FireCallPrefs"
 End Sub
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnCodAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnCodAdd_Click()
+   On Error GoTo btnCodAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         cmbCod.AddItem txtStringToAdd.Text, 0
     Else
@@ -3489,9 +4106,25 @@ Private Sub btnCodAdd_Click()
     End If
     cmbCod.ListIndex = 0
 
+   On Error GoTo 0
+   Exit Sub
+
+btnCodAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnCodAdd_Click of Form FireCallPrefs"
+
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnCodRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnCodRemove_Click()
+   On Error GoTo btnCodRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button ' enable the save button
     If cmbCod.ListIndex <> 0 Then
         cmbCod.RemoveItem (cmbCod.ListIndex)
@@ -3499,13 +4132,45 @@ Private Sub btnCodRemove_Click()
         MsgBox "You cannot delete the first item in the list, try one of the others. Note: you can always add one at the top and replace the one you want to remove."
     End If
     cmbCod.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnCodRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnCodRemove_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : btnDeleteText_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnDeleteText_Click()
+   On Error GoTo btnDeleteText_Click_Error
+
     txtStringToAdd.Text = vbNullString
+
+   On Error GoTo 0
+   Exit Sub
+
+btnDeleteText_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnDeleteText_Click of Form FireCallPrefs"
 End Sub
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnGdnAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnGdnAdd_Click()
+   On Error GoTo btnGdnAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         cmbGdn.AddItem txtStringToAdd.Text, 0
     Else
@@ -3513,9 +4178,25 @@ Private Sub btnGdnAdd_Click()
     End If
     cmbGdn.ListIndex = 0
 
+   On Error GoTo 0
+   Exit Sub
+
+btnGdnAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnGdnAdd_Click of Form FireCallPrefs"
+
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnGdnRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnGdnRemove_Click()
+   On Error GoTo btnGdnRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button ' enable the save button
     If cmbGdn.ListIndex <> 0 Then
         cmbGdn.RemoveItem (cmbGdn.ListIndex)
@@ -3523,13 +4204,29 @@ Private Sub btnGdnRemove_Click()
         MsgBox "You cannot delete the first item in the list, try one of the others. Note: you can always add one at the top and replace the one you want to remove."
     End If
     cmbGdn.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnGdnRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnGdnRemove_Click of Form FireCallPrefs"
 End Sub
 ' display the help file
+'---------------------------------------------------------------------------------------
+' Procedure : btnHelp_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnHelp_Click()
     ' variables declared
     Dim answer As VbMsgBoxResult
     
     'initialise the dimensioned variables
+   On Error GoTo btnHelp_Click_Error
+
     answer = vbNo
     
     answer = MsgBox("This option opens a browser window and displays this tool's help. Proceed?", vbExclamation + vbYesNo)
@@ -3540,9 +4237,25 @@ Private Sub btnHelp_Click()
             MsgBox ("%Err-I-ErrorNumber 11 - The help file - FireCallWin Help.html - is missing from the help folder.")
         End If
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+btnHelp_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnHelp_Click of Form FireCallPrefs"
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnMornRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnMornRemove_Click()
+   On Error GoTo btnMornRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button ' enable the save button
     If cmbMorn.ListIndex <> 0 Then
         cmbMorn.RemoveItem (cmbMorn.ListIndex)
@@ -3550,9 +4263,25 @@ Private Sub btnMornRemove_Click()
         MsgBox "You cannot delete the first item in the list, try one of the others. Note: you can always add one at the top and replace the one you want to remove."
     End If
     cmbMorn.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnMornRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnMornRemove_Click of Form FireCallPrefs"
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnNewsRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnNewsRemove_Click()
+   On Error GoTo btnNewsRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button ' enable the save button
     If cmbNews.ListIndex <> 0 Then
         cmbNews.RemoveItem (cmbNews.ListIndex)
@@ -3560,15 +4289,38 @@ Private Sub btnNewsRemove_Click()
         MsgBox "You cannot delete the first item in the list, try one of the others. Note: you can always add one at the top and replace the one you want to remove."
     End If
     cmbNews.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnNewsRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnNewsRemove_Click of Form FireCallPrefs"
 End Sub
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnOutAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnOutAdd_Click()
+   On Error GoTo btnOutAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         cmbOut.AddItem txtStringToAdd.Text, 0
     Else
         MsgBox "No text to add - please add your text in the box above and then retry."
     End If
     cmbOut.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnOutAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnOutAdd_Click of Form FireCallPrefs"
 End Sub
 ' remove user defined text from the pre-defined button -
 Private Sub btnOutRemove_Click()
