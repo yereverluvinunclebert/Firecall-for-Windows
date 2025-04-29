@@ -2321,11 +2321,20 @@ End Sub
 
 ' Basically, we cannot have the combobox on another form and instead we keep the two in synch.
 
+'---------------------------------------------------------------------------------------
+' Procedure : enumerateRecordingDevices
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub enumerateRecordingDevices()
 
     Dim sName As Variant
     Dim devCount As Integer
     
+   On Error GoTo enumerateRecordingDevices_Error
+
     devCount = 0
     
     'If FCWCaptureMethod = "0" Then
@@ -2348,10 +2357,26 @@ Public Sub enumerateRecordingDevices()
         
 
     'End If
+
+   On Error GoTo 0
+   Exit Sub
+
+enumerateRecordingDevices_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure enumerateRecordingDevices of Form FireCallMain"
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : setBackups
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub setBackups()
+
+   On Error GoTo setBackups_Error
 
     If FCWAutomaticBackups = "1" Then
         backupTimer.Enabled = True
@@ -2362,9 +2387,23 @@ Private Sub setBackups()
         Call backupOutputFile(FCWSharedOutputFile, "startup")
     End If
 
+   On Error GoTo 0
+   Exit Sub
+
+setBackups_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setBackups of Form FireCallMain"
+
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : setVisualItems
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub setVisualItems()
 
     Dim CurrentDPI As Long
@@ -2381,6 +2420,8 @@ Private Sub setVisualItems()
 '    Else
 '        FireCallMain.Top = Val(FCWMaximiseFormY)
 '    End If
+
+   On Error GoTo setVisualItems_Error
 
     Me.Show ' explicitly show the form
     
@@ -2415,12 +2456,42 @@ Private Sub setVisualItems()
     ' set focus to the input text box so we can start typing immediately
     txtTextEntry.Text = "Type your text here..." ' never rely on the IDE as this specific value is checked
     txtTextEntry.SetFocus
+
+   On Error GoTo 0
+   Exit Sub
+
+setVisualItems_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setVisualItems of Form FireCallMain"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : Form_Resize
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub Form_Resize()
+   On Error GoTo Form_Resize_Error
+
     Call formResizeSub
+
+   On Error GoTo 0
+   Exit Sub
+
+Form_Resize_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Form_Resize of Form FireCallMain"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : formResizeSub
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub formResizeSub()
 ' credit Magic Ink
 ' https://www.vbforums.com/showthread.php?824699-RESOLVED-Form-Placement-Considering-Aero-Borders
@@ -2432,6 +2503,8 @@ Private Sub formResizeSub()
     Dim a As Long
     
     
+   On Error GoTo formResizeSub_Error
+
     desiredClientMinWidth = 10065
     desiredClientHeight = 10185
     desiredClientMaxWidth = 25000
@@ -2490,6 +2563,13 @@ Private Sub formResizeSub()
     
     'DoEvents
     
+
+   On Error GoTo 0
+   Exit Sub
+
+formResizeSub_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure formResizeSub of Form FireCallMain"
     
 End Sub
 '
@@ -2543,6 +2623,13 @@ Form_Unload_Error:
 End Sub
 
 ' start the iconise timer that iconises the main form to the stamp icon
+'---------------------------------------------------------------------------------------
+' Procedure : startTheIconiseTimers
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub startTheIconiseTimers()
 
     Dim iconiseIntervalMillisecs As Long
@@ -2550,6 +2637,8 @@ Private Sub startTheIconiseTimers()
     Dim sixtyFive As Long ' just used to avoid multiplying two integers
     Dim oneThousand As Long
     
+   On Error GoTo startTheIconiseTimers_Error
+
     If fInIDE Then
         ' VB6 timers cannot exceed 65 seconds (65535 ms)
         If Val(FCWIconiseDelay) > 65 Then
@@ -2573,14 +2662,30 @@ Private Sub startTheIconiseTimers()
         ' in addition, unfortunately the manual code timer method does not work in the IDE
         Call initiateIconiseTimerInCode
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+startTheIconiseTimers_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure startTheIconiseTimers of Form FireCallMain"
 End Sub
 
 ' the listboxes have a vertical scrollbar by default and we add a horizontal scrollbar
 ' showing/hiding these require different methods
+'---------------------------------------------------------------------------------------
+' Procedure : handleScrollbars
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub handleScrollbars()
     Dim lLength As Long
     
     'disable the scrollbars for the input listbox
+   On Error GoTo handleScrollbars_Error
+
     If FCWEnableScrollbars = "0" Then
         Call SendMessageByNum(lbxInputTextArea.hwnd, LB_SETHORIZONTALEXTENT, 0, 0&)
         Call ShowScrollBar(lbxInputTextArea.hwnd, SB_VERT, False)  ' hides the vertical scrollbar
@@ -2615,14 +2720,30 @@ Private Sub handleScrollbars()
         Call SendMessageByNum(FireCallMain.lbxCombinedTextArea.hwnd, LB_SETHORIZONTALEXTENT, lLength, 0&)
     End If
 
+   On Error GoTo 0
+   Exit Sub
+
+handleScrollbars_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure handleScrollbars of Form FireCallMain"
+
 End Sub
 
 
 
 
 ' set the Zorder of the main window, emulating functionality of the YWE version
+'---------------------------------------------------------------------------------------
+' Procedure : setZOrder
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub setZOrder(ByVal formLoad As Boolean)
     
+   On Error GoTo setZOrder_Error
+
     If Val(FCWWindowLevel) = 0 Then
         Call setFormPosition(Me, HWND_BOTTOM)
     ElseIf Val(FCWWindowLevel) = 1 Then
@@ -2630,11 +2751,27 @@ Private Sub setZOrder(ByVal formLoad As Boolean)
     ElseIf Val(FCWWindowLevel) = 2 Then
         Call setFormPosition(Me, HWND_TOPMOST)
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+setZOrder_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setZOrder of Form FireCallMain"
 End Sub
  
 
 ' check that the three required preference settings have valid values.
+'---------------------------------------------------------------------------------------
+' Procedure : fTestInputsOutputs
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Function fTestInputsOutputs() As Boolean
+   On Error GoTo fTestInputsOutputs_Error
+
     fTestInputsOutputs = True
     
     If Not FCWSharedInputFile = vbNullString And Not fFExists(FCWSharedInputFile) Then
@@ -2652,12 +2789,28 @@ Private Function fTestInputsOutputs() As Boolean
         fTestInputsOutputs = False
         Exit Function
     End If
+
+   On Error GoTo 0
+   Exit Function
+
+fTestInputsOutputs_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fTestInputsOutputs of Form FireCallMain"
     
 End Function
 
 
 ' check that the three required preference settings have values, valid or not
+'---------------------------------------------------------------------------------------
+' Procedure : fTestMissingFields
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Function fTestMissingFields() As Boolean
+   On Error GoTo fTestMissingFields_Error
+
     fTestMissingFields = True
     
     If FCWSharedInputFile = vbNullString Then
@@ -2675,15 +2828,45 @@ Private Function fTestMissingFields() As Boolean
         fTestMissingFields = False
         Exit Function
     End If
+
+   On Error GoTo 0
+   Exit Function
+
+fTestMissingFields_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fTestMissingFields of Form FireCallMain"
 End Function
 
 ' call the same form unload subroutine called by the form unloading itself
+'---------------------------------------------------------------------------------------
+' Procedure : btnClose_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnClose_Click()
+   On Error GoTo btnClose_Click_Error
+
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     Unload FireCallMain
+
+   On Error GoTo 0
+   Exit Sub
+
+btnClose_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnClose_Click of Form FireCallMain"
 End Sub
 
 ' attach a single file to send to the remote chat partner
+'---------------------------------------------------------------------------------------
+' Procedure : btnPicAttach_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnPicAttach_Click()
     Dim retFileName As String
     'Dim retfileTitle As String
@@ -2692,6 +2875,8 @@ Private Sub btnPicAttach_Click()
     Dim answer As VbMsgBoxResult
     
     'initialise the dimensioned variables
+   On Error GoTo btnPicAttach_Click_Error
+
     answer = vbYes
     attachedFile = vbNullString
     
@@ -2728,16 +2913,32 @@ Private Sub btnPicAttach_Click()
         End If
     
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+btnPicAttach_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicAttach_Click of Form FireCallMain"
     
 End Sub
 
 
 ' display the small resized icon in the small emoji box
+'---------------------------------------------------------------------------------------
+' Procedure : cmbEmojiSelection_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbEmojiSelection_Click()
     
     Dim fullPath As String
     'Dim emojiSet As String
     
+   On Error GoTo cmbEmojiSelection_Click_Error
+
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     If FCWEmojiSetDesc = vbNullString Then FCWEmojiSetDesc = "standard"
@@ -2757,14 +2958,30 @@ Private Sub cmbEmojiSelection_Click()
     picEmojiSmall.Picture = picEmojiSmall.Image
     'lbxInputTextArea.Refresh
     picEmojiSmall.Refresh
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbEmojiSelection_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbEmojiSelection_Click of Form FireCallMain"
     
 End Sub
 
 ' send your emoji state to the chat partner
+'---------------------------------------------------------------------------------------
+' Procedure : btnEmojiSet_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnEmojiSet_Click()
 
     Dim fullPath As String
     
+   On Error GoTo btnEmojiSet_Click_Error
+
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
         
     If FCWEmojiSetDesc = vbNullString Then FCWEmojiSetDesc = "standard"
@@ -2782,22 +2999,54 @@ Private Sub btnEmojiSet_Click()
     picBtnLidCatch.Visible = False
     picBtnLidShadow.Visible = False
     txtTextEntry.SetFocus
+
+   On Error GoTo 0
+   Exit Sub
+
+btnEmojiSet_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnEmojiSet_Click of Form FireCallMain"
 End Sub
 
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : houseKeepingTimer_Timer
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub houseKeepingTimer_Timer()
+   On Error GoTo houseKeepingTimer_Timer_Error
+
     Call houseKeepingTimerLogic(False)
+
+   On Error GoTo 0
+   Exit Sub
+
+houseKeepingTimer_Timer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure houseKeepingTimer_Timer of Form FireCallMain"
 End Sub
 
 
 
 '  The VB6 Iconise timer the equivalent of the initiateIconiseTimerInCode
+'---------------------------------------------------------------------------------------
+' Procedure : IconiseTimer_Timer
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub IconiseTimer_Timer()
     'Dim lastInputVar As LASTINPUTINFO
     
     ' disable this timer when working in the runtime
+   On Error GoTo IconiseTimer_Timer_Error
+
     If Not fInIDE Then
         Exit Sub ' this timer should only work in the IDE
     End If
@@ -2819,10 +3068,26 @@ Private Sub IconiseTimer_Timer()
         End If
     End If
 
+   On Error GoTo 0
+   Exit Sub
+
+IconiseTimer_Timer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure IconiseTimer_Timer of Form FireCallMain"
+
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : lbxCombinedTextArea_DblClick
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxCombinedTextArea_DblClick()
+   On Error GoTo lbxCombinedTextArea_DblClick_Error
+
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
@@ -2835,19 +3100,67 @@ Private Sub lbxCombinedTextArea_DblClick()
         combinedScrollBarTimer.Enabled = False
     End If
     Call lbxTextAreaClick(lbxCombinedTextArea, True)
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxCombinedTextArea_DblClick_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_DblClick of Form FireCallMain"
 End Sub
 
 ' interpret the keys pressed and identify to the program where the keypress occurred
+'---------------------------------------------------------------------------------------
+' Procedure : lbxCombinedTextArea_KeyDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxCombinedTextArea_KeyDown(KeyCode As Integer, Shift As Integer)
+   On Error GoTo lbxCombinedTextArea_KeyDown_Error
+
     controlPressed = "lbxCombinedTextArea"
     Call getKeyPress(KeyCode)
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxCombinedTextArea_KeyDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_KeyDown of Form FireCallMain"
 End Sub
 'after a key has been pressed on the combined area undo the CTRL key var
+'---------------------------------------------------------------------------------------
+' Procedure : lbxCombinedTextArea_KeyUp
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxCombinedTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
+   On Error GoTo lbxCombinedTextArea_KeyUp_Error
+
     CTRL_1 = False
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxCombinedTextArea_KeyUp_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_KeyUp of Form FireCallMain"
 End Sub
 ' show the alternative right click menu and set the bulbs to dull
+'---------------------------------------------------------------------------------------
+' Procedure : lbxCombinedTextArea_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo lbxCombinedTextArea_MouseDown_Error
+
     If Button = 2 Then
         mnuLBOpenSharedInputFile.Visible = True
         mnuLBOpenSharedOutputFile.Visible = True
@@ -2884,23 +3197,71 @@ Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x
     picTextChangeBright.Visible = False
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxCombinedTextArea_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_MouseDown of Form FireCallMain"
     
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : lbxCombinedTextArea_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxCombinedTextArea_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo lbxCombinedTextArea_MouseMove_Error
+
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip lbxCombinedTextArea.hwnd, "The combined chat box contains both chat partner's texts and messages. This is both the input and output files' contents combined and then sorted.", _
                   TTIconInfo, "Help on the Combined Chat Box", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxCombinedTextArea_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_MouseMove of Form FireCallMain"
 End Sub
 
 ' set the change lamp to dull when any activity is enountered in the input box - the scrollbars in this case
+'---------------------------------------------------------------------------------------
+' Procedure : lbxCombinedTextArea_Scroll
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxCombinedTextArea_Scroll()
+   On Error GoTo lbxCombinedTextArea_Scroll_Error
+
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
     lbxCombinedTextArea.ToolTipText = ""
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxCombinedTextArea_Scroll_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_Scroll of Form FireCallMain"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : lbxInputTextArea_DblClick
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxInputTextArea_DblClick()
+
+   On Error GoTo lbxInputTextArea_DblClick_Error
 
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
@@ -2915,35 +3276,115 @@ Private Sub lbxInputTextArea_DblClick()
     End If
     
     Call lbxTextAreaClick(lbxInputTextArea, True)
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxInputTextArea_DblClick_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_DblClick of Form FireCallMain"
 End Sub
 
 ' interpret the keys pressed and identify to the program where the keypress occurred
+'---------------------------------------------------------------------------------------
+' Procedure : lbxInputTextArea_KeyDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxInputTextArea_KeyDown(ByRef KeyCode As Integer, ByRef Shift As Integer)
+   On Error GoTo lbxInputTextArea_KeyDown_Error
+
     controlPressed = "lbxInputTextArea"
     Call getKeyPress(KeyCode)
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxInputTextArea_KeyDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_KeyDown of Form FireCallMain"
     
 End Sub
 'after a key has been pressed on the input area undo the CTRL key var
+'---------------------------------------------------------------------------------------
+' Procedure : lbxInputTextArea_KeyUp
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxInputTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
+   On Error GoTo lbxInputTextArea_KeyUp_Error
+
     CTRL_1 = False
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxInputTextArea_KeyUp_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_KeyUp of Form FireCallMain"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : lbxInputTextArea_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxInputTextArea_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo lbxInputTextArea_MouseMove_Error
+
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip lbxInputTextArea.hwnd, "The top chat box contains your chat partner's texts and messages. This is known as the input box displaying the contents of the shared input file.", _
                   TTIconInfo, "Help on the Upper Chat Box", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxInputTextArea_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_MouseMove of Form FireCallMain"
 End Sub
 
 ' set the change lamp to dull when any activity is enountered in the input box - the scrollbars in this case
+'---------------------------------------------------------------------------------------
+' Procedure : lbxInputTextArea_Scroll
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxInputTextArea_Scroll()
+   On Error GoTo lbxInputTextArea_Scroll_Error
+
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
     lbxInputTextArea.ToolTipText = ""
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxInputTextArea_Scroll_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_Scroll of Form FireCallMain"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : lbxOutputTextArea_DblClick
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxOutputTextArea_DblClick()
     ' when using the keys to select the top list box, the scrollbar is always displayed even when switched off
     ' in this case we disable it two seconds after the last keypress by using a timer to disable it
+
+   On Error GoTo lbxOutputTextArea_DblClick_Error
 
     If LTrim$(Str$(FCWEnableScrollbars)) = "0" Then
         If outputScrollBarTimer.Enabled = False Then outputScrollBarTimer.Enabled = True
@@ -2952,26 +3393,97 @@ Private Sub lbxOutputTextArea_DblClick()
     End If
     Call lbxTextAreaClick(lbxOutputTextArea, True)
 
+   On Error GoTo 0
+   Exit Sub
+
+lbxOutputTextArea_DblClick_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_DblClick of Form FireCallMain"
+
 End Sub
 
 ' interpret the keys pressed and identify to the program where the keypress occurred
+'---------------------------------------------------------------------------------------
+' Procedure : lbxOutputTextArea_KeyDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxOutputTextArea_KeyDown(ByRef KeyCode As Integer, ByRef Shift As Integer)
+   On Error GoTo lbxOutputTextArea_KeyDown_Error
+
     controlPressed = "lbxOutputTextArea"
     
     Call getKeyPress(KeyCode)
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxOutputTextArea_KeyDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_KeyDown of Form FireCallMain"
 End Sub
 'after a key has been pressed on the output area undo the CTRL key var
+'---------------------------------------------------------------------------------------
+' Procedure : lbxOutputTextArea_KeyUp
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxOutputTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
+   On Error GoTo lbxOutputTextArea_KeyUp_Error
+
     CTRL_1 = False
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxOutputTextArea_KeyUp_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_KeyUp of Form FireCallMain"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : lbxOutputTextArea_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxOutputTextArea_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo lbxOutputTextArea_MouseMove_Error
+
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip lbxOutputTextArea.hwnd, "The bottom chat contains your own texts and messages. This is the output box displaying the contents of the shared output file. Beneath your chat box is the text box where you type your messages, pressing the SEND button to dispatch the text.", _
                   TTIconInfo, "Help on the Lower Chat Box", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxOutputTextArea_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_MouseMove of Form FireCallMain"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : lbxOutputTextArea_Scroll
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbxOutputTextArea_Scroll()
+   On Error GoTo lbxOutputTextArea_Scroll_Error
+
     lbxOutputTextArea.ToolTipText = ""
+
+   On Error GoTo 0
+   Exit Sub
+
+lbxOutputTextArea_Scroll_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_Scroll of Form FireCallMain"
 End Sub
 
 'add ping request to the listBox right click menus
