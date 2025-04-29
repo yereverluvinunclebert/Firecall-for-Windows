@@ -4323,7 +4323,16 @@ btnOutAdd_Click_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnOutAdd_Click of Form FireCallPrefs"
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnOutRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnOutRemove_Click()
+   On Error GoTo btnOutRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button ' enable the save button
     If cmbOut.ListIndex <> 0 Then
         cmbOut.RemoveItem (cmbOut.ListIndex)
@@ -4331,11 +4340,27 @@ Private Sub btnOutRemove_Click()
         MsgBox "You cannot delete the first item in the list, try one of the others. Note: you can always add one at the top and replace the one you want to remove."
     End If
     cmbOut.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnOutRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnOutRemove_Click of Form FireCallPrefs"
 End Sub
 ' select a font for the chatbox areas alone on FireCallPrefs
 
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnPrgAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnPrgAdd_Click()
+   On Error GoTo btnPrgAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         cmbPrg.AddItem txtStringToAdd.Text, 0
     Else
@@ -4343,9 +4368,25 @@ Private Sub btnPrgAdd_Click()
     End If
     cmbPrg.ListIndex = 0
 
+   On Error GoTo 0
+   Exit Sub
+
+btnPrgAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPrgAdd_Click of Form FireCallPrefs"
+
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnPrgRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnPrgRemove_Click()
+   On Error GoTo btnPrgRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button ' enable the save button
     If cmbPrg.ListIndex <> 0 Then
         cmbPrg.RemoveItem (cmbPrg.ListIndex)
@@ -4353,8 +4394,22 @@ Private Sub btnPrgRemove_Click()
         MsgBox "You cannot delete the first item in the list, try one of the others. Note: you can always add one at the top and replace the one you want to remove."
     End If
     cmbPrg.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnPrgRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPrgRemove_Click of Form FireCallPrefs"
 End Sub
 ' save the values from all the tabs
+'---------------------------------------------------------------------------------------
+' Procedure : btnSave_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnSave_Click()
 
     Dim foundMessage As Boolean
@@ -4367,6 +4422,8 @@ Private Sub btnSave_Click()
     'Dim smtpConfigValue As String
         
     ' save the values from the general tab
+   On Error GoTo btnSave_Click_Error
+
     FCWSharedInputFile = txtSharedInputFile.Text
     FCWSharedOutputFile = txtSharedOutputFile.Text
     FCWExchangeFolder = txtExchangeFolder.Text
@@ -4666,17 +4723,33 @@ Private Sub btnSave_Click()
     FireCallPrefs.SetFocus
     
 
+   On Error GoTo 0
+   Exit Sub
+
+btnSave_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnSave_Click of Form FireCallPrefs"
+
 End Sub
 
 
 
 ' add a file to act as the shared input file
+'---------------------------------------------------------------------------------------
+' Procedure : btnSharedInputFile_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnSharedInputFile_Click()
     Dim retFileName As String
     'Dim retfileTitle As String
     Dim answer As VbMsgBoxResult
     
     'retfileTitle = ""
+   On Error GoTo btnSharedInputFile_Click_Error
+
     retFileName = vbNullString
 
     Call addTargetFile(txtSharedInputFile.Text, retFileName)
@@ -4703,9 +4776,25 @@ Private Sub btnSharedInputFile_Click()
     
     
 
+   On Error GoTo 0
+   Exit Sub
+
+btnSharedInputFile_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnSharedInputFile_Click of Form FireCallPrefs"
+
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnWellRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnWellRemove_Click()
+   On Error GoTo btnWellRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     If cmbWell.ListIndex <> 0 Then
         cmbWell.RemoveItem (cmbWell.ListIndex)
@@ -4713,9 +4802,25 @@ Private Sub btnWellRemove_Click()
         MsgBox "You cannot delete the first item in the list, try one of the others. Note: you can always add one at the top and replace the one you want to remove."
     End If
     cmbWell.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnWellRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnWellRemove_Click of Form FireCallPrefs"
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnWotRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnWotRemove_Click()
+   On Error GoTo btnWotRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     If cmbWot.ListIndex <> 0 Then
         cmbWot.RemoveItem (cmbWot.ListIndex)
@@ -4723,9 +4828,25 @@ Private Sub btnWotRemove_Click()
         MsgBox "You cannot delete the first item in the list, try one of the others. Note: you can always add one at the top and replace the one you want to remove."
     End If
     cmbWot.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnWotRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnWotRemove_Click of Form FireCallPrefs"
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnWthRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnWthRemove_Click()
+   On Error GoTo btnWthRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     If cmbWth.ListIndex <> 0 Then
         cmbWth.RemoveItem (cmbWth.ListIndex)
@@ -4733,84 +4854,340 @@ Private Sub btnWthRemove_Click()
         MsgBox "You cannot delete the first item in the list, try one of the others. Note: you can always add one at the top and replace the one you want to remove."
     End If
     cmbWth.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnWthRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnWthRemove_Click of Form FireCallPrefs"
 End Sub
 ' scrollbar enable/disable
+'---------------------------------------------------------------------------------------
+' Procedure : chkEnableScrollbars_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkEnableScrollbars_Click()
+   On Error GoTo chkEnableScrollbars_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     
     FCWEnableScrollbars = LTrim$(Str$(chkEnableScrollbars.Value))
+
+   On Error GoTo 0
+   Exit Sub
+
+chkEnableScrollbars_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkEnableScrollbars_Click of Form FireCallPrefs"
         
 End Sub
 
 ' set a var on a checkbox tick
+'---------------------------------------------------------------------------------------
+' Procedure : chkEnableTooltips_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkEnableTooltips_Click()
+   On Error GoTo chkEnableTooltips_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkEnableTooltips_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkEnableTooltips_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkEnableSounds_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkEnableSounds_Click()
+   On Error GoTo chkEnableSounds_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkEnableSounds_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkEnableSounds_Click of Form FireCallPrefs"
 End Sub
+'---------------------------------------------------------------------------------------
+' Procedure : chkIgnoreMouse_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkIgnoreMouse_Click()
+   On Error GoTo chkIgnoreMouse_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkIgnoreMouse_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkIgnoreMouse_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkLoadBottom_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkLoadBottom_Click()
+   On Error GoTo chkLoadBottom_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkLoadBottom_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkLoadBottom_Click of Form FireCallPrefs"
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkPlayVolume_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkPlayVolume_Click()
+   On Error GoTo chkPlayVolume_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkPlayVolume_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkPlayVolume_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkSendEmails_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkSendEmails_Click()
+   On Error GoTo chkSendEmails_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     If chkSendEmails.Value = 1 Or chkSendErrorEmails.Value = 1 Then
         Call toggleAllEmailControls("show")
     Else
         Call toggleAllEmailControls("hide")
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+chkSendEmails_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkSendEmails_Click of Form FireCallPrefs"
 End Sub
+'---------------------------------------------------------------------------------------
+' Procedure : chkSendErrorEmails_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkSendErrorEmails_Click()
+   On Error GoTo chkSendErrorEmails_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     If chkSendEmails.Value = 1 Or chkSendErrorEmails.Value = 1 Then
         Call toggleAllEmailControls("show")
     Else
         Call toggleAllEmailControls("hide")
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+chkSendErrorEmails_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkSendErrorEmails_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkSingleListBox_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub chkSingleListBox_Click()
+   On Error GoTo chkSingleListBox_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+chkSingleListBox_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure chkSingleListBox_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : cmbAdviceInterval_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbAdviceInterval_Click()
+   On Error GoTo cmbAdviceInterval_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbAdviceInterval_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbAdviceInterval_Click of Form FireCallPrefs"
 
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : cmbAlarmSound_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbAlarmSound_Click()
+   On Error GoTo cmbAlarmSound_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbAlarmSound_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbAlarmSound_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : cmbEmojiSet_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbEmojiSet_Click()
+   On Error GoTo cmbEmojiSet_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbEmojiSet_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbEmojiSet_Click of Form FireCallPrefs"
 
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : cmbMaxLineLength_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbMaxLineLength_Click()
+   On Error GoTo cmbMaxLineLength_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbMaxLineLength_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbMaxLineLength_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : cmbRefreshInterval_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbRefreshInterval_Click()
+   On Error GoTo cmbRefreshInterval_Click_Error
+
     btnSave.Enabled = True ' enable the save button
+
+   On Error GoTo 0
+   Exit Sub
+
+cmbRefreshInterval_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbRefreshInterval_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : cmbWindowLevel_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub cmbWindowLevel_Click()
+   On Error GoTo cmbWindowLevel_Click_Error
+
     btnSave.Enabled = True ' enable the save button
 
+   On Error GoTo 0
+   Exit Sub
+
+cmbWindowLevel_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbWindowLevel_Click of Form FireCallPrefs"
+
 End Sub
+'---------------------------------------------------------------------------------------
+' Procedure : btnPrefsFont_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnPrefsFont_Click()
+   On Error GoTo btnPrefsFont_Click_Error
+
     btnSave.Enabled = True ' enable the save button
 
     Dim fntFont As String
@@ -4851,8 +5228,22 @@ Private Sub btnPrefsFont_Click()
     
     txtPrefsFontSize.Text = fntSize
 
+   On Error GoTo 0
+   Exit Sub
+
+btnPrefsFont_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPrefsFont_Click of Form FireCallPrefs"
+
 End Sub
 ' select a font for the chatbox areas alone on FireCallMain
+'---------------------------------------------------------------------------------------
+' Procedure : btnTextFont_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnTextFont_Click()
     Dim storedFont As String
     
@@ -4865,6 +5256,8 @@ Private Sub btnTextFont_Click()
     Dim fntUnderline As Boolean
     Dim fntFontResult As Boolean
     
+   On Error GoTo btnTextFont_Click_Error
+
     btnSave.Enabled = True ' enable the save button
     
     storedFont = txtTextFont.Text
@@ -4909,14 +5302,30 @@ Private Sub btnTextFont_Click()
     
     'FireCallMain.cmbEmojiSelection.SelLength = 0
 
+
+   On Error GoTo 0
+   Exit Sub
+
+btnTextFont_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnTextFont_Click of Form FireCallPrefs"
     
 End Sub
 
 ' add a file to act as the shared input file
+'---------------------------------------------------------------------------------------
+' Procedure : btnSharedOutputFile_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnSharedOutputFile_Click()
     Dim retFileName As String
     'Dim retfileTitle As String
     Dim answer As VbMsgBoxResult
+
+   On Error GoTo btnSharedOutputFile_Click_Error
 
     Call addTargetFile(txtSharedOutputFile.Text, retFileName)
     
@@ -4941,13 +5350,29 @@ Private Sub btnSharedOutputFile_Click()
     End If
     
 
+   On Error GoTo 0
+   Exit Sub
+
+btnSharedOutputFile_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnSharedOutputFile_Click of Form FireCallPrefs"
+
 End Sub
 ' add a file to act as the shared exchange folder
+'---------------------------------------------------------------------------------------
+' Procedure : btnExchangeFolder_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnExchangeFolder_Click()
     ' variables declared
     Dim getFolder As String
     Dim dialogInitDir As String
    
+   On Error GoTo btnExchangeFolder_Click_Error
+
     If debugflg = 1 Then Debug.Print "%btnGeneralRdFolder_Click"
     
    'initialise the dimensioned variables
@@ -4965,17 +5390,49 @@ Private Sub btnExchangeFolder_Click()
     getFolder = fBrowseFolder(Me.hwnd, dialogInitDir) ' show the dialog box to select a folder
     If getFolder <> vbNullString Then txtExchangeFolder.Text = getFolder
 
+   On Error GoTo 0
+   Exit Sub
+
+btnExchangeFolder_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnExchangeFolder_Click of Form FireCallPrefs"
+
 End Sub
 
 
 ' open an explorer window and show the default emoji folder
+'---------------------------------------------------------------------------------------
+' Procedure : btnEmojiLocation_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnEmojiLocation_Click()
+   On Error GoTo btnEmojiLocation_Click_Error
+
         If fDirExists(App.Path & "\Resources\emojis\") Then
             Call ShellExecute(Me.hwnd, "Open", App.Path & "\Resources\emojis\", vbNullString, App.Path, 1)
         End If
+
+   On Error GoTo 0
+   Exit Sub
+
+btnEmojiLocation_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnEmojiLocation_Click of Form FireCallPrefs"
 End Sub
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnMornAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnMornAdd_Click()
+   On Error GoTo btnMornAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         If cmbMorn.ListCount <= 9 Then
             cmbMorn.AddItem txtStringToAdd.Text, 0
@@ -4987,9 +5444,25 @@ Private Sub btnMornAdd_Click()
     End If
     cmbMorn.ListIndex = 0
 
+   On Error GoTo 0
+   Exit Sub
+
+btnMornAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnMornAdd_Click of Form FireCallPrefs"
+
 End Sub
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnWotAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnWotAdd_Click()
+   On Error GoTo btnWotAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         If cmbWot.ListCount <= 9 Then
             cmbWot.AddItem txtStringToAdd.Text, 0
@@ -5001,9 +5474,25 @@ Private Sub btnWotAdd_Click()
     End If
     cmbWot.ListIndex = 0
 
+   On Error GoTo 0
+   Exit Sub
+
+btnWotAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnWotAdd_Click of Form FireCallPrefs"
+
 End Sub
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnWthAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnWthAdd_Click()
+   On Error GoTo btnWthAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         If cmbWth.ListCount <= 9 Then
             cmbWth.AddItem txtStringToAdd.Text, 0
@@ -5015,15 +5504,47 @@ Private Sub btnWthAdd_Click()
     End If
     cmbWth.ListIndex = 0
 
+   On Error GoTo 0
+   Exit Sub
+
+btnWthAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnWthAdd_Click of Form FireCallPrefs"
+
 End Sub
 ' open an explorer window and show the default sounds folder
+'---------------------------------------------------------------------------------------
+' Procedure : btnSoundsLocation_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnSoundsLocation_Click()
+   On Error GoTo btnSoundsLocation_Click_Error
+
         If fDirExists(App.Path & "\Resources\sounds\") Then
             Call ShellExecute(Me.hwnd, "Open", App.Path & "\Resources\sounds\", vbNullString, App.Path, 1)
         End If
+
+   On Error GoTo 0
+   Exit Sub
+
+btnSoundsLocation_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnSoundsLocation_Click of Form FireCallPrefs"
 End Sub
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnTtfnAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnTtfnAdd_Click()
+   On Error GoTo btnTtfnAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         If cmbTTFN.ListCount <= 9 Then
             cmbTTFN.AddItem txtStringToAdd.Text, 0
@@ -5035,18 +5556,48 @@ Private Sub btnTtfnAdd_Click()
     End If
     cmbTTFN.ListIndex = 0
 
+   On Error GoTo 0
+   Exit Sub
+
+btnTtfnAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnTtfnAdd_Click of Form FireCallPrefs"
+
 End Sub
 ' mute any test sound playing
+'---------------------------------------------------------------------------------------
+' Procedure : btnMute_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnMute_Click()
     Dim fileToPlay As String
     
+   On Error GoTo btnMute_Click_Error
+
     fileToPlay = "nothing.wav"
     If fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
         PlaySound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
     End If
     'btnSave.SetFocus
+
+   On Error GoTo 0
+   Exit Sub
+
+btnMute_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnMute_Click of Form FireCallPrefs"
 End Sub
 ' play a sound chosen from the sounds folder
+'---------------------------------------------------------------------------------------
+' Procedure : btnPlaySound_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnPlaySound_Click()
     'Dim answer As VbMsgBoxResult
     Dim fileToPlay As String
@@ -5072,6 +5623,8 @@ Private Sub btnPlaySound_Click()
 '        MsgBox (fileToKill & " file deleted")
 '    End If
     
+   On Error GoTo btnPlaySound_Click_Error
+
     fileToPlay = cmbAlarmSound.List(cmbAlarmSound.ListIndex)
 
     ' delete the sound
@@ -5085,10 +5638,26 @@ Private Sub btnPlaySound_Click()
 '        MsgBox (fileToKill & " file deleted")
     'End If
     'btnSave.SetFocus
+
+   On Error GoTo 0
+   Exit Sub
+
+btnPlaySound_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPlaySound_Click of Form FireCallPrefs"
     
 End Sub
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnWellAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnWellAdd_Click()
+   On Error GoTo btnWellAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         If cmbWell.ListCount <= 9 Then
             cmbWell.AddItem txtStringToAdd.Text, 0
@@ -5100,10 +5669,26 @@ Private Sub btnWellAdd_Click()
     End If
     cmbWell.ListIndex = 0
 
+
+   On Error GoTo 0
+   Exit Sub
+
+btnWellAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnWellAdd_Click of Form FireCallPrefs"
     
 End Sub
 ' add new user defined text to the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnNewsAdd_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnNewsAdd_Click()
+   On Error GoTo btnNewsAdd_Click_Error
+
     If txtStringToAddFieldModified = True And txtStringToAdd.Text <> vbNullString Then
         If cmbNews.ListCount <= 9 Then
             cmbNews.AddItem txtStringToAdd.Text, 0
@@ -5115,9 +5700,25 @@ Private Sub btnNewsAdd_Click()
     End If
     cmbNews.ListIndex = 0
 
+   On Error GoTo 0
+   Exit Sub
+
+btnNewsAdd_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnNewsAdd_Click of Form FireCallPrefs"
+
 End Sub
 ' remove user defined text from the pre-defined button -
+'---------------------------------------------------------------------------------------
+' Procedure : btnTtfnRemove_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub btnTtfnRemove_Click()
+   On Error GoTo btnTtfnRemove_Click_Error
+
     btnSave.Enabled = True ' enable the save button
 
     If cmbTTFN.ListIndex <> 0 Then
@@ -5126,6 +5727,13 @@ Private Sub btnTtfnRemove_Click()
         MsgBox "You cannot delete the first item in the list, try one of the others. Note: you can always add one at the top and replace the one you want to remove."
     End If
     cmbTTFN.ListIndex = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+btnTtfnRemove_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnTtfnRemove_Click of Form FireCallPrefs"
 
 End Sub
 
@@ -5560,10 +6168,19 @@ End Sub
 
 
 'read the sounds folder and add each WAV file to the combo box
+'---------------------------------------------------------------------------------------
+' Procedure : populateCmbAlarmSound
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub populateCmbAlarmSound()
     Dim MyPath  As String
     Dim myName As String
     
+   On Error GoTo populateCmbAlarmSound_Error
+
     MyPath = App.Path & "\Resources\sounds\"
     
     ' populate the alarm box with any .wav files that exist
@@ -5575,279 +6192,910 @@ Private Sub populateCmbAlarmSound()
        myName = Dir   ' Retrieve the next entry.
     Loop
 
+   On Error GoTo 0
+   Exit Sub
+
+populateCmbAlarmSound_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateCmbAlarmSound of Form FireCallPrefs"
+
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraConfigInner_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraConfigInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraConfigInner_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraConfigInner_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraConfigInner_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraConfigInner_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraConfigInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraConfigInner_MouseMove_Error
+
     CreateToolTip fraConfigInner.hwnd, "The configuration panel is the location for optional configuration items. These items change how FireCall operates, configure them to suit your needs and your mode of operation.", _
                   TTIconInfo, "Help on Configuration", , , , True
 
+   On Error GoTo 0
+   Exit Sub
+
+fraConfigInner_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraConfigInner_MouseMove of Form FireCallPrefs"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraConfiguration_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraConfiguration_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraConfiguration_MouseMove_Error
+
     CreateToolTip fraConfiguration.hwnd, "The configuration panel is the location for optional configuration items. These items change how FireCall operates, configure them to suit your needs and your mode of operation.", _
                   TTIconInfo, "Help on Configuration", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraConfiguration_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraConfiguration_MouseMove of Form FireCallPrefs"
 End Sub
 
 
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraDropbox_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraDropbox_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraDropbox_MouseMove_Error
+
     CreateToolTip fraDropbox.hwnd, "Selecting Dropbox here means that FireCall will look for the Dropbox processes and report an error if they are missing. Uncheck the check box below to suppress the alarm.", _
                   TTIconInfo, "Help on Dropbox Selection", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraDropbox_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraDropbox_MouseMove of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraEmail_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraEmail_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraEmail_MouseMove_Error
+
     CreateToolTip fraEmail.hwnd, "The email panel is where you will configure FCW to work with your email client in order to send email messages containing status and advice.", _
                   TTIconInfo, "Help on Email", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraEmail_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraEmail_MouseMove of Form FireCallPrefs"
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraEmailInner_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraEmailInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraEmailInner_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraEmailInner_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraEmailInner_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraEmailInner_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraEmailInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraEmailInner_MouseMove_Error
+
     CreateToolTip fraEmailInner.hwnd, "The email panel is where you will configure FCW to work with your email client in order to send email messages containing status and advice.", _
                   TTIconInfo, "Help on Email", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraEmailInner_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraEmailInner_MouseMove of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraEmojis_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraEmojis_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraEmojis_MouseMove_Error
+
     CreateToolTip fraEmojis.hwnd, "Your own Emoji sets can be copied to a folder alongside the standard folder and must have two forms of the emojis within two subfolders, base and telly, both containing emojis of the size, 96x96 pixels.", _
                   TTIconInfo, "Help on Emoji Sets", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraEmojis_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraEmojis_MouseMove of Form FireCallPrefs"
                   
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraEmojisInner_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraEmojisInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraEmojisInner_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraEmojisInner_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraEmojisInner_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraEmojisInner_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraEmojisInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraEmojisInner_MouseMove_Error
+
     CreateToolTip fraEmojisInner.hwnd, "Your own Emoji sets can be copied to a folder alongside the standard folder and must have two forms of the emojis within two subfolders, base and telly, both containing emojis of the size, 96x96 pixels.", _
                   TTIconInfo, "Help on Emoji Sets", , , , True
 
+   On Error GoTo 0
+   Exit Sub
+
+fraEmojisInner_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraEmojisInner_MouseMove of Form FireCallPrefs"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraFonts_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraFonts_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraFonts_MouseMove_Error
+
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip fraFonts.hwnd, "For the chat window we suggest Linux Biolinum G at 8pt and Centurion Light SF at 8pt for the config. screen, both of which you will find bundled in the FCW program folder. Choose a small 8pt font for each.", _
                   TTIconInfo, "Help on Setting the Fonts", , , , True
 
+   On Error GoTo 0
+   Exit Sub
+
+fraFonts_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraFonts_MouseMove of Form FireCallPrefs"
+
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraFontsInner_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraFontsInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraFontsInner_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraFontsInner_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraFontsInner_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraFontsInner_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraFontsInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraFontsInner_MouseMove_Error
+
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip fraFontsInner.hwnd, "For the chat window we suggest Linux Biolinum G at 8pt and Centurion Light SF at 8pt for the config. screen, both of which you will find bundled in the FCW program folder. Choose a small 8pt font for each.", _
                   TTIconInfo, "Help on Setting the Fonts", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraFontsInner_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraFontsInner_MouseMove of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraGeneral_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraGeneral_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraGeneral_MouseMove_Error
+
     CreateToolTip fraGeneral.hwnd, "The General Panel contains the most important user-configurable items required for the program to operate correctly. If these items are not filled in then FireCall will not operate at all.", _
                   TTIconInfo, "Help on Essential Configuration", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraGeneral_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraGeneral_MouseMove of Form FireCallPrefs"
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraGeneralInner_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraGeneralInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraGeneralInner_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraGeneralInner_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraGeneralInner_MouseDown of Form FireCallPrefs"
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraGeneralInner_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraGeneralInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraGeneralInner_MouseMove_Error
+
     CreateToolTip fraGeneralInner.hwnd, "The General Panel contains the most important user-configurable items required for the program to operate correctly. If these items are not filled in then FireCall will not operate at all.", _
                   TTIconInfo, "Help on Essential Configuration", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraGeneralInner_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraGeneralInner_MouseMove of Form FireCallPrefs"
 End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraGoogleDrive_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraGoogleDrive_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraGoogleDrive_MouseMove_Error
+
     CreateToolTip fraGoogleDrive.hwnd, "Selecting Google Drive here means that FireCall will look for the Google Drive processes and report an error if they are missing.", _
                   TTIconInfo, "Help on Google Drive Selection", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraGoogleDrive_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraGoogleDrive_MouseMove of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraHiddenHousekeeping_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraHiddenHousekeeping_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraHiddenHousekeeping_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraHiddenHousekeeping_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraHiddenHousekeeping_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraHiddenHousekeeping_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraHiddenHousekeeping_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraHiddenHousekeeping_MouseMove_Error
+
     CreateToolTip fraHiddenHousekeeping.hwnd, "The housekeeping panel is where you can configure backups and the archiving of old data. The backup functionality is working well but the archiving has not yet been implemented.", _
                   TTIconInfo, "Help on Housekeeping", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraHiddenHousekeeping_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraHiddenHousekeeping_MouseMove of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraHousekeeping_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraHousekeeping_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraHousekeeping_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraHousekeeping_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraHousekeeping_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraHousekeeping_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraHousekeeping_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraHousekeeping_MouseMove_Error
+
     CreateToolTip fraHousekeeping.hwnd, "The housekeeping panel is where you can configure backups and the archiving of old data. The backup functionality is working well but the archiving has not yet been implemented.", _
                   TTIconInfo, "Help on Housekeeping", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraHousekeeping_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraHousekeeping_MouseMove of Form FireCallPrefs"
 End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraNone_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraNone_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraNone_MouseMove_Error
+
     CreateToolTip fraNone.hwnd, "Selecting None - FireCall will not look for any processes. This implies you are using your own network for internal file sharing.", _
                   TTIconInfo, "Help on OneDrive Selection", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraNone_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraNone_MouseMove of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraOneDrive_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraOneDrive_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraOneDrive_MouseMove_Error
+
     CreateToolTip fraOneDrive.hwnd, "Selecting OneDrive here means that FireCall will look for the OneDrive processes and report an error if they are missing.", _
                   TTIconInfo, "Help on OneDrive Selection", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraOneDrive_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraOneDrive_MouseMove of Form FireCallPrefs"
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraSMTPframe_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraSMTPframe_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraSMTPframe_MouseMove_Error
+
     CreateToolTip fraSMTPframe.hwnd, "Messages are sent by email using the SMTP details entered.  Extract these from your email client, Outlook or Thunderbird for example.", _
                   TTIconInfo, "Help on SMTP Server", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraSMTPframe_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraSMTPframe_MouseMove of Form FireCallPrefs"
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraSounds_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraSounds_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraSounds_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraSounds_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraSounds_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraSounds_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraSounds_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 
-CreateToolTip fraSounds.hwnd, "The sound panel allows you to configure the sounds that occur within FCW. Some of the animations have associated sounds, you can control these here..", _
+   On Error GoTo fraSounds_MouseMove_Error
+
+    CreateToolTip fraSounds.hwnd, "The sound panel allows you to configure the sounds that occur within FCW. Some of the animations have associated sounds, you can control these here..", _
                   TTIconInfo, "Help on Configuring Sounds", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraSounds_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraSounds_MouseMove of Form FireCallPrefs"
 
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraSoundsInner_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraSoundsInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraSoundsInner_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraSoundsInner_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraSoundsInner_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraSoundsInner_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraSoundsInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraSoundsInner_MouseMove_Error
+
     CreateToolTip fraSoundsInner.hwnd, "The sound panel allows you to configure the sounds that occur within FCW. Some of the animations have associated sounds, you can control these here..", _
                   TTIconInfo, "Help on Configuring Sounds", , , , True
 
+   On Error GoTo 0
+   Exit Sub
+
+fraSoundsInner_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraSoundsInner_MouseMove of Form FireCallPrefs"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraTargetClient_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraTargetClient_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraTargetClient_MouseMove_Error
+
     CreateToolTip fraTargetClient.hwnd, "The target client is an option that you may not need to change unless you are communicating with the javascript version of the FireCall app that runs on Mac OS X. That version requires UTF8 support to display and handle unicode characters. If you are a Windows user communicating with FireCall for Windows you do not need to select the UTF8 option. However, the code we use to handle UTF8 files may be faster for reading and writing the input/output data files, so by all means try it out.", _
                   TTIconInfo, "Help on Selecting ANSI or UTF8", , , , True
 
+   On Error GoTo 0
+   Exit Sub
+
+fraTargetClient_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraTargetClient_MouseMove of Form FireCallPrefs"
+
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraTexts_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraTexts_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraTexts_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraTexts_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraTexts_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraTexts_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraTexts_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraTexts_MouseMove_Error
+
     CreateToolTip fraTexts.hwnd, "The texts panel is where you can configure the pre-programmed messages that FCW can send using the buttons at the bottom of the utility. This panel allows you to change or add to the pre-defined texts that appear on the buttons.", _
                   TTIconInfo, "Help on PreDefined Texts", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraTexts_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraTexts_MouseMove of Form FireCallPrefs"
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraTextsInner_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraTextsInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraTextsInner_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraTextsInner_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraTextsInner_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraTextsInner_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraTextsInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraTextsInner_MouseMove_Error
+
     CreateToolTip fraTextsInner.hwnd, "The texts panel is where you can configure the pre-programmed messages that FCW can send using the buttons at the bottom of the utility. This panel allows you to change or add to the pre-defined texts that appear on the buttons.", _
                   TTIconInfo, "Help on PreDefined Texts", , , , True
 
+   On Error GoTo 0
+   Exit Sub
+
+fraTextsInner_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraTextsInner_MouseMove of Form FireCallPrefs"
+
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraWindow_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraWindow_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraWindow_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraWindow_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraWindow_MouseDown of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraWindow_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraWindow_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraWindow_MouseMove_Error
+
     CreateToolTip fraWindow.hwnd, "The Opacity and Window Level of the program are rather strange characteristics to change in a Windows program, however Fire Call Win is a copy of a Yahoo Widget of the same name. All widgets have similar window tab options including the capability to change the opacity and window level. Whether these options are useful to you or anyone is a moot point but as this tool aims to replicate the YWE version functionality it has been reproduced here. It is here as more of an experiment as to how to implement a feature, one carried over from the Yahoo Widget (javascript) version of this program.", _
                   TTIconInfo, "Help on YWE Quirk Mode Options", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraWindow_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraWindow_MouseMove of Form FireCallPrefs"
 End Sub
 
 ' Clicking on the icon inner frame
+'---------------------------------------------------------------------------------------
+' Procedure : fraWindowInner_MouseDown
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraWindowInner_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraWindowInner_MouseDown_Error
+
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu prefsMnuPopmenu, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+fraWindowInner_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraWindowInner_MouseDown of Form FireCallPrefs"
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : lblAllowShutdowns_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lblAllowShutdowns_Click()
+   On Error GoTo lblAllowShutdowns_Click_Error
+
     If chkAllowShutdowns.Value = 1 Then
         chkAllowShutdowns.Value = 0
     Else
         chkAllowShutdowns.Value = 1
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+lblAllowShutdowns_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lblAllowShutdowns_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : fraWindowInner_MouseMove
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub fraWindowInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error GoTo fraWindowInner_MouseMove_Error
+
     CreateToolTip fraWindowInner.hwnd, "The Opacity and Window Level of the program are rather strange characteristics to change in a Windows program, however Fire Call Win is a copy of a Yahoo Widget of the same name. All widgets have similar window tab options including the capability to change the opacity and window level. Whether these options are useful to you or anyone is a moot point but as this tool aims to replicate the YWE version functionality it has been reproduced here. It is here as more of an experiment as to how to implement a feature, one carried over from the Yahoo Widget (javascript) version of this program.", _
                   TTIconInfo, "Help on YWE Quirk Mode Options", , , , True
+
+   On Error GoTo 0
+   Exit Sub
+
+fraWindowInner_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fraWindowInner_MouseMove of Form FireCallPrefs"
 End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : lblAutomaticHousekeeping_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lblAutomaticHousekeeping_Click()
+   On Error GoTo lblAutomaticHousekeeping_Click_Error
+
     If chkAutomaticHousekeeping.Value = 1 Then
         chkAutomaticHousekeeping.Value = 0
     Else
         chkAutomaticHousekeeping.Value = 1
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+lblAutomaticHousekeeping_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lblAutomaticHousekeeping_Click of Form FireCallPrefs"
 End Sub
 
 
@@ -5862,19 +7110,67 @@ End Sub
 
 
 ' clicking upon the labels below the main prefs icons
+'---------------------------------------------------------------------------------------
+' Procedure : lblEmojis_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lblEmojis_Click()
+   On Error GoTo lblEmojis_Click_Error
+
     Call picEmojis_Click
+
+   On Error GoTo 0
+   Exit Sub
+
+lblEmojis_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lblEmojis_Click of Form FireCallPrefs"
 End Sub
 
 
 
 ' clicking upon the labels below the main prefs icons
+'---------------------------------------------------------------------------------------
+' Procedure : lblFonts_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lblFonts_Click()
+   On Error GoTo lblFonts_Click_Error
+
     Call picFonts_Click
+
+   On Error GoTo 0
+   Exit Sub
+
+lblFonts_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lblFonts_Click of Form FireCallPrefs"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : lbloptServiceProvider_Click
+' Author    : beededea
+' Date      : 29/04/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub lbloptServiceProvider_Click(Index As Integer)
+   On Error GoTo lbloptServiceProvider_Click_Error
+
     optServiceProvider(Index).Value = True
+
+   On Error GoTo 0
+   Exit Sub
+
+lbloptServiceProvider_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbloptServiceProvider_Click of Form FireCallPrefs"
 End Sub
 
 Private Sub fraServiceProvider_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
