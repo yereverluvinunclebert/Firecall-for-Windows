@@ -1,5 +1,5 @@
 Attribute VB_Name = "modCommon"
-
+Option Explicit
 
 '------------------------------------------------------ STARTS
 ' to set the full window Opacity
@@ -8,10 +8,27 @@ Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVa
 Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
 '------------------------------------------------------ ENDS
 
+'---------------------------------------------------------------------------------------
 Private Const WS_EX_LAYERED  As Long = &H80000
 Private Const GWL_EXSTYLE  As Long = (-20)
 Private Const LWA_COLORKEY  As Long = &H1       'to trans'
 Private Const LWA_ALPHA  As Long = &H2          'to semi trans'
+
+Private Declare Function PathGetCharType Lib "shlwapi.dll" Alias "PathGetCharTypeW" (ByVal ch As Integer) As Long
+
+'Private Const GCT_INVALID = &H0
+Private Const GCT_LFNCHAR = &H1
+'Private Const GCT_SEPARATOR = &H8
+Private Const GCT_SHORTCHAR = &H2
+'Private Const GCT_WILD = &H4
+'---------------------------------------------------------------------------------------
+
+
+
+'---------------------------------------------------------------------------------------
+Private Declare Function SHCreateStreamOnFileW Lib "shlwapi" (ByVal pszFile As Long, ByVal grfMode As Long, ppStream As IUnknown) As Long
+Private Declare Function OleLoadPicture Lib "oleaut32" (ByVal lpStream As IUnknown, ByVal lSize As Long, ByVal fRunmode As Long, riid As Any, lplpvObj As IPicture) As Long
+'---------------------------------------------------------------------------------------
 
 
 '---------------------------------------------------------------------------------------
@@ -24,7 +41,6 @@ Private Const LWA_ALPHA  As Long = &H2          'to semi trans'
 
 ' https://www.vbforums.com/showthread.php?473677-VB6-Sorting-algorithms-(sort-array-sorting-arrays)
 
-Option Explicit
 
 ' API that Allows the execution of command svia the shell
 Public Declare Function ShellExecute Lib "Shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
@@ -621,16 +637,18 @@ Public FCWIconiseDesktop As String
 
 Public FCWArchiveFolder As String
 Public FCWBackupFolder As String
-Public FCWDefaultEditor As String
-Public FCWDebug As String
 
 Public FCWMsgBox13Enabled As String
 
 
 Public backupTimerCount As Integer
+
 Public CTRL_1 As Boolean
+
 Public messageQueue As Collection
+
 Public ioMethodADO As Boolean
+
 Public SoundName As String
 
 'Public screenTwipsPerPixelX As Long ' .07 DAEB 26/04/2021 common.bas changed to use pixels alone, removed all unnecessary twip conversion
@@ -847,9 +865,9 @@ Public Sub iconiseTimer_TimerA()
         If FCWIconiseDesktop = "True" Then
             FireCallMain.opacityFadeOutTimer.Enabled = True
             MinimiseForm.Visible = True
-        Else
-            ' just set the opacity of the window
-            Call setMainWindowOpacity
+'        Else
+'            ' just set the opacity of the window
+'            Call setMainWindowOpacity
         End If
         Call stopIconiseTimer
         
@@ -1065,7 +1083,7 @@ l_getInputLineCount: ' continue location
     FireCallMain.picTextChangeBright.Visible = True
     FireCallMain.picTextChangeDull.Visible = False
     
-    Call readInputFileAndWriteArrayWriteListbox(FCWSharedInputFile)
+    Call readInputFileAndWriteArray(FCWSharedInputFile)
 
 
 End Sub
@@ -1660,7 +1678,7 @@ Public Sub populateInputBox()
     End If
 
     ' read the defined input file and write the input array
-    Call readInputFileAndWriteArrayWriteListbox(FCWSharedInputFile)
+    Call readInputFileAndWriteArray(FCWSharedInputFile)
     
     ' the scrollbar config code needs to be here after the reading of the output data
     If FCWEnableScrollbars = 0 Then
@@ -1914,7 +1932,7 @@ End Function
 
 ' read the remote user's file line by line, read it into an interim array and thence into a listbox.
 ' called by checkAndReadInputFile during polling & populateInputBox during startup
-Public Sub readInputFileAndWriteArrayWriteListbox(ByVal sFName As String)
+Public Sub readInputFileAndWriteArray(ByVal sFName As String)
 
     Dim lIndex As Long
     'Dim fileString As String
@@ -2369,9 +2387,18 @@ Public Sub readInputFileAndWriteArrayWriteListbox(ByVal sFName As String)
     oldInputFileModificationTime = inputFileModificationTime
 
 End Sub
-' searches through a supplied collection for a matching string
+'
+'---------------------------------------------------------------------------------------
+' Procedure : fInstrSuffix
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   : searches through a supplied collection for a matching string
+'---------------------------------------------------------------------------------------
+'
 Public Function fInstrSuffix(arrayList As Collection, thisSuffix As String)
     Dim arrayMember As Variant
+    On Error GoTo fInstrSuffix_Error
+
     fInstrSuffix = False
     For Each arrayMember In arrayList
         If LCase(thisSuffix) = arrayMember Then
@@ -2379,6 +2406,13 @@ Public Function fInstrSuffix(arrayList As Collection, thisSuffix As String)
             Exit For
         End If
     Next
+
+   On Error GoTo 0
+   Exit Function
+
+fInstrSuffix_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fInstrSuffix of Module modCommon"
 End Function
 
 
@@ -2391,11 +2425,12 @@ End Function
 '
 Public Sub displaySelectedImage(ByVal fullFilePath As String)
 
-    Dim suffix As String
-    Dim suffixNoDot As String
-    Dim imageCreated As Boolean
-    Dim currFilePath As String
-    Dim imgFilePath As String
+    Dim suffix As String: suffix = vbNullString
+    Dim suffixNoDot As String: suffixNoDot = vbNullString
+    Dim imageCreated As Boolean: imageCreated = False
+    Dim currFilePath As String: currFilePath = vbNullString
+    Dim imgFilePath As String: imgFilePath = vbNullString
+    Dim rectifiedFileName As Boolean: rectifiedFileName = False
             
     imageCreated = False
 
@@ -2409,13 +2444,17 @@ Public Sub displaySelectedImage(ByVal fullFilePath As String)
     FireCallMain.picImagePrintOut.cls
 
     If fFExists(fullFilePath) <> 0 Then
+    
+        rectifiedFileName = ValidFileName(fGetFileNameFromPath(fullFilePath))
+        If rectifiedFileName = False Then Exit Sub
+            
         If FireCallMain.picImagePrintOut.Visible = False Then
             'FireCallMain.picImagePrintOut.Visible = True
             'FireCallMain.picPrintOutShadow.Visible = True
             If FCWImageDisplay = "1" Then
                 imgFilePath = App.Path & "\Resources\images\lidBackgroundDullShadowed.jpg"
                 If fFExists(imgFilePath) Then
-                    FireCallMain.picLidBackground.Picture = LoadPicture(imgFilePath)
+                    FireCallMain.picLidBackground.Picture = LoadPictureEx(imgFilePath)
                 End If
             End If
 '            imgFilePath = App.Path & "\Resources\images\lidBackgroundDullShadowed.jpg"
@@ -2454,9 +2493,10 @@ Public Sub displaySelectedImage(ByVal fullFilePath As String)
         End If
     
         If InStr("jpg,bmp,jpeg,gif", LCase(suffix)) <> 0 Then
-            'for image types known to VB6 we use the native methods of displaying in a picbox.
+            'for image types known to VB6 we do not use the native methods of displaying in a picbox as they cannot handle unicode characters
+            ' instead we use a unicode compatible
             Dim lPic As Picture
-            Set lPic = LoadPicture(fullFilePath)
+            Set lPic = LoadPictureEx(fullFilePath)
             
             Call resizeNative(FireCallMain.picImagePrintOut, lPic)
         End If
@@ -2478,16 +2518,86 @@ displaySelectedImage_Error:
 
 End Sub
 
+'
+'---------------------------------------------------------------------------------------
+' Procedure : LoadPictureEx
+' Author    : vangoghgaming
+' Date      : 22/10/2024
+' Purpose   : unicode version of loadPicture that handles unicode char.s in filenames
+'---------------------------------------------------------------------------------------
+'
+Private Function LoadPictureEx(sFilename As String) As IPicture
+    Dim IID_IUnknown(0 To 1) As Currency, ppStream As IUnknown
+    
+    On Error GoTo LoadPictureEx_Error
 
+    IID_IUnknown(1) = 504403158265495.5712@
+    If SHCreateStreamOnFileW(StrPtr(sFilename), 0, ppStream) = 0 Then OleLoadPicture ppStream, 0, 0, IID_IUnknown(0), LoadPictureEx
+
+   On Error GoTo 0
+   Exit Function
+
+LoadPictureEx_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure LoadPictureEx of Module modCommon"
+End Function
+
+
+'
+'---------------------------------------------------------------------------------------
+' Procedure : ValidFileName
+' Author    : eduardo
+' Date      : 22/10/2024
+' Purpose   : flags any non-standard character in a filename
+'---------------------------------------------------------------------------------------
+'
+Public Function ValidFileName(nProposedFileName As String, Optional ForOldFileFormat_8Dot3 As Boolean = False) As Boolean
+    Dim iChar As String: iChar = vbNullString
+    Dim C  As Long: C = 0
+    Dim iFlag As Long: iFlag = 0
+    
+    On Error GoTo ValidFileName_Error
+
+    If ForOldFileFormat_8Dot3 Then
+        iFlag = GCT_SHORTCHAR
+    Else
+        iFlag = GCT_LFNCHAR
+    End If
+    ValidFileName = False
+    For C = 1 To Len(nProposedFileName)
+        iChar = Mid$(nProposedFileName, C, 1)
+        If (PathGetCharType(AscW(iChar)) And iFlag) = iFlag Then
+            ValidFileName = True
+        Else
+            ValidFileName = False
+        End If
+    Next C
+
+   On Error GoTo 0
+   Exit Function
+
+ValidFileName_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure ValidFileName of Module modCommon"
+End Function
 ' credit jcis https://www.vbforums.com/member.php?40893-jcis
 ' resize image types known to VB6
+'---------------------------------------------------------------------------------------
+' Procedure : resizeNative
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub resizeNative(ByRef pBox As PictureBox, ByRef pPic As Picture)
-    Dim lWidth      As Single
-    Dim lHeight    As Single
-    Dim lnewWidth   As Single
-    Dim lnewHeight As Single
+    Dim lWidth     As Single: lWidth = 0
+    Dim lHeight    As Single: lHeight = 0
+    Dim lnewWidth  As Single: lnewWidth = 0
+    Dim lnewHeight As Single: lnewHeight = 0
  
     'Clear the Picture in the PictureBox
+    On Error GoTo resizeNative_Error
+
     pBox.Picture = Nothing
     
     'Clear the Image  in the Picturebox
@@ -2520,16 +2630,32 @@ Private Sub resizeNative(ByRef pBox As PictureBox, ByRef pPic As Picture)
                             
     'Update the Picture with the new image
     Set pBox.Picture = pBox.Image
+
+   On Error GoTo 0
+   Exit Sub
+
+resizeNative_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure resizeNative of Module modCommon"
 End Sub
 
 ' Calculate new dimensions of the picturebox
+'---------------------------------------------------------------------------------------
+' Procedure : resizeNonNative
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub resizeNonNative(ByRef pBox As PictureBox, ByRef lWidth As Long, ByRef lHeight As Long)
-    Dim lnewWidth   As Single
-    Dim lnewHeight As Single
+    Dim lnewWidth As Single: lnewWidth = 0
+    Dim lnewHeight As Single: lnewHeight = 0
     
     ' note that the size of the Image is already in the same Scale as the picBox
 
     ' resize Width
+   On Error GoTo resizeNonNative_Error
+
     If lWidth > pBox.ScaleWidth Then
         lnewWidth = pBox.ScaleWidth
         lHeight = lHeight * (lnewWidth / lWidth) 'Resize height proportionally
@@ -2547,6 +2673,13 @@ Private Sub resizeNonNative(ByRef pBox As PictureBox, ByRef lWidth As Long, ByRe
     
     lWidth = lnewWidth  ' pass the new values back to the byRef vars
     lHeight = lnewHeight
+
+   On Error GoTo 0
+   Exit Sub
+
+resizeNonNative_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure resizeNonNative of Module modCommon"
     
 End Sub
 '---------------------------------------------------------------------------------------
@@ -2650,6 +2783,7 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     Dim outStm As ADODB.Stream
     Dim findStartPos As Integer
     Dim stringWithoutPrefix As String
+
     
     Const ForReading As Integer = 1
     
@@ -2658,6 +2792,8 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     
     ' resize the array to the new linecount
     ReDim outputFileArray(outputLineCount)
+    
+
     
     If ioMethodADO = False Then
     '     we use the FSO method rather than VB6 input as it is more friendly to unix crlf EOLs
@@ -2704,6 +2840,8 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
 '        MsgBox "Execution Time " & sngTime & " mS"
 '
 ' timer code ENDS
+    
+
 
     lbxCount = 0
     If Val(FCWLoadBottom) = 1 Then
@@ -2719,6 +2857,9 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     ' locks the input listbox whilst the listbox is updated from the array
     LockWindowUpdate FireCallMain.lbxOutputTextArea.hwnd
     
+    
+    
+        
     ' this reads the output array and populates the listbox
     For useloop = startLoc To endLoc Step stepNo
         stringToWrite = vbNullString
@@ -2776,7 +2917,7 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     Dim listCounter As Long
     listCounter = FireCallMain.lbxOutputTextArea.ListCount
     If listCounter > outputLineCount Then
-        MsgBox "This message pops up to prevent a duplication occurring in the OUTPUT. Please report if this occurs."
+        'MsgBox "This message pops up to prevent a duplication occurring in the OUTPUT. Please report if this occurs."
         For useloop = (listCounter + 1) To outputLineCount
             FireCallMain.lbxOutputTextArea.List(useloop) = ""
         Next useloop
@@ -2968,8 +3109,6 @@ Public Sub readSettingsFile(ByVal location As String, ByVal FCWSettingsFile As S
         
         FCWArchiveFolder = fGetINISetting(location, "archiveFolder", FCWSettingsFile)
         FCWBackupFolder = fGetINISetting(location, "backupFolder", FCWSettingsFile)
-        FCWDefaultEditor = fGetINISetting(location, "defaultEditor", FCWSettingsFile)
-        FCWDebug = fGetINISetting(location, "debug", FCWSettingsFile)
         
         
         FCWSkinTheme = fGetINISetting(location, "skinTheme", FCWSettingsFile)
@@ -3689,8 +3828,17 @@ End Function
 '---------------------------------------------------------------------------------------
 '
 Public Sub setThemeShade(ByVal redC As Integer, ByVal greenC As Integer, ByVal blueC As Integer)
-
+        
+    ' variables declared
+    'Dim a As Long
     Dim ctrl As Control
+    'Dim useloop As Integer
+    
+    'initialise the dimensioned variables
+    ' a = 0
+     'Ctrl As Control
+    ' useloop = 0
+    
     ' RGB(redC, greenC, blueC) is the background colour used by the lighter themes
     
     FireCallPrefs.BackColor = RGB(redC, greenC, blueC)
@@ -3719,14 +3867,12 @@ Public Sub setThemeShade(ByVal redC As Integer, ByVal greenC As Integer, ByVal b
         ' the general tab icon does not need alternative images as it is a square image on a background
         If fFExists(App.Path & "\config-icon.jpg") Then FireCallPrefs.picConfig.Picture = LoadPicture(App.Path & "\config-icon.jpg")
         If fFExists(App.Path & "\pennyred.jpg") Then FireCallPrefs.picEmail.Picture = LoadPicture(App.Path & "\pennyred.jpg")
-        If fFExists(App.Path & "\emoji-icon.jpg") Then FireCallPrefs.picEmoji.Picture = LoadPicture(App.Path & "\emoji-icon.jpg")
+        If fFExists(App.Path & "\emoji-icon.jpg") Then FireCallPrefs.picEmojis.Picture = LoadPicture(App.Path & "\emoji-icon.jpg")
         If fFExists(App.Path & "\font-icon.jpg") Then FireCallPrefs.picFonts.Picture = LoadPicture(App.Path & "\font-icon.jpg")
         If fFExists(App.Path & "\texts-icon.jpg") Then FireCallPrefs.picTexts.Picture = LoadPicture(App.Path & "\texts-icon.jpg")
         If fFExists(App.Path & "\sounds-icon.jpg") Then FireCallPrefs.picSounds.Picture = LoadPicture(App.Path & "\sounds-icon.jpg")
         If fFExists(App.Path & "\housekeepingIcon.jpg") Then FireCallPrefs.picHousekeeping.Picture = LoadPicture(App.Path & "\housekeepingIcon.jpg")
         If fFExists(App.Path & "\windowsScreenMagnify.jpg") Then FireCallPrefs.picWindow.Picture = LoadPicture(App.Path & "\windowsScreenMagnify.gif")
-        If fFExists(App.Path & "\about-icon-dark.jpg") Then FireCallPrefs.picAbout.Picture = LoadPicture(App.Path & "\about-icon-dark.jpg")
-        If fFExists(App.Path & "\development-icon-dark.jpg") Then FireCallPrefs.picDevelopment.Picture = LoadPicture(App.Path & "\development-icon-dark.jpg")
         
     Else
         'classicTheme = False
@@ -3735,15 +3881,13 @@ Public Sub setThemeShade(ByVal redC As Integer, ByVal greenC As Integer, ByVal b
     
         If fFExists(App.Path & "\config-icon-light.jpg") Then FireCallPrefs.picConfig.Picture = LoadPicture(App.Path & "\config-icon-light.jpg")
         If fFExists(App.Path & "\pennyredlight.jpg") Then FireCallPrefs.picEmail.Picture = LoadPicture(App.Path & "\pennyredlight.jpg")
-        If fFExists(App.Path & "\emoji-icon-light.jpg") Then FireCallPrefs.picEmoji.Picture = LoadPicture(App.Path & "\emoji-icon-light.jpg")
+        If fFExists(App.Path & "\emoji-icon-light.jpg") Then FireCallPrefs.picEmojis.Picture = LoadPicture(App.Path & "\emoji-icon-light.jpg")
         If fFExists(App.Path & "\font-icon-light.jpg") Then FireCallPrefs.picFonts.Picture = LoadPicture(App.Path & "\font-icon-light.jpg")
         If fFExists(App.Path & "\texts-icon-light.jpg") Then FireCallPrefs.picTexts.Picture = LoadPicture(App.Path & "\texts-icon-light.jpg")
         If fFExists(App.Path & "\sounds-icon-light.jpg") Then FireCallPrefs.picSounds.Picture = LoadPicture(App.Path & "\sounds-icon-light.jpg")
         If fFExists(App.Path & "\housekeeping-icon-light.jpg") Then FireCallPrefs.picHousekeeping.Picture = LoadPicture(App.Path & "\housekeeping-icon-light.jpg")
         If fFExists(App.Path & "\windowsScreenMagnifyLight.jpg") Then FireCallPrefs.picWindow.Picture = LoadPicture(App.Path & "\windowsScreenMagnifyLight.jpg")
-        If fFExists(App.Path & "\about-icon-light.jpg") Then FireCallPrefs.picAbout.Picture = LoadPicture(App.Path & "\about-icon-light.jpg")
-        If fFExists(App.Path & "\development-icon-light.jpg") Then FireCallPrefs.picDevelopment.Picture = LoadPicture(App.Path & "\development-icon-light.jpg")
-    
+        
     End If
     
     FireCallPrefs.sliIconiseDelay.BackColor = RGB(redC, greenC, blueC)
@@ -3752,7 +3896,7 @@ Public Sub setThemeShade(ByVal redC As Integer, ByVal greenC As Integer, ByVal b
     FireCallPrefs.sliOpacity.BackColor = RGB(redC, greenC, blueC)
     FireCallPrefs.sliAutomaticBackupInterval.BackColor = RGB(redC, greenC, blueC)
     FireCallPrefs.sliRecordingQuality.BackColor = RGB(redC, greenC, blueC)
-    FireCallPrefs.txtAboutText.BackColor = RGB(redC, greenC, blueC)
+    
     ' these elements are normal elements that should have their styling reverted
     ' the loop above changes the background colour and we don't want that for all items
         
@@ -3776,7 +3920,10 @@ End Sub
 '
 Public Sub setThemeColour()
     ' variables declared
-    Dim SysClr As Long: SysClr = 0
+    Dim SysClr As Long
+        
+    'initialise the dimensioned variables
+    SysClr = 0
     
    ' On Error GoTo setThemeColour_Error
    If debugflg = 1 Then Debug.Print "%setThemeColour"
@@ -4606,6 +4753,8 @@ Private Sub writeOutputFile(ByVal fileToUpdate As String, ByVal thisLineCount As
             End If
         Wend
         
+        
+
         With BinaryStream
             .Type = 1
             .Mode = 3 'adModeReadWrite
@@ -5167,6 +5316,13 @@ End Sub
 ' The logic is in a globally accessible separate routine as it is called directly by both the VB6 timer and the callback timer.
 
 '   forward texts by mail on a regular basis containing all recent texts within the timestamp period
+'---------------------------------------------------------------------------------------
+' Procedure : emailTimer_TimerLogic
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub emailTimer_TimerLogic()
 
     Dim lastInputVar As LASTINPUTINFO
@@ -5193,6 +5349,8 @@ Public Sub emailTimer_TimerLogic()
     
     ' initialise vars
     
+   On Error GoTo emailTimer_TimerLogic_Error
+
     a = vbNullString
     useloop = 0
     lastEmailTimeInSecs = 0
@@ -5336,6 +5494,13 @@ Public Sub emailTimer_TimerLogic()
     
     FireCallMain.picWEmailIcon.ToolTipText = "If the email icon persists then it means a background email task has failed to connect"
     FireCallMain.emailIconTimer.Enabled = True
+
+   On Error GoTo 0
+   Exit Sub
+
+emailTimer_TimerLogic_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure emailTimer_TimerLogic of Module modCommon"
     
 End Sub
 
@@ -5367,7 +5532,7 @@ End Sub
 ' in a separate thread and this achieves basic multi threading but may limit some functionality - but basic commands seem to operate correctly
 
 Public Sub houseKeepingTimer_CodeTimer()
-    Call houseKeepingTimerLogic
+    Call houseKeepingTimerLogic(False)
 End Sub
 
 ' The housekeeping timer runs regularly
@@ -5378,57 +5543,83 @@ End Sub
 '       write the line to an archive file
 '       remove the line from the output file
 
-Public Sub houseKeepingTimerLogic()
+'---------------------------------------------------------------------------------------
+' Procedure : houseKeepingTimerLogic
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Sub houseKeepingTimerLogic(ByVal bypassIdleCheck As Boolean)
     Dim lastInputVar As LASTINPUTINFO
-    Dim currentIdleTime As Long: currentIdleTime = 0
+    Dim currentIdleTime As Long
 
-    Dim lastHouseKeepDateTimeInSecs As Long: lastHouseKeepDateTimeInSecs = 0
-    Dim findStr As Integer: findStr = 0
-    Dim stampTimeInSecs As Long: stampTimeInSecs = 0
-    Dim useloop As Long: useloop = 0
-    Dim stampTimeDiffInSecs As Long: stampTimeDiffInSecs = 0
-    Dim emailBodyStr As String: emailBodyStr = vbNullString
-    Dim errBodyStr As String: errBodyStr = vbNullString
-    Dim iFile As Integer: iFile = 0
+    Dim lastHouseKeepDateTimeInSecs As Long
+    Dim findStr As Integer
+    Dim stampTimeInSecs As Long
+    Dim useloop As Long
+    Dim stampTimeDiffInSecs As Long
+    Dim emailBodyStr As String
+    Dim errBodyStr As String
+    Dim iFile As Integer
     
-    Dim maxLineLength As Integer:  maxLineLength = 0
-    Dim outputArrayTimeStamp As String: outputArrayTimeStamp = ""
-    Dim archiveTimeInSecs As Long: archiveTimeInSecs = 0
-    Dim nowInSecs As Long: nowInSecs = 0
-    Dim lastHouseKeepDiff As Long: lastHouseKeepDiff = 0
-    Dim stampDiffInSecs As Long: stampTimeDiffInSecs = 0
+    Dim maxLineLength As Integer
+    Dim outputArrayTimeStamp As String
+    Dim archiveTimeInSecs As Long
+    Dim nowInSecs As Long
+    Dim lastHouseKeepDiff As Long
+    Dim stampDiffInSecs As Long
     
-    Dim archiveArray() As String ' cannot initialise an array in VB6
+    Dim archiveArray() As String
     Dim temporaryArray() As String
-    Dim archiveFilePath As String: archiveFilePath = vbNullString
+    Dim archiveFilePath As String
     
-    Dim archiveLoc As Long: archiveLoc = 0
-    Dim tempLoc As Long: tempLoc = 0
+    Dim archiveLoc As Long
+    Dim tempLoc As Long
 
-    Dim a As String: a = vbNullString
-    Dim timestamp As String: timestamp = vbNullString
-    Dim testArchiveExists As Boolean: testArchiveExists = False
+    Dim a As String
+    Dim timestamp As String
+    Dim testArchiveExists As Boolean
     
     Const lngThousand As Long = 1000
     
+    ' initialise vars
+
+   On Error GoTo houseKeepingTimerLogic_Error
+
+    maxLineLength = 0
+    archiveTimeInSecs = 0
+    outputArrayTimeStamp = ""
+    
+    useloop = 0
+    findStr = 0
+    lastHouseKeepDateTimeInSecs = 0
+    stampTimeDiffInSecs = 0
+    emailBodyStr = vbNullString
+    errBodyStr = vbNullString
+    iFile = 0
+    testArchiveExists = False
             
     If Val(FCWAutomaticHousekeeping) = 0 Then Exit Sub
     
     debugLog "running automatic housekeeping using code timer"
      
     ' check to see if the app has not been used for a while, ie. it has been idle
-    ' only allows the function to continue if FCW's user has been idle for more than 30 secs
     lastInputVar.cbSize = Len(lastInputVar)
     Call GetLastInputInfo(lastInputVar)
     currentIdleTime = GetTickCount - lastInputVar.dwTime
-    If currentIdleTime < 30000 Then Exit Sub
+    
+    ' only allows the function to continue if FCW's user has been idle for more than 30 secs
+    If Not bypassIdleCheck = True And currentIdleTime < 30000 Then Exit Sub
     
     ' check the date/time of the last advice message
-    ' here we extract the time in seconds from the housekeeping archive period and exit immediately if the time is greater than the archive time
     lastHouseKeepDateTimeInSecs = fSecondsFromDateString(FCWLastHouseKeep) ' eg. FCWLastEmail="2022-02-03 13:18:08.185"
     nowInSecs = fSecondsFromDateString(Now)
     lastHouseKeepDiff = nowInSecs - lastHouseKeepDateTimeInSecs
+    
     archiveTimeInSecs = Val(FCWArchiveDays) * 24 * 3600
+    
+    ' here we extract the time in seconds from the housekeeping archive period
     If lastHouseKeepDiff > archiveTimeInSecs Then Exit Sub
 
     While pollingFlag = True  ' flag that indicates that polling is still underway
@@ -5539,11 +5730,25 @@ Public Sub houseKeepingTimerLogic()
         PutINISetting "Software\FireCallWin", "lastHouseKeep", FCWLastHouseKeep, FCWSettingsFile
     End If
 
+   On Error GoTo 0
+   Exit Sub
+
+houseKeepingTimerLogic_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure houseKeepingTimerLogic of Module modCommon"
+
 End Sub
 
 
 
 ' routine called at startup to create or run the two HouseKeeping timers
+'---------------------------------------------------------------------------------------
+' Procedure : startTheHouseKeepingTimers
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub startTheHouseKeepingTimers()
     
     Dim HouseKeepingIntervalMillisecs As Long
@@ -5552,6 +5757,8 @@ Public Sub startTheHouseKeepingTimers()
     Const lngThousand As Long = 1000
 
     ' start the HouseKeeping timer in code
+   On Error GoTo startTheHouseKeepingTimers_Error
+
     If fInIDE Then
         ' VB6 timers cannot exceed 65 seconds (65535 ms)
 '        lngSecs = 65
@@ -5587,23 +5794,55 @@ Public Sub startTheHouseKeepingTimers()
             debugLog "Please note: Timers in code will not run in the IDE, defaulting to VB6 timers <65secs."
         End If
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+startTheHouseKeepingTimers_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure startTheHouseKeepingTimers of Module modCommon"
 End Sub
 
 
 
 ' The timer that stops the houseKeeping timer
+'---------------------------------------------------------------------------------------
+' Procedure : stopHouseKeepingTimer
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub stopHouseKeepingTimer()
     ' Don't stop the timer If it isn't running.
+   On Error GoTo stopHouseKeepingTimer_Error
+
     If houseKeepingTimerID Then
         KillTimer 0, houseKeepingTimerID
         houseKeepingTimerID = 0
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+stopHouseKeepingTimer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure stopHouseKeepingTimer of Module modCommon"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : debugLog
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub debugLog(inputStr As String, Optional msgBoxOutOverride As Boolean)
 
     Dim FN As Integer
     Dim timestamp As String
+
+   On Error GoTo debugLog_Error
 
     FN = FreeFile
 
@@ -5619,11 +5858,27 @@ Public Sub debugLog(inputStr As String, Optional msgBoxOutOverride As Boolean)
         Close FN
         
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+debugLog_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure debugLog of Module modCommon"
 End Sub
 
 
 ' default positions prior to any resizing/shifting
+'---------------------------------------------------------------------------------------
+' Procedure : putImageInPlace
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub putImageInPlace()
+   On Error GoTo putImageInPlace_Error
+
     FireCallMain.picImagePrintOut.Left = 140
     FireCallMain.picImagePrintOut.Top = 585
     FireCallMain.picImagePrintOut.Width = 2160
@@ -5633,16 +5888,32 @@ Public Sub putImageInPlace()
 '    FireCallMain.picPrintOutShadow.Top = 620
 '    FireCallMain.picPrintOutShadow.Width = 2160
 '    FireCallMain.picPrintOutShadow.Height = 2475
+
+   On Error GoTo 0
+   Exit Sub
+
+putImageInPlace_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure putImageInPlace of Module modCommon"
 End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : setModernThemeColours
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub setModernThemeColours()
          
     ' variables declared
     Dim SysClr As Long
         
     'initialise the dimensioned variables
+   On Error GoTo setModernThemeColours_Error
+
     SysClr = 0
     
     'FireCallPrefs.mnuAuto.Caption = "Auto Theme Selection Cannot be Enabled"
@@ -5656,107 +5927,178 @@ Public Sub setModernThemeColours()
         Call setThemeShade(240, 240, 240)
         FCWSkinTheme = "light"
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+setModernThemeColours_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setModernThemeColours of Module modCommon"
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : stripOut
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Function stripOut(from As String, What As String) As String
 
     Dim i As Integer
+
+   On Error GoTo stripOut_Error
 
     stripOut = from
     For i = 1 To Len(What)
         stripOut = Replace(stripOut, Mid$(What, i, 1), "")
     Next i
 
+   On Error GoTo 0
+   Exit Function
+
+stripOut_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure stripOut of Module modCommon"
+
 End Function
 
-Public Function fBorderSize(frm As Form) As RECT
-
-' this does not work at all
-    
-    'returns the size of the borders applied by Windows around the outside/ inside of a Form when Vista+ and Aero type theme is applied
-    ' typically returns negative values in Windows 10
-     
-    Dim FrmDims As RECT, BordersizeTemp As RECT
-    Dim lret&
-    Static BorderSizeFixed As RECT, BorderSizeSizable As RECT
-    Static InitFixed As Boolean, InitSizable As Boolean
-    
-    Const DWMWA_EXTENDED_FRAME_BOUNDS = 9&
-    
-    'return stored values if available for Frm.BorderStyle (Frm does not have to be visible and we avoid calling the API/ Error handler every time which should be quicker)
-    Select Case frm.BorderStyle
-        Case vbBSNone
-            fBorderSize = BordersizeTemp 'borders always zero
-            Exit Function
-        Case vbFixedSingle, vbFixedDouble, vbFixedToolWindow
-            If InitFixed Then       'return precalculated/ stored values
-                fBorderSize = BorderSizeFixed
-                Exit Function
-            End If
-        Case vbSizable, vbSizableToolWindow
-            If InitSizable Then     'return precalculated/ stored values
-                fBorderSize = BorderSizeSizable
-                Exit Function
-            End If
-    End Select
-    
-    'following code only fires twice, once to get/ store Fixed form values, once to get/ store Sizable form values
-    
-    On Error Resume Next    'API below is not supported in XP and may cause error when called so catch that to keep use under XP sweet
-    'to return the Aero Borders Frm must be Shown/ Visible, otherwize zero is returned for all borders
-    lret = DwmGetWindowAttribute(frm.hwnd, DWMWA_EXTENDED_FRAME_BOUNDS, FrmDims, LenB(FrmDims))
-    'returns lret = 0 if an Aero Theme is active, Aero Themes are optional in Vista and Win7, in Win 8.1 and 10 they are always active without option
-    If lret = 0 And err.Number = 0 Then
-        On Error GoTo 0
-        With BordersizeTemp
-            .Left = (frm.Left - FrmDims.Left * Screen.TwipsPerPixelX)
-            .Top = (frm.Top - FrmDims.Top * Screen.TwipsPerPixelY)
-            .Right = FrmDims.Right * Screen.TwipsPerPixelX - (frm.Left + frm.Width)
-            .Bottom = FrmDims.Bottom * Screen.TwipsPerPixelY - (frm.Top + frm.Height)
-        End With
-    Else
-        'all the borders are returned as zero, it's XP or Aero is switched off
-        On Error GoTo 0
-        InitFixed = True
-        InitSizable = True
-        Exit Function
-    End If
-    
-    Select Case frm.BorderStyle
-        Case 1, 3, 4
-            BorderSizeFixed = BordersizeTemp
-            InitFixed = True
-        Case Else
-            BorderSizeSizable = BordersizeTemp
-            InitSizable = True
-    End Select
-    
-End Function
+'Public Function fBorderSize(frm As Form) As RECT
+'
+'' this does not work at all
+'
+'    'returns the size of the borders applied by Windows around the outside/ inside of a Form when Vista+ and Aero type theme is applied
+'    ' typically returns negative values in Windows 10
+'
+'    Dim FrmDims As RECT, BordersizeTemp As RECT
+'    Dim lret&
+'    Static BorderSizeFixed As RECT, BorderSizeSizable As RECT
+'    Static InitFixed As Boolean, InitSizable As Boolean
+'
+'    Const DWMWA_EXTENDED_FRAME_BOUNDS = 9&
+'
+'    'return stored values if available for Frm.BorderStyle (Frm does not have to be visible and we avoid calling the API/ Error handler every time which should be quicker)
+'    Select Case frm.BorderStyle
+'        Case vbBSNone
+'            fBorderSize = BordersizeTemp 'borders always zero
+'            Exit Function
+'        Case vbFixedSingle, vbFixedDouble, vbFixedToolWindow
+'            If InitFixed Then       'return precalculated/ stored values
+'                fBorderSize = BorderSizeFixed
+'                Exit Function
+'            End If
+'        Case vbSizable, vbSizableToolWindow
+'            If InitSizable Then     'return precalculated/ stored values
+'                fBorderSize = BorderSizeSizable
+'                Exit Function
+'            End If
+'    End Select
+'
+'    'following code only fires twice, once to get/ store Fixed form values, once to get/ store Sizable form values
+'
+'    On Error Resume Next    'API below is not supported in XP and may cause error when called so catch that to keep use under XP sweet
+'    'to return the Aero Borders Frm must be Shown/ Visible, otherwize zero is returned for all borders
+'    lret = DwmGetWindowAttribute(frm.hwnd, DWMWA_EXTENDED_FRAME_BOUNDS, FrmDims, LenB(FrmDims))
+'    'returns lret = 0 if an Aero Theme is active, Aero Themes are optional in Vista and Win7, in Win 8.1 and 10 they are always active without option
+'    If lret = 0 And err.Number = 0 Then
+'        On Error GoTo 0
+'        With BordersizeTemp
+'            .Left = (frm.Left - FrmDims.Left * Screen.TwipsPerPixelX)
+'            .Top = (frm.Top - FrmDims.Top * Screen.TwipsPerPixelY)
+'            .Right = FrmDims.Right * Screen.TwipsPerPixelX - (frm.Left + frm.Width)
+'            .Bottom = FrmDims.Bottom * Screen.TwipsPerPixelY - (frm.Top + frm.Height)
+'        End With
+'    Else
+'        'all the borders are returned as zero, it's XP or Aero is switched off
+'        On Error GoTo 0
+'        InitFixed = True
+'        InitSizable = True
+'        Exit Function
+'    End If
+'
+'    Select Case frm.BorderStyle
+'        Case 1, 3, 4
+'            BorderSizeFixed = BordersizeTemp
+'            InitFixed = True
+'        Case Else
+'            BorderSizeSizable = BordersizeTemp
+'            InitSizable = True
+'    End Select
+'
+'End Function
 ' credit wqweto
+'---------------------------------------------------------------------------------------
+' Procedure : IsValidPath
+' Author    : wqweto
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
     Public Function IsValidPath(sPath As String) As Boolean
+   On Error GoTo IsValidPath_Error
+
     If sPath = "" Then IsValidPath = False: Exit Function ' this would mean 2 or more \\ together and is not valid
         IsValidPath = (sPath = SanitizePath(sPath))
+
+   On Error GoTo 0
+   Exit Function
+
+IsValidPath_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure IsValidPath of Module modCommon"
     End Function
      
+'---------------------------------------------------------------------------------------
+' Procedure : SanitizePath
+' Author    : wqweto
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
     Public Function SanitizePath(sPath As String, Optional InvalidChar As String = "?") As String
     Dim vSplit          As Variant
     Dim lIdx            As Long
     
+   On Error GoTo SanitizePath_Error
+
     vSplit = Split(sPath, "\")
     For lIdx = IIf(vSplit(0) Like "?:", 1, 0) To UBound(vSplit)
         vSplit(lIdx) = SanitizeFileName(CStr(vSplit(lIdx)), InvalidChar)
     Next
     SanitizePath = Join(vSplit, "\")
+
+   On Error GoTo 0
+   Exit Function
+
+SanitizePath_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure SanitizePath of Module modCommon"
         
     End Function
      
+'---------------------------------------------------------------------------------------
+' Procedure : SanitizeFileName
+' Author    : wqweto
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
     Public Function SanitizeFileName(sFilename As String, Optional InvalidChar As String = "?") As String
+   On Error GoTo SanitizeFileName_Error
+
         With CreateObject("VBScript.RegExp")
             .Global = True
             .Pattern = "[\x00-\x1F""<>\|:\*\?\\/]"
             SanitizeFileName = .Replace(sFilename, InvalidChar)
         End With
+
+   On Error GoTo 0
+   Exit Function
+
+SanitizeFileName_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure SanitizeFileName of Module modCommon"
     End Function
 
 
@@ -5853,9 +6195,98 @@ savestring_Error:
 End Sub
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : centreMainScreen
+' Author    : beededea
+' Date      : 23/10/2024
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub centreMainScreen()
+   On Error GoTo centreMainScreen_Error
+
     FireCallMain.Top = screenHeightTwips / 2 - FireCallMain.Height / 2
     FireCallMain.Left = screenWidthTwips / 2 - FireCallMain.Width / 2
 
+   On Error GoTo 0
+   Exit Sub
+
+centreMainScreen_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure centreMainScreen of Module modCommon"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : backupOutputFile
+' Author    : beededea
+' Date      : 30/05/2019
+' Purpose   : Creates an incrementally named backup of the settings.ini
+'---------------------------------------------------------------------------------------
+
+Public Sub backupOutputFile(ByVal fileToBackupFullPath As String, backupCommand As String)
+
+    Dim trgtBackupFilename As String
+    Dim useloop As Integer
+    Dim srchBackupFile As String
+    Dim versionNumberAvailable As Integer
+    Dim bkpfileFound As Boolean
+    
+    
+    ' set the name of the bkp file
+   
+   ' On Error GoTo backupOutputFile_Error
+      If debugflg = 1 Then Debug.Print "%" & "backupOutputFile"
+
+        trgtBackupFilename = FCWBackupFolder & "\" & backupCommand & "-" & fGetFileNameFromPath(fileToBackupFullPath)
+                
+        'check for any version of an already existing backup file with the same suffix.
+        For useloop = 1 To 32767
+            srchBackupFile = trgtBackupFilename & "." & useloop
+          
+            If fFExists(srchBackupFile) Then
+              ' found a file
+              bkpfileFound = True
+            Else
+              ' no file found use this entry
+              'GoTo l_exit_bkp_loop
+              Exit For
+            End If
+        Next useloop
+        
+l_exit_bkp_loop:
+        
+        If bkpfileFound = True Then
+            bkpfileFound = False
+            versionNumberAvailable = useloop
+            
+            'if versionNumberAvailable >= 32767 then
+                'versionNumberAvailable = 1
+                'if fFExists(trgtBackupFilename) Then
+                    'delete trgtBackupFilename
+                'endif
+            'endif
+        Else
+             versionNumberAvailable = 1
+        End If
+        
+        trgtBackupFilename = trgtBackupFilename & "." & Trim$(Str$(versionNumberAvailable))
+        If Not fFExists(trgtBackupFilename) Then
+            ' copy the original settings file to a duplicate that we will keep as a safety backup
+
+                If fFExists(fileToBackupFullPath) Then
+                    If fDirExists(FCWBackupFolder) Then
+                        FileCopy fileToBackupFullPath, trgtBackupFilename
+                    End If
+                End If
+
+        End If
+        
+   On Error GoTo 0
+   Exit Sub
+
+backupOutputFile_Error:
+
+    debugLog "Error " & err.Number & " (" & err.Description & ") in procedure backupOutputFile of Form FireCallMain"
+        
+End Sub

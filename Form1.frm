@@ -4,7 +4,7 @@ Begin VB.Form FireCallMain
    Caption         =   "Fire Call Win"
    ClientHeight    =   10185
    ClientLeft      =   3120
-   ClientTop       =   2370
+   ClientTop       =   2070
    ClientWidth     =   10065
    Icon            =   "Form1.frx":0000
    KeyPreview      =   -1  'True
@@ -17,7 +17,7 @@ Begin VB.Form FireCallMain
    Begin VB.ComboBox cmbHiddenCaptureDevices 
       Height          =   315
       Left            =   60
-      TabIndex        =   88
+      TabIndex        =   89
       Text            =   "cmbHiddenCaptureDevices"
       Top             =   1050
       Visible         =   0   'False
@@ -29,7 +29,7 @@ Begin VB.Form FireCallMain
       Height          =   315
       Left            =   465
       Style           =   2  'Dropdown List
-      TabIndex        =   86
+      TabIndex        =   87
       ToolTipText     =   "Select from a list of JPG Emojis"
       Top             =   255
       Width           =   6015
@@ -217,9 +217,9 @@ Begin VB.Form FireCallMain
       Begin VB.Label lblopacityFadeOutTimer 
          Caption         =   "opacityFadeToTimer"
          Height          =   285
-         Index           =   96
+         Index           =   1
          Left            =   3210
-         TabIndex        =   95
+         TabIndex        =   96
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   4005
          Width           =   1785
@@ -229,7 +229,7 @@ Begin VB.Form FireCallMain
          Height          =   285
          Index           =   5
          Left            =   5520
-         TabIndex        =   94
+         TabIndex        =   95
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   3675
          Width           =   1710
@@ -239,7 +239,7 @@ Begin VB.Form FireCallMain
          Height          =   285
          Index           =   4
          Left            =   900
-         TabIndex        =   93
+         TabIndex        =   94
          Tag             =   "turns a lit lamp off"
          Top             =   3990
          Width           =   1500
@@ -247,9 +247,9 @@ Begin VB.Form FireCallMain
       Begin VB.Label lblTimer 
          Caption         =   "emailIconTimer"
          Height          =   285
-         Index           =   97
+         Index           =   1
          Left            =   3240
-         TabIndex        =   92
+         TabIndex        =   93
          Tag             =   "turns a lit lamp off"
          Top             =   3570
          Width           =   1140
@@ -257,9 +257,9 @@ Begin VB.Form FireCallMain
       Begin VB.Label lblTimer 
          Caption         =   "EmailTimer"
          Height          =   285
-         Index           =   99
+         Index           =   0
          Left            =   885
-         TabIndex        =   89
+         TabIndex        =   90
          Tag             =   "turns a lit lamp off"
          Top             =   3540
          Width           =   1140
@@ -269,27 +269,26 @@ Begin VB.Form FireCallMain
          Height          =   285
          Index           =   2
          Left            =   5520
-         TabIndex        =   85
+         TabIndex        =   86
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   3240
          Width           =   1710
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lblPlayTimer 
          Caption         =   "playTimer"
          Height          =   285
-         Index           =   0
          Left            =   855
-         TabIndex        =   84
+         TabIndex        =   85
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   765
          Width           =   1785
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lblEmailTimer 
          Caption         =   "recordTimer"
          Height          =   285
          Index           =   2
          Left            =   855
-         TabIndex        =   80
+         TabIndex        =   81
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   330
          Width           =   1785
@@ -298,7 +297,7 @@ Begin VB.Form FireCallMain
          Caption         =   "shutdownTimer"
          Height          =   285
          Left            =   5520
-         TabIndex        =   79
+         TabIndex        =   80
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   2745
          Width           =   1785
@@ -330,30 +329,27 @@ Begin VB.Form FireCallMain
          Top             =   360
          Width           =   1290
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lblclockTimer 
          Caption         =   "clockTimer"
          Height          =   285
-         Index           =   11
          Left            =   3240
          TabIndex        =   33
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   3105
          Width           =   1710
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lblpausePrinterTimer 
          Caption         =   "pausePrinterTimer"
          Height          =   285
-         Index           =   10
          Left            =   3240
          TabIndex        =   32
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   2625
          Width           =   1710
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lblshredderTimer 
          Caption         =   "shredderTimer"
          Height          =   285
-         Index           =   9
          Left            =   3255
          TabIndex        =   31
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
@@ -370,30 +366,27 @@ Begin VB.Form FireCallMain
          Top             =   3090
          Width           =   1140
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lbldropTimer 
          Caption         =   "dropTimer"
          Height          =   285
-         Index           =   5
          Left            =   885
          TabIndex        =   29
          Tag             =   "turns a lit lamp off"
          Top             =   2595
          Width           =   1140
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lblPrinterTimer 
          Caption         =   "printerTimer"
          Height          =   285
-         Index           =   4
          Left            =   870
          TabIndex        =   28
          Tag             =   "turns a lit lamp off"
          Top             =   2130
          Width           =   1140
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lblPollingTimer 
          Caption         =   "pollingTimer *"
          Height          =   285
-         Index           =   8
          Left            =   3255
          TabIndex        =   27
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
@@ -408,20 +401,18 @@ Begin VB.Form FireCallMain
          Top             =   4650
          Width           =   6330
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lblzOrderTimer 
          Caption         =   "zOrderTimer"
          Height          =   285
-         Index           =   7
          Left            =   3255
          TabIndex        =   25
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   1260
          Width           =   1260
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lblopacityFadeInTimer 
          Caption         =   "opacityFadeInTimer"
          Height          =   285
-         Index           =   6
          Left            =   3240
          TabIndex        =   24
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
@@ -431,17 +422,16 @@ Begin VB.Form FireCallMain
       Begin VB.Label lblopacityFadeOutTimer 
          Caption         =   "opacityFadeOutTimer"
          Height          =   285
-         Index           =   98
+         Index           =   0
          Left            =   3195
          TabIndex        =   23
          Tag             =   "When the scrollbars are set to hidden, causes the vertical scrollbar to disappear 2 seconds after the last keypress"
          Top             =   315
          Width           =   1785
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lbliconiseTimer 
          Caption         =   "iconiseTimer *"
          Height          =   285
-         Index           =   3
          Left            =   885
          TabIndex        =   22
          Tag             =   "iconises the main application to a small stamp image"
@@ -466,10 +456,9 @@ Begin VB.Form FireCallMain
          Top             =   1815
          Width           =   1785
       End
-      Begin VB.Label lbTimer 
+      Begin VB.Label lbllampTimer 
          Caption         =   "lampTimer"
          Height          =   285
-         Index           =   1
          Left            =   885
          TabIndex        =   19
          Tag             =   "turns a lit lamp off"
@@ -771,7 +760,7 @@ Begin VB.Form FireCallMain
          Picture         =   "Form1.frx":7D4B3
          ScaleHeight     =   375
          ScaleWidth      =   450
-         TabIndex        =   91
+         TabIndex        =   92
          Top             =   2055
          Visible         =   0   'False
          Width           =   450
@@ -783,7 +772,7 @@ Begin VB.Form FireCallMain
          Picture         =   "Form1.frx":7DAF3
          ScaleHeight     =   450
          ScaleWidth      =   2655
-         TabIndex        =   90
+         TabIndex        =   91
          Top             =   5355
          Visible         =   0   'False
          Width           =   2655
@@ -798,7 +787,7 @@ Begin VB.Form FireCallMain
          Picture         =   "Form1.frx":7F276
          ScaleHeight     =   405
          ScaleWidth      =   2460
-         TabIndex        =   87
+         TabIndex        =   88
          Top             =   5055
          Width           =   2460
          Begin VB.Line linRed 
@@ -819,7 +808,7 @@ Begin VB.Form FireCallMain
          Picture         =   "Form1.frx":80263
          ScaleHeight     =   3480
          ScaleWidth      =   2400
-         TabIndex        =   73
+         TabIndex        =   74
          Top             =   6030
          Width           =   2400
          Begin VB.PictureBox picRecordLampBright 
@@ -832,7 +821,7 @@ Begin VB.Form FireCallMain
             Picture         =   "Form1.frx":87EC7
             ScaleHeight     =   360
             ScaleWidth      =   360
-            TabIndex        =   77
+            TabIndex        =   78
             ToolTipText     =   "Speech is being recorded now..."
             Top             =   2085
             Visible         =   0   'False
@@ -848,7 +837,7 @@ Begin VB.Form FireCallMain
             Picture         =   "Form1.frx":88388
             ScaleHeight     =   480
             ScaleWidth      =   480
-            TabIndex        =   81
+            TabIndex        =   82
             Top             =   2535
             Width           =   480
          End
@@ -862,7 +851,7 @@ Begin VB.Form FireCallMain
             Picture         =   "Form1.frx":8894A
             ScaleHeight     =   495
             ScaleWidth      =   495
-            TabIndex        =   76
+            TabIndex        =   77
             ToolTipText     =   "End Recording"
             Top             =   345
             Width           =   495
@@ -877,7 +866,7 @@ Begin VB.Form FireCallMain
             Picture         =   "Form1.frx":88C19
             ScaleHeight     =   465
             ScaleWidth      =   465
-            TabIndex        =   75
+            TabIndex        =   76
             ToolTipText     =   "Record Speech"
             Top             =   345
             Width           =   465
@@ -889,7 +878,7 @@ Begin VB.Form FireCallMain
             Picture         =   "Form1.frx":891F7
             ScaleHeight     =   795
             ScaleWidth      =   585
-            TabIndex        =   74
+            TabIndex        =   75
             ToolTipText     =   "This lid covers the emoji display"
             Top             =   2550
             Width           =   585
@@ -904,7 +893,7 @@ Begin VB.Form FireCallMain
             Picture         =   "Form1.frx":896DA
             ScaleHeight     =   360
             ScaleWidth      =   360
-            TabIndex        =   78
+            TabIndex        =   79
             ToolTipText     =   "This lamp glows red when recording"
             Top             =   2085
             Width           =   360
@@ -919,7 +908,7 @@ Begin VB.Form FireCallMain
             Picture         =   "Form1.frx":89B4D
             ScaleHeight     =   360
             ScaleWidth      =   360
-            TabIndex        =   83
+            TabIndex        =   84
             Top             =   2070
             Width           =   360
          End
@@ -933,18 +922,30 @@ Begin VB.Form FireCallMain
             Picture         =   "Form1.frx":8A046
             ScaleHeight     =   360
             ScaleWidth      =   360
-            TabIndex        =   82
+            TabIndex        =   83
             ToolTipText     =   "Speech is being recorded now..."
             Top             =   2085
             Visible         =   0   'False
             Width           =   360
          End
       End
+      Begin VB.PictureBox picFsoLid 
+         BorderStyle     =   0  'None
+         Height          =   645
+         Left            =   2280
+         Picture         =   "Form1.frx":8A553
+         ScaleHeight     =   645
+         ScaleWidth      =   345
+         TabIndex        =   73
+         ToolTipText     =   "Click this cover to reveal the FSO/UTF8 lamps"
+         Top             =   1800
+         Width           =   345
+      End
       Begin VB.PictureBox picBtnLidShadow 
          BorderStyle     =   0  'None
          Height          =   3435
          Left            =   -1995
-         Picture         =   "Form1.frx":8A553
+         Picture         =   "Form1.frx":8A770
          ScaleHeight     =   3435
          ScaleWidth      =   2385
          TabIndex        =   72
@@ -958,7 +959,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   345
          Left            =   150
-         Picture         =   "Form1.frx":8B06D
+         Picture         =   "Form1.frx":8B28A
          ScaleHeight     =   345
          ScaleWidth      =   330
          TabIndex        =   71
@@ -972,7 +973,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   330
          Left            =   1140
-         Picture         =   "Form1.frx":8B5EE
+         Picture         =   "Form1.frx":8B80B
          ScaleHeight     =   330
          ScaleWidth      =   345
          TabIndex        =   70
@@ -986,7 +987,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   330
          Left            =   1140
-         Picture         =   "Form1.frx":8B9C1
+         Picture         =   "Form1.frx":8BBDE
          ScaleHeight     =   330
          ScaleWidth      =   345
          TabIndex        =   69
@@ -997,7 +998,7 @@ Begin VB.Form FireCallMain
       Begin VB.CommandButton btnClose 
          Height          =   450
          Left            =   1080
-         Picture         =   "Form1.frx":8BDFA
+         Picture         =   "Form1.frx":8C017
          Style           =   1  'Graphical
          TabIndex        =   68
          ToolTipText     =   "Click to close FireCall"
@@ -1007,7 +1008,7 @@ Begin VB.Form FireCallMain
       Begin VB.CommandButton btnPing 
          Height          =   450
          Left            =   1080
-         Picture         =   "Form1.frx":8C523
+         Picture         =   "Form1.frx":8C740
          Style           =   1  'Graphical
          TabIndex        =   67
          ToolTipText     =   "Click to send a ping"
@@ -1021,7 +1022,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   570
          Left            =   540
-         Picture         =   "Form1.frx":8CB15
+         Picture         =   "Form1.frx":8CD32
          ScaleHeight     =   570
          ScaleWidth      =   1725
          TabIndex        =   43
@@ -1036,7 +1037,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   585
          Left            =   525
-         Picture         =   "Form1.frx":8E211
+         Picture         =   "Form1.frx":8E42E
          ScaleHeight     =   585
          ScaleWidth      =   1725
          TabIndex        =   42
@@ -1051,7 +1052,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   570
          Left            =   540
-         Picture         =   "Form1.frx":8FA95
+         Picture         =   "Form1.frx":8FCB2
          ScaleHeight     =   570
          ScaleWidth      =   1725
          TabIndex        =   41
@@ -1066,7 +1067,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   3435
          Left            =   135
-         Picture         =   "Form1.frx":9128E
+         Picture         =   "Form1.frx":914AB
          ScaleHeight     =   3435
          ScaleWidth      =   2415
          TabIndex        =   56
@@ -1090,7 +1091,7 @@ Begin VB.Form FireCallMain
                BorderStyle     =   0  'None
                Height          =   210
                Left            =   1875
-               Picture         =   "Form1.frx":92D08
+               Picture         =   "Form1.frx":92F25
                ScaleHeight     =   210
                ScaleWidth      =   225
                TabIndex        =   58
@@ -1106,7 +1107,7 @@ Begin VB.Form FireCallMain
             ForeColor       =   &H80000008&
             Height          =   1455
             Left            =   495
-            Picture         =   "Form1.frx":92F35
+            Picture         =   "Form1.frx":93152
             ScaleHeight     =   1455
             ScaleWidth      =   1500
             TabIndex        =   59
@@ -1137,7 +1138,7 @@ Begin VB.Form FireCallMain
             ForeColor       =   &H80000008&
             Height          =   465
             Left            =   1965
-            Picture         =   "Form1.frx":94F84
+            Picture         =   "Form1.frx":951A1
             ScaleHeight     =   465
             ScaleWidth      =   465
             TabIndex        =   66
@@ -1151,7 +1152,7 @@ Begin VB.Form FireCallMain
             ForeColor       =   &H80000008&
             Height          =   690
             Left            =   765
-            Picture         =   "Form1.frx":95209
+            Picture         =   "Form1.frx":95426
             ScaleHeight     =   690
             ScaleWidth      =   930
             TabIndex        =   64
@@ -1165,7 +1166,7 @@ Begin VB.Form FireCallMain
             ForeColor       =   &H80000008&
             Height          =   1440
             Left            =   510
-            Picture         =   "Form1.frx":95711
+            Picture         =   "Form1.frx":9592E
             ScaleHeight     =   1440
             ScaleWidth      =   1455
             TabIndex        =   63
@@ -1179,7 +1180,7 @@ Begin VB.Form FireCallMain
             ForeColor       =   &H80000008&
             Height          =   720
             Left            =   1680
-            Picture         =   "Form1.frx":96427
+            Picture         =   "Form1.frx":96644
             ScaleHeight     =   720
             ScaleWidth      =   720
             TabIndex        =   62
@@ -1193,7 +1194,7 @@ Begin VB.Form FireCallMain
             ForeColor       =   &H80000008&
             Height          =   720
             Left            =   0
-            Picture         =   "Form1.frx":96845
+            Picture         =   "Form1.frx":96A62
             ScaleHeight     =   720
             ScaleWidth      =   675
             TabIndex        =   61
@@ -1207,7 +1208,7 @@ Begin VB.Form FireCallMain
             ForeColor       =   &H80000008&
             Height          =   690
             Left            =   765
-            Picture         =   "Form1.frx":96C3F
+            Picture         =   "Form1.frx":96E5C
             ScaleHeight     =   690
             ScaleWidth      =   930
             TabIndex        =   65
@@ -1219,7 +1220,7 @@ Begin VB.Form FireCallMain
          BorderStyle     =   0  'None
          Height          =   315
          Left            =   2310
-         Picture         =   "Form1.frx":970D0
+         Picture         =   "Form1.frx":972ED
          ScaleHeight     =   315
          ScaleWidth      =   315
          TabIndex        =   51
@@ -1231,7 +1232,7 @@ Begin VB.Form FireCallMain
          BorderStyle     =   0  'None
          Height          =   315
          Left            =   2310
-         Picture         =   "Form1.frx":97312
+         Picture         =   "Form1.frx":9752F
          ScaleHeight     =   315
          ScaleWidth      =   315
          TabIndex        =   49
@@ -1243,7 +1244,7 @@ Begin VB.Form FireCallMain
          BorderStyle     =   0  'None
          Height          =   315
          Left            =   2310
-         Picture         =   "Form1.frx":97549
+         Picture         =   "Form1.frx":97766
          ScaleHeight     =   315
          ScaleWidth      =   315
          TabIndex        =   48
@@ -1256,7 +1257,7 @@ Begin VB.Form FireCallMain
          BorderStyle     =   0  'None
          Height          =   315
          Left            =   2310
-         Picture         =   "Form1.frx":977A2
+         Picture         =   "Form1.frx":979BF
          ScaleHeight     =   315
          ScaleWidth      =   315
          TabIndex        =   50
@@ -1272,7 +1273,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   2955
          Left            =   120
-         Picture         =   "Form1.frx":97A02
+         Picture         =   "Form1.frx":97C1F
          ScaleHeight     =   2955
          ScaleWidth      =   2460
          TabIndex        =   53
@@ -1411,7 +1412,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   2955
          Left            =   120
-         Picture         =   "Form1.frx":9FC2B
+         Picture         =   "Form1.frx":9FE48
          ScaleHeight     =   2955
          ScaleWidth      =   2460
          TabIndex        =   52
@@ -1425,7 +1426,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   315
          Left            =   1980
-         Picture         =   "Form1.frx":A2B30
+         Picture         =   "Form1.frx":A2D4D
          ScaleHeight     =   315
          ScaleWidth      =   315
          TabIndex        =   46
@@ -1440,7 +1441,7 @@ Begin VB.Form FireCallMain
          ForeColor       =   &H80000008&
          Height          =   315
          Left            =   1605
-         Picture         =   "Form1.frx":A2DA4
+         Picture         =   "Form1.frx":A2FC1
          ScaleHeight     =   315
          ScaleWidth      =   315
          TabIndex        =   44
@@ -1451,7 +1452,7 @@ Begin VB.Form FireCallMain
       Begin VB.CommandButton btnMinimise 
          Height          =   405
          Left            =   540
-         Picture         =   "Form1.frx":A3018
+         Picture         =   "Form1.frx":A3235
          Style           =   1  'Graphical
          TabIndex        =   39
          ToolTipText     =   "Minimise the program to a desktop icon"
@@ -1461,7 +1462,7 @@ Begin VB.Form FireCallMain
       Begin VB.CommandButton btnCloseIt 
          Height          =   405
          Left            =   990
-         Picture         =   "Form1.frx":A353A
+         Picture         =   "Form1.frx":A3757
          Style           =   1  'Graphical
          TabIndex        =   40
          ToolTipText     =   "Close the program"
@@ -1525,25 +1526,13 @@ Begin VB.Form FireCallMain
          Visible         =   0   'False
       End
       Begin VB.Menu mnuCoffee 
-         Caption         =   "Donate a coffee with Kofi!"
+         Caption         =   "Donate a coffee with paypal"
       End
-      Begin VB.Menu mnuOnline 
-         Caption         =   "Online Help and other options"
-         Begin VB.Menu mnuWidgets 
-            Caption         =   "See the other widgets"
-         End
-         Begin VB.Menu mnuLatest 
-            Caption         =   "Download Latest Version from Github"
-         End
-         Begin VB.Menu mnuSupport 
-            Caption         =   "Contact Support"
-         End
-         Begin VB.Menu mnuFacebook 
-            Caption         =   "Chat about the widget on Facebook"
-         End
-         Begin VB.Menu mnuHelpHTM 
-            Caption         =   "Open Help CHM"
-         End
+      Begin VB.Menu mnuSweets 
+         Caption         =   "Donate some sweets/candy with Amazon"
+      End
+      Begin VB.Menu mnuSupport 
+         Caption         =   "Contact Support"
       End
       Begin VB.Menu mnuBlankLine6 
          Caption         =   "-"
@@ -1557,18 +1546,6 @@ Begin VB.Form FireCallMain
       Begin VB.Menu mnuBlankLine7 
          Caption         =   "-"
       End
-      Begin VB.Menu mnuBlankLine12 
-         Caption         =   ""
-      End
-      Begin VB.Menu mnuAppFolder 
-         Caption         =   "Reveal Program Location in Windows Explorer"
-      End
-      Begin VB.Menu mnuEditWidget 
-         Caption         =   "Edit Widget using..."
-      End
-      Begin VB.Menu mnuBlankLine11 
-         Caption         =   ""
-      End
       Begin VB.Menu mnuRefresh 
          Caption         =   "Refresh the Chat boxes (F5)"
       End
@@ -1579,153 +1556,95 @@ Begin VB.Form FireCallMain
          Caption         =   "Close Program"
       End
    End
-   Begin VB.Menu inputListBoxMnuPopmenu 
-      Caption         =   "Input List Box Menu"
-      Begin VB.Menu mnuInputListBoxSendPingRequest 
+   Begin VB.Menu listBoxMnuPopmenu 
+      Caption         =   "List Box Menu"
+      Visible         =   0   'False
+      Begin VB.Menu mnuLBoxSendPingRequest 
          Caption         =   "Send a Ping Request"
       End
-      Begin VB.Menu mnuInputListBoxSendAwakeCall 
+      Begin VB.Menu mnuLBoxSendAwakeCall 
          Caption         =   "Send an Awake Call"
       End
-      Begin VB.Menu mnuInputListBoxSendShutdownRequest 
+      Begin VB.Menu mnuLBoxSendShutdownRequest 
          Caption         =   "Send Shutdown Request"
       End
-      Begin VB.Menu mnuBlankLine18 
-         Caption         =   ""
+      Begin VB.Menu mnuBlankLine8 
+         Caption         =   "-"
       End
-      Begin VB.Menu mnuInputListBoxCopyLine 
-         Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
-      End
-      Begin VB.Menu mnuInputListBoxQuoteLine 
-         Caption         =   "Copy and Quote Line"
-      End
-      Begin VB.Menu mnuInputListBoxCopyBlankLine 
-         Caption         =   ""
-      End
-      Begin VB.Menu mnuInputListBoxSwitchChatBoxes 
-         Caption         =   "Switch to Single Chat Box"
-      End
-      Begin VB.Menu mnuInputListBoxFind 
-         Caption         =   "Find (Ctrl+F)"
-      End
-      Begin VB.Menu mnuInputListBoxOpenSharedInputFile 
-         Caption         =   "Open the Shared Input File"
-      End
-      Begin VB.Menu mnuInputListBoxOpenSharedExchangeFolder 
-         Caption         =   "Open the Shared Exchange Folder"
-      End
-      Begin VB.Menu mnuInputListBoxRefresh 
-         Caption         =   "Refresh the Chat boxes (F5)"
-      End
-   End
-   Begin VB.Menu outputListBoxMnuPopmenu 
-      Caption         =   "Output List Box Menu"
-      Begin VB.Menu mnuOutputListBoxSendPingRequest 
-         Caption         =   "Send a Ping Request"
-      End
-      Begin VB.Menu mnuOutputListBoxSendAwakeCall 
-         Caption         =   "Send an Awake Call"
-      End
-      Begin VB.Menu mnuOutputListBoxSendShutdownRequest 
-         Caption         =   "Send Shutdown Request"
-      End
-      Begin VB.Menu mnuOutputBlankLine18 
-         Caption         =   ""
-      End
-      Begin VB.Menu mnuOutputListBoxEditLine 
+      Begin VB.Menu mnuCombinedEditLine 
          Caption         =   "Edit This Line"
+         Visible         =   0   'False
       End
-      Begin VB.Menu mnuOutputListBoxDeleteLine 
+      Begin VB.Menu mnuOutputEditLine 
+         Caption         =   "Edit This Line"
+         Visible         =   0   'False
+      End
+      Begin VB.Menu mnuCombinedDeleteLine 
          Caption         =   "Delete This Line"
+         Visible         =   0   'False
       End
-      Begin VB.Menu mnuOutputListBoxEditBlankLine 
-         Caption         =   ""
+      Begin VB.Menu mnuOutputDeleteLine 
+         Caption         =   "Delete This Line"
+         Visible         =   0   'False
       End
-      Begin VB.Menu mnuOutputListBoxCopyLine 
+      Begin VB.Menu mnuOutputCopyLine 
          Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
       End
-      Begin VB.Menu mnuOutputListBoxQuoteLine 
+      Begin VB.Menu mnuInputCopyLine 
+         Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
+      End
+      Begin VB.Menu mnuInputQuoteLine 
          Caption         =   "Copy and Quote Line"
       End
-      Begin VB.Menu mnuOutputListBoxPasteLine 
-         Caption         =   "Paste From Clipboard (Ctrl+V)"
+      Begin VB.Menu mnuCombinedQuoteLine 
+         Caption         =   "Copy and Quote Line"
       End
-      Begin VB.Menu mnuOutputListBoxPasteAndGo 
+      Begin VB.Menu mnuCombinedCopyLine 
+         Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
+      End
+      Begin VB.Menu mnuCombinedPasteLine 
+         Caption         =   "Paste From Clipboard (Ctrl+V)"
+         Visible         =   0   'False
+      End
+      Begin VB.Menu mnuOutputPasteLine 
+         Caption         =   "Paste From Clipboard (Ctrl+V)"
+         Visible         =   0   'False
+      End
+      Begin VB.Menu mnuCombinedPasteAndGo 
          Caption         =   "Paste && Go"
       End
-      Begin VB.Menu mnuOutputListBoxBlankLine9 
-         Caption         =   ""
+      Begin VB.Menu mnuOutputPasteAndGo 
+         Caption         =   "Paste && Go"
+         Visible         =   0   'False
       End
-      Begin VB.Menu mnuOutputListBoxSwitchChatBoxes 
+      Begin VB.Menu mnuBlankLine9 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuSwitchChatBoxes 
          Caption         =   "Switch to Single Chat Box"
       End
-      Begin VB.Menu mnuOutputListBoxFind 
+      Begin VB.Menu mnuBlankLine10 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuFindInput 
          Caption         =   "Find (Ctrl+F)"
       End
-      Begin VB.Menu mnuOutputListBoxOpenSharedOutputFile 
-         Caption         =   "Open the Shared Output File"
-      End
-      Begin VB.Menu mnuOutputListBoxOpenSharedExchangeFolder 
-         Caption         =   "Open the Shared Exchange Folder"
-      End
-      Begin VB.Menu mnuOutputListBoxRefresh 
-         Caption         =   "Refresh the Chat boxes (F5)"
-      End
-   End
-   Begin VB.Menu combinedListBoxMnuPopmenu 
-      Caption         =   "Combined List Box Menu"
-      Begin VB.Menu mnuCombinedListBoxSendPingRequest 
-         Caption         =   "Send a Ping Request"
-      End
-      Begin VB.Menu mnuCombinedListBoxSendAwakeCall 
-         Caption         =   "Send an Awake Call"
-      End
-      Begin VB.Menu mnuCombinedListBoxSendShutdownRequest 
-         Caption         =   "Send Shutdown Request"
-      End
-      Begin VB.Menu mnuCombinedBlankLine18 
-         Caption         =   ""
-      End
-      Begin VB.Menu mnuCombinedListBoxEditLine 
-         Caption         =   "Edit This Line"
-      End
-      Begin VB.Menu mnuCombinedListBoxDeleteLine 
-         Caption         =   "Delete This Line"
-      End
-      Begin VB.Menu mnuCombinedEditBlankLine 
-         Caption         =   ""
-      End
-      Begin VB.Menu mnuCombinedListBoxCopyLine 
-         Caption         =   "Copy Selected Line(s) to Clipboard (Ctrl+C)"
-      End
-      Begin VB.Menu mnuCombinedListBoxQuoteLine 
-         Caption         =   "Copy and Quote Line"
-      End
-      Begin VB.Menu mnuCombinedListBoxPasteLine 
-         Caption         =   "Paste From Clipboard (Ctrl+V)"
-      End
-      Begin VB.Menu mnuCombinedListBoxPasteAndGo 
-         Caption         =   "Paste && Go"
-      End
-      Begin VB.Menu mnuCombinedListBoxBlankLine9 
-         Caption         =   ""
-      End
-      Begin VB.Menu mnuCombinedListBoxSwitchChatBoxes 
-         Caption         =   "Switch to Split Chat Box Mode"
-      End
-      Begin VB.Menu mnuCombinedListBoxFind 
+      Begin VB.Menu mnuFindOutput 
          Caption         =   "Find (Ctrl+F)"
       End
-      Begin VB.Menu mnuCombinedListBoxOpenSharedInputFile 
+      Begin VB.Menu mnuFindCombined 
+         Caption         =   "Find (Ctrl+F)"
+      End
+      Begin VB.Menu mnuLBOpenSharedInputFile 
          Caption         =   "Open the Shared Input File"
       End
-      Begin VB.Menu mnuCombinedListBoxOpenSharedOutputFile 
+      Begin VB.Menu mnuLBOpenSharedOutputFile 
          Caption         =   "Open the Shared Output File"
       End
-      Begin VB.Menu mnuCombinedListBoxOpenSharedExchangeFolder 
+      Begin VB.Menu mnuLBOpenSharedExchangeFolder 
          Caption         =   "Open the Shared Exchange Folder"
       End
-      Begin VB.Menu mnuCombinedListBoxRefresh 
+      Begin VB.Menu mnuLBRefresh 
          Caption         =   "Refresh the Chat boxes (F5)"
       End
    End
@@ -1786,19 +1705,6 @@ Begin VB.Form FireCallMain
       End
       Begin VB.Menu mnuText10 
          Caption         =   "Text 10"
-      End
-   End
-   Begin VB.Menu mnuTextEntryPopmenu 
-      Caption         =   "The Input Box Menu"
-      Visible         =   0   'False
-      Begin VB.Menu mnuTextEntryPasteAndGo 
-         Caption         =   "Paste && Go"
-      End
-      Begin VB.Menu mnuTextEntryPasteLine 
-         Caption         =   "Paste From Clipboard (Ctrl+V)"
-      End
-      Begin VB.Menu mnuTextEntryNothing 
-         Caption         =   "Nothing to Paste"
       End
    End
 End
@@ -2042,7 +1948,8 @@ Dim plyIndex    As Long
 '------------------------------------------------------ ENDS
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
-       
+     
+     
 Private Declare Function GetDeviceCaps Lib "gdi32" (ByVal hdc As Long, ByVal nIndex As Long) As Long
      
 
@@ -2085,9 +1992,11 @@ Private busyCounter As Integer
 '---------------------------------------------------------------------------------------
 '
 Private Sub configBusyTimer_Timer()
-    Dim busyFilename As String: busyFilename = ""
+    Dim busyFilename As String
 
     On Error GoTo configBusyTimer_Timer_Error
+
+    busyFilename = ""
 
     totalBusyCounter = totalBusyCounter + 1
     busyCounter = busyCounter + 1
@@ -2123,27 +2032,11 @@ End Sub
 'Note all new events and procedures are moved to the bottom of this file, top event space is reserved for the main form events.
 
 ' set the focus to the text entry field whenever the form itself is clicked. The same done for almost all other controls on the form.
-'---------------------------------------------------------------------------------------
-' Procedure : Form_Click
-' Author    : beededea
-' Date      : 11/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub Form_Click()
      
-   On Error GoTo Form_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
 
     txtTextEntry.SetFocus
-
-   On Error GoTo 0
-   Exit Sub
-
-Form_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Form_Click of Form FireCallMain"
 End Sub
 
 ' the standard Form_KeyDown routine that captures all keypresses on the form - keyPreview = true
@@ -2151,19 +2044,19 @@ Private Sub Form_KeyDown(KeyCode As Integer, ByRef Shift As Integer)
     Call getKeyPress(KeyCode)
 End Sub
 
-
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : Form_Load
 ' Author    : beededea
-' Date      : 11/07/2023
-' Purpose   : 'form_load is just used to initialise some vars the real work is done by formLoadTasks
+' Date      : 25/03/2025
+' Purpose   : form_load is just used to initialise some vars the real work is done by formLoadTasks
 '---------------------------------------------------------------------------------------
 '
 Private Sub Form_Load()
 
     ' initialise some global variables, cannot be in the form_initialise as that runs after form_load
     
-    On Error GoTo Form_Load_Error
+   On Error GoTo Form_Load_Error
 
     Randomize
     
@@ -2220,9 +2113,6 @@ Private Sub Form_Load()
     FCWLastAwakeString = vbNullString
     FCWLastShutdown = vbNullString
     FCWAllowShutdowns = vbNullString
-    FCWDefaultEditor = vbNullString
-    FCWDebug = vbNullString
-    
     storedSearchString = vbNullString
     storedSearchLineNo = 0
     
@@ -2242,7 +2132,8 @@ Private Sub Form_Load()
     msgBoxOut = True
     msgLogOut = True
     
-
+    ' read available audio input devices
+    Call enumerateRecordingDevices
     
     Call formLoadTasks ' < just so we can call the same routine from other places, you cannot call Form_Load
 
@@ -2260,20 +2151,20 @@ End Sub
 '---------------------------------------------------------------------------------------
 ' Procedure : formLoadTasks
 ' Author    : beededea
-' Date      : 11/07/2023
+' Date      : 25/03/2025
 ' Purpose   : the standard form_load routine calls our own routine that can be called directly elsewhere
 '---------------------------------------------------------------------------------------
 '
 Public Sub formLoadTasks()
 
-    On Error GoTo formLoadTasks_Error
-    
-    Dim slicence As Integer: slicence = 0
+    Dim slicence As Integer
     
     ' assign some global variable values to valid amounts, do not remove as these are reset regularly when
     ' formLoadTasks is run (after saving the prefs. for example)
         
- 
+    On Error GoTo formLoadTasks_Error
+
+    slicence = 0
     dropTimerCount = 0
     opacitylevel = 255
     inputDataChangedFlag = False
@@ -2285,21 +2176,13 @@ Public Sub formLoadTasks()
     recording = False
     playing = False
     
-    inputListBoxMnuPopmenu.Visible = False
-    outputListBoxMnuPopmenu.Visible = False
-    combinedListBoxMnuPopmenu.Visible = False
-    'listBoxMnuPopmenu.Visible = False
     
-    ' read available audio input devices
-    Call enumerateRecordingDevices
-    
-    'add known executables to a VB6 collection
     Call addExecutableSuffixArrayList
 
-    'add Valid image type suffixes to  a VB6 collection ".jpg,.jpeg,.bmp,.ico,.png,.tif,.tiff,.gif,.cur,.wmf,.emf"
+    'validImageTypes = ".jpg,.jpeg,.bmp,.ico,.png,.tif,.tiff,.gif,.cur,.wmf,.emf"
     Call addValidImageTypes
     
-    'add inValid image type suffixes to a VB6 collectionknownButInvalidImageTypes = ".pict,.icns,.ani,.svg,.NEF,.CR2,.ORF,.RW2,.ARW,.DNG,.wps,.AI,.PDF,.PSD,.RAW,.INDD"
+    'knownButInvalidImageTypes = ".pict,.icns,.ani,.svg,.NEF,.CR2,.ORF,.RW2,.ARW,.DNG,.wps,.AI,.PDF,.PSD,.RAW,.INDD"
     Call addInvalidImageTypes
     
     ' populate the emoji dropdown
@@ -2328,6 +2211,7 @@ Public Sub formLoadTasks()
     
     ' call the testMissingFields function to check the missing fields related to the input and output filenames
     If fTestMissingFields = False Then '
+        'Call btnConfig_Click
         Call btnPicConfig_Click
         Exit Sub
     End If
@@ -2369,13 +2253,10 @@ Public Sub formLoadTasks()
     ' populate the combined listbox
     If FCWSingleListBox = "1" Then Call populateCombinedBox
     
-
-    
     If FCWSingleListBox = "1" Then
-        mnuInputListBoxSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
-        mnuOutputListBoxSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
+        mnuSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
     Else
-        mnuCombinedListBoxSwitchChatBoxes.Caption = "Switch to Single Chat Box"
+        mnuSwitchChatBoxes.Caption = "Switch to Single Chat Box"
     End If
     
     'enable/disable the scrollbars for the input and output listboxes
@@ -2442,8 +2323,10 @@ End Sub
 
 Public Sub enumerateRecordingDevices()
 
-    Dim sName As Variant ' do not initialise a variant
-    Dim devCount As Integer: devCount = 0
+    Dim sName As Variant
+    Dim devCount As Integer
+    
+    devCount = 0
     
     'If FCWCaptureMethod = "0" Then
         cmbHiddenCaptureDevices.Clear
@@ -2468,16 +2351,7 @@ Public Sub enumerateRecordingDevices()
 End Sub
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : setBackups
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub setBackups()
-
-   On Error GoTo setBackups_Error
 
     If FCWAutomaticBackups = "1" Then
         backupTimer.Enabled = True
@@ -2488,20 +2362,13 @@ Private Sub setBackups()
         Call backupOutputFile(FCWSharedOutputFile, "startup")
     End If
 
-   On Error GoTo 0
-   Exit Sub
-
-setBackups_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setBackups of Form FireCallMain"
-
 End Sub
 
 
 Private Sub setVisualItems()
 
-    Dim CurrentDPI As Long: CurrentDPI = 0
-    Dim NewSize As Long: NewSize = 0
+    Dim CurrentDPI As Long
+    Dim NewSize As Long
     
 '    If FCWMaximiseFormX = "0" Then
 '        'FireCallMain.Left = FireCallMain.Left - 300
@@ -2550,58 +2417,27 @@ Private Sub setVisualItems()
     txtTextEntry.SetFocus
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : Form_Resize
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub Form_Resize()
-    On Error GoTo Form_Resize_Error
-
     Call formResizeSub
-
-    On Error GoTo 0
-    Exit Sub
-
-Form_Resize_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Form_Resize of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : formResizeSub
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub formResizeSub()
+' credit Magic Ink
+' https://www.vbforums.com/showthread.php?824699-RESOLVED-Form-Placement-Considering-Aero-Borders
     
-    Dim desiredClientHeight As Long: desiredClientHeight = 0
-    Dim desiredClientMinWidth As Long: desiredClientMinWidth = 0
-    Dim desiredClientMaxWidth As Long: desiredClientMaxWidth = 0
-    Dim windowBorderWidth As Long: windowBorderWidth = 0
-    Dim captionHeight As Long: captionHeight = 0
+    Dim desiredClientHeight As Long
+    Dim desiredClientMinWidth As Long
+    Dim desiredClientMaxWidth As Long
+    Dim windowBorderWidth As Long
+    Dim a As Long
     
-    On Error GoTo formResizeSub_Error
     
-    desiredClientMinWidth = 10290 ' if you change this then check form_unload too
-    desiredClientHeight = 10200 '
+    desiredClientMinWidth = 10065
+    desiredClientHeight = 10185
     desiredClientMaxWidth = 25000
+    windowBorderWidth = 0
+    a = 0
     
-'    Dim Padding As Long: Padding = 0
-'    Dim borderWidth As Long: borderWidth = 0
-'    Dim captionHeight As Long: captionHeight = 0
-'
-'    borderWidth = (Me.Width - Me.ScaleWidth) / 2
-'    captionHeight = Me.Height - Me.ScaleHeight - borderWidth
-'
-'    ' under windows 10+ the internal window calcs are all wrong due to the bigger title bars
-'    Padding = 0 ' add normal padding below the help button to position the bottom of the form
-'
-'    FireCallMain.Height = 10560 + captionHeight + borderWidth + Padding
 
     
     ' Width and Heigth are the size of the component, including the borders
@@ -2612,8 +2448,7 @@ Private Sub formResizeSub()
     
     ' width         = full window + theme border
     ' ScaleWidth    = window without any theme border
-    windowBorderWidth = (Me.Width - Me.ScaleWidth) / 2
-    captionHeight = Me.Height - Me.ScaleHeight - windowBorderWidth
+    windowBorderWidth = Me.Width - Me.ScaleWidth
     '
 '    borderSizeLeft = fBorderSize(FireCallMain).Left
 '    borderSizeRight = fBorderSize(FireCallMain).Right
@@ -2621,32 +2456,40 @@ Private Sub formResizeSub()
 '    borderSizeBottom = fBorderSize(FireCallMain).Bottom
     
     If Me.Width > 25000 Then ' maximum
-        'windowBorderWidth = Me.Width - Me.ScaleWidth / 2
-        Me.Width = desiredClientMaxWidth + windowBorderWidth
+        windowBorderWidth = Me.Width - Me.ScaleWidth
+        Me.Width = windowBorderWidth + desiredClientMaxWidth
+        Exit Sub
     End If
-    If Me.Width < desiredClientMinWidth Then ' minimum
-        Me.Width = desiredClientMinWidth + windowBorderWidth
+    If Me.Width < 10185 Then ' minimum
+        Me.Width = windowBorderWidth + desiredClientMinWidth
         Exit Sub
     End If
     
-    'Me.Height = Me.Height - Me.ScaleHeight + desiredClientHeight
-    Me.Height = desiredClientHeight + captionHeight + windowBorderWidth
+    Me.Height = Me.Height - Me.ScaleHeight + desiredClientHeight
+    
+'     Me.Width = WidthInPixels * (Width / ScaleWidth)
+'    Me.Height = HeightInPixels * (Height / ScaleHeight)
     
     txtTextEntry.Width = Me.ScaleWidth - 3700
     btnSendText.Left = txtTextEntry.Width + 355
+    ' 10185  9945 240
+    ' 14590  14355 235
+    ' 10305  10065 240
+    
+    ' 10905  10785 = 120
+    ' 11100 - 10980 = 120
     
     picSideBar.Left = Me.ScaleWidth - 2655 '+ Abs(fBorderSize(Me).Right)  ' 2715
+    'picSideBar.Left = 9945 - 2655
     
     lbxOutputTextArea.Width = picSideBar.Left - 120
     lbxInputTextArea.Width = picSideBar.Left - 120
     lbxCombinedTextArea.Width = picSideBar.Left - 120
-
-   On Error GoTo 0
-   Exit Sub
-
-formResizeSub_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure formResizeSub of Form FireCallMain"
+    'Me.Refresh
+    'picSideBar.Refresh
+    
+    'DoEvents
+    
     
 End Sub
 '
@@ -2664,8 +2507,8 @@ Private Sub Form_Unload(Cancel As Integer)
 
     FCWMaximiseFormX = Str$(FireCallMain.Left)
     FCWMaximiseFormY = Str$(FireCallMain.Top)
-    If Val(FCWFormWidth) <= 10290 Then
-        FCWFormWidth = "10290"
+    If Val(FCWFormWidth) <= 10185 Then
+        FCWFormWidth = "10185"
     Else
         FCWFormWidth = Str$(FireCallMain.Width)
     End If
@@ -2700,27 +2543,18 @@ Form_Unload_Error:
 End Sub
 
 ' start the iconise timer that iconises the main form to the stamp icon
-'---------------------------------------------------------------------------------------
-' Procedure : startTheIconiseTimers
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub startTheIconiseTimers()
 
-    Dim iconiseIntervalMillisecs As Long: iconiseIntervalMillisecs = 0
+    Dim iconiseIntervalMillisecs As Long
     
-    Const sixtyFive As Long = 65 ' just used to avoid multiplying two integers
-    Const oneThousand As Long = 1000
-
-   On Error GoTo startTheIconiseTimers_Error
-
+    Dim sixtyFive As Long ' just used to avoid multiplying two integers
+    Dim oneThousand As Long
+    
     If fInIDE Then
         ' VB6 timers cannot exceed 65 seconds (65535 ms)
         If Val(FCWIconiseDelay) > 65 Then
-'            sixtyFive = 65
-'            oneThousand = 1000
+            sixtyFive = 65
+            oneThousand = 1000
             ' when multiplying two integer values and assigning to a long in the IDE it caused an overflow as the IDE
             ' is handling the two numbers internally as integers as they are both below 32768 when VB6 encounters them.
             ' declaring vars as longs is a workaround.
@@ -2739,30 +2573,14 @@ Private Sub startTheIconiseTimers()
         ' in addition, unfortunately the manual code timer method does not work in the IDE
         Call initiateIconiseTimerInCode
     End If
-
-   On Error GoTo 0
-   Exit Sub
-
-startTheIconiseTimers_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure startTheIconiseTimers of Form FireCallMain"
 End Sub
 
 ' the listboxes have a vertical scrollbar by default and we add a horizontal scrollbar
 ' showing/hiding these require different methods
-'---------------------------------------------------------------------------------------
-' Procedure : handleScrollbars
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub handleScrollbars()
-    Dim lLength As Long: lLength = 0
+    Dim lLength As Long
     
     'disable the scrollbars for the input listbox
-   On Error GoTo handleScrollbars_Error
-
     If FCWEnableScrollbars = "0" Then
         Call SendMessageByNum(lbxInputTextArea.hwnd, LB_SETHORIZONTALEXTENT, 0, 0&)
         Call ShowScrollBar(lbxInputTextArea.hwnd, SB_VERT, False)  ' hides the vertical scrollbar
@@ -2797,30 +2615,14 @@ Private Sub handleScrollbars()
         Call SendMessageByNum(FireCallMain.lbxCombinedTextArea.hwnd, LB_SETHORIZONTALEXTENT, lLength, 0&)
     End If
 
-   On Error GoTo 0
-   Exit Sub
-
-handleScrollbars_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure handleScrollbars of Form FireCallMain"
-
 End Sub
 
 
 
 
 ' set the Zorder of the main window, emulating functionality of the YWE version
-'---------------------------------------------------------------------------------------
-' Procedure : setZOrder
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub setZOrder(ByVal formLoad As Boolean)
     
-   On Error GoTo setZOrder_Error
-
     If Val(FCWWindowLevel) = 0 Then
         Call setFormPosition(Me, HWND_BOTTOM)
     ElseIf Val(FCWWindowLevel) = 1 Then
@@ -2828,27 +2630,11 @@ Private Sub setZOrder(ByVal formLoad As Boolean)
     ElseIf Val(FCWWindowLevel) = 2 Then
         Call setFormPosition(Me, HWND_TOPMOST)
     End If
-
-   On Error GoTo 0
-   Exit Sub
-
-setZOrder_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setZOrder of Form FireCallMain"
 End Sub
  
 
 ' check that the three required preference settings have valid values.
-'---------------------------------------------------------------------------------------
-' Procedure : fTestInputsOutputs
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Function fTestInputsOutputs() As Boolean
-   On Error GoTo fTestInputsOutputs_Error
-
     fTestInputsOutputs = True
     
     If Not FCWSharedInputFile = vbNullString And Not fFExists(FCWSharedInputFile) Then
@@ -2866,28 +2652,12 @@ Private Function fTestInputsOutputs() As Boolean
         fTestInputsOutputs = False
         Exit Function
     End If
-
-   On Error GoTo 0
-   Exit Function
-
-fTestInputsOutputs_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fTestInputsOutputs of Form FireCallMain"
     
 End Function
 
 
 ' check that the three required preference settings have values, valid or not
-'---------------------------------------------------------------------------------------
-' Procedure : fTestMissingFields
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Function fTestMissingFields() As Boolean
-   On Error GoTo fTestMissingFields_Error
-
     fTestMissingFields = True
     
     If FCWSharedInputFile = vbNullString Then
@@ -2905,72 +2675,23 @@ Private Function fTestMissingFields() As Boolean
         fTestMissingFields = False
         Exit Function
     End If
-
-   On Error GoTo 0
-   Exit Function
-
-fTestMissingFields_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fTestMissingFields of Form FireCallMain"
 End Function
 
 ' call the same form unload subroutine called by the form unloading itself
-'---------------------------------------------------------------------------------------
-' Procedure : btnClose_Click
-' Author    : beededea
-' Date      : 08/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnClose_Click()
-   On Error GoTo btnClose_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
-    
-    ' unload the native VB6 forms
-    
     Unload FireCallMain
-    Unload about
-    Unload FireCallPrefs
-    Unload licence
-    Unload MinimiseForm
-    Unload MinimiseMenuForm
-    
-    ' remove all variable references to each form in turn
-    
-    Set FireCallMain = Nothing
-    Set about = Nothing
-    Set FireCallPrefs = Nothing
-    Set licence = Nothing
-    Set MinimiseForm = Nothing
-    Set MinimiseMenuForm = Nothing
-
-   On Error GoTo 0
-   Exit Sub
-
-btnClose_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnClose_Click of Form FireCallMain"
-    
 End Sub
 
 ' attach a single file to send to the remote chat partner
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicAttach_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicAttach_Click()
-    Dim retFileName As String: retFileName = vbNullString
-    Dim attachedFile As String: attachedFile = vbNullString
-    Dim fileNameToCopy As String: fileNameToCopy = vbNullString
-    Dim answer As VbMsgBoxResult: answer = vbNo
+    Dim retFileName As String
+    'Dim retfileTitle As String
+    Dim attachedFile As String
+    Dim fileNameToCopy As String
+    Dim answer As VbMsgBoxResult
     
     'initialise the dimensioned variables
-   On Error GoTo btnPicAttach_Click_Error
-
     answer = vbYes
     attachedFile = vbNullString
     
@@ -3007,31 +2728,16 @@ Private Sub btnPicAttach_Click()
         End If
     
     End If
-
-   On Error GoTo 0
-   Exit Sub
-
-btnPicAttach_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicAttach_Click of Form FireCallMain"
     
 End Sub
 
 
 ' display the small resized icon in the small emoji box
-'---------------------------------------------------------------------------------------
-' Procedure : cmbEmojiSelection_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub cmbEmojiSelection_Click()
     
-    Dim fullPath As String: fullPath = vbNullString
+    Dim fullPath As String
+    'Dim emojiSet As String
     
-   On Error GoTo cmbEmojiSelection_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     If FCWEmojiSetDesc = vbNullString Then FCWEmojiSetDesc = "standard"
@@ -3051,30 +2757,14 @@ Private Sub cmbEmojiSelection_Click()
     picEmojiSmall.Picture = picEmojiSmall.Image
     'lbxInputTextArea.Refresh
     picEmojiSmall.Refresh
-
-   On Error GoTo 0
-   Exit Sub
-
-cmbEmojiSelection_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbEmojiSelection_Click of Form FireCallMain"
     
 End Sub
 
 ' send your emoji state to the chat partner
-'---------------------------------------------------------------------------------------
-' Procedure : btnEmojiSet_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnEmojiSet_Click()
 
-    Dim fullPath As String: fullPath = vbNullString
+    Dim fullPath As String
     
-   On Error GoTo btnEmojiSet_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
         
     If FCWEmojiSetDesc = vbNullString Then FCWEmojiSetDesc = "standard"
@@ -3092,38 +2782,22 @@ Private Sub btnEmojiSet_Click()
     picBtnLidCatch.Visible = False
     picBtnLidShadow.Visible = False
     txtTextEntry.SetFocus
-
-   On Error GoTo 0
-   Exit Sub
-
-btnEmojiSet_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnEmojiSet_Click of Form FireCallMain"
 End Sub
 
 
 
 
 Private Sub houseKeepingTimer_Timer()
-    Call houseKeepingTimerLogic
+    Call houseKeepingTimerLogic(False)
 End Sub
 
 
 
 '  The VB6 Iconise timer the equivalent of the initiateIconiseTimerInCode
-'---------------------------------------------------------------------------------------
-' Procedure : IconiseTimer_Timer
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub IconiseTimer_Timer()
     'Dim lastInputVar As LASTINPUTINFO
     
     ' disable this timer when working in the runtime
-   On Error GoTo IconiseTimer_Timer_Error
-
     If Not fInIDE Then
         Exit Sub ' this timer should only work in the IDE
     End If
@@ -3145,27 +2819,10 @@ Private Sub IconiseTimer_Timer()
         End If
     End If
 
-   On Error GoTo 0
-   Exit Sub
-
-IconiseTimer_Timer_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure IconiseTimer_Timer of Form FireCallMain"
-
 End Sub
 
 
-
-'---------------------------------------------------------------------------------------
-' Procedure : lbxCombinedTextArea_DblClick
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxCombinedTextArea_DblClick()
-   On Error GoTo lbxCombinedTextArea_DblClick_Error
-
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
@@ -3178,157 +2835,72 @@ Private Sub lbxCombinedTextArea_DblClick()
         combinedScrollBarTimer.Enabled = False
     End If
     Call lbxTextAreaClick(lbxCombinedTextArea, True)
-
-   On Error GoTo 0
-   Exit Sub
-
-lbxCombinedTextArea_DblClick_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_DblClick of Form FireCallMain"
 End Sub
 
 ' interpret the keys pressed and identify to the program where the keypress occurred
-'---------------------------------------------------------------------------------------
-' Procedure : lbxCombinedTextArea_KeyDown
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxCombinedTextArea_KeyDown(KeyCode As Integer, Shift As Integer)
-    On Error GoTo lbxCombinedTextArea_KeyDown_Error
-
     controlPressed = "lbxCombinedTextArea"
     Call getKeyPress(KeyCode)
-
-    On Error GoTo 0
-    Exit Sub
-
-lbxCombinedTextArea_KeyDown_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_KeyDown of Form FireCallMain"
 End Sub
 'after a key has been pressed on the combined area undo the CTRL key var
 Private Sub lbxCombinedTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
     CTRL_1 = False
 End Sub
 ' show the alternative right click menu and set the bulbs to dull
-'---------------------------------------------------------------------------------------
-' Procedure : lbxCombinedTextArea_MouseDown
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Dim theText As String: theText = vbNullString
-   
-    On Error GoTo lbxCombinedTextArea_MouseDown_Error
-
     If Button = 2 Then
-        If lbxCombinedTextArea.SelCount = 1 Then 'a single line has been selected
-                     
-            theText = Left$(getCurrentLine(lbxCombinedTextArea), 25)
-
-            mnuCombinedListBoxEditLine.Caption = "Edit The Line - """ & theText & """"
-            mnuCombinedListBoxDeleteLine.Caption = "Delete Line - """ & theText & """?"
-            mnuCombinedListBoxDeleteLine.Visible = True
-            
-            mnuCombinedListBoxEditLine.Visible = True
-            mnuCombinedListBoxCopyLine.Visible = True
-            mnuCombinedListBoxQuoteLine.Visible = True
-            
-            mnuCombinedEditBlankLine.Visible = True
-        Else
-            'nothing or everything has selected
-            mnuCombinedListBoxEditLine.Visible = False
-            mnuCombinedListBoxDeleteLine.Visible = False
-            mnuCombinedListBoxCopyLine.Visible = False
-            mnuCombinedListBoxQuoteLine.Visible = False
-            mnuCombinedEditBlankLine.Visible = False
-        End If
+        mnuLBOpenSharedInputFile.Visible = True
+        mnuLBOpenSharedOutputFile.Visible = True
+        
+        mnuOutputEditLine.Visible = False
+        mnuOutputDeleteLine.Visible = False
+        mnuInputCopyLine.Visible = False
+        mnuInputQuoteLine.Visible = False
+        mnuOutputCopyLine.Visible = False
+        mnuOutputPasteLine.Visible = False
+        mnuFindInput.Visible = False
+        mnuFindOutput.Visible = False
+        mnuOutputPasteLine.Visible = False
+        mnuOutputPasteAndGo.Visible = False
+        
+'        mnuCombinedDeleteLine.Visible = True
+'        mnuCombinedEditLine.Visible = True
+        mnuCombinedCopyLine.Visible = True
+        mnuCombinedQuoteLine.Visible = True
+        mnuFindCombined.Visible = True
         
         DoEvents
         If Clipboard.GetText <> "" Then
-            mnuCombinedListBoxPasteLine.Visible = True
-            mnuCombinedListBoxPasteAndGo.Visible = True
+            mnuCombinedPasteLine.Visible = True
+            mnuCombinedPasteAndGo.Visible = True
         Else
-            mnuCombinedListBoxPasteLine.Visible = False
-            mnuCombinedListBoxPasteAndGo.Visible = False
+            mnuCombinedPasteLine.Visible = False
+            mnuCombinedPasteAndGo.Visible = False
         End If
         
-        Me.PopupMenu combinedListBoxMnuPopmenu, vbPopupMenuRightButton
-        'Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
+        Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
     End If
     
     picTextChangeBright.Visible = False
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
-
-   On Error GoTo 0
-   Exit Sub
-
-lbxCombinedTextArea_MouseDown_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_MouseDown of Form FireCallMain"
     
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : lbxCombinedTextArea_MouseMove
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxCombinedTextArea_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    On Error GoTo lbxCombinedTextArea_MouseMove_Error
-
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip lbxCombinedTextArea.hwnd, "The combined chat box contains both chat partner's texts and messages. This is both the input and output files' contents combined and then sorted.", _
                   TTIconInfo, "Help on the Combined Chat Box", , , , True
-
-    On Error GoTo 0
-    Exit Sub
-
-lbxCombinedTextArea_MouseMove_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_MouseMove of Form FireCallMain"
 End Sub
 
 ' set the change lamp to dull when any activity is enountered in the input box - the scrollbars in this case
-'---------------------------------------------------------------------------------------
-' Procedure : lbxCombinedTextArea_Scroll
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxCombinedTextArea_Scroll()
-   On Error GoTo lbxCombinedTextArea_Scroll_Error
-
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
     lbxCombinedTextArea.ToolTipText = ""
-
-   On Error GoTo 0
-   Exit Sub
-
-lbxCombinedTextArea_Scroll_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_Scroll of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : lbxInputTextArea_DblClick
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxInputTextArea_DblClick()
-
-   On Error GoTo lbxInputTextArea_DblClick_Error
 
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
@@ -3343,35 +2915,12 @@ Private Sub lbxInputTextArea_DblClick()
     End If
     
     Call lbxTextAreaClick(lbxInputTextArea, True)
-
-   On Error GoTo 0
-   Exit Sub
-
-lbxInputTextArea_DblClick_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_DblClick of Form FireCallMain"
 End Sub
 
 ' interpret the keys pressed and identify to the program where the keypress occurred
-'---------------------------------------------------------------------------------------
-' Procedure : lbxInputTextArea_KeyDown
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxInputTextArea_KeyDown(ByRef KeyCode As Integer, ByRef Shift As Integer)
-    On Error GoTo lbxInputTextArea_KeyDown_Error
-
     controlPressed = "lbxInputTextArea"
     Call getKeyPress(KeyCode)
-
-    On Error GoTo 0
-    Exit Sub
-
-lbxInputTextArea_KeyDown_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_KeyDown of Form FireCallMain"
     
 End Sub
 'after a key has been pressed on the input area undo the CTRL key var
@@ -3385,41 +2934,16 @@ Private Sub lbxInputTextArea_MouseMove(Button As Integer, Shift As Integer, x As
 End Sub
 
 ' set the change lamp to dull when any activity is enountered in the input box - the scrollbars in this case
-'---------------------------------------------------------------------------------------
-' Procedure : lbxInputTextArea_Scroll
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxInputTextArea_Scroll()
-    On Error GoTo lbxInputTextArea_Scroll_Error
-
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
     lbxInputTextArea.ToolTipText = ""
-
-    On Error GoTo 0
-    Exit Sub
-
-lbxInputTextArea_Scroll_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_Scroll of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : lbxOutputTextArea_DblClick
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxOutputTextArea_DblClick()
     ' when using the keys to select the top list box, the scrollbar is always displayed even when switched off
     ' in this case we disable it two seconds after the last keypress by using a timer to disable it
-
-    On Error GoTo lbxOutputTextArea_DblClick_Error
 
     If LTrim$(Str$(FCWEnableScrollbars)) = "0" Then
         If outputScrollBarTimer.Enabled = False Then outputScrollBarTimer.Enabled = True
@@ -3428,36 +2952,13 @@ Private Sub lbxOutputTextArea_DblClick()
     End If
     Call lbxTextAreaClick(lbxOutputTextArea, True)
 
-    On Error GoTo 0
-    Exit Sub
-
-lbxOutputTextArea_DblClick_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_DblClick of Form FireCallMain"
-
 End Sub
 
 ' interpret the keys pressed and identify to the program where the keypress occurred
-'---------------------------------------------------------------------------------------
-' Procedure : lbxOutputTextArea_KeyDown
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxOutputTextArea_KeyDown(ByRef KeyCode As Integer, ByRef Shift As Integer)
-    On Error GoTo lbxOutputTextArea_KeyDown_Error
-
     controlPressed = "lbxOutputTextArea"
     
     Call getKeyPress(KeyCode)
-
-    On Error GoTo 0
-    Exit Sub
-
-lbxOutputTextArea_KeyDown_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_KeyDown of Form FireCallMain"
 End Sub
 'after a key has been pressed on the output area undo the CTRL key var
 Private Sub lbxOutputTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
@@ -3473,183 +2974,36 @@ Private Sub lbxOutputTextArea_Scroll()
     lbxOutputTextArea.ToolTipText = ""
 End Sub
 
-
-
-
-
-
-Private Sub mnuCombinedBlankLine23_Click()
-
-End Sub
-
-Private Sub mnuCombinedListBoxOpenSharedInputFile_Click()
-    Call OpenSharedInputFile
-End Sub
-
-Private Sub mnuCombinedListBoxOpenSharedOutputFile_Click()
-    Call OpenSharedOutputFile
-End Sub
-
-Private Sub mnuCombinedListBoxPasteLine_Click()
-    Call mnuOutputPasteLine_click_event
-End Sub
-
-Private Sub mnuCombinedPasteLine_click()
-    Call mnuOutputPasteLine_click_event
-End Sub
-
-Private Sub mnuOutputPasteLine_click_event()
-    DoEvents
-    txtTextEntry.Text = Clipboard.GetText
-    txtTextEntry.SetFocus ' set focus back to the text entry box
-End Sub
-
-Private Sub mnuInputListBoxCopyLine_Click()
-    Call copyText(lbxInputTextArea, False)
-End Sub
-
-Private Sub mnuCombinedListBoxCopyLine_Click()
-    Call copyText(lbxCombinedTextArea, False)
-End Sub
-
-
-Private Sub mnuInputListBoxQuoteLine_Click()
-    Call copyText(lbxInputTextArea, True)
-    Call pasteAndGoHandler
-End Sub
-
-Private Sub mnuOutputListBoxQuoteLine_Click()
-    Call copyText(lbxOutputTextArea, True)
-    Call pasteAndGoHandler
-End Sub
-
-Private Sub mnuCombinedListBoxQuoteLine_Click()
-    Call copyText(lbxCombinedTextArea, True)
-    Call pasteAndGoHandler
-End Sub
-
-Private Sub mnuInputQuoteLine_click()
-    Call copyText(lbxInputTextArea, True)
-    Call pasteAndGoHandler
-
-End Sub
-
-Private Sub mnuCombinedQuoteLine_click()
-    Call copyText(lbxCombinedTextArea, True)
-    Call pasteAndGoHandler
-End Sub
-
 'add ping request to the listBox right click menus
 Private Sub mnuLBoxSendPingRequest_Click()
     Call mnuSendPingRequest_Click
 End Sub
-
-'add ping request to the listBox right click menus
-Private Sub mnuInputListBoxSendPingRequest_Click()
-    Call mnuSendPingRequest_Click
-End Sub
-
-Private Sub mnuOutputListBoxCopyLine_Click()
-    Call copyText(lbxOutputTextArea, False)
-End Sub
-
-'add ping request to the listBox right click menus
-Private Sub mnuOutputListBoxSendPingRequest_Click()
-    Call mnuSendPingRequest_Click
-End Sub
-
-
-'add ping request to the listBox right click menus
-Private Sub mnuCombinedListBoxSendPingRequest_Click()
-    Call mnuSendPingRequest_Click
-End Sub
-
-
 'add awake call to the listBox right click menus
 Private Sub mnuLBoxSendAwakeCall_Click()
     Call mnuSendAwakeCall_click
 End Sub
 
-'add awake call to the listBox right click menus
-Private Sub mnuInputListBoxSendAwakeCall_Click()
-    Call mnuSendAwakeCall_click
-End Sub
-
-
-'add awake call to the listBox right click menus
-Private Sub mnuOutputListBoxSendAwakeCall_Click()
-    Call mnuSendAwakeCall_click
-End Sub
-
-
-'add awake call to the listBox right click menus
-Private Sub mnuCombinedListBoxSendAwakeCall_Click()
-    Call mnuSendAwakeCall_click
-End Sub
-
-
 
 ' hides the main form by starting the timer to fade the form out
-'---------------------------------------------------------------------------------------
-' Procedure : mnuHideProgram_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub mnuHideProgram_Click()
     
-   On Error GoTo mnuHideProgram_Click_Error
-
     picTextChangeBright.Visible = False
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
     
     opacityFadeOutTimer.Enabled = True
     MinimiseForm.Visible = True
-
-   On Error GoTo 0
-   Exit Sub
-
-mnuHideProgram_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuHideProgram_Click of Form FireCallMain"
     
 End Sub
 ' open the preferences form
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicConfig_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicConfig_Click()
     
-    On Error GoTo btnPicConfig_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
-
-    On Error GoTo 0
-    Exit Sub
-
-btnPicConfig_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicConfig_Click of Form FireCallMain"
 
 End Sub
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : makeConfigAvailable
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub makeConfigAvailable()
-   On Error GoTo makeConfigAvailable_Error
-
     If FireCallPrefs.Visible = False And FireCallPrefs.WindowState = vbNormal Then
         
         If FireCallPrefs.WindowState = vbMinimized Then
@@ -3674,29 +3028,16 @@ Private Sub makeConfigAvailable()
         FireCallPrefs.Visible = True  ' show it again
         FireCallPrefs.SetFocus
     End If
-
-   On Error GoTo 0
-   Exit Sub
-
-makeConfigAvailable_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure makeConfigAvailable of Form FireCallMain"
 End Sub
 ' read the assigned text messages for the ten preset buttons at the base of the chat window
-'---------------------------------------------------------------------------------------
-' Procedure : readButtonTexts
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub readButtonTexts(ByVal buttonNo As Integer, ByRef textMessageArray() As String, Optional ByRef msgCnt As Integer)
 
-    Dim buttonmessage As String: buttonmessage = vbNullString
-    Dim foundMessage As Boolean: foundMessage = False
+    Dim buttonmessage As String
+    Dim foundMessage As Boolean
+    'Dim useloop As Integer
     
-   On Error GoTo readButtonTexts_Error
-
+    buttonmessage = vbNullString
+    foundMessage = False
     msgCnt = 0
     
     foundMessage = True
@@ -3710,30 +3051,18 @@ Private Sub readButtonTexts(ByVal buttonNo As Integer, ByRef textMessageArray() 
             textMessageArray(msgCnt) = buttonmessage
         End If
     Loop
-
-   On Error GoTo 0
-   Exit Sub
-
-readButtonTexts_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure readButtonTexts of Form FireCallMain"
 End Sub
 ' the user pressed the TTFN button - demonstrating the use of GOTO for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicTtfn_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicTtfn_Click()
 
     ' declaration of vars
-    Dim rndResult As Integer: rndResult = 0
+    Dim rndResult As Integer
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
-
-   On Error GoTo btnPicTtfn_Click_Error
+    Dim msgCnt As Integer
+    
+    ' initialisation of vars
+    rndResult = 0
+    msgCnt = 0
 
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
@@ -3751,31 +3080,18 @@ reRunbtnPicTtfn_Click:
     Call sendSomething(txtTextEntry.Text)
     txtTextEntry.Text = vbNullString
     txtTextEntry.SetFocus ' set focus back to the text entry box
-
-   On Error GoTo 0
-   Exit Sub
-
-btnPicTtfn_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicTtfn_Click of Form FireCallMain"
 End Sub
 
 ' the user pressed the WELL button - demonstrating the use of DO WHILE for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicWell_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicWell_Click()
-    Dim rndResult As Integer:    rndResult = 0
-    Dim goodText As Boolean: goodText = False
+    Dim rndResult As Integer
+    Dim goodText As Boolean
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
+    Dim msgCnt As Integer
     
-   On Error GoTo btnPicWell_Click_Error
-
+    rndResult = 0
+    goodText = False
+    
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     Call readButtonTexts(2, textMessageArray(), msgCnt)
@@ -3794,31 +3110,18 @@ Private Sub btnPicWell_Click()
     txtTextEntry.SetFocus ' set focus back to the text entry box
 
 
-   On Error GoTo 0
-   Exit Sub
-
-btnPicWell_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicWell_Click of Form FireCallMain"
-
 End Sub
 
 ' the user pressed the NEWS button - demonstrating the use of DO LOOP UNTIL for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicNews_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicNews_Click()
-    Dim rndResult As Integer:  rndResult = 0
-    Dim goodText As Boolean: goodText = False
+    Dim rndResult As Integer
+    Dim goodText As Boolean
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
-        
-   On Error GoTo btnPicNews_Click_Error
-
+    Dim msgCnt As Integer
+    
+    rndResult = 0
+    goodText = False
+    
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     Call readButtonTexts(3, textMessageArray(), msgCnt)
@@ -3836,31 +3139,17 @@ Private Sub btnPicNews_Click()
     txtTextEntry.Text = vbNullString
     txtTextEntry.SetFocus ' set focus back to the text entry box
 
-   On Error GoTo 0
-   Exit Sub
-
-btnPicNews_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicNews_Click of Form FireCallMain"
-
 End Sub
 
 ' the user pressed the MORN button - demonstrating the use of DO LOOP UNTIL for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicMorn_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicMorn_Click()
-    Dim rndResult As Integer:  rndResult = 0
-    Dim goodText As Boolean: goodText = False
+    Dim rndResult As Integer
+    Dim goodText As Boolean
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
-           
-   On Error GoTo btnPicMorn_Click_Error
-
+    Dim msgCnt As Integer
+    
+    rndResult = 0
+    goodText = False
     
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
@@ -3879,32 +3168,17 @@ Private Sub btnPicMorn_Click()
     txtTextEntry.Text = vbNullString
     txtTextEntry.SetFocus ' set focus back to the text entry box
 
-   On Error GoTo 0
-   Exit Sub
-
-btnPicMorn_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicMorn_Click of Form FireCallMain"
-
 End Sub
 
 ' the user pressed the WOT button - demonstrating the use of DO UNTIL LOOP for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicWot_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicWot_Click()
-    Dim rndResult As Integer:  rndResult = 0
-    Dim goodText As Boolean: goodText = False
+    Dim rndResult As Integer
+    Dim goodText As Boolean
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
-        
+    Dim msgCnt As Integer
     
-   On Error GoTo btnPicWot_Click_Error
-
+    rndResult = 0
+    goodText = False
     
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
@@ -3923,31 +3197,17 @@ Private Sub btnPicWot_Click()
     txtTextEntry.Text = vbNullString
     txtTextEntry.SetFocus ' set focus back to the text entry box
 
-   On Error GoTo 0
-   Exit Sub
-
-btnPicWot_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicWot_Click of Form FireCallMain"
-
 End Sub
 
 ' the user pressed the WTH button - demonstrating the use of DO UNTIL LOOP for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : BtnPicWth_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub BtnPicWth_Click()
-    Dim rndResult As Integer:  rndResult = 0
-    Dim goodText As Boolean: goodText = False
+    Dim rndResult As Integer
+    Dim goodText As Boolean
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
-        
-   On Error GoTo BtnPicWth_Click_Error
-
+    Dim msgCnt As Integer
+    
+    rndResult = 0
+    goodText = False
     
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
@@ -3966,30 +3226,17 @@ Private Sub BtnPicWth_Click()
     txtTextEntry.Text = vbNullString
     txtTextEntry.SetFocus ' set focus back to the text entry box
 
-   On Error GoTo 0
-   Exit Sub
-
-BtnPicWth_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure BtnPicWth_Click of Form FireCallMain"
-
 End Sub
 
 ' the user pressed the PRG button - demonstrating the use of DO LOOP WHILE for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicPrg_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicPrg_Click()
-    Dim rndResult As Integer:  rndResult = 0
-    Dim goodText As Boolean: goodText = False
+    Dim rndResult As Integer
+    Dim goodText As Boolean
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
+    Dim msgCnt As Integer
     
-   On Error GoTo btnPicPrg_Click_Error
+    rndResult = 0
+    goodText = False
     
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
@@ -4009,31 +3256,18 @@ Private Sub btnPicPrg_Click()
     txtTextEntry.Text = vbNullString
     txtTextEntry.SetFocus ' set focus back to the text entry box
 
-   On Error GoTo 0
-   Exit Sub
-
-btnPicPrg_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicPrg_Click of Form FireCallMain"
-
 End Sub
 
 ' the user pressed the gdn button - demonstrating the use of DO UNTIL LOOP for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicGdn_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicGdn_Click()
-    Dim rndResult As Integer:  rndResult = 0
-    Dim goodText As Boolean: goodText = False
+    Dim rndResult As Integer
+    Dim goodText As Boolean
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
-           
-   On Error GoTo btnPicGdn_Click_Error
-
+    Dim msgCnt As Integer
+    
+    rndResult = 0
+    goodText = False
+    
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
 
     Call readButtonTexts(8, textMessageArray(), msgCnt)
@@ -4051,32 +3285,18 @@ Private Sub btnPicGdn_Click()
     txtTextEntry.Text = vbNullString
     txtTextEntry.SetFocus ' set focus back to the text entry box
 
-   On Error GoTo 0
-   Exit Sub
-
-btnPicGdn_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicGdn_Click of Form FireCallMain"
-
 End Sub
 
 ' the user pressed the BUSY button - demonstrating the use of DO UNTIL LOOP for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicBusy_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicBusy_Click()
-    Dim rndResult As Integer:  rndResult = 0
-    Dim goodText As Boolean: goodText = False
+    Dim rndResult As Integer
+    Dim goodText As Boolean
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
-        
+    Dim msgCnt As Integer
     
-   On Error GoTo btnPicBusy_Click_Error
-
+    rndResult = 0
+    goodText = False
+    
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
 
     Call readButtonTexts(9, textMessageArray(), msgCnt)
@@ -4093,32 +3313,18 @@ Private Sub btnPicBusy_Click()
     txtTextEntry.Text = vbNullString
     txtTextEntry.SetFocus ' set focus back to the text entry box
 
-   On Error GoTo 0
-   Exit Sub
-
-btnPicBusy_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicBusy_Click of Form FireCallMain"
-
 End Sub
 
 ' the user pressed the COD button - demonstrating the use of DO UNTIL LOOP for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicCod_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicCod_Click()
-    Dim rndResult As Integer:  rndResult = 0
-    Dim goodText As Boolean: goodText = False
+    Dim rndResult As Integer
+    Dim goodText As Boolean
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
-        
+    Dim msgCnt As Integer
     
-   On Error GoTo btnPicCod_Click_Error
-
+    rndResult = 0
+    goodText = False
+    
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     Call readButtonTexts(10, textMessageArray(), msgCnt)
@@ -4135,33 +3341,19 @@ Private Sub btnPicCod_Click()
     txtTextEntry.Text = vbNullString
     txtTextEntry.SetFocus ' set focus back to the text entry box
 
-
-   On Error GoTo 0
-   Exit Sub
-
-btnPicCod_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicCod_Click of Form FireCallMain"
     
 End Sub
 
 ' the user pressed the out button - demonstrating the use of WHILE WEND for my young boy
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicOut_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicOut_Click()
-    Dim rndResult As Integer:  rndResult = 0
-    Dim goodText As Boolean: goodText = False
+    Dim rndResult As Integer
+    Dim goodText As Boolean
     Dim textMessageArray(10) As String
-    Dim msgCnt As Integer: msgCnt = 0
-        
+    Dim msgCnt As Integer
     
-   On Error GoTo btnPicOut_Click_Error
-
+    rndResult = 0
+    goodText = False
+    
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     Call readButtonTexts(11, textMessageArray(), msgCnt)
@@ -4181,29 +3373,13 @@ Private Sub btnPicOut_Click()
     txtTextEntry.SetFocus ' set focus back to the text entry box
 
 
-   On Error GoTo 0
-   Exit Sub
-
-btnPicOut_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicOut_Click of Form FireCallMain"
-
 End Sub
 
 
 
 'refresh the two listboxes containing the chat
-'---------------------------------------------------------------------------------------
-' Procedure : btnRefresh_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnRefresh_Click()
     
-   On Error GoTo btnRefresh_Click_Error
-
     picTimerLampBright.Visible = True
     picTimerLampDull.Visible = False
     picTimerLampBright.Refresh
@@ -4223,29 +3399,13 @@ Private Sub btnRefresh_Click()
     lbxOutputTextArea.Height = 4300
     
     txtTextEntry.SetFocus ' set focus back to the text entry box
-
-   On Error GoTo 0
-   Exit Sub
-
-btnRefresh_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnRefresh_Click of Form FireCallMain"
 End Sub
 ' when clicking upon a line in the output box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
-'---------------------------------------------------------------------------------------
-' Procedure : lbxOutputTextArea_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxOutputTextArea_Click() '(Optional ByRef frm As Form)
 
     ' when using the keys to select the top list box, the scrollbar is always displayed even when switched off
     ' in this case we disable it two seconds after the last keypress by using a timer to disable it
     
-   On Error GoTo lbxOutputTextArea_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
 
     If LTrim$(Str$(FCWEnableScrollbars)) = "0" Then
@@ -4254,48 +3414,40 @@ Private Sub lbxOutputTextArea_Click() '(Optional ByRef frm As Form)
         outputScrollBarTimer.Enabled = False
     End If
     Call lbxTextAreaClick(lbxOutputTextArea)
-
-   On Error GoTo 0
-   Exit Sub
-
-lbxOutputTextArea_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_Click of Form FireCallMain"
     
 End Sub
 
 ' when clicking upon a line in the output box, display any image found in that line, or act upon any URL found
-'---------------------------------------------------------------------------------------
-' Procedure : lbxTextAreaClick
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxTextAreaClick(Optional ByRef srcListBox As ListBox, Optional ByRef textAreaDblClickState As Boolean)
+    Dim attachmentString As String
+    Dim attachmentFilenamePos As Integer
+    Dim attachmentFilename As String
+    Dim recordingString As String
+    Dim recordingFilenamePos As Integer
+    Dim recordingFilename As String
+    Dim suffix As String
+    Dim suffixNoDot As String
     
-    Dim attachmentString As String: attachmentString = 0
-    Dim attachmentFilenamePos As Integer: attachmentFilenamePos = 0
-    Dim attachmentFilename As String: attachmentFilename = vbNullString
-    Dim recordingString As String: recordingString = vbNullString
-    Dim recordingFilenamePos As Integer: recordingFilenamePos = 0
-    Dim recordingFilename As String: recordingFilename = vbNullString
-    Dim suffix As String: suffix = vbNullString
-    Dim suffixNoDot As String: suffixNoDot = vbNullString
-    Dim strToSearch As String: strToSearch = vbNullString
-    Dim extractedURL As String: extractedURL = vbNullString
-    Dim preliminaryURL As String: preliminaryURL = vbNullString
-    Dim answer As VbMsgBoxResult: answer = vbNo
-    Dim foundFile As Boolean: foundFile = False
-    Dim foundFolder As Boolean: foundFolder = False
-    Dim imgFilePath As String: imgFilePath = vbNullString
-    
-    On Error GoTo lbxTextAreaClick_Error
+    Dim strToSearch As String
 
+    Dim extractedURL As String
+    Dim preliminaryURL As String
+    
+    Dim answer As VbMsgBoxResult
+    
+    Dim foundFile As Boolean
+    Dim foundFolder As Boolean
+    Dim imgFilePath As String
+    
+    foundFile = False
+    foundFolder = False
     foundRecording = False
     binaryFlag = False
     picImagePrintOut.ToolTipText = ""
     binaryFlag = False
+    
+    'initialise the dimensioned variables
+    answer = vbNo
     
     picBtnPlaySound.Visible = False
     
@@ -4433,54 +3585,22 @@ Private Sub lbxTextAreaClick(Optional ByRef srcListBox As ListBox, Optional ByRe
             End If
         End If
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-lbxTextAreaClick_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxTextAreaClick of Form FireCallMain"
     
 End Sub
 ' KayJay
 ' utilises the isValidURL API function in Windows
-'---------------------------------------------------------------------------------------
-' Procedure : fIsGoodURL
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Public Function fIsGoodURL(ByVal sURL As String) As Boolean
-   On Error GoTo fIsGoodURL_Error
-
     sURL = StrConv(sURL, vbUnicode)
     'Now call the function
     fIsGoodURL = (IsValidURL(ByVal 0&, sURL, 0) = S_OK)
-
-   On Error GoTo 0
-   Exit Function
-
-fIsGoodURL_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fIsGoodURL of Form FireCallMain"
 End Function
 
 
 
 
 ' when clicking upon a line in the input box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
-'---------------------------------------------------------------------------------------
-' Procedure : lbxInputTextArea_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxInputTextArea_Click()
     
-   On Error GoTo lbxInputTextArea_Click_Error
-
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
@@ -4496,27 +3616,11 @@ Private Sub lbxInputTextArea_Click()
     End If
     
     Call lbxTextAreaClick(lbxInputTextArea)
-
-   On Error GoTo 0
-   Exit Sub
-
-lbxInputTextArea_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_Click of Form FireCallMain"
     
 End Sub
 
 ' when clicking upon a line in the input box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
-'---------------------------------------------------------------------------------------
-' Procedure : lbxCombinedTextArea_Click
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxCombinedTextArea_Click()
-
-   On Error GoTo lbxCombinedTextArea_Click_Error
 
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
@@ -4532,13 +3636,6 @@ Private Sub lbxCombinedTextArea_Click()
         combinedScrollBarTimer.Enabled = False
     End If
     Call lbxTextAreaClick(lbxCombinedTextArea)
-
-   On Error GoTo 0
-   Exit Sub
-
-lbxCombinedTextArea_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_Click of Form FireCallMain"
 End Sub
 'captures a drag and drop to any of the listBoxes
 Private Sub lbxInputTextArea_OLEDragDrop(Data As DataObject, Effect As Long, ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
@@ -4551,24 +3648,16 @@ Private Sub lbxCombinedTextArea_OLEDragDrop(Data As DataObject, Effect As Long, 
 End Sub
 
 'captures a drag and drop to any of the output listBoxes
-'---------------------------------------------------------------------------------------
-' Procedure : lbxOutputTextArea_OLEDragDrop
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxOutputTextArea_OLEDragDrop(Data As DataObject, Effect As Long, ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
-    
-    Dim iconTitle As String: iconTitle = vbNullString
-    Dim fileNameToCopy As String: fileNameToCopy = vbNullString
-    Dim answer As VbMsgBoxResult: answer = vbNo
+    Dim iconTitle As String
+    Dim fileNameToCopy As String
+    Dim answer As VbMsgBoxResult
     
     Const wFlags As Long = SWP_NOMOVE Or SWP_NOSIZE Or SWP_SHOWWINDOW Or SWP_NOACTIVATE
     
-   On Error GoTo lbxOutputTextArea_OLEDragDrop_Error
-
+    'initialise the dimensioned variables
     answer = vbYes
+    
     
     'only allow the drag and drop of files and not from one part of the listbox to the other
     If Data.GetFormat(vbCFFiles) = True Then
@@ -4617,19 +3706,6 @@ Private Sub lbxOutputTextArea_OLEDragDrop(Data As DataObject, Effect As Long, By
                 End If
 
                 If answer = vbYes Then
-'                    Dim fileSize As currency: fileSize = 0
-'                    Dim lngLong As Long: lngLong = 0
-'                    Dim fileName As String: fileName = vbNullString
-'
-'                    fileSize = FileLen(iconTitle)
-'                    MsgBox iconTitle & fileSize
-'
-'                    If fileSize > 100000 Then answer = MsgBox("This file is too big, do you still wish to copy it?", vbExclamation + vbYesNo)
-'                    If answer = vbYes Then
-'                        FileCopy iconTitle, FCWExchangeFolder & "\" & fileNameToCopy
-'                        Call sendSomething("<><>" & fileNameToCopy)
-'                    endif
-
                     FileCopy iconTitle, FCWExchangeFolder & "\" & fileNameToCopy
                     Call sendSomething("<><>" & fileNameToCopy)
                 End If
@@ -4646,30 +3722,14 @@ Private Sub lbxOutputTextArea_OLEDragDrop(Data As DataObject, Effect As Long, By
     
     SetWindowPos hwnd, -2&, 0, 0, 0, 0, wFlags ' this brings the window to the fore but sometimes the explorer window might sit on top, the earlier .setfocus sorts this
 
-   On Error GoTo 0
-   Exit Sub
-
-lbxOutputTextArea_OLEDragDrop_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_OLEDragDrop of Form FireCallMain"
-
 End Sub
 
 
 ' Chris Fannin (AbbydonKrafts) http://vbcity.com/forums/t/129391.aspx
 ' allows the copying of a whole folder
-'---------------------------------------------------------------------------------------
-' Procedure : VBCopyFolder
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Public Sub VBCopyFolder(ByRef strSource As String, ByRef strTarget As String)
 
     Dim op As SHFILEOPSTRUCT
-   On Error GoTo VBCopyFolder_Error
-
     With op
         .wFunc = FO_COPY ' Set function
         .pTo = strTarget ' Set new path
@@ -4679,76 +3739,26 @@ Public Sub VBCopyFolder(ByRef strSource As String, ByRef strTarget As String)
     ' Perform operation
     SHFileOperation op
 
-   On Error GoTo 0
-   Exit Sub
-
-VBCopyFolder_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure VBCopyFolder of Form FireCallMain"
-
 End Sub
-' menu options to refesh the chat boxes
-Private Sub mnuInputListBoxRefresh_Click()
-    Call menuRefresh
-End Sub
-
-Private Sub mnuOutputListBoxRefresh_Click()
-    Call menuRefresh
-End Sub
-
-Private Sub mnuCombinedListBoxRefresh_Click()
-    Call menuRefresh
-End Sub
-
+' menu options to do this and that
 Private Sub mnuRefresh_Click()
-    Call menuRefresh
-End Sub
-
-Private Sub mnuLBRefresh_Click()
-    Call menuRefresh
-End Sub
-'---------------------------------------------------------------------------------------
-' Procedure : menuRefresh
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Private Sub menuRefresh()
-    On Error GoTo menuRefresh_Error
-
     If lbxOutputTextArea.Visible = True Then lbxOutputTextArea.Clear
     If lbxInputTextArea.Visible = True Then lbxInputTextArea.Clear
     If lbxCombinedTextArea.Visible = True Then lbxCombinedTextArea.Clear
     Call btnRefresh_Click
-
-    On Error GoTo 0
-    Exit Sub
-
-menuRefresh_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure menuRefresh of Form FireCallMain"
 End Sub
-
-Private Sub mnuInputListBoxOpenSharedInputFile_Click()
-    Call OpenSharedInputFile
+Private Sub mnuLBRefresh_Click()
+    If lbxOutputTextArea.Visible = True Then lbxOutputTextArea.Clear
+    If lbxInputTextArea.Visible = True Then lbxInputTextArea.Clear
+    If lbxCombinedTextArea.Visible = True Then lbxCombinedTextArea.Clear
+    Call btnRefresh_Click
 End Sub
-
 Private Sub mnuLBOpenSharedInputFile_Click()
-    Call OpenSharedInputFile
+    Call mnuOpenSharedInputFile_Click
 End Sub
-
-' menu option to open the shared input file in an an editor or default application
-Private Sub mnuOpenSharedInputFile_Click()
-    Call OpenSharedInputFile
+Private Sub mnuLBOpenSharedOutputFile_Click()
+    Call mnuOpenSharedOutputFile_Click
 End Sub
-
-' open the shared input file in an an editor or default application
-Private Sub OpenSharedInputFile()
-    Call ShellExecute(Me.hwnd, "Open", FCWSharedInputFile, vbNullString, App.Path, 1)
-End Sub
-
-
 Private Sub mnuCloseProgram_Click()
     Call btnClose_Click
 End Sub
@@ -4756,87 +3766,30 @@ End Sub
 ' make the Emoji lid disappear or show the right click menu
 
 ' show the right click menu
-'---------------------------------------------------------------------------------------
-' Procedure : cmbEmojiSelection_MouseDown
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub cmbEmojiSelection_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
-    On Error GoTo cmbEmojiSelection_MouseDown_Error
-
     If Button = 2 Then
         Me.PopupMenu mainMnuPopmenu, vbPopupMenuRightButton
     End If
 
-    On Error GoTo 0
-    Exit Sub
-
-cmbEmojiSelection_MouseDown_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure cmbEmojiSelection_MouseDown of Form FireCallMain"
-
 End Sub
 ' small button close form
-'---------------------------------------------------------------------------------------
-' Procedure : btnCloseIt_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnCloseIt_Click()
     
-    On Error GoTo btnCloseIt_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     Call btnClose_Click
-
-    On Error GoTo 0
-    Exit Sub
-
-btnCloseIt_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnCloseIt_Click of Form FireCallMain"
     
 End Sub
 
 ' use the win API to place the form in zorder
-'---------------------------------------------------------------------------------------
-' Procedure : setFormPosition
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Public Sub setFormPosition(ByRef frm As Form, ByVal fromPosition As Long)
-   On Error GoTo setFormPosition_Error
-
     Call SetWindowPos(frm.hwnd, fromPosition, 0&, 0&, 0&, 0&, OnTopFlags)
-
-   On Error GoTo 0
-   Exit Sub
-
-setFormPosition_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setFormPosition of Form FireCallMain"
 End Sub
 ' add the emoji filenames to the emoji dropdown
-'---------------------------------------------------------------------------------------
-' Procedure : populateEmoji
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub populateEmoji()
-    Dim MyPath  As String: MyPath = vbNullString
+    Dim MyPath  As String
     'Dim themePresent As Boolean
-    Dim myName As String: myName = vbNullString
+    Dim myName As String
 
-
-   On Error GoTo populateEmoji_Error
 
     If FCWEmojiSetDesc = vbNullString Then FCWEmojiSetDesc = "standard"
     MyPath = App.Path & "\resources\Emojis\" & FCWEmojiSetDesc & "\base\"
@@ -4852,13 +3805,6 @@ Private Sub populateEmoji()
     Loop
     cmbEmojiSelection.ListIndex = 0
     'cmbEmojiSelection.SelLength = 0
-
-   On Error GoTo 0
-   Exit Sub
-
-populateEmoji_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateEmoji of Form FireCallMain"
     
 End Sub
     
@@ -5093,42 +4039,38 @@ End Sub
 
 
 ' show the alternative right click menu and set the bulbs to dull
-'---------------------------------------------------------------------------------------
-' Procedure : lbxInputTextArea_MouseDown
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lbxInputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
-    On Error GoTo lbxInputTextArea_MouseDown_Error
+    If Button = 2 Then
+        mnuLBOpenSharedInputFile.Visible = True
+        mnuLBOpenSharedOutputFile.Visible = False
+        
+        mnuInputCopyLine.Visible = True
+        mnuInputQuoteLine.Visible = True
+        mnuFindInput.Visible = True
+        
+        mnuOutputCopyLine.Visible = False
+        mnuFindOutput.Visible = False
+        mnuOutputPasteLine.Visible = False
+        mnuOutputPasteAndGo.Visible = False
+        mnuOutputEditLine.Visible = False
+        mnuOutputDeleteLine.Visible = False
+        
+'        mnuCombinedDeleteLine.Visible = False
+'        mnuCombinedEditLine.Visible = False
+        mnuFindCombined.Visible = False
+        mnuCombinedPasteLine.Visible = False
+        mnuCombinedPasteAndGo.Visible = False
+        mnuCombinedCopyLine.Visible = False
+        mnuCombinedQuoteLine.Visible = False
 
-     If Button = 2 Then
-        If lbxInputTextArea.SelCount = 1 Then 'a single line has been selected
-            mnuInputListBoxCopyLine.Visible = True
-            mnuInputListBoxQuoteLine.Visible = True
-            mnuInputListBoxCopyBlankLine.Visible = True
-        Else
-            'nothing or everything has selected
-            mnuInputListBoxCopyLine.Visible = False
-            mnuInputListBoxQuoteLine.Visible = False
-            mnuInputListBoxCopyBlankLine.Visible = False
-        End If
-        Me.PopupMenu inputListBoxMnuPopmenu, vbPopupMenuRightButton
+        
+        Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
     End If
-    
     
     picTextChangeBright.Visible = False
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
     
-
-   On Error GoTo 0
-   Exit Sub
-
-lbxInputTextArea_MouseDown_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_MouseDown of Form FireCallMain"
 
 End Sub
 
@@ -5143,38 +4085,44 @@ Private Sub lbxOutputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As 
             
             theText = Left$(getCurrentLine(lbxOutputTextArea), 25)
 
-            mnuOutputListBoxEditLine.Caption = "Edit The Line - """ & theText & """"
-            mnuOutputListBoxEditLine.Visible = True
-            mnuOutputListBoxDeleteLine.Caption = "Delete Line - """ & theText & """?"
-            mnuOutputListBoxDeleteLine.Visible = True
-            
-            mnuOutputListBoxCopyLine.Visible = True
-            mnuOutputListBoxQuoteLine.Visible = True
-            mnuOutputListBoxEditBlankLine.Visible = True
+            mnuOutputEditLine.Caption = "Edit The Line - """ & theText & """"
+            mnuOutputEditLine.Visible = True
+            mnuOutputDeleteLine.Visible = True
         Else
             'nothing or everything has selected
-            mnuOutputListBoxEditLine.Visible = False
-            mnuOutputListBoxDeleteLine.Visible = False
-            mnuOutputListBoxCopyLine.Visible = False
-            mnuOutputListBoxQuoteLine.Visible = False
-            mnuOutputListBoxEditBlankLine.Visible = False
+            mnuOutputEditLine.Visible = False
+            mnuOutputDeleteLine.Visible = False
         End If
 
+        mnuLBOpenSharedOutputFile.Visible = True
+        mnuOutputCopyLine.Visible = True
+        mnuFindOutput.Visible = True
+
+        mnuLBOpenSharedInputFile.Visible = False
+        mnuInputCopyLine.Visible = False
+        mnuInputQuoteLine.Visible = False
+        mnuFindInput.Visible = False
+        mnuCombinedCopyLine.Visible = False
+        mnuCombinedPasteLine.Visible = False
+        mnuCombinedPasteAndGo.Visible = False
+        mnuFindCombined.Visible = False
+        mnuCombinedQuoteLine.Visible = False
+        mnuCombinedEditLine.Visible = False
+        mnuCombinedDeleteLine.Visible = False
+        
         DoEvents
         If Clipboard.GetText <> "" Then
-            mnuOutputListBoxPasteLine.Visible = True
-            mnuOutputListBoxPasteAndGo.Visible = True
+            mnuOutputPasteLine.Visible = True
+            mnuOutputPasteAndGo.Visible = True
         Else
-            mnuOutputListBoxPasteAndGo.Visible = False
-            mnuOutputListBoxPasteLine.Visible = False
+            mnuOutputPasteAndGo.Visible = False
+            mnuOutputPasteLine.Visible = False
         End If
 
-        Me.PopupMenu outputListBoxMnuPopmenu, vbPopupMenuRightButton
+        Me.PopupMenu listBoxMnuPopmenu, vbPopupMenuRightButton
     End If
 
 End Sub
-
-
 
 
 'menu options follow
@@ -5184,52 +4132,24 @@ Private Sub mnuAboutFireCallWin_Click()
     about.Show
 End Sub
 
-
-Private Sub mnuOutputListBoxOpenSharedOutputFile_click()
-    Call OpenSharedOutputFile
-End Sub
-
-Private Sub mnuLBOpenSharedOutputFile_Click()
-    Call OpenSharedOutputFile
+' menu option to open the shared input file in an an editor or default application
+Private Sub mnuOpenSharedInputFile_Click()
+    Call ShellExecute(Me.hwnd, "Open", FCWSharedInputFile, vbNullString, App.Path, 1)
 End Sub
 
 ' menu option to open the shared output file in an an editor or default application
 Private Sub mnuOpenSharedOutputFile_Click()
-    Call OpenSharedOutputFile
-End Sub
-
-' menu option to open the shared output file in an an editor or default application
-Private Sub OpenSharedOutputFile()
     Call ShellExecute(Me.hwnd, "Open", FCWSharedOutputFile, vbNullString, App.Path, 1)
-End Sub
-
-
-' menu option to open the shared folder in a file manager window
-Private Sub mnuInputListBoxOpenSharedExchangeFolder_Click()
-    Call OpenSharedExchangeFolder
-End Sub
-' menu option to open the shared folder in a file manager window
-Private Sub mnuOutputListBoxOpenSharedExchangeFolder_Click()
-    Call OpenSharedExchangeFolder
-End Sub
-' menu option to open the shared folder in a file manager window
-Private Sub mnuCombinedListBoxOpenSharedExchangeFolder_Click()
-    Call OpenSharedExchangeFolder
 End Sub
 
 ' menu option to open the shared folder in a file manager window
 Private Sub mnuOpenSharedExchangeFolder_Click()
-    Call OpenSharedExchangeFolder
+    Call ShellExecute(Me.hwnd, "Open", FCWExchangeFolder, vbNullString, App.Path, 1)
 End Sub
 ' menu option to open the shared folder in a file manager window
 Private Sub mnuLBOpenSharedExchangeFolder_Click()
-    Call OpenSharedExchangeFolder
-End Sub
-' open the shared folder in a file manager window
-Private Sub OpenSharedExchangeFolder()
     Call ShellExecute(Me.hwnd, "Open", FCWExchangeFolder, vbNullString, App.Path, 1)
 End Sub
-
 '---------------------------------------------------------------------------------------
 ' Procedure : mnuCoffee_Click
 ' Author    : beededea
@@ -5263,25 +4183,9 @@ End Sub
 
 
 ' menu option to open the licence form
-'---------------------------------------------------------------------------------------
-' Procedure : mnuLicenceA_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub mnuLicenceA_Click()
-    On Error GoTo mnuLicenceA_Click_Error
-
     Call LoadFileToTB(licence.txtLicenceTextBox, App.Path & "\licence.txt", False)
     licence.Show
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuLicenceA_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuLicenceA_Click of Form FireCallMain"
 
 End Sub
 
@@ -5357,16 +4261,7 @@ mnuSweets_Click_Error:
 End Sub
 
 ' a timer that reduces the opacity to zero then hides the main form
-'---------------------------------------------------------------------------------------
-' Procedure : opacityFadeOutTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub opacityFadeOutTimer_Timer()
-    On Error GoTo opacityFadeOutTimer_Timer_Error
-
             opacitylevel = opacitylevel - 10
             If opacitylevel <= 0 Then
                 opacitylevel = 0
@@ -5375,13 +4270,6 @@ Private Sub opacityFadeOutTimer_Timer()
             End If
             
             Call setOpacity(opacitylevel)
-
-    On Error GoTo 0
-    Exit Sub
-
-opacityFadeOutTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure opacityFadeOutTimer_Timer of Form FireCallMain"
 End Sub
 ' a timer that makes the main form visible, then increases the opacity to full
 Private Sub opacityFadeInTimer_Timer()
@@ -5401,18 +4289,9 @@ Private Sub opacityFadeInTimer_Timer()
             Call setOpacity(opacitylevel)
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : opacityToTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub opacityToTimer_Timer()
     Dim finalOpacitylevel As Integer
     
-    On Error GoTo opacityToTimer_Timer_Error
-
     opacitylevel = opacitylevel - 10
     
     finalOpacitylevel = 255 * (Val(FCWOpacity) / 100)
@@ -5423,13 +4302,6 @@ Private Sub opacityToTimer_Timer()
     End If
 
     Call setOpacity(opacitylevel)
-
-    On Error GoTo 0
-    Exit Sub
-
-opacityToTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure opacityToTimer_Timer of Form FireCallMain"
 End Sub
 
 ' hides the vertical scrollbar
@@ -5442,18 +4314,9 @@ Private Sub combinedScrollBarTimer_Timer()
     Call ShowScrollBar(lbxCombinedTextArea.hwnd, SB_VERT, False)
 End Sub
 ' play a sound and pause the timer
-'---------------------------------------------------------------------------------------
-' Procedure : pausePrinterTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub pausePrinterTimer_Timer()
     Dim soundtoplay As String
     
-    On Error GoTo pausePrinterTimer_Timer_Error
-
     dropTimerCount = dropTimerCount + 1
     
     If dropTimerCount = 10 Then
@@ -5469,27 +4332,11 @@ Private Sub pausePrinterTimer_Timer()
         dropTimer.Enabled = True
     End If
 
-    On Error GoTo 0
-    Exit Sub
-
-pausePrinterTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure pausePrinterTimer_Timer of Form FireCallMain"
-
 End Sub
 
 ' make the Emoji lid disappear or show the right click menu
-'---------------------------------------------------------------------------------------
-' Procedure : picBtnLidCatch_MouseDown
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picBtnLidCatch_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
     
-    On Error GoTo picBtnLidCatch_MouseDown_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     If Button = 2 Then
@@ -5504,13 +4351,6 @@ Private Sub picBtnLidCatch_MouseDown(ByRef Button As Integer, ByRef Shift As Int
         txtTextEntry.SetFocus
     End If
 
-    On Error GoTo 0
-    Exit Sub
-
-picBtnLidCatch_MouseDown_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picBtnLidCatch_MouseDown of Form FireCallMain"
-
 End Sub
 
 Private Sub picBtnLidCatch_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -5518,13 +4358,6 @@ Private Sub picBtnLidCatch_MouseMove(Button As Integer, Shift As Integer, x As S
                   TTIconInfo, "Help on Opening the Lid", , , , True
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : picBtnPlaySound_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picBtnPlaySound_Click()
     
     ' Play
@@ -5534,8 +4367,6 @@ Private Sub picBtnPlaySound_Click()
     Dim fileSize As Long
     Dim playUsingDefaultApp As Boolean
     
-    On Error GoTo picBtnPlaySound_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     playingTimerMax = 0
@@ -5574,13 +4405,6 @@ Private Sub picBtnPlaySound_Click()
         End If
     End If
 
-    On Error GoTo 0
-    Exit Sub
-
-picBtnPlaySound_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picBtnPlaySound_Click of Form FireCallMain"
-
 End Sub
 
 Private Sub picBtnPlaySound_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -5596,26 +4420,10 @@ End Sub
 'End Sub
 
 ' make the buzzer indicator dull after it has been raised
-'---------------------------------------------------------------------------------------
-' Procedure : picBuzzerBrightLamp_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picBuzzerBrightLamp_Click()
-    On Error GoTo picBuzzerBrightLamp_Click_Error
-
         picBuzzerDullLamp.Visible = True
         picBuzzerBrightLamp.Visible = False
         txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-picBuzzerBrightLamp_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picBuzzerBrightLamp_Click of Form FireCallMain"
 End Sub
 
 
@@ -5645,16 +4453,7 @@ Private Sub picClock_MouseMove(Button As Integer, Shift As Integer, x As Single,
 End Sub
 
 ' toggle the clock and button, saving the result for the next restart
-'---------------------------------------------------------------------------------------
-' Procedure : picClockSwitch_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picClockSwitch_Click()
-
-    On Error GoTo picClockSwitch_Click_Error
 
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     If picRedButton.Visible = False Then
@@ -5671,39 +4470,16 @@ Private Sub picClockSwitch_Click()
         PutINISetting "Software\FireCallWin", "clockStyle", FCWClockStyle, FCWSettingsFile
     End If
     txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-picClockSwitch_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picClockSwitch_Click of Form FireCallMain"
 End Sub
 
 ' dbl clicking the button also switches to clock but not vice versa
-'---------------------------------------------------------------------------------------
-' Procedure : picClock_DblClick
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picClock_DblClick()
     
-    On Error GoTo picClock_DblClick_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     picRedButton.Visible = True
     picClock.Visible = False
     txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-picClock_DblClick_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picClock_DblClick of Form FireCallMain"
     
 End Sub
 
@@ -5714,19 +4490,10 @@ Private Sub picClockSwitch_MouseMove(Button As Integer, Shift As Integer, x As S
 End Sub
 
 ' closes the image display with a sound
-'---------------------------------------------------------------------------------------
-' Procedure : picCloseMe_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picCloseMe_Click()
     Dim soundtoplay As String
     Dim imgFilePath As String
     
-    On Error GoTo picCloseMe_Click_Error
-
     imgFilePath = App.Path & "\Resources\images\lidBackgroundDull.jpg"
     If fFExists(imgFilePath) Then
         picLidBackground.Picture = LoadPicture(imgFilePath)
@@ -5750,13 +4517,6 @@ Private Sub picCloseMe_Click()
     
     
     txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-picCloseMe_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picCloseMe_Click of Form FireCallMain"
     
 End Sub
 ' does some animation and sounds when the emoji is clicked upon
@@ -5771,18 +4531,9 @@ Private Sub picEmoji_MouseMove(Button As Integer, Shift As Integer, x As Single,
 End Sub
 
 ' select the previous emoji
-'---------------------------------------------------------------------------------------
-' Procedure : picEmojiKnobLeft_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picEmojiKnobLeft_Click()
     Dim fullPath As String
     Dim soundtoplay As String
-
-    On Error GoTo picEmojiKnobLeft_Click_Error
 
     If currindex = 0 Then currindex = cmbEmojiSelection.ListIndex
     currindex = currindex - 1
@@ -5808,13 +4559,6 @@ Private Sub picEmojiKnobLeft_Click()
     
     
     txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-picEmojiKnobLeft_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picEmojiKnobLeft_Click of Form FireCallMain"
     
 End Sub
 
@@ -5824,18 +4568,9 @@ Private Sub picEmojiKnobLeft_MouseMove(Button As Integer, Shift As Integer, x As
 End Sub
 
 ' select the next emoji
-'---------------------------------------------------------------------------------------
-' Procedure : picEmojiKnobRight_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picEmojiKnobRight_Click()
     Dim fullPath As String
     Dim soundtoplay As String
-
-    On Error GoTo picEmojiKnobRight_Click_Error
 
     If currindex = 0 Then currindex = cmbEmojiSelection.ListIndex
     currindex = currindex + 1
@@ -5861,13 +4596,6 @@ Private Sub picEmojiKnobRight_Click()
     txtTextEntry.SetFocus
 
 
-    On Error GoTo 0
-    Exit Sub
-
-picEmojiKnobRight_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picEmojiKnobRight_Click of Form FireCallMain"
-
 End Sub
 
 
@@ -5883,23 +4611,21 @@ Private Sub picEmojiSmall_MouseMove(Button As Integer, Shift As Integer, x As Si
                   TTIconInfo, "Help on Emojis", , , , True
 End Sub
 
-'Private Sub picFsoLampBright_Click()
-'        picFsoLid.Visible = True
-'End Sub
-'
-'Private Sub picFsoLampDull_Click()
-'    picFsoLid.Visible = True
-'End Sub
+Private Sub picFsoLampBright_Click()
+        picFsoLid.Visible = True
+End Sub
 
-'Private Sub picFsoLid_Click()
-'    picFsoLid.Visible = False
-'
-''    MsgBox " borderSizeLeft=" & borderSizeLeft & " borderSizeRight=" & borderSizeRight & vbCr & _
-''            " borderSizeTop=" & borderSizeTop & " borderSizeBottom=" & borderSizeBottom
-'
-'End Sub
+Private Sub picFsoLampDull_Click()
+    picFsoLid.Visible = True
+End Sub
 
-
+Private Sub picFsoLid_Click()
+    picFsoLid.Visible = False
+    
+'    MsgBox " borderSizeLeft=" & borderSizeLeft & " borderSizeRight=" & borderSizeRight & vbCr & _
+'            " borderSizeTop=" & borderSizeTop & " borderSizeBottom=" & borderSizeBottom
+    
+End Sub
 
 Private Sub picImageButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip picImageButton.hwnd, "This button top right will close any image or icon that is currently being displayed .", _
@@ -5908,13 +4634,6 @@ Private Sub picImageButton_MouseMove(Button As Integer, Shift As Integer, x As S
 End Sub
 
 ' open the currently displayed image using default application
-'---------------------------------------------------------------------------------------
-' Procedure : picImagePrintOut_DblClick
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picImagePrintOut_DblClick()
     ' variables declared
     Dim suffix As String
@@ -5923,8 +4642,6 @@ Private Sub picImagePrintOut_DblClick()
     Dim execStatus As Long
     
     'initialise the dimensioned variables
-    On Error GoTo picImagePrintOut_DblClick_Error
-
     answer = vbNo
     execStatus = 0
     
@@ -5967,13 +4684,6 @@ Private Sub picImagePrintOut_DblClick()
 
     txtTextEntry.SetFocus
 
-    On Error GoTo 0
-    Exit Sub
-
-picImagePrintOut_DblClick_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picImagePrintOut_DblClick of Form FireCallMain"
-
 End Sub
 
 
@@ -5988,16 +4698,7 @@ Private Sub picImagePrintOut_MouseDown(Button As Integer, Shift As Integer, x As
     End If
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : picImagePrintOut_MouseMove
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picImagePrintOut_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    On Error GoTo picImagePrintOut_MouseMove_Error
-
         If binaryFlag = True Then
         
             CreateToolTip picImagePrintOut.hwnd, "This is an executable program, double clicking on it will run it straight away, this could be dangerous", _
@@ -6011,13 +4712,6 @@ Private Sub picImagePrintOut_MouseMove(Button As Integer, Shift As Integer, x As
             End If
                   
         End If
-
-    On Error GoTo 0
-    Exit Sub
-
-picImagePrintOut_MouseMove_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picImagePrintOut_MouseMove of Form FireCallMain"
                                   
 End Sub
 
@@ -6044,18 +4738,9 @@ End Sub
 'End Sub
 
 'if the background of the emoji area is lit (bright) then make it show the dull version
-'---------------------------------------------------------------------------------------
-' Procedure : picLidBackground_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picLidBackground_Click()
     
     Dim fullPath As String
-    On Error GoTo picLidBackground_Click_Error
-
     btnLid.Visible = True
     picBtnLidCatch.Visible = True
     picBtnLidShadow.Visible = True
@@ -6066,31 +4751,15 @@ Private Sub picLidBackground_Click()
         picLidBackground.Picture = LoadPicture(fullPath)
     End If
     txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-picLidBackground_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picLidBackground_Click of Form FireCallMain"
 End Sub
 
 ' a small button that displays the picture image
-'---------------------------------------------------------------------------------------
-' Procedure : picImageButton_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picImageButton_Click()
     
     Dim soundtoplay As String
     Dim imgFilePath As String
     
     'If FCWImageDisplay = "1" Then
-    On Error GoTo picImageButton_Click_Error
-
         imgFilePath = App.Path & "\Resources\images\lidBackgroundDullShadowed.jpg"
         If fFExists(imgFilePath) Then
             picLidBackground.Picture = LoadPicture(imgFilePath)
@@ -6114,13 +4783,6 @@ Private Sub picImageButton_Click()
     PutINISetting "Software\FireCallWin", "imageDisplay", FCWImageDisplay, FCWSettingsFile
     
     txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-picImageButton_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picImageButton_Click of Form FireCallMain"
 End Sub
 
 ' right click popup menu for the lid background
@@ -6144,16 +4806,7 @@ End Sub
 
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : picLidOpen_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picLidOpen_Click()
-
-    On Error GoTo picLidOpen_Click_Error
 
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
@@ -6161,13 +4814,6 @@ Private Sub picLidOpen_Click()
     btnLid.Visible = True
     picBtnLidCatch.Visible = True
     picBtnLidShadow.Visible = True
-
-    On Error GoTo 0
-    Exit Sub
-
-picLidOpen_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picLidOpen_Click of Form FireCallMain"
 End Sub
 
 Private Sub picLidOpen_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -6213,18 +4859,9 @@ Private Sub picRecordLampDull_MouseMove(Button As Integer, Shift As Integer, x A
 End Sub
 
 ' right click popup menu for the lid background
-'---------------------------------------------------------------------------------------
-' Procedure : picRedButton_MouseDown
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picRedButton_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
     Dim fullPath As String
     
-    On Error GoTo picRedButton_MouseDown_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     If Button = 2 Then
@@ -6240,35 +4877,12 @@ Private Sub picRedButton_MouseDown(ByRef Button As Integer, ByRef Shift As Integ
             picRedButton.Picture = LoadPicture(fullPath)
         End If
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-picRedButton_MouseDown_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picRedButton_MouseDown of Form FireCallMain"
 End Sub
 ' timer to dull the bright the lamp after 5 seconds of being lit
-'---------------------------------------------------------------------------------------
-' Procedure : lampTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub lampTimer_Timer()
-    On Error GoTo lampTimer_Timer_Error
-
     picTimerLampBright.Visible = False
     picTimerLampDull.Visible = True
     lampTimer.Enabled = False
-
-    On Error GoTo 0
-    Exit Sub
-
-lampTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lampTimer_Timer of Form FireCallMain"
 End Sub
 
 Private Sub picRedButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -6278,19 +4892,10 @@ End Sub
 
 
 'Restore the normal image of the big red button
-'---------------------------------------------------------------------------------------
-' Procedure : picRedButton_MouseUp
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picRedButton_MouseUp(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
 
     Dim fullPath As String
     
-    On Error GoTo picRedButton_MouseUp_Error
-
     buzzerTimer.Enabled = False
     If Button = 1 Then
         fullPath = App.Path & "\resources\images\" & "redButton" & ".jpg"
@@ -6300,55 +4905,23 @@ Private Sub picRedButton_MouseUp(ByRef Button As Integer, ByRef Shift As Integer
         End If
     End If
     txtTextEntry.SetFocus ' set focus back to the text entry box
-
-    On Error GoTo 0
-    Exit Sub
-
-picRedButton_MouseUp_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picRedButton_MouseUp of Form FireCallMain"
     
 End Sub
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : picSideBar_MouseDown
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picSideBar_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    On Error GoTo picSideBar_MouseDown_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     If Button = 2 Then
         ' only required for VB6, the VB.NET version allows
         ' click-throughs on transparent images so that the main main menu is shown, the image itself shows the preview menu
         Me.PopupMenu mainMnuPopmenu, vbPopupMenuRightButton
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-picSideBar_MouseDown_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picSideBar_MouseDown of Form FireCallMain"
 End Sub
 
 
 
 ' clicking on the speaker grilles controls the volume
-'---------------------------------------------------------------------------------------
-' Procedure : picSpeakerGrille_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picSpeakerGrille_Click()
-    On Error GoTo picSpeakerGrille_Click_Error
-
     picSpeakerGrille.Visible = False
     picSpeakerGrilleOpen.Visible = True
     FCWPlayVolume = "1"
@@ -6356,13 +4929,6 @@ Private Sub picSpeakerGrille_Click()
     If fFExists(FCWSettingsFile) Then
         PutINISetting "Software\FireCallWin", "playVolume", FCWPlayVolume, FCWSettingsFile
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-picSpeakerGrille_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picSpeakerGrille_Click of Form FireCallMain"
 End Sub
 
 Private Sub picSpeakerGrille_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -6388,53 +4954,21 @@ Private Sub picSpeakerGrilleOpen_MouseMove(Button As Integer, Shift As Integer, 
 End Sub
 
 ' dull the bright the lamp when clicked
-'---------------------------------------------------------------------------------------
-' Procedure : picTextChangeBright_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picTextChangeBright_Click()
     
-    On Error GoTo picTextChangeBright_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     picTextChangeBright.Visible = False
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
     txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-picTextChangeBright_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picTextChangeBright_Click of Form FireCallMain"
         
 End Sub
 
 ' the scrollbar re-appears when marked to hide, it does this on any key up/down action on the listbox, a VB6 feature.
 ' this timer re-hides the scrollbar after a second or two
-'---------------------------------------------------------------------------------------
-' Procedure : inputScrollBarTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub inputScrollBarTimer_Timer()
-    On Error GoTo inputScrollBarTimer_Timer_Error
-
     Call ShowScrollBar(lbxInputTextArea.hwnd, SB_VERT, False)  ' hides the vertical scrollbar
-
-    On Error GoTo 0
-    Exit Sub
-
-inputScrollBarTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure inputScrollBarTimer_Timer of Form FireCallMain"
 End Sub
 
 Private Sub picTextChangeBright_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -6465,67 +4999,26 @@ End Sub
 
 
 ' a click on the timer lamp will cause a repoll for the data
-'---------------------------------------------------------------------------------------
-' Procedure : picTimerLampDull_DblClick
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub picTimerLampDull_DblClick()
-    On Error GoTo picTimerLampDull_DblClick_Error
-
     Call btnRefresh_Click
     txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-picTimerLampDull_DblClick_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picTimerLampDull_DblClick of Form FireCallMain"
 End Sub
 
-'Private Sub picUtf8LampBright_Click()
-'        picFsoLid.Visible = True
-'End Sub
-'
-'Private Sub picUtf8LampDull_Click()
-'        picFsoLid.Visible = True
-'End Sub
+Private Sub picUtf8LampBright_Click()
+        picFsoLid.Visible = True
+End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : picWEmailIcon_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
+Private Sub picUtf8LampDull_Click()
+        picFsoLid.Visible = True
+End Sub
+
 Private Sub picWEmailIcon_Click()
     
-    On Error GoTo picWEmailIcon_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     picWEmailIcon.Visible = False
-
-    On Error GoTo 0
-    Exit Sub
-
-picWEmailIcon_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picWEmailIcon_Click of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : PlayTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub PlayTimer_Timer()
-    On Error GoTo PlayTimer_Timer_Error
-
     playingTimerCount = playingTimerCount + 1
     If playingTimerMax > 0 Then ' avoid divide by zero
         linRed.X2 = 540 + ((1605 / playingTimerMax) * playingTimerCount)
@@ -6537,47 +5030,15 @@ Private Sub PlayTimer_Timer()
     If playingTimerCount = playingTimerMax Then
         Call btnStop_Click
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-PlayTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure PlayTimer_Timer of Form FireCallMain"
 End Sub
 
 '  VB6 polling timer, the equivalent of the pollingTimer_CodeTimer
-'---------------------------------------------------------------------------------------
-' Procedure : pollingTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub pollingTimer_Timer()
-    On Error GoTo pollingTimer_Timer_Error
-
     Call pollingTimer_TimerLogic
-
-    On Error GoTo 0
-    Exit Sub
-
-pollingTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure pollingTimer_Timer of Form FireCallMain"
 End Sub
 ' pseudo animate the action of a printer for the remote user's emoji
-'---------------------------------------------------------------------------------------
-' Procedure : printerTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub printerTimer_Timer()
     
-    On Error GoTo printerTimer_Timer_Error
-
     picEmoji.Top = picEmoji.Top + 10
     If picEmoji.Top > -800 Then picEmoji.Top = picEmoji.Top + 37
     picEmoji.Refresh
@@ -6589,28 +5050,12 @@ Private Sub printerTimer_Timer()
     End If
 
     'If picEmoji.Top >= 2000 Then printerTimer.Enabled = False
-
-    On Error GoTo 0
-    Exit Sub
-
-printerTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure printerTimer_Timer of Form FireCallMain"
     
 End Sub
 
 ' Sound files are recorded at 11kHz - we could divide the file length by 11000 you get a very good estimate of the duration in seconds.
 ' but we might change that frequency later, for the moment we place the recording timer value at the beginning of the unique filename.
-'---------------------------------------------------------------------------------------
-' Procedure : recordTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub recordTimer_Timer()
-    On Error GoTo recordTimer_Timer_Error
-
     recordingTimerCount = recordingTimerCount + 1
     linRed.X2 = 540 + ((1605 / 65) * recordingTimerCount)
     
@@ -6621,13 +5066,6 @@ Private Sub recordTimer_Timer()
         Call btnStop_Click
         
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-recordTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure recordTimer_Timer of Form FireCallMain"
 End Sub
 
 '---------------------------------------------------------------------------------------
@@ -6673,18 +5111,9 @@ sendCommandTimer_PlayTimer_Error:
 
 End Sub
 ' pseudo animate the shredder activity
-'---------------------------------------------------------------------------------------
-' Procedure : shredderTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub shredderTimer_Timer()
     Dim soundtoplay As String
     
-    On Error GoTo shredderTimer_Timer_Error
-
     picEmoji.Top = picEmoji.Top + 40
     picEmoji.Refresh
 
@@ -6704,49 +5133,17 @@ Private Sub shredderTimer_Timer()
         End If
     End If
 
-    On Error GoTo 0
-    Exit Sub
-
-shredderTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure shredderTimer_Timer of Form FireCallMain"
-
 End Sub
 
 ' when the program is first run is has the text "Type your text here...", remove it on the first keypress.
-'---------------------------------------------------------------------------------------
-' Procedure : txtTextEntry_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub txtTextEntry_Click()
-    On Error GoTo txtTextEntry_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     If RTrim(txtTextEntry.Text) = "Type your text here..." Then
         txtTextEntry.Text = vbNullString
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-txtTextEntry_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure txtTextEntry_Click of Form FireCallMain"
 End Sub
 ' when a user hits ENTER it generates carriage return, send the text to the output file at that point
-'---------------------------------------------------------------------------------------
-' Procedure : txtTextEntry_KeyPress
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub txtTextEntry_KeyPress(KeyAscii As Integer)
-    On Error GoTo txtTextEntry_KeyPress_Error
-
     If txtTextEntry.Text = "Type your text here..." Then
         txtTextEntry.Text = vbNullString
     End If
@@ -6756,25 +5153,9 @@ Private Sub txtTextEntry_KeyPress(KeyAscii As Integer)
         KeyAscii = 0
         Call btnSendText_Click
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-txtTextEntry_KeyPress_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure txtTextEntry_KeyPress of Form FireCallMain"
 End Sub
 ' user clicks the SEND button instead of a keyboard RETURN
-'---------------------------------------------------------------------------------------
-' Procedure : btnSendText_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnSendText_Click()
-    On Error GoTo btnSendText_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     If txtTextEntry.Text = "Type your text here..." Then
         txtTextEntry.Text = " "
@@ -6782,69 +5163,25 @@ Private Sub btnSendText_Click()
     Call handleStringInput(txtTextEntry.Text)
     txtTextEntry.Text = vbNullString
     txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-btnSendText_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnSendText_Click of Form FireCallMain"
 End Sub
 ' send a PING code to the remote user via the menu
-'---------------------------------------------------------------------------------------
-' Procedure : mnuSendPingRequest_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub mnuSendPingRequest_Click()
-    On Error GoTo mnuSendPingRequest_Click_Error
-
     txtTextEntry.Text = "<p><p> Refresh Interval:" & FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) & " OS:" & WindowsVer & " Version " & App.Major & "." & App.Minor & "." & App.Revision
     Call sendSomething(txtTextEntry.Text)
     txtTextEntry.Text = vbNullString
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuSendPingRequest_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuSendPingRequest_Click of Form FireCallMain"
 End Sub
 
 Private Sub mnuLBoxSendShutdownRequest_Click()
     mnuSendShutdownRequest_Click
 End Sub
 
-Private Sub mnuInputListBoxSendShutdownRequest_Click()
-    mnuSendShutdownRequest_Click
-End Sub
-
-Private Sub mnuOutputListBoxSendShutdownRequest_Click()
-    mnuSendShutdownRequest_Click
-End Sub
-
-Private Sub mnuCombinedputListBoxSendShutdownRequest_Click()
-    mnuSendShutdownRequest_Click
-End Sub
-
 
 ' send a shutdown code to the remote user via the menu
-'---------------------------------------------------------------------------------------
-' Procedure : mnuSendShutdownRequest_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub mnuSendShutdownRequest_Click()
 
     Dim dtToday As Date
     Dim UnixTimeinSec As Currency
     
-    On Error GoTo mnuSendShutdownRequest_Click_Error
-
     dtToday = Now
     UnixTimeinSec = DateDiff("s", "1/1/1970", dtToday) & Right$(Format(Timer, "000"), 3)
     
@@ -6852,25 +5189,9 @@ Private Sub mnuSendShutdownRequest_Click()
     
     Call sendSomething(txtTextEntry.Text)
     txtTextEntry.Text = vbNullString
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuSendShutdownRequest_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuSendShutdownRequest_Click of Form FireCallMain"
 End Sub
 ' hide the lid and show the underlying control panel
-'---------------------------------------------------------------------------------------
-' Procedure : mnuShowEmojiState_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub mnuShowEmojiState_Click()
-
-    On Error GoTo mnuShowEmojiState_Click_Error
 
         If btnLid.Visible = False Then
             btnLid.Visible = True
@@ -6885,127 +5206,23 @@ Private Sub mnuShowEmojiState_Click()
         ' could be phrased as:
         ' btnLid.Visible = btnLid.Visible = False
         ' but the above is clearer
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuShowEmojiState_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuShowEmojiState_Click of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : backupOutputFile
-' Author    : beededea
-' Date      : 30/05/2019
-' Purpose   : Creates an incrementally named backup of the settings.ini
-'---------------------------------------------------------------------------------------
 
-Public Sub backupOutputFile(ByVal fileToBackupFullPath As String, backupCommand As String)
-
-    Dim trgtBackupFilename As String
-    Dim useloop As Integer
-    Dim srchBackupFile As String
-    Dim versionNumberAvailable As Integer
-    Dim bkpfileFound As Boolean
-    
-    
-    ' set the name of the bkp file
-   
-   ' On Error GoTo backupOutputFile_Error
-      If debugflg = 1 Then Debug.Print "%" & "backupOutputFile"
-
-        trgtBackupFilename = FCWBackupFolder & "\" & backupCommand & "-" & fGetFileNameFromPath(fileToBackupFullPath)
-                
-        'check for any version of an already existing backup file with the same suffix.
-        For useloop = 1 To 32767
-            srchBackupFile = trgtBackupFilename & "." & useloop
-          
-            If fFExists(srchBackupFile) Then
-              ' found a file
-              bkpfileFound = True
-            Else
-              ' no file found use this entry
-              'GoTo l_exit_bkp_loop
-              Exit For
-            End If
-        Next useloop
-        
-l_exit_bkp_loop:
-        
-        If bkpfileFound = True Then
-            bkpfileFound = False
-            versionNumberAvailable = useloop
-            
-            'if versionNumberAvailable >= 32767 then
-                'versionNumberAvailable = 1
-                'if fFExists(trgtBackupFilename) Then
-                    'delete trgtBackupFilename
-                'endif
-            'endif
-        Else
-             versionNumberAvailable = 1
-        End If
-        
-        trgtBackupFilename = trgtBackupFilename & "." & Trim$(Str$(versionNumberAvailable))
-        If Not fFExists(trgtBackupFilename) Then
-            ' copy the original settings file to a duplicate that we will keep as a safety backup
-
-                If fFExists(fileToBackupFullPath) Then
-                    If fDirExists(FCWBackupFolder) Then
-                        FileCopy fileToBackupFullPath, trgtBackupFilename
-                    End If
-                End If
-
-        End If
-        
-   On Error GoTo 0
-   Exit Sub
-
-backupOutputFile_Error:
-
-    debugLog "Error " & err.Number & " (" & err.Description & ") in procedure backupOutputFile of Form FireCallMain"
-        
-End Sub
 
 ' cause the main program to iconise to a stamp on the dekstop
-'---------------------------------------------------------------------------------------
-' Procedure : btnMinimise_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnMinimise_Click()
     
-    On Error GoTo btnMinimise_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     Call mnuHideProgram_Click
-
-    On Error GoTo 0
-    Exit Sub
-
-btnMinimise_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnMinimise_Click of Form FireCallMain"
 End Sub
 ' initiate the help screen via the default browser
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicHelp_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicHelp_Click()
 
     ' variables declared
     Dim answer As VbMsgBoxResult
     
     'initialise the dimensioned variables
-    On Error GoTo btnPicHelp_Click_Error
-
     answer = vbNo
     
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
@@ -7030,87 +5247,23 @@ mnuHelpPdf_click_Error:
 
     debugLog "Error " & err.Number & " (" & err.Description & ") in procedure mnuHelpPdf_click of Form fireCallMain"
 
-    On Error GoTo 0
-    Exit Sub
-
-btnPicHelp_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicHelp_Click of Form FireCallMain"
-
 End Sub
 
 ' send a PING code to the remote user via the button
-'---------------------------------------------------------------------------------------
-' Procedure : btnPing_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPing_Click()
-    On Error GoTo btnPing_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     Call mnuSendPingRequest_Click
     txtTextEntry.SetFocus
-
-    On Error GoTo 0
-    Exit Sub
-
-btnPing_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPing_Click of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : txtTextEntry_MouseDown
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub txtTextEntry_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    On Error GoTo txtTextEntry_MouseDown_Error
-
     If Button = vbRightButton Then
-        txtTextEntry.Enabled = False ' this allows the right click menu to supercede the rubbish right click text box IME menu
+        txtTextEntry.Enabled = False
         txtTextEntry.Enabled = True
-        
-        If Clipboard.GetText <> "" Then
-            mnuTextEntryPasteAndGo.Visible = True
-            mnuTextEntryNothing.Visible = False
-            mnuTextEntryPasteLine.Visible = True
-        Else
-            mnuTextEntryPasteAndGo.Visible = False
-            mnuTextEntryNothing.Visible = True
-            mnuTextEntryPasteLine.Visible = False
-        End If
-        Me.PopupMenu mnuTextEntryPopmenu, vbPopupMenuRightButton
+        Me.PopupMenu mainMnuPopmenu, vbPopupMenuRightButton
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-txtTextEntry_MouseDown_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure txtTextEntry_MouseDown of Form FireCallMain"
 End Sub
 
-Private Sub mnuTextEntryPasteAndGo_click()
-    Call pasteAndGoHandler
-End Sub
-
-Private Sub mnuTextEntryPasteLine_click()
-    Call mnuOutputPasteLine_click_event
-End Sub
-
-Private Sub mnuOutputListBoxPasteLine_click()
-    Call mnuOutputPasteLine_click_event
-End Sub
-
-Private Sub mnuOutputPasteLine_click()
-    Call mnuOutputPasteLine_click_event
-End Sub
 Private Sub txtTextEntry_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If FCWEnableBalloonTooltips = "1" Then CreateToolTip txtTextEntry.hwnd, "This is the text box where you type your messages, pressing the SEND button to dispatch the text.", _
                   TTIconInfo, "Help on Text entry", , , , True
@@ -7123,19 +5276,10 @@ Private Sub zOrderTimer_Timer()
 End Sub
 
 ' handles cut and paste text that can have a UNIX type EOL or a Windows EOL.
-'---------------------------------------------------------------------------------------
-' Procedure : handleStringInput
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub handleStringInput(ByVal userText As String)
     'Dim userText As String
     Dim pos0 As Integer
     Dim pos1 As Integer
-
-    On Error GoTo handleStringInput_Error
 
     pos0 = InStr(userText, vbLf) ' position of vbLf in the string
     pos1 = InStr(userText, vbCrLf) ' position of vbCrLf in the string
@@ -7174,13 +5318,6 @@ Private Sub handleStringInput(ByVal userText As String)
     Else
         Call sendSomething(userText) ' single line
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-handleStringInput_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure handleStringInput of Form FireCallMain"
 End Sub
 
 
@@ -7252,16 +5389,7 @@ End Sub
 
 
 ' the tooltips can be made to appear or disappear according to the prefs setting
-'---------------------------------------------------------------------------------------
-' Procedure : setTooltips
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub setTooltips()
-    On Error GoTo setTooltips_Error
-
     toolTipFlag = CBool(Val(FCWEnableTooltips))
 
     If toolTipFlag = True Then
@@ -7320,7 +5448,7 @@ Private Sub setTooltips()
         
         picRecordLampDull.ToolTipText = "This lamp glows red when recording"
         picRecordLampBright.ToolTipText = "Speech is being recorded now..."
-        'picFsoLid.ToolTipText = "Click this cover to reveal the FSO/UTF8 lamps"
+        picFsoLid.ToolTipText = "Click this cover to reveal the FSO/UTF8 lamps"
         btnLid.ToolTipText = "These are the speech recording controls"
         picFsoLampDull.ToolTipText = "This lamp will glow when we are writing files as ANSI using FSO"
         picFsoLampBright.ToolTipText = "We are currently writing files as ANSI using FSO"
@@ -7390,7 +5518,7 @@ Private Sub setTooltips()
         btnStop.ToolTipText = vbNullString
         picRecordLampDull.ToolTipText = vbNullString
         picRecordLampBright.ToolTipText = vbNullString
-        'picFsoLid.ToolTipText = vbNullString
+        picFsoLid.ToolTipText = vbNullString
         btnLid.ToolTipText = vbNullString
         picFsoLampDull.ToolTipText = vbNullString
         picFsoLampBright.ToolTipText = vbNullString
@@ -7410,36 +5538,22 @@ Private Sub setTooltips()
         'chkGenStartup.ToolTipText = ""
 
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-setTooltips_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setTooltips of Form FireCallMain"
 End Sub
 ' copy text from the input listbox via the menu
 Private Sub mnuInputCopyLine_click()
-    Call copyText(lbxInputTextArea, False)
+    Call copyText(lbxInputTextArea)
 End Sub
 ' copy text from the output listbox via the menu
 Private Sub mnuOutputCopyLine_click()
-    Call copyText(lbxOutputTextArea, False)
+    Call copyText(lbxOutputTextArea)
 End Sub
 
 ' copy text from the combined listbox via the menu
 Private Sub mnuCombinedCopyLine_click()
-    Call copyText(lbxCombinedTextArea, False)
+    Call copyText(lbxCombinedTextArea)
 End Sub
 
 ' copy text from either of the two listboxes
-'---------------------------------------------------------------------------------------
-' Procedure : copyText
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub copyText(ByRef srcBox As ListBox, Optional quote As Boolean)
 
     Dim findStr As Integer
@@ -7447,8 +5561,6 @@ Private Sub copyText(ByRef srcBox As ListBox, Optional quote As Boolean)
     Dim finalString As String
     Dim useloop As Integer
    
-    On Error GoTo copyText_Error
-
     If srcBox.SelCount = 0 Then Exit Sub
    
     If srcBox.SelCount = 1 Then
@@ -7473,13 +5585,6 @@ Private Sub copyText(ByRef srcBox As ListBox, Optional quote As Boolean)
         
         writeToClipboard finalString
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-copyText_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure copyText of Form FireCallMain"
    
 End Sub
 '---------------------------------------------------------------------------------------
@@ -7515,13 +5620,13 @@ End Sub
 
 
 
-
-Private Sub mnuOutputListBoxPasteAndGo_click()
-    Call pasteAndGoHandler
+Private Sub mnuCombinedPasteLine_click()
+    Call mnuOutputPasteLine_click
 End Sub
-
-Private Sub mnuCombinedListBoxPasteAndGo_click()
-    Call pasteAndGoHandler
+Private Sub mnuOutputPasteLine_click()
+    DoEvents
+    txtTextEntry.Text = Clipboard.GetText
+    txtTextEntry.SetFocus ' set focus back to the text entry box
 End Sub
 
 Private Sub mnuCombinedPasteAndGo_click()
@@ -7532,18 +5637,10 @@ Private Sub mnuOutputPasteAndGo_click()
     Call pasteAndGoHandler
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : pasteAndGoHandler
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub pasteAndGoHandler()
+    'DoEvents
     
     Dim clipboardRetries As Integer
-    On Error GoTo pasteAndGoHandler_Error
-
     clipboardRetries = 0
 
     On Error GoTo Clip_Error
@@ -7568,51 +5665,15 @@ Clip_Error:
             Resume
         End If
 
-    On Error GoTo 0
-    Exit Sub
-
-pasteAndGoHandler_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure pasteAndGoHandler of Form FireCallMain"
-
 End Sub
-
-
 
 Private Sub mnuSwitchChatBoxes_click()
-    Call switchChatBoxes
-End Sub
-
-Private Sub mnuInputListBoxSwitchChatBoxes_click()
-    Call switchChatBoxes
-End Sub
-
-Private Sub mnuOutputListBoxSwitchChatBoxes_click()
-    Call switchChatBoxes
-End Sub
-
-Private Sub mnuCombinedListBoxSwitchChatBoxes_click()
-    Call switchChatBoxes
-End Sub
-
-
-'---------------------------------------------------------------------------------------
-' Procedure : switchChatBoxes
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Private Sub switchChatBoxes()
-    On Error GoTo switchChatBoxes_Error
-
     If FCWSingleListBox = "0" Then
         FCWSingleListBox = "1"
-        mnuCombinedListBoxSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
+        mnuSwitchChatBoxes.Caption = "Switch to Split Chat Box Mode"
     Else
         FCWSingleListBox = "0"
-        mnuInputListBoxSwitchChatBoxes.Caption = "Switch to Single Chat Box Mode"
-        mnuOutputListBoxSwitchChatBoxes.Caption = "Switch to Single Chat Box Mode"
+        mnuSwitchChatBoxes.Caption = "Switch to Single Chat Box"
     End If
     PutINISetting "Software\FireCallWin", "singleListBox", FCWSingleListBox, FCWSettingsFile
     
@@ -7628,13 +5689,6 @@ Private Sub switchChatBoxes()
     End If
     
     Call btnRefresh_Click
-
-    On Error GoTo 0
-    Exit Sub
-
-switchChatBoxes_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure switchChatBoxes of Form FireCallMain"
 End Sub
 '---------------------------------------------------------------------------------------
 ' Procedure : getkeypress
@@ -7835,13 +5889,6 @@ getkeypress_Error:
 End Sub
 
 ' This is the timer that places the clock hands in the correct position on a second by second basis.
-'---------------------------------------------------------------------------------------
-' Procedure : clockTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub clockTimer_Timer()
 
     Dim intUseloop As Integer
@@ -7853,8 +5900,6 @@ Private Sub clockTimer_Timer()
     Dim intSecondLbl As Integer
     
     'init the vars
-    On Error GoTo clockTimer_Timer_Error
-
     intUseloop = 0
     lngStartPosX = 0
     lngStartPosY = 0
@@ -7917,28 +5962,12 @@ Private Sub clockTimer_Timer()
         HourHand(1).Visible = True
     End If
 
-    On Error GoTo 0
-    Exit Sub
-
-clockTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure clockTimer_Timer of Form FireCallMain"
-
 End Sub
 
 ' timer used to pseudo animate the pretence of a flashing emoji control area
-'---------------------------------------------------------------------------------------
-' Procedure : brightTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub brightTimer_Timer()
         Dim fullPath As String
         
-    On Error GoTo brightTimer_Timer_Error
-
         picEmojiKnobLeft.Visible = False
         picEmojiKnobRight.Visible = False
         picImageButton.Visible = False
@@ -7962,28 +5991,12 @@ Private Sub brightTimer_Timer()
         If fFExists(fullPath) Then
             picLidBackground.Picture = LoadPicture(fullPath)
         End If
-
-    On Error GoTo 0
-    Exit Sub
-
-brightTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure brightTimer_Timer of Form FireCallMain"
 End Sub
 
 ' The buzzer plays locally and sends a buzz code to the remote chat partner
-'---------------------------------------------------------------------------------------
-' Procedure : buzzerTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub buzzerTimer_Timer()
     Dim soundtoplay As String
     
-    On Error GoTo buzzerTimer_Timer_Error
-
     buzzerCnt = buzzerCnt + 1
     
     ' after 5 seconds send a buzzer
@@ -8005,13 +6018,6 @@ Private Sub buzzerTimer_Timer()
         txtTextEntry.Text = vbNullString
         txtTextEntry.SetFocus
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-buzzerTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure buzzerTimer_Timer of Form FireCallMain"
 
 End Sub
 ' the image of the Emoji animated as it drops
@@ -8046,19 +6052,10 @@ Public Sub dropTimer_TimerSub()
 End Sub
 
 ' menu option to send an awake call to the remote user
-'---------------------------------------------------------------------------------------
-' Procedure : mnuSendAwakeCall_click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub mnuSendAwakeCall_click()
     Dim dtToday As Date
     Dim UnixTimeinSec As Currency
     
-    On Error GoTo mnuSendAwakeCall_click_Error
-
     dtToday = Now
     UnixTimeinSec = DateDiff("s", "1/1/1970", dtToday) & Right$(Format(Timer, "000"), 3)
     txtTextEntry.Text = "<t><t>" & UnixTimeinSec
@@ -8066,42 +6063,20 @@ Private Sub mnuSendAwakeCall_click()
     ' 1635341466675
     Call sendSomething(txtTextEntry.Text)
     txtTextEntry.Text = vbNullString
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuSendAwakeCall_click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuSendAwakeCall_click of Form FireCallMain"
 End Sub
 
-
-' menu option to find the first occurrence of a string on the input listbox
-Private Sub mnuInputListBoxFind_click()
-    Call mnuFind(lbxInputTextArea, inputLineCount, "first")
-End Sub
-
-' menu option to find the first occurrence of a string on the input listbox
-Private Sub mnuOutputListBoxFind_click()
-    Call mnuFind(lbxOutputTextArea, outputLineCount, "first")
-End Sub
-
-' menu option to find the first occurrence of a string on the input listbox
-Private Sub mnuCombinedListBoxFind_click()
-    Call mnuFind(lbxCombinedTextArea, inputLineCount + outputLineCount, "first")
-End Sub
 
 ' menu option to find the first occurrence of a string on the input listbox
 Private Sub mnuFindInput_click()
-    Call mnuFind(lbxInputTextArea, inputLineCount, "first")
+    Call mnuFind(lbxInputTextArea, "first")
 End Sub
 ' menu option to find the first occurrence of a string on the output listbox
 Private Sub mnuFindOutput_click()
-    Call mnuFind(lbxOutputTextArea, outputLineCount, "first")
+    Call mnuFind(lbxOutputTextArea, "first")
 End Sub
 ' menu option to find the first occurrence of a string on the combined listbox
 Private Sub mnuFindCombined_click()
-    Call mnuFind(lbxCombinedTextArea, inputLineCount + outputLineCount, "first")
+    Call mnuFind(lbxCombinedTextArea, "first")
 End Sub
 
 
@@ -8110,22 +6085,13 @@ Private Sub mnuShowClock_click()
     Call picClockSwitch_Click
 End Sub
 ' find option on the listboxes also called by Ctrl/F
-'---------------------------------------------------------------------------------------
-' Procedure : mnuFind
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Private Sub mnuFind(ByRef thisListBox As ListBox, noOfLines As Long, ByVal searchType As String)
+Private Sub mnuFind(ByRef thisListBox As ListBox, noOfLines As Long, Optional ByVal searchType As String)
 
     Dim strToFind As String
     Dim useloop As Integer
     Dim answer As VbMsgBoxResult
     Dim foundString As Boolean
     
-    On Error GoTo mnuFind_Error
-
     strToFind = vbNullString
     useloop = 0
     answer = vbNo
@@ -8167,13 +6133,6 @@ Private Sub mnuFind(ByRef thisListBox As ListBox, noOfLines As Long, ByVal searc
     ElseIf answer = vbYes Then
         MsgBox "No more occurrences found"
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuFind_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuFind of Form FireCallMain"
     
 End Sub
 
@@ -8323,20 +6282,11 @@ Private Sub btnPicTtfn_MouseDown(ByRef Button As Integer, ByRef Shift As Integer
     End If
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : readStringsIntoTextMenu
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub readStringsIntoTextMenu(ByVal buttonNo As Integer)
     Dim textMessageArray(10) As String
     Dim b As Control
     Dim i As Integer
     
-
-    On Error GoTo readStringsIntoTextMenu_Error
 
     Call readButtonTexts(buttonNo, textMessageArray())
     
@@ -8368,13 +6318,6 @@ Private Sub readStringsIntoTextMenu(ByVal buttonNo As Integer)
     Next i
     
 
-
-    On Error GoTo 0
-    Exit Sub
-
-readStringsIntoTextMenu_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure readStringsIntoTextMenu of Form FireCallMain"
     
 End Sub
     
@@ -8582,21 +6525,8 @@ Private Sub adjustMainControls()
         houseKeepingTimer.Enabled = False
     End If
     
-    ' temporary code STARTS
-'    FCWDefaultEditor = "E:\vb6\fire call\FireCallWin.vbp"
-'    FCWDebug = "1"
-    ' temporary code ENDS
     
-    If FCWDefaultEditor <> vbNullString And FCWDebug = "1" Then
-        FireCallMain.mnuEditWidget.Caption = "Edit Program using " & FCWDefaultEditor
-        FireCallMain.mnuEditWidget.Visible = True
-        FireCallMain.mnuAppFolder.Visible = True
-    Else
-        FireCallMain.mnuEditWidget.Visible = False
-        FireCallMain.mnuAppFolder.Visible = False
-    End If
-    
-    
+
    On Error GoTo 0
    Exit Sub
 
@@ -8607,62 +6537,23 @@ adjustMainControls_Error:
 End Sub
 
 ' a timer that runs once and shuts down the program on demand
-'---------------------------------------------------------------------------------------
-' Procedure : shutdownTimer_timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub shutdownTimer_timer()
-    On Error GoTo shutdownTimer_timer_Error
-
     shutdownTimer.Enabled = False
     Unload FireCallMain
     'Call Form_Unload_Sub ' < we call a sub routine to shut it down
-
-    On Error GoTo 0
-    Exit Sub
-
-shutdownTimer_timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure shutdownTimer_timer of Form FireCallMain"
 End Sub
 
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : backupTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub backupTimer_Timer()
-    On Error GoTo backupTimer_Timer_Error
-
     backupTimerCount = backupTimerCount + 1
     If backupTimerCount >= Val(FCWAutomaticBackupInterval) * 60 Then
         Call backupOutputFile(FCWSharedOutputFile, "timer")
         backupTimerCount = 1
         'MsgBox "A timed backup has been taken, once every " & Val(FCWAutomaticBackupInterval) & " hours"
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-backupTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure backupTimer_Timer of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : btnStartRecord_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnStartRecord_Click()
     
     ' Record from microphone
@@ -8673,8 +6564,6 @@ Private Sub btnStartRecord_Click()
     Dim bitDepth As Long
     Dim SampleRate As Long
     
-    On Error GoTo btnStartRecord_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
     If recordingIsPossible = False Then Exit Sub
@@ -8722,22 +6611,8 @@ Private Sub btnStartRecord_Click()
         capCount = 0
             
 '    End If
-
-    On Error GoTo 0
-    Exit Sub
-
-btnStartRecord_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnStartRecord_Click of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : btnStop_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnStop_Click()
     Dim cmd As String
     Dim ret As Long
@@ -8745,8 +6620,6 @@ Private Sub btnStop_Click()
     Dim fileNameToCopy As String
     Dim fileTimeStamp As String
     
-    On Error GoTo btnStop_Click_Error
-
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
         
     linRed.X2 = 540
@@ -8830,13 +6703,6 @@ Private Sub btnStop_Click()
         recordingTimerCount = 0
         recording = False
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-btnStop_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnStop_Click of Form FireCallMain"
     
 End Sub
 
@@ -8856,17 +6722,8 @@ Private Sub btnEmojiSet_MouseMove(Button As Integer, Shift As Integer, x As Sing
                   TTIconInfo, "Help on Emojis", , , , True
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : btnLid_MouseDown
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnLid_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
     
-    On Error GoTo btnLid_MouseDown_Error
-
      If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
      If Button = 2 Then
@@ -8877,13 +6734,6 @@ Private Sub btnLid_MouseDown(Button As Integer, Shift As Integer, x As Single, y
    
     btnLid.Left = btnLid.Left + 10
     btnLid.Top = btnLid.Top + 10
-
-    On Error GoTo 0
-    Exit Sub
-
-btnLid_MouseDown_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnLid_MouseDown of Form FireCallMain"
 End Sub
 
 Private Sub btnLid_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -9016,16 +6866,7 @@ End Sub
 '
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : addExecutableSuffixArrayList
-' Author    : beededea
-' Date      : 12/07/2023
-' Purpose   : add known executables
-'---------------------------------------------------------------------------------------
-'
 Sub addExecutableSuffixArrayList()
-   On Error GoTo addExecutableSuffixArrayList_Error
-
     executableSuffixArrayList.Add ".bat"
     executableSuffixArrayList.Add ".bin"
     executableSuffixArrayList.Add ".cmd"
@@ -9061,26 +6902,10 @@ Sub addExecutableSuffixArrayList()
     executableSuffixArrayList.Add ".ws"
     executableSuffixArrayList.Add ".wsf"
     executableSuffixArrayList.Add ".wsh"
-
-   On Error GoTo 0
-   Exit Sub
-
-addExecutableSuffixArrayList_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure addExecutableSuffixArrayList of Form FireCallMain"
 End Sub
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : addValidImageTypes
-' Author    : beededea
-' Date      : 11/07/2023
-' Purpose   : add Valid image type suffixes to array
-'---------------------------------------------------------------------------------------
-'
 Sub addValidImageTypes()
-   On Error GoTo addValidImageTypes_Error
-
     validImageArrayList.Add ".jpg"
     validImageArrayList.Add ".jpeg"
     validImageArrayList.Add ".bmp"
@@ -9092,26 +6917,10 @@ Sub addValidImageTypes()
     validImageArrayList.Add ".wmf"
     validImageArrayList.Add ".emf"
     validImageArrayList.Add ".gif"
-
-   On Error GoTo 0
-   Exit Sub
-
-addValidImageTypes_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure addValidImageTypes of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : addInvalidImageTypes
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Sub addInvalidImageTypes()
     
-    On Error GoTo addInvalidImageTypes_Error
-
     invalidImageArrayList.Add ".pict"
     invalidImageArrayList.Add ".icns"
     invalidImageArrayList.Add ".ani"
@@ -9131,29 +6940,13 @@ Sub addInvalidImageTypes()
     invalidImageArrayList.Add ".heic"
     invalidImageArrayList.Add ".heif"
 
-    On Error GoTo 0
-    Exit Sub
-
-addInvalidImageTypes_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure addInvalidImageTypes of Form FireCallMain"
-
 End Sub
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : setListBoxFirstRun
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub setListBoxFirstRun()
     ' check the existence of the default files
     
     ' set the text boxes
-    On Error GoTo setListBoxFirstRun_Error
-
     FCWSharedInputFile = App.Path & "\input.txt"
     If Not fFExists(FCWSharedInputFile) Then FCWSharedInputFile = vbNullString
 
@@ -9161,32 +6954,16 @@ Private Sub setListBoxFirstRun()
     If Not fFExists(FCWSharedOutputFile) Then FCWSharedOutputFile = vbNullString
         
     FCWExchangeFolder = App.Path
-
-    On Error GoTo 0
-    Exit Sub
-
-setListBoxFirstRun_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setListBoxFirstRun of Form FireCallMain"
     
 End Sub
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : trickSoundSave
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub trickSoundSave(cdlgFileName As String)
     Dim tFmt    As WAVEFORMATEX
     Dim hWave   As Long
     Dim chkRIFF As MMCKINFO
     Dim chkData As MMCKINFO
     
-    On Error GoTo trickSoundSave_Error
-
     On Error GoTo Cancel
     
     If capCount = 0 Then
@@ -9255,24 +7032,10 @@ Cancel:
     If hWave Then
         mmioClose hWave
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-trickSoundSave_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure trickSoundSave of Form FireCallMain"
     
 End Sub
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : tSound_NewData
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub tSound_NewData( _
             ByVal DataPtr As Long, _
             ByVal CountBytes As Long)
@@ -9280,8 +7043,6 @@ Private Sub tSound_NewData( _
     Dim Index   As Long
     Dim total   As Long
     
-    On Error GoTo tSound_NewData_Error
-
     If IsRecording Then
     
         Index = capCount
@@ -9314,13 +7075,6 @@ Private Sub tSound_NewData( _
         End If
         
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-tSound_NewData_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure tSound_NewData of Form FireCallMain"
     
 End Sub
 
@@ -9356,16 +7110,7 @@ End Sub
 
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : setSampleRate
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub setSampleRate()
-    On Error GoTo setSampleRate_Error
-
     If recordingIsPossible = True Then
         If FCWRecordingQuality = "5" Then
             PBK_NUMOFCHANNELS = 2
@@ -9385,31 +7130,15 @@ Private Sub setSampleRate()
             PBK_SAMPLERATE = 5512
         End If
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-setSampleRate_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setSampleRate of Form FireCallMain"
 End Sub
 
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : mnuFindFile_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub mnuFindFile_Click()
     Dim execStatus As Long
     Dim folderPath As String
     
     
-    On Error GoTo mnuFindFile_Click_Error
-
     execStatus = 0
     
     If fDirExists(displayedAttachmentFilePath) Then ' if it is a folder already
@@ -9425,13 +7154,6 @@ Private Sub mnuFindFile_Click()
     End If
 
 
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuFindFile_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuFindFile_Click of Form FireCallMain"
 
 End Sub
 
@@ -9570,7 +7292,16 @@ Private Sub mnuText10_click()
 End Sub
 
 
+Private Sub mnuInputQuoteLine_click()
+    Call copyText(lbxInputTextArea, True)
+    Call pasteAndGoHandler
 
+End Sub
+
+Private Sub mnuCombinedQuoteLine_click()
+    Call copyText(lbxCombinedTextArea, True)
+    Call pasteAndGoHandler
+End Sub
 
 
 '---------------------------------------------------------------------------------------
@@ -9698,56 +7429,24 @@ End Function
 
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : m_oProxy_RecvFromClient
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub m_oProxy_RecvFromClient(Data() As Byte)
     Dim sText           As String
     
-    On Error GoTo m_oProxy_RecvFromClient_Error
-
     sText = StrConv(Data, vbUnicode)
     If Right$(sText, 2) = vbCrLf Then
         sText = Left$(sText, Len(sText) - 2)
     End If
     'pvLog "->" & Replace(sText, vbCrLf, vbCrLf & "  ")
-
-    On Error GoTo 0
-    Exit Sub
-
-m_oProxy_RecvFromClient_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure m_oProxy_RecvFromClient of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : m_oProxy_RecvFromServer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub m_oProxy_RecvFromServer(Data() As Byte)
     Dim sText           As String
     
-    On Error GoTo m_oProxy_RecvFromServer_Error
-
     sText = StrConv(Data, vbUnicode)
     If Right$(sText, 2) = vbCrLf Then
         sText = Left$(sText, Len(sText) - 2)
     End If
     'pvLog "<-" & Replace(sText, vbCrLf, vbCrLf & "  ")
-
-    On Error GoTo 0
-    Exit Sub
-
-m_oProxy_RecvFromServer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure m_oProxy_RecvFromServer of Form FireCallMain"
 End Sub
 
 'Private Sub pvLog(sText As String)
@@ -9758,13 +7457,6 @@ End Sub
 
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : initiateEmail
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Public Sub initiateEmail(emailBody As String)
 
     Dim a As Boolean
@@ -9772,8 +7464,6 @@ Public Sub initiateEmail(emailBody As String)
     'MsgBox "Test email message sent. Error from the server, if any, should appear within 30 seconds. Check your Email and press get new messages!"
     
     'if the starttls option is selected then do this
-    On Error GoTo initiateEmail_Error
-
     If FCWSmtpSecurity = 1 Then ' STARTTLS
         Set m_oProxy = New cSmtpProxy
         If m_oProxy.Init(FCWSmtpServer, FCWSmtpPort, LNG_PROXY_PORT) Then
@@ -9789,35 +7479,12 @@ Public Sub initiateEmail(emailBody As String)
                             FCWEmailSubject, _
                             emailBody)
     End If
-
-    On Error GoTo 0
-    Exit Sub
-
-initiateEmail_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure initiateEmail of Form FireCallMain"
                         
 End Sub
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : emailTimer_Timer
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub emailTimer_Timer()
-    On Error GoTo emailTimer_Timer_Error
-
     Call emailTimer_TimerLogic
-
-    On Error GoTo 0
-    Exit Sub
-
-emailTimer_Timer_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure emailTimer_Timer of Form FireCallMain"
 End Sub
 
 Private Sub emailIconTimer_Timer()
@@ -9831,111 +7498,29 @@ Private Sub emailIconTimer_Timer()
     picWEmailIcon.ToolTipText = "An Email task is underway"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicAttach_MouseUp
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicAttach_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    On Error GoTo btnPicAttach_MouseUp_Error
-
     btnPicAttach.Left = btnPicAttach.Left - 10
     btnPicAttach.Top = btnPicAttach.Top - 10
-
-    On Error GoTo 0
-    Exit Sub
-
-btnPicAttach_MouseUp_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicAttach_MouseUp of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicConfig_MouseUp
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicConfig_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    On Error GoTo btnPicConfig_MouseUp_Error
-
     btnPicConfig.Left = btnPicConfig.Left - 10
     btnPicConfig.Top = btnPicConfig.Top - 10
-
-    On Error GoTo 0
-    Exit Sub
-
-btnPicConfig_MouseUp_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicConfig_MouseUp of Form FireCallMain"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : btnPicHelp_MouseUp
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub btnPicHelp_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    On Error GoTo btnPicHelp_MouseUp_Error
-
     btnPicHelp.Left = btnPicHelp.Left - 10
     btnPicHelp.Top = btnPicHelp.Top - 10
-
-    On Error GoTo 0
-    Exit Sub
-
-btnPicHelp_MouseUp_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicHelp_MouseUp of Form FireCallMain"
 End Sub
 
-
-
-Private Sub mnuOutputDeleteLine_click()
-    ' waiting for code
-End Sub
-
-Private Sub mnuCombinedDeleteLine_click()
-    ' waiting for code
-End Sub
-
-Private Sub mnuCombinedListBoxEditLine_click()
-    Call editLine(lbxCombinedTextArea)
-    'Call copyText(lbxCombinedTextArea, False)
-End Sub
-Private Sub mnuOutputListBoxEditLine_click()
-    Call editLine(lbxOutputTextArea)
-End Sub
 Private Sub mnuOutputEditLine_click()
-    Call editLine(lbxOutputTextArea)
-End Sub
-
-
-'---------------------------------------------------------------------------------------
-' Procedure : outputEditLine
-' Author    : beededea
-' Date      : 22/07/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Private Sub editLine(ByRef srcBox As ListBox, Optional quote As Boolean)
     Dim editedText As String
     Dim theText As String
     
     'theText = lbxOutputTextArea.List(lbxOutputTextArea.ListIndex)
     
     ' get the current line from the chosen list box
-   On Error GoTo outputEditLine_Error
-
-    If srcBox.SelCount = 0 Then Exit Sub
-    'textToWorkOn = srcBox.Text
-
-    theText = getCurrentLine(srcBox)
+    theText = getCurrentLine(lbxOutputTextArea)
 
     ' uses an ordinary inputbox to allow the user to edit the text, might do a custom form later.
     editedText = InputBox("Edit Current Line", "Editing The Output", theText)
@@ -9961,30 +7546,14 @@ Private Sub editLine(ByRef srcBox As ListBox, Optional quote As Boolean)
     ' write the same
     ' insert the newly edited line
     ' write the remaining lines
-
-   On Error GoTo 0
-   Exit Sub
-
-outputEditLine_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure outputEditLine of Form FireCallMain"
     
 End Sub
 
 ' get text from either of the two listboxes
-'---------------------------------------------------------------------------------------
-' Procedure : getCurrentLine
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Function getCurrentLine(ByRef srcBox As ListBox, Optional quote As Boolean)
 
     Dim findStr As Integer
    
-    On Error GoTo getCurrentLine_Error
-
     If srcBox.SelCount = 0 Then Exit Function
    
     'If srcBox.SelCount = 1 Then
@@ -9995,289 +7564,28 @@ Private Function getCurrentLine(ByRef srcBox As ListBox, Optional quote As Boole
     findStr = InStr(23, srcBox.Text, "    ")
     ' the string is the next section to the end of the line after the four spaces
     getCurrentLine = LTrim(Mid$(srcBox.Text, findStr, Len(srcBox.Text)))
-
-    On Error GoTo 0
-    Exit Function
-
-getCurrentLine_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure getCurrentLine of Form FireCallMain"
         
 End Function
 
  ' set the opacity of the main window, emulating functionality of the YWE version
-'---------------------------------------------------------------------------------------
-' Procedure : restoreMainWindowOpacity
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub restoreMainWindowOpacity()
     
   Dim Opacity As Long
   
   'MsgBox "restoring"
 
-    On Error GoTo restoreMainWindowOpacity_Error
-
   Opacity = 255
   Call setOpacity(Opacity)
 
-    On Error GoTo 0
-    Exit Sub
-
-restoreMainWindowOpacity_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure restoreMainWindowOpacity of Form FireCallMain"
-
 End Sub
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : mnuSynchWindowsTime_click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub mnuSynchWindowsTime_click()
     ' run the selected program
-    On Error GoTo mnuSynchWindowsTime_click_Error
-
     Call ShellExecute(FireCallMain.hwnd, "Open", "w32tm /resync", vbNullString, vbNullString, 0)
     MsgBox ("A synch system time command has been initiated.")
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuSynchWindowsTime_click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuSynchWindowsTime_click of Form FireCallMain"
 End Sub
-'---------------------------------------------------------------------------------------
-' Procedure : mnuBringToCentre_Click
-' Author    : beededea
-' Date      : 06/10/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
 Private Sub mnuBringToCentre_Click()
-    On Error GoTo mnuBringToCentre_Click_Error
-
     Call centreMainScreen
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuBringToCentre_Click_Error:
-
-     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuBringToCentre_Click of Form FireCallMain"
     
 End Sub
-
-'---------------------------------------------------------------------------------------
-' Procedure : mnuAppFolder_Click
-' Author    : beededea
-' Date      : 05/05/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Private Sub mnuAppFolder_Click()
-    Dim folderPath As String: folderPath = vbNullString
-    Dim execStatus As Long: execStatus = 0
-    
-   On Error GoTo mnuAppFolder_Click_Error
-
-    folderPath = App.Path
-    If fDirExists(folderPath) Then ' if it is a folder already
-
-        execStatus = ShellExecute(Me.hwnd, "open", folderPath, vbNullString, vbNullString, 1)
-        If execStatus <= 32 Then MsgBox "Attempt to open folder failed."
-    Else
-        MsgBox "Having a bit of a problem opening a folder for this widget - " & folderPath & " It doesn't seem to have a valid working directory set.", "Panzer Earth Gauge Confirmation Message", vbOKOnly + vbExclamation
-        'MessageBox Me.hWnd, "Having a bit of a problem opening a folder for that command - " & sCommand & " It doesn't seem to have a valid working directory set.", "Panzer Earth Gauge Confirmation Message", vbOKOnly + vbExclamation
-    End If
-
-   On Error GoTo 0
-   Exit Sub
-
-mnuAppFolder_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuAppFolder_Click of Form menuForm"
-
-End Sub
-
-'---------------------------------------------------------------------------------------
-' Procedure : mnuEditWidget_Click
-' Author    : beededea
-' Date      : 05/05/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Private Sub mnuEditWidget_Click()
-    Dim editorPath As String: editorPath = vbNullString
-    Dim execStatus As Long: execStatus = 0
-    
-    ' temporary code STARTS
-'    FCWDefaultEditor = "E:\vb6\fire call\FireCallWin.vbp"
-'    FCWDebug = "1"
-    ' temporary code ENDS
-    
-   On Error GoTo mnuEditWidget_Click_Error
-
-    editorPath = FCWDefaultEditor
-    If fFExists(editorPath) Then ' if it is a folder already
-        '''If debugflg = 1  Then msgBox "ShellExecute " & sCommand
-        
-            ' run the selected program
-        execStatus = ShellExecute(Me.hwnd, "open", editorPath, vbNullString, vbNullString, 1)
-        If execStatus <= 32 Then MsgBox "Attempt to open the IDE for this program failed."
-    Else
-        MsgBox "Having a bit of a problem opening an IDE for this program - " & editorPath & " It doesn't seem to have a valid working directory set.", "Panzer Earth Gauge Confirmation Message", vbOKOnly + vbExclamation
-        'MessageBox Me.hWnd, "Having a bit of a problem opening a folder for that command - " & sCommand & " It doesn't seem to have a valid working directory set.", "Panzer Earth Gauge Confirmation Message", vbOKOnly + vbExclamation
-    End If
-
-   On Error GoTo 0
-   Exit Sub
-
-mnuEditWidget_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuEditWidget_Click of Form menuForm"
-End Sub
-
-
-'---------------------------------------------------------------------------------------
-' Procedure : mnuWidgets_Click
-' Author    : beededea
-' Date      : 13/02/2019
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Private Sub mnuWidgets_Click()
-    Dim answer As VbMsgBoxResult
-
-    On Error GoTo mnuWidgets_Click_Error
-    '''If debugflg = 1  Then msgBox "%" & "mnuWidgets_Click"
-
-    answer = MsgBox(" This button opens a browser window and connects to the Steampunk widgets page on my site. Do you wish to proceed?", vbExclamation + vbYesNo)
-
-    If answer = vbYes Then
-        Call ShellExecute(Me.hwnd, "Open", "https://www.deviantart.com/yereverluvinuncleber/gallery/59981269/yahoo-widgets", vbNullString, App.Path, 1)
-    End If
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuWidgets_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuWidgets_Click of form menuForm"
-End Sub
-
-'---------------------------------------------------------------------------------------
-' Procedure : mnuLatest_Click
-' Author    : beededea
-' Date      : 13/02/2019
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Public Sub mnuLatest_Click()
-    Dim answer As VbMsgBoxResult: answer = vbNo
-
-    On Error GoTo mnuLatest_Click_Error
-    '''If debugflg = 1  Then msgBox "%" & "mnuLatest_Click"
-    
-    'MsgBox "The download menu option is not yet enabled."
-
-    answer = MsgBox("Download latest version of the program from github - this button opens a browser window and connects to the widget download page where you can check and download the latest SETUP.EXE file). Proceed?", vbExclamation + vbYesNo)
-
-    If answer = vbYes Then
-        Call ShellExecute(Me.hwnd, "Open", "https://github.com/yereverluvinunclebert/Firecall-for-Windows", vbNullString, App.Path, 1)
-    End If
-
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuLatest_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuLatest_Click of form menuForm"
-
-End Sub
-
-'---------------------------------------------------------------------------------------
-' Procedure : mnuFacebook_Click
-' Author    : beededea
-' Date      : 14/02/2019
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Public Sub mnuFacebook_Click()
-    Dim answer As VbMsgBoxResult
-
-    On Error GoTo mnuFacebook_Click_Error
-    '''If debugflg = 1  Then msgBox "%" & "mnuFacebook_Click"
-
-    answer = MsgBox("Visiting the Facebook chat page - this button opens a browser window and connects to our Facebook chat page. Proceed?", vbExclamation + vbYesNo)
-    If answer = vbYes Then
-        Call ShellExecute(Me.hwnd, "Open", "http://www.facebook.com/profile.php?id=100012278951649", vbNullString, App.Path, 1)
-    End If
-
-    On Error GoTo 0
-    Exit Sub
-
-mnuFacebook_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuFacebook_Click of form menuForm"
-End Sub
-
-'---------------------------------------------------------------------------------------
-' Procedure : mnuHelpHTM_Click
-' Author    : beededea
-' Date      : 14/05/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Private Sub mnuHelpHTM_Click()
-    On Error GoTo mnuHelpHTM_Click_Error
-    
-    Call btnPicHelp_Click
-
-'        If fFExists(App.Path & "\help\Help.chm") Then
-'            Call ShellExecute(Me.hwnd, "Open", App.Path & "\help\Help.chm", vbNullString, App.Path, 1)
-'        Else
-'            MsgBox ("The help file - help\Help.chm - is missing from the help folder.")
-'        End If
-
-   On Error GoTo 0
-   Exit Sub
-
-mnuHelpHTM_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuHelpHTM_Click of Form menuForm"
-End Sub
-
-'---------------------------------------------------------------------------------------
-' Procedure : btnAboutDebugInfo_Click
-' Author    : beededea
-' Date      : 03/03/2020
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Private Sub btnAboutDebugInfo_Click()
-
-   On Error GoTo btnAboutDebugInfo_Click_Error
-   'If debugflg = 1 Then Debug.Print "%btnAboutDebugInfo_Click"
-
-    'mnuDebug_Click
-    MsgBox "The debug mode is not yet enabled."
-
-   On Error GoTo 0
-   Exit Sub
-
-btnAboutDebugInfo_Click_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnAboutDebugInfo_Click of form PanzerEarthPrefs"
-End Sub
-
-
