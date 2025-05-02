@@ -2,13 +2,13 @@ Attribute VB_Name = "modTooltips"
 
 Option Explicit
 '
-Private Declare Function SendMessageA Lib "user32" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByRef lParam As Any) As Long
-Private Declare Function SendMessageLongA Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Private Declare Function SendMessageA Lib "user32" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByRef lParam As Any) As Long
+Private Declare Function SendMessageLongA Lib "user32" Alias "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
 '
 Private Type TOOLINFO
     lSize       As Long
     lFlags      As Long
-    hWnd        As Long
+    hwnd        As Long
     lId         As Long
     '
     'lpRect      As RECT
@@ -23,8 +23,8 @@ Private Type TOOLINFO
 End Type
 '
 Private Declare Sub InitCommonControls Lib "comctl32" ()
-Private Declare Function CreateWindowExW Lib "user32" (ByVal dwExStyle As Long, ByVal lpClassName As Long, ByVal lpWindowName As Long, ByVal dwStyle As Long, ByVal X As Long, ByVal Y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hWndParent As Long, ByVal hMenu As Long, ByVal hInstance As Long, lpParam As Any) As Long
-Private Declare Function DestroyWindow Lib "user32" (ByVal hWnd As Long) As Long
+Private Declare Function CreateWindowExW Lib "user32" (ByVal dwExStyle As Long, ByVal lpClassName As Long, ByVal lpWindowName As Long, ByVal dwStyle As Long, ByVal x As Long, ByVal y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hWndParent As Long, ByVal hMenu As Long, ByVal hInstance As Long, lpParam As Any) As Long
+Private Declare Function DestroyWindow Lib "user32" (ByVal hwnd As Long) As Long
 '
 Private Const WM_USER               As Long = &H400&
 Private Const CW_USEDEFAULT         As Long = &H80000000
@@ -122,7 +122,7 @@ Public Sub CreateToolTip(ByVal ParentHwnd As Long, _
     ti.lFlags = TTF_SUBCLASS Or TTF_IDISHWND
     If bCentered Then ti.lFlags = ti.lFlags Or TTF_CENTERTIP
     ' Set the hwnd prop to our parent control's hwnd.
-    ti.hWnd = ParentHwnd
+    ti.hwnd = ParentHwnd
     ti.lId = ParentHwnd
     ti.hInstance = App.hInstance
     ti.lpStr = TipText
@@ -142,10 +142,26 @@ Public Sub CreateToolTip(ByVal ParentHwnd As Long, _
     SendMessageLongA hwndTT, TTM_SETDELAYTIME, TTDT_INITIAL, lDelayTime
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : DestroyToolTip
+' Author    :
+' Date      : 31/03/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub DestroyToolTip()
     ' It's not a bad idea to put this in the Form_Unload event just to make sure.
+   On Error GoTo DestroyToolTip_Error
+
     If hwndTT <> 0& Then DestroyWindow hwndTT
     hwndTT = 0&
+
+   On Error GoTo 0
+   Exit Sub
+
+DestroyToolTip_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure DestroyToolTip of Module modTooltips"
 End Sub
 
 Private Sub FormatTooltipText(TipText As String, lLen As Long)

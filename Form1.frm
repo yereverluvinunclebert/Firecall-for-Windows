@@ -1983,7 +1983,7 @@ Attribute m_oProxy.VB_VarHelpID = -1
 Private totalBusyCounter As Integer
 Private busyCounter As Integer
 
-' timer and vars necessary to allow the animation on the config button
+
 '---------------------------------------------------------------------------------------
 ' Procedure : configBusyTimer_Timer
 ' Author    : beededea
@@ -2032,16 +2032,48 @@ End Sub
 'Note all new events and procedures are moved to the bottom of this file, top event space is reserved for the main form events.
 
 ' set the focus to the text entry field whenever the form itself is clicked. The same done for almost all other controls on the form.
+'---------------------------------------------------------------------------------------
+' Procedure : Form_Click
+' Author    : beededea
+' Date      : 02/05/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub Form_Click()
      
+   On Error GoTo Form_Click_Error
+
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
 
     txtTextEntry.SetFocus
+
+   On Error GoTo 0
+   Exit Sub
+
+Form_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Form_Click of Form FireCallMain"
 End Sub
 
-' the standard Form_KeyDown routine that captures all keypresses on the form - keyPreview = true
+'
+'---------------------------------------------------------------------------------------
+' Procedure : Form_KeyDown
+' Author    : beededea
+' Date      : 02/05/2025
+' Purpose   : the standard Form_KeyDown routine that captures all keypresses on the form - keyPreview = true
+'---------------------------------------------------------------------------------------
+'
 Private Sub Form_KeyDown(KeyCode As Integer, ByRef Shift As Integer)
+   On Error GoTo Form_KeyDown_Error
+
     Call getKeyPress(KeyCode)
+
+   On Error GoTo 0
+   Exit Sub
+
+Form_KeyDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Form_KeyDown of Form FireCallMain"
 End Sub
 
 '
@@ -2572,6 +2604,118 @@ formResizeSub_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure formResizeSub of Form FireCallMain"
     
 End Sub
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : thisForm_Unload
+' Author    : beededea
+' Date      : 18/08/2022
+' Purpose   : the standard form unload routine called from several places
+'---------------------------------------------------------------------------------------
+'
+Public Sub thisForm_Unload() ' name follows VB6 standard naming convention
+    On Error GoTo Form_Unload_Error
+
+    Call saveMainFormPosition
+
+    Call DestroyToolTip ' destroys any current tooltip
+    
+    Call unloadAllForms(True)
+
+    On Error GoTo 0
+    Exit Sub
+
+Form_Unload_Error:
+
+    With err
+         If .Number <> 0 Then
+            MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure thisForm_Unload of Class Module module1"
+            Resume Next
+          End If
+    End With
+End Sub
+
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : unloadAllForms
+' Author    : beededea
+' Date      : 28/06/2023
+' Purpose   : unload all VB6 forms
+'---------------------------------------------------------------------------------------
+'
+Public Sub unloadAllForms(ByVal endItAll As Boolean)
+    
+    Dim NameProcess As String: NameProcess = ""
+    Dim fcount As Integer: fcount = 0
+    Dim useloop As Integer: useloop = 0
+       
+    On Error GoTo unloadAllForms_Error
+    
+    ' the following unload commands take a while to complete resulting in a seeming-delay after a close, this .hide does away with that
+    
+    Me.Hide
+    
+    ' stop all VB6 timers in the main form
+    
+    Call stopPollingTimer
+    Call stopIconiseTimer
+
+    recordTimer.Enabled = False
+    PlayTimer.Enabled = False
+    lampTimer.Enabled = False
+    printerTimer.Enabled = False
+    dropTimer.Enabled = False
+    brightTimer.Enabled = False
+    emailTimer.Enabled = False
+    houseKeepingTimer.Enabled = False
+    opacityFadeOutTimer.Enabled = False
+    opacityFadeInTimer.Enabled = False
+    zOrderTimer.Enabled = False
+    shredderTimer.Enabled = False
+    pausePrinterTimer.Enabled = False
+    clockTimer.Enabled = False
+    emailIconTimer.Enabled = False
+    opacityToTimer.Enabled = False
+    buzzerTimer.Enabled = False
+    sendCommandTimer.Enabled = False
+    inputScrollBarTimer.Enabled = False
+    outputScrollBarTimer.Enabled = False
+    combinedScrollBarTimer.Enabled = False
+    shutdownTimer.Enabled = False
+    backupTimer.Enabled = False
+    configBusyTimer.Enabled = False
+    
+    FireCallPrefs.themeTimer.Enabled = False
+    
+    ' unload the native VB6 forms
+    
+    Unload about
+    Unload FireCallPrefs
+    Unload licence
+    Unload MinimiseForm
+    'Unload FireCallMain ' this will be unloaded at the end of the main forms' form_unload
+    
+    ' remove all variable references to each form in turn
+    
+    Set about = Nothing
+    Set FireCallPrefs = Nothing
+    Set licence = Nothing
+    Set MinimiseForm = Nothing
+    Set FireCallMain = Nothing
+   
+    On Error Resume Next
+    
+    If endItAll = True Then End
+
+   On Error GoTo 0
+   Exit Sub
+
+unloadAllForms_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure unloadAllForms of Module Module1"
+End Sub
+
 '
 '---------------------------------------------------------------------------------------
 ' Procedure : Form_Unload
@@ -2581,33 +2725,10 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub Form_Unload(Cancel As Integer)
-    Dim frm As Form
     
-    ' On Error GoTo Form_Unload_Error
-
-    FCWMaximiseFormX = Str$(FireCallMain.Left)
-    FCWMaximiseFormY = Str$(FireCallMain.Top)
-    If Val(FCWFormWidth) <= 10185 Then
-        FCWFormWidth = "10185"
-    Else
-        FCWFormWidth = Str$(FireCallMain.Width)
-    End If
+    On Error GoTo Form_Unload_Error
     
-    PutINISetting "Software\FireCallWin", "maximiseFormX", FCWMaximiseFormX, FCWSettingsFile
-    PutINISetting "Software\FireCallWin", "maximiseFormY", FCWMaximiseFormY, FCWSettingsFile
-    PutINISetting "Software\FireCallWin", "formWidth", FCWFormWidth, FCWSettingsFile
-
-    DestroyToolTip
-    
-    Call stopPollingTimer
-    Call stopIconiseTimer
-        
-    For Each frm In Forms
-        Unload frm
-        Set frm = Nothing
-    Next
-    
-    'End ' <- naughty!
+    Call thisForm_Unload
 
     On Error GoTo 0
     Exit Sub
@@ -2622,12 +2743,44 @@ Form_Unload_Error:
     End With
 End Sub
 
-' start the iconise timer that iconises the main form to the stamp icon
+'---------------------------------------------------------------------------------------
+' Procedure : saveMainFormPosition
+' Author    : beededea
+' Date      : 04/08/2023
+' Purpose   : called from several locations saves the form X,Y positions
+'---------------------------------------------------------------------------------------
+'
+Public Sub saveMainFormPosition()
+
+   On Error GoTo saveMainFormPosition_Error
+
+    FCWMaximiseFormX = Str$(FireCallMain.Left)
+    FCWMaximiseFormY = Str$(FireCallMain.Top)
+    If Val(FCWFormWidth) <= 10185 Then
+        FCWFormWidth = "10185"
+    Else
+        FCWFormWidth = Str$(FireCallMain.Width)
+    End If
+    
+    PutINISetting "Software\FireCallWin", "maximiseFormX", FCWMaximiseFormX, FCWSettingsFile
+    PutINISetting "Software\FireCallWin", "maximiseFormY", FCWMaximiseFormY, FCWSettingsFile
+    PutINISetting "Software\FireCallWin", "formWidth", FCWFormWidth, FCWSettingsFile
+
+   On Error GoTo 0
+   Exit Sub
+
+saveMainFormPosition_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure saveMainFormPosition of Module Module1"
+    
+End Sub
+
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : startTheIconiseTimers
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : start the iconise timer that iconises the main form to the stamp icon
 '---------------------------------------------------------------------------------------
 '
 Private Sub startTheIconiseTimers()
@@ -2671,13 +2824,14 @@ startTheIconiseTimers_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure startTheIconiseTimers of Form FireCallMain"
 End Sub
 
-' the listboxes have a vertical scrollbar by default and we add a horizontal scrollbar
-' showing/hiding these require different methods
+'
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : handleScrollbars
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the listboxes have a vertical scrollbar by default and we add a horizontal scrollbar
+'                showing/hiding these require different methods
 '---------------------------------------------------------------------------------------
 '
 Private Sub handleScrollbars()
@@ -2732,12 +2886,12 @@ End Sub
 
 
 
-' set the Zorder of the main window, emulating functionality of the YWE version
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : setZOrder
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : set the Zorder of the main window, emulating functionality of the YWE version
 '---------------------------------------------------------------------------------------
 '
 Private Sub setZOrder(ByVal formLoad As Boolean)
@@ -2761,12 +2915,12 @@ setZOrder_Error:
 End Sub
  
 
-' check that the three required preference settings have valid values.
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : fTestInputsOutputs
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : check that the three required preference settings have valid values.
 '---------------------------------------------------------------------------------------
 '
 Private Function fTestInputsOutputs() As Boolean
@@ -2800,12 +2954,12 @@ fTestInputsOutputs_Error:
 End Function
 
 
-' check that the three required preference settings have values, valid or not
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : fTestMissingFields
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : check that the three required preference settings have values, valid or not
 '---------------------------------------------------------------------------------------
 '
 Private Function fTestMissingFields() As Boolean
@@ -2837,19 +2991,20 @@ fTestMissingFields_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fTestMissingFields of Form FireCallMain"
 End Function
 
-' call the same form unload subroutine called by the form unloading itself
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnClose_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : call the same form unload subroutine called by the form unloading itself
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnClose_Click()
    On Error GoTo btnClose_Click_Error
 
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
-    Unload FireCallMain
+    
+    Call thisForm_Unload
 
    On Error GoTo 0
    Exit Sub
@@ -2859,12 +3014,14 @@ btnClose_Click_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnClose_Click of Form FireCallMain"
 End Sub
 
-' attach a single file to send to the remote chat partner
+
+
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicAttach_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : attach a single file to send to the remote chat partner
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicAttach_Click()
@@ -2924,12 +3081,12 @@ btnPicAttach_Click_Error:
 End Sub
 
 
-' display the small resized icon in the small emoji box
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : cmbEmojiSelection_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : display the small resized icon in the small emoji box
 '---------------------------------------------------------------------------------------
 '
 Private Sub cmbEmojiSelection_Click()
@@ -2968,12 +3125,12 @@ cmbEmojiSelection_Click_Error:
     
 End Sub
 
-' send your emoji state to the chat partner
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnEmojiSet_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : send your emoji state to the chat partner
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnEmojiSet_Click()
@@ -3033,12 +3190,12 @@ End Sub
 
 
 
-'  The VB6 Iconise timer the equivalent of the initiateIconiseTimerInCode
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : IconiseTimer_Timer
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   :  The VB6 Iconise timer the equivalent of the initiateIconiseTimerInCode
 '---------------------------------------------------------------------------------------
 '
 Private Sub IconiseTimer_Timer()
