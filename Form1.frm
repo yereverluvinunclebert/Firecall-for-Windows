@@ -10,7 +10,6 @@ Begin VB.Form FireCallMain
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   MinButton       =   0   'False
    Picture         =   "Form1.frx":058A
    ScaleHeight     =   10185
    ScaleWidth      =   10065
@@ -183,7 +182,7 @@ Begin VB.Form FireCallMain
       End
       Begin VB.Timer opacityFadeOutTimer 
          Enabled         =   0   'False
-         Interval        =   1
+         Interval        =   20
          Left            =   2625
          Top             =   225
       End
@@ -1451,7 +1450,7 @@ Begin VB.Form FireCallMain
       End
       Begin VB.CommandButton btnMinimise 
          Height          =   405
-         Left            =   540
+         Left            =   555
          Picture         =   "Form1.frx":A3235
          Style           =   1  'Graphical
          TabIndex        =   39
@@ -2506,6 +2505,8 @@ End Sub
 '
 Private Sub Form_Resize()
    On Error GoTo Form_Resize_Error
+   
+    If FireCallMain.WindowState = vbMinimized Then Exit Sub
 
     Call formResizeSub
 
@@ -5627,12 +5628,15 @@ End Sub
 '
 Private Sub opacityFadeOutTimer_Timer()
    On Error GoTo opacityFadeOutTimer_Timer_Error
+   
+       FireCallMain.WindowState = vbMinimized
 
             opacitylevel = opacitylevel - 10
             If opacitylevel <= 0 Then
                 opacitylevel = 0
                 opacityFadeOutTimer.Enabled = False
-                FireCallMain.Visible = False
+                'FireCallMain.WindowState = vbMinimized
+                'FireCallMain.Visible = False
             End If
             
             Call setOpacity(opacitylevel)
@@ -5657,7 +5661,8 @@ Private Sub opacityFadeInTimer_Timer()
    On Error GoTo opacityFadeInTimer_Timer_Error
 
             If opacitylevel <= 1 Then ' as soon as the form opacity starts to be not 0 then the form is made visible
-                FireCallMain.Visible = True
+                'FireCallMain.Visible = True
+                FireCallMain.WindowState = vbNormal
                 FireCallMain.txtTextEntry.SetFocus
             End If
             

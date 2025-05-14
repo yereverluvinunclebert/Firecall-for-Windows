@@ -48,7 +48,7 @@ Private minFormPositionY As Single
 Private imageCounter As Integer
 
 
-Private Sub Form_MouseUp(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
+Private Sub Form_MouseUp(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
             FCWMinimiseFormX = Str$(MinimiseForm.Left)
             FCWMinimiseFormY = Str$(MinimiseForm.Top)
             
@@ -96,7 +96,8 @@ Public Sub FormDblClickSub()
 
     ' if the program is minimised, maximise it
     FireCallMain.opacityFadeInTimer.Enabled = True
-    If FireCallMain.Visible = False Then
+    'If FireCallMain.Visible = False Then
+    If FireCallMain.WindowState = vbMinimized Then
         FireCallMain.opacityFadeInTimer.Enabled = True
         MinimiseForm.Visible = False
         
@@ -139,9 +140,9 @@ Private Sub Form_Load()
     
 End Sub
 
-Private Sub Form_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
-    minFormPositionX = X
-    minFormPositionY = Y
+Private Sub Form_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+    minFormPositionX = x
+    minFormPositionY = y
     
     If Button = 2 Then
         ' use the menu from the specialised menu form to avoid generating a title bar
@@ -149,11 +150,11 @@ Private Sub Form_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRe
     End If
 End Sub
 
-Private Sub Form_MouseMove(ByRef Button As Integer, ByRef Shift As Integer, ByRef X As Single, ByRef Y As Single)
+Private Sub Form_MouseMove(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
     If Button = 1 Then
         With Me
-            .Left = .Left - (minFormPositionX - X)
-            .Top = .Top - (minFormPositionY - Y)
+            .Left = .Left - (minFormPositionX - x)
+            .Top = .Top - (minFormPositionY - y)
 
         End With
     End If

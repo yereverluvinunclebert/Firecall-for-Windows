@@ -5331,7 +5331,7 @@ Public Sub emailTimer_TimerLogic()
 
 
     Dim a As String
-    Dim lastEmailTimeInSecs  As Long
+    Dim lastEmailTimeInSecs  As Double
     'Dim emailIntervalMillisecs As Long
     Dim oldMessageCnt As Long
     Dim errMessageCnt As Long
