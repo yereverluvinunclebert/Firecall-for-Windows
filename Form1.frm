@@ -1793,6 +1793,12 @@ Attribute VB_Exposed = False
 '           requires a backup folder in app.path
 '
 ' Notes:
+
+' reads utf-8 (linux) or Windows files x 2 into specific arrays, top loaded or bottom loaded by preference
+' then filters the contents, adding tags that are recognised by the program to indicate URLs, images, file attachments &c.
+' writes these to multiline listbox controls that are indexed.
+
+' the files are stored onto a shared dropbox area, only dropbox supported at the moment but others will be available later.
 '
 ' The VB6 non native images (PNGs &c) are displayed using Lavolpe's transparent DIB image code,
 ' except for the .ico files which use his earlier StdPictureEx class.
@@ -2151,7 +2157,7 @@ Private Sub Form_Load()
     
     msgBoxShowing = False
     
-    ioMethodADO = False
+    gblIoMethodADO = False
             
     PBK_NUMOFCHANNELS = 1 '2     ' 1
     PBK_SAMPLERATE = 5512      ' 11025 ' 44100 ' 22050
@@ -2791,11 +2797,12 @@ Private Sub startTheIconiseTimers()
     Dim sixtyFive As Long ' just used to avoid multiplying two integers
     Dim oneThousand As Long
     
-   On Error GoTo startTheIconiseTimers_Error
+    On Error GoTo startTheIconiseTimers_Error
+    
+    
+    #If TWINBASIC Then
+        ' TwinBasic timers are any length and can exceed 65 seconds (65535 ms)
 
-    If fInIDE Then
-        ' VB6 timers cannot exceed 65 seconds (65535 ms)
-        If Val(FCWIconiseDelay) > 65 Then
             sixtyFive = 65
             oneThousand = 1000
             ' when multiplying two integer values and assigning to a long in the IDE it caused an overflow as the IDE
@@ -2804,18 +2811,33 @@ Private Sub startTheIconiseTimers()
             
             ' iconiseIntervalMillisecs = 65 * 1000 '  < this fails even though iconiseIntervalMillisecs is a long
             iconiseIntervalMillisecs = sixtyFive * oneThousand ' works!
-            
+        
+    #Else ' VB6 timers in the IDE or at runtime
+
+        If fInIDE Then
+            ' VB6 timers cannot exceed 65 seconds (65535 ms)
+            If Val(FCWIconiseDelay) > 65 Then
+                sixtyFive = 65
+                oneThousand = 1000
+                ' when multiplying two integer values and assigning to a long in the IDE it caused an overflow as the IDE
+                ' is handling the two numbers internally as integers as they are both below 32768 when VB6 encounters them.
+                ' declaring vars as longs is a workaround.
+                
+                ' iconiseIntervalMillisecs = 65 * 1000 '  < this fails even though iconiseIntervalMillisecs is a long
+                iconiseIntervalMillisecs = sixtyFive * oneThousand ' works!
+                
+            Else
+                iconiseIntervalMillisecs = Val(FCWIconiseDelay) * 1000
+            End If
+            iconiseTimer.Interval = iconiseIntervalMillisecs
+            iconiseTimer.Enabled = True
         Else
-            iconiseIntervalMillisecs = Val(FCWIconiseDelay) * 1000
+            ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
+            ' and if you want a longer timer you have to roll your own.
+            ' in addition, unfortunately the manual code timer method does not work in the IDE
+            Call initiateIconiseTimerInCode
         End If
-        iconiseTimer.Interval = iconiseIntervalMillisecs
-        iconiseTimer.Enabled = True
-    Else
-        ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
-        ' and if you want a longer timer you have to roll your own.
-        ' in addition, unfortunately the manual code timer method does not work in the IDE
-        Call initiateIconiseTimerInCode
-    End If
+    #End If
 
    On Error GoTo 0
    Exit Sub
@@ -3267,12 +3289,12 @@ lbxCombinedTextArea_DblClick_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_DblClick of Form FireCallMain"
 End Sub
 
-' interpret the keys pressed and identify to the program where the keypress occurred
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxCombinedTextArea_KeyDown
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : interpret the keys pressed and identify to the program where the keypress occurred
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxCombinedTextArea_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -3288,12 +3310,12 @@ lbxCombinedTextArea_KeyDown_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_KeyDown of Form FireCallMain"
 End Sub
-'after a key has been pressed on the combined area undo the CTRL key var
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxCombinedTextArea_KeyUp
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : after a key has been pressed on the combined area undo the CTRL key var
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxCombinedTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
@@ -3308,12 +3330,12 @@ lbxCombinedTextArea_KeyUp_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_KeyUp of Form FireCallMain"
 End Sub
-' show the alternative right click menu and set the bulbs to dull
+' l
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxCombinedTextArea_MouseDown
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : show the alternative right click menu and set the bulbs to dul
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxCombinedTextArea_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -3386,12 +3408,12 @@ lbxCombinedTextArea_MouseMove_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_MouseMove of Form FireCallMain"
 End Sub
 
-' set the change lamp to dull when any activity is enountered in the input box - the scrollbars in this case
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxCombinedTextArea_Scroll
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : set the change lamp to dull when any activity is enountered in the input box - the scrollbars in this case
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxCombinedTextArea_Scroll()
@@ -3443,12 +3465,12 @@ lbxInputTextArea_DblClick_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_DblClick of Form FireCallMain"
 End Sub
 
-' interpret the keys pressed and identify to the program where the keypress occurred
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxInputTextArea_KeyDown
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : interpret the keys pressed and identify to the program where the keypress occurred
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxInputTextArea_KeyDown(ByRef KeyCode As Integer, ByRef Shift As Integer)
@@ -3465,12 +3487,12 @@ lbxInputTextArea_KeyDown_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_KeyDown of Form FireCallMain"
     
 End Sub
-'after a key has been pressed on the input area undo the CTRL key var
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxInputTextArea_KeyUp
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : after a key has been pressed on the input area undo the CTRL key var
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxInputTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
@@ -3507,12 +3529,12 @@ lbxInputTextArea_MouseMove_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_MouseMove of Form FireCallMain"
 End Sub
 
-' set the change lamp to dull when any activity is enountered in the input box - the scrollbars in this case
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxInputTextArea_Scroll
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : set the change lamp to dull when any activity is enountered in the input box - the scrollbars in this case
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxInputTextArea_Scroll()
@@ -3560,12 +3582,12 @@ lbxOutputTextArea_DblClick_Error:
 
 End Sub
 
-' interpret the keys pressed and identify to the program where the keypress occurred
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxOutputTextArea_KeyDown
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : interpret the keys pressed and identify to the program where the keypress occurred
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxOutputTextArea_KeyDown(ByRef KeyCode As Integer, ByRef Shift As Integer)
@@ -3582,12 +3604,12 @@ lbxOutputTextArea_KeyDown_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_KeyDown of Form FireCallMain"
 End Sub
-'after a key has been pressed on the output area undo the CTRL key var
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxOutputTextArea_KeyUp
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : after a key has been pressed on the output area undo the CTRL key var
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxOutputTextArea_KeyUp(KeyCode As Integer, Shift As Integer)
@@ -3644,33 +3666,81 @@ lbxOutputTextArea_Scroll_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxOutputTextArea_Scroll of Form FireCallMain"
 End Sub
 
-'add ping request to the listBox right click menus
+'
+'---------------------------------------------------------------------------------------
+' Procedure : mnuLBoxSendPingRequest_Click
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   : add ping request to the listBox right click menus
+'---------------------------------------------------------------------------------------
+'
 Private Sub mnuLBoxSendPingRequest_Click()
+   On Error GoTo mnuLBoxSendPingRequest_Click_Error
+
     Call mnuSendPingRequest_Click
+
+   On Error GoTo 0
+   Exit Sub
+
+mnuLBoxSendPingRequest_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuLBoxSendPingRequest_Click of Form FireCallMain"
 End Sub
-'add awake call to the listBox right click menus
+'
+'---------------------------------------------------------------------------------------
+' Procedure : mnuLBoxSendAwakeCall_Click
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   : add awake call to the listBox right click menus
+'---------------------------------------------------------------------------------------
+'
 Private Sub mnuLBoxSendAwakeCall_Click()
+   On Error GoTo mnuLBoxSendAwakeCall_Click_Error
+
     Call mnuSendAwakeCall_click
+
+   On Error GoTo 0
+   Exit Sub
+
+mnuLBoxSendAwakeCall_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuLBoxSendAwakeCall_Click of Form FireCallMain"
 End Sub
 
 
-' hides the main form by starting the timer to fade the form out
+'
+'---------------------------------------------------------------------------------------
+' Procedure : mnuHideProgram_Click
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   : hides the main form by starting the timer to fade the form out
+'---------------------------------------------------------------------------------------
+'
 Private Sub mnuHideProgram_Click()
     
+   On Error GoTo mnuHideProgram_Click_Error
+
     picTextChangeBright.Visible = False
     picTextChangeDull.Visible = True
     inputDataChangedFlag = False
     
     opacityFadeOutTimer.Enabled = True
     MinimiseForm.Visible = True
+
+   On Error GoTo 0
+   Exit Sub
+
+mnuHideProgram_Click_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuHideProgram_Click of Form FireCallMain"
     
 End Sub
-' open the preferences form
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicConfig_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : open the preferences form
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicConfig_Click()
@@ -3731,12 +3801,12 @@ makeConfigAvailable_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure makeConfigAvailable of Form FireCallMain"
 End Sub
-' read the assigned text messages for the ten preset buttons at the base of the chat window
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : readButtonTexts
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : read the assigned text messages for the ten preset buttons at the base of the chat window
 '---------------------------------------------------------------------------------------
 '
 Private Sub readButtonTexts(ByVal buttonNo As Integer, ByRef textMessageArray() As String, Optional ByRef msgCnt As Integer)
@@ -3770,12 +3840,12 @@ readButtonTexts_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure readButtonTexts of Form FireCallMain"
 End Sub
-' the user pressed the TTFN button - demonstrating the use of GOTO for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicTtfn_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the TTFN button - demonstrating the use of GOTO for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicTtfn_Click()
@@ -3816,12 +3886,12 @@ btnPicTtfn_Click_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnPicTtfn_Click of Form FireCallMain"
 End Sub
 
-' the user pressed the WELL button - demonstrating the use of DO WHILE for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicWell_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the WELL button - demonstrating the use of DO WHILE for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicWell_Click()
@@ -3862,12 +3932,12 @@ btnPicWell_Click_Error:
 
 End Sub
 
-' the user pressed the NEWS button - demonstrating the use of DO LOOP UNTIL for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicNews_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the NEWS button - demonstrating the use of DO LOOP UNTIL for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicNews_Click()
@@ -3907,12 +3977,12 @@ btnPicNews_Click_Error:
 
 End Sub
 
-' the user pressed the MORN button - demonstrating the use of DO LOOP UNTIL for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicMorn_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the MORN button - demonstrating the use of DO LOOP UNTIL for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicMorn_Click()
@@ -3952,12 +4022,12 @@ btnPicMorn_Click_Error:
 
 End Sub
 
-' the user pressed the WOT button - demonstrating the use of DO UNTIL LOOP for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicWot_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the WOT button - demonstrating the use of DO UNTIL LOOP for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicWot_Click()
@@ -3997,12 +4067,12 @@ btnPicWot_Click_Error:
 
 End Sub
 
-' the user pressed the WTH button - demonstrating the use of DO UNTIL LOOP for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : BtnPicWth_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the WTH button - demonstrating the use of DO UNTIL LOOP for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub BtnPicWth_Click()
@@ -4271,12 +4341,12 @@ End Sub
 
 
 
-'refresh the two listboxes containing the chat
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnRefresh_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : refresh the two listboxes containing the chat
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnRefresh_Click()
@@ -4310,12 +4380,12 @@ btnRefresh_Click_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnRefresh_Click of Form FireCallMain"
 End Sub
-' when clicking upon a line in the output box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxOutputTextArea_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : when clicking upon a line in the output box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxOutputTextArea_Click() '(Optional ByRef frm As Form)
@@ -4343,12 +4413,12 @@ lbxOutputTextArea_Click_Error:
     
 End Sub
 
-' when clicking upon a line in the output box, display any image found in that line, or act upon any URL found
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxTextAreaClick
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : when clicking upon a line in the output box, display any image found in that line, or act upon any URL found
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxTextAreaClick(Optional ByRef srcListBox As ListBox, Optional ByRef textAreaDblClickState As Boolean)
@@ -4394,9 +4464,9 @@ Private Sub lbxTextAreaClick(Optional ByRef srcListBox As ListBox, Optional ByRe
         attachmentFilenamePos = InStr(srcListBox.List(srcListBox.ListIndex), "New File:") + 9
         attachmentFilename = Mid$(attachmentString, attachmentFilenamePos, Len(attachmentString))
         foundFile = True
-        attachmentFilePath = FCWExchangeFolder & "\" & attachmentFilename
+        gblAttachmentFilePath = FCWExchangeFolder & "\" & attachmentFilename
 
-        If fExtractSuffixWithDot(attachmentFilePath) = ".m4a" Or fExtractSuffixWithDot(attachmentFilePath) = ".wav" Then
+        If fExtractSuffixWithDot(gblAttachmentFilePath) = ".m4a" Or fExtractSuffixWithDot(gblAttachmentFilePath) = ".wav" Then
             recordingFilenamePos = InStr(srcListBox.List(srcListBox.ListIndex), "New File:") + 9
             recordingFilename = Mid$(attachmentString, attachmentFilenamePos, Len(attachmentString))
             foundRecording = True
@@ -4413,10 +4483,10 @@ Private Sub lbxTextAreaClick(Optional ByRef srcListBox As ListBox, Optional ByRe
         foundFile = False
         picBtnPlaySound.Visible = True
         recordingFilePath = FCWExchangeFolder & "\" & recordingFilename
-        attachmentFilePath = recordingFilePath
+        gblAttachmentFilePath = recordingFilePath
     End If
                         
-    If Not fFExists(RTrim$(attachmentFilePath)) Then
+    If Not fFExists(RTrim$(gblAttachmentFilePath)) Then
         Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-missing" & ".png")
         'If FCWEnableTooltips = "1" Then
         picImagePrintOut.ToolTipText = attachmentFilename & " This file is missing - it is no longer in the dropbox shared folder."
@@ -4438,15 +4508,15 @@ Private Sub lbxTextAreaClick(Optional ByRef srcListBox As ListBox, Optional ByRe
             End If
             
             If foundFile = True Then
-                ' on a click we reassign the stored full file variable path displayedAttachmentFilePath as that is what is used during a dblClick on the image
-                displayedAttachmentFilePath = attachmentFilePath
-                'suffix = fExtractSuffix(displayedAttachmentFilePath)
+                ' on a click we reassign the stored full file variable path gblDisplayedAttachmentFilePath as that is what is used during a dblClick on the image
+                gblDisplayedAttachmentFilePath = gblAttachmentFilePath
+                'suffix = fExtractSuffix(gblDisplayedAttachmentFilePath)
                 
-                suffix = fExtractSuffixWithDot(displayedAttachmentFilePath)
-                suffixNoDot = fExtractSuffix(displayedAttachmentFilePath)
+                suffix = fExtractSuffixWithDot(gblDisplayedAttachmentFilePath)
+                suffixNoDot = fExtractSuffix(gblDisplayedAttachmentFilePath)
 
                 If fInstrSuffix(validImageArrayList, LCase(suffix)) Then
-                    Call displaySelectedImage(displayedAttachmentFilePath)
+                    Call displaySelectedImage(gblDisplayedAttachmentFilePath)
                 ElseIf fInstrSuffix(invalidImageArrayList, LCase(suffix)) <> 0 Then
                     Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-unknown" & ".png")
                 Else
@@ -4455,7 +4525,7 @@ Private Sub lbxTextAreaClick(Optional ByRef srcListBox As ListBox, Optional ByRe
                 End If
                 If FCWEnableTooltips = "1" Then picImagePrintOut.ToolTipText = attachmentFilename & " - double click to open it using default app."
                 
-                suffix = fExtractSuffixWithDot(displayedAttachmentFilePath)
+                suffix = fExtractSuffixWithDot(gblDisplayedAttachmentFilePath)
                 If fInstrSuffix(executableSuffixArrayList, LCase(suffix)) Then
                     binaryFlag = True
                     picImagePrintOut.ToolTipText = attachmentFilename & " - This is an executable program - take care."
@@ -4463,15 +4533,15 @@ Private Sub lbxTextAreaClick(Optional ByRef srcListBox As ListBox, Optional ByRe
                 
                 If textAreaDblClickState = True Then
                     If binaryFlag = True Then
-                        answer = MsgBox(attachmentFilePath & vbCrLf & vbCrLf & " This is an executable program, running it could be dangerous and unpredictable things may happen." & vbCrLf & vbCrLf & "Are you sure you wish to proceed?", vbExclamation + vbYesNo)
+                        answer = MsgBox(gblAttachmentFilePath & vbCrLf & vbCrLf & " This is an executable program, running it could be dangerous and unpredictable things may happen." & vbCrLf & vbCrLf & "Are you sure you wish to proceed?", vbExclamation + vbYesNo)
                     Else
                         answer = vbYes
                     End If
                     If answer = vbYes Then
                         If attachmentFilename = "FireCallWin.exe" Then
-                            answer = MsgBox(attachmentFilePath & vbCrLf & vbCrLf & " This is the FireCallWin program, it cannot run itself again.", vbExclamation)
+                            answer = MsgBox(gblAttachmentFilePath & vbCrLf & vbCrLf & " This is the FireCallWin program, it cannot run itself again.", vbExclamation)
                         Else
-                            Call ShellExecute(Me.hwnd, "Open", displayedAttachmentFilePath, vbNullString, App.Path, 1)
+                            Call ShellExecute(Me.hwnd, "Open", gblDisplayedAttachmentFilePath, vbNullString, App.Path, 1)
                         End If
                     End If
                 End If
@@ -4483,11 +4553,11 @@ Private Sub lbxTextAreaClick(Optional ByRef srcListBox As ListBox, Optional ByRe
                 If FCWEnableTooltips = "1" Then picImagePrintOut.ToolTipText = attachmentFilename & " - double click to open the folder in Explorer."
             
                 If textAreaDblClickState = True Then
-                    Call ShellExecute(Me.hwnd, "Open", attachmentFilePath, vbNullString, App.Path, 1)
+                    Call ShellExecute(Me.hwnd, "Open", gblAttachmentFilePath, vbNullString, App.Path, 1)
                 End If
             End If
     
-            attachmentViewTime = Now
+            gblAttachmentViewTime = Now
         End If
     End If
     srcListBox.ToolTipText = ""
@@ -4529,13 +4599,13 @@ lbxTextAreaClick_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxTextAreaClick of Form FireCallMain"
     
 End Sub
-' KayJay
-' utilises the isValidURL API function in Windows
+'
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : fIsGoodURL
-' Author    : beededea
+' Author    : KayJay
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : utilises the isValidURL API function in Windows
 '---------------------------------------------------------------------------------------
 '
 Public Function fIsGoodURL(ByVal sURL As String) As Boolean
@@ -4556,12 +4626,12 @@ End Function
 
 
 
-' when clicking upon a line in the input box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxInputTextArea_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : when clicking upon a line in the input box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxInputTextArea_Click()
@@ -4593,12 +4663,12 @@ lbxInputTextArea_Click_Error:
     
 End Sub
 
-' when clicking upon a line in the input box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxCombinedTextArea_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : when clicking upon a line in the input box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxCombinedTextArea_Click()
@@ -4627,12 +4697,12 @@ lbxCombinedTextArea_Click_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_Click of Form FireCallMain"
 End Sub
-'captures a drag and drop to any of the listBoxes
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxInputTextArea_OLEDragDrop
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : captures a drag and drop to any of the listBoxes
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxInputTextArea_OLEDragDrop(Data As DataObject, Effect As Long, ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
@@ -4648,12 +4718,12 @@ lbxInputTextArea_OLEDragDrop_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxInputTextArea_OLEDragDrop of Form FireCallMain"
 End Sub
 
-'captures a drag and drop to any of the listBoxes
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxCombinedTextArea_OLEDragDrop
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : captures a drag and drop to any of the listBoxes
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxCombinedTextArea_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -4669,12 +4739,12 @@ lbxCombinedTextArea_OLEDragDrop_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lbxCombinedTextArea_OLEDragDrop of Form FireCallMain"
 End Sub
 
-'captures a drag and drop to any of the output listBoxes
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxOutputTextArea_OLEDragDrop
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : captures a drag and drop to any of the output listBoxes
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxOutputTextArea_OLEDragDrop(Data As DataObject, Effect As Long, ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
@@ -4763,13 +4833,13 @@ lbxOutputTextArea_OLEDragDrop_Error:
 End Sub
 
 
-' Chris Fannin (AbbydonKrafts) http://vbcity.com/forums/t/129391.aspx
-' allows the copying of a whole folder
+'
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : VBCopyFolder
-' Author    : beededea
+' Author    : Chris Fannin (AbbydonKrafts)  http://vbcity.com/forums/t/129391.aspx
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : allows the copying of a whole folder
 '---------------------------------------------------------------------------------------
 '
 Public Sub VBCopyFolder(ByRef strSource As String, ByRef strTarget As String)
@@ -4794,12 +4864,12 @@ VBCopyFolder_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure VBCopyFolder of Form FireCallMain"
 
 End Sub
-' menu options to do this and that
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : mnuRefresh_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : menu options to do this and that
 '---------------------------------------------------------------------------------------
 '
 Private Sub mnuRefresh_Click()
@@ -5941,12 +6011,12 @@ End Sub
 '                  TTIconInfo, "Help on the Green Button Hole", , , , True
 'End Sub
 
-' make the buzzer indicator dull after it has been raised
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : picBuzzerBrightLamp_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : make the buzzer indicator dull after it has been raised
 '---------------------------------------------------------------------------------------
 '
 Private Sub picBuzzerBrightLamp_Click()
@@ -6007,12 +6077,12 @@ picBuzzerBrightLamp_MouseMove_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure picBuzzerBrightLamp_MouseMove of Form FireCallMain"
 End Sub
 
-' show the right click menu on the clock
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : picClock_MouseDown
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : show the right click menu on the clock
 '---------------------------------------------------------------------------------------
 '
 Private Sub picClock_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
@@ -6054,12 +6124,12 @@ picClock_MouseMove_Error:
 
 End Sub
 
-' toggle the clock and button, saving the result for the next restart
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : picClockSwitch_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : toggle the clock and button, saving the result for the next restart
 '---------------------------------------------------------------------------------------
 '
 Private Sub picClockSwitch_Click()
@@ -6498,34 +6568,34 @@ Private Sub picImagePrintOut_DblClick()
     
     If currentOpacity < 255 Then Call restoreMainWindowOpacity
     
-    If fFExists(RTrim$(displayedAttachmentFilePath)) Then
+    If fFExists(RTrim$(gblDisplayedAttachmentFilePath)) Then
         If foundRecording = True Then
             Call picBtnPlaySound_Click
-            'PlaySound attachmentFilePath, ByVal 0&, SND_FILENAME Or SND_ASYNC
+            'PlaySound gblAttachmentFilePath, ByVal 0&, SND_FILENAME Or SND_ASYNC
         Else
-            suffix = fExtractSuffixWithDot(attachmentFilePath)
+            suffix = fExtractSuffixWithDot(gblAttachmentFilePath)
             If fInstrSuffix(executableSuffixArrayList, LCase(suffix)) Then
                 'picImagePrintOut.ToolTipText = attachmentFilename & " This file is missing - it is no longer in the dropbox shared folder."
 
-                answer = MsgBox(attachmentFilePath & vbCrLf & vbCrLf & " This is an executable program, running it could be dangerous and unpredictable things may happen." & vbCrLf & vbCrLf & "Are you sure you wish to proceed?", vbExclamation + vbYesNo)
+                answer = MsgBox(gblAttachmentFilePath & vbCrLf & vbCrLf & " This is an executable program, running it could be dangerous and unpredictable things may happen." & vbCrLf & vbCrLf & "Are you sure you wish to proceed?", vbExclamation + vbYesNo)
                 If answer = vbYes Then
-                    attachmentFilename = fGetFileNameFromPath(attachmentFilePath)
+                    attachmentFilename = fGetFileNameFromPath(gblAttachmentFilePath)
                     If attachmentFilename = "FireCallWin.exe" Then
-                        answer = MsgBox(attachmentFilePath & vbCrLf & vbCrLf & " This is the FireCallWin program, it cannot run itself again.", vbExclamation)
+                        answer = MsgBox(gblAttachmentFilePath & vbCrLf & vbCrLf & " This is the FireCallWin program, it cannot run itself again.", vbExclamation)
                     Else
-                        execStatus = ShellExecute(Me.hwnd, "Open", displayedAttachmentFilePath, vbNullString, App.Path, 1)
+                        execStatus = ShellExecute(Me.hwnd, "Open", gblDisplayedAttachmentFilePath, vbNullString, App.Path, 1)
                         If execStatus <= 32 Then MsgBox "No association found for " & suffix & " file type, FireCall cannot run this file type."
                    End If
                 End If
 
             Else
-                execStatus = ShellExecute(Me.hwnd, "Open", displayedAttachmentFilePath, vbNullString, App.Path, 1)
+                execStatus = ShellExecute(Me.hwnd, "Open", gblDisplayedAttachmentFilePath, vbNullString, App.Path, 1)
                 If execStatus <= 32 Then MsgBox "No association found for " & suffix & " file type, FireCall cannot open it. " & vbCrLf & "You need to create an association for this file type in Windows. "
             End If
         End If
     Else
-        If fDirExists(attachmentFilePath) Then ' we've checked file existence, now folder.
-            execStatus = ShellExecute(Me.hwnd, "Open", displayedAttachmentFilePath, vbNullString, App.Path, 1)
+        If fDirExists(gblAttachmentFilePath) Then ' we've checked file existence, now folder.
+            execStatus = ShellExecute(Me.hwnd, "Open", gblDisplayedAttachmentFilePath, vbNullString, App.Path, 1)
             If execStatus <= 32 Then MsgBox "Attempt to open folder failed."
         Else
             MsgBox "%Err-I-ErrorNumber 10 - File not found, if a recent attachment, Dropbox is possibly still transferring." & vbCrLf & _
@@ -6606,7 +6676,7 @@ picImagePrintOut_MouseMove_Error:
 End Sub
 
 'Private Sub picIoMethodDull_Click()
-'    ioMethodADO = True
+'    gblIoMethodADO = True
 '    picIoMethodBright.Visible = True
 '    picIoMethodDull.Visible = False
 '
@@ -6617,7 +6687,7 @@ End Sub
 '
 'End Sub
 'Private Sub picIoMethodBright_Click()
-'    ioMethodADO = False
+'    gblIoMethodADO = False
 '    picIoMethodBright.Visible = False
 '    picIoMethodDull.Visible = True
 '
@@ -10908,12 +10978,12 @@ Private Sub mnuFindFile_Click()
 
     execStatus = 0
     
-    If fDirExists(displayedAttachmentFilePath) Then ' if it is a folder already
-        execStatus = ShellExecute(Me.hwnd, "Open", displayedAttachmentFilePath, vbNullString, vbNullString, 1)
+    If fDirExists(gblDisplayedAttachmentFilePath) Then ' if it is a folder already
+        execStatus = ShellExecute(Me.hwnd, "Open", gblDisplayedAttachmentFilePath, vbNullString, vbNullString, 1)
         If execStatus <= 32 Then MsgBox "Attempt to open folder failed."
     Else
         'obtain the folder from the scommand
-        folderPath = fGetDirectory(displayedAttachmentFilePath)  ' extract the default folder from the batch full path
+        folderPath = fGetDirectory(gblDisplayedAttachmentFilePath)  ' extract the default folder from the batch full path
         If fDirExists(folderPath) Then
             execStatus = ShellExecute(hwnd, "open", folderPath, vbNullString, vbNullString, 1)
             If execStatus <= 32 Then MsgBox "Attempt to open folder failed."

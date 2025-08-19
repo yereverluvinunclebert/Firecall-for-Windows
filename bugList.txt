@@ -381,6 +381,11 @@
 ' link CHM file that on the main help button
 ' link CHM file that on the prefs help button
 
+    use WM_GETMINMAXINFO  to limit the height
+    https://www.vbforums.com/showthread.php?889548-How-to-programmatically-force-a-WM_SIZING-message&p=5501246&viewfull=1#post5501246
+    or
+    https://www.vbforums.com/showthread.php?29827-Restrict-resize-to-vertical
+
 ' HIGH PRIORITY
 ' =============
 '

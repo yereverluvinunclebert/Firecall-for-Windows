@@ -507,11 +507,11 @@ Public toolTipFlag As Boolean
 Public validImageArrayList As Collection
 Public executableSuffixArrayList As Collection
 Public invalidImageArrayList As Collection
-Public attachmentFilePath As String
+Public gblAttachmentFilePath As String
 Public recordingFilePath As String
-Public displayedAttachmentFilePath As String
+Public gblDisplayedAttachmentFilePath As String
 Public dropboxErrCnt As Integer
-Public attachmentViewTime As Date
+Public gblAttachmentViewTime As Date
 Public recordingViewTime As Date
 Public nowBeingModifiedFlag As Boolean
 Public pollingFlag As Boolean
@@ -647,7 +647,7 @@ Public CTRL_1 As Boolean
 
 Public messageQueue As Collection
 
-Public ioMethodADO As Boolean
+Public gblIoMethodADO As Boolean
 
 Public SoundName As String
 
@@ -690,50 +690,62 @@ Public Sub startThePollingTimers()
         debugLog "%Err-I-ErrorNumber 21 - The polling timer is not active, the prefs are set to No Timed Refresh" & vbCrLf & "Increase value if you want it to poll for new data,"
         Exit Sub
     End If
-    ' start the polling timer in code
-    If fInIDE Then
-        ' VB6 timers cannot exceed 65 seconds (65535 ms)
-        If Val(FCWRefreshIntervalSecs) > 65 Then
-'            lngSecs = 65
-'            lngThousand = 1000
-            ' when multiplying two integer values and assigning to a long in the IDE it causes a failure as the IDE is handling the two numbers as integers
-            ' pollingIntervalMillisecs = 65 * 1000 '  < this fails
-            pollingIntervalMillisecs = lngSecs * lngThousand ' works!
-        Else
-            pollingIntervalMillisecs = Val(FCWRefreshIntervalSecs) * 1000
-        End If
+    
+    #If TWINBASIC Then
+        ' TwinBasic timers are any length and can exceed 65 seconds (65535 ms)
+
+        pollingIntervalMillisecs = Val(FCWRefreshIntervalSecs) * 1000
         FireCallMain.pollingTimer.Interval = pollingIntervalMillisecs
         FireCallMain.pollingTimer.Enabled = True
         debugLog "STARTING startPollingTimer using VB6 timer, ID = " & pollingTimerID & " at interval of " & pollingIntervalMillisecs & "ms", False
-
-    Else
-        ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
-        ' and if you want a longer timer you have to roll your own.
-        ' in addition, unfortunately the manual code timer method does not work in the IDE
-        'Call pollingTimer_CodeTimer
-                
-        ' stop any possible running timer first
-        Call stopPollingTimer
         
-        ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
-        'pollingIntervalMillisecs = FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) * 1000
-        pollingIntervalMillisecs = Val(FCWRefreshIntervalSecs) * 1000
-        
-        ' prevent starting this timer when working in the IDE
-        If Not fInIDE Then
-            'startPollingTimer pollingIntervalMillisecs
-            ' Don't start the timer If it's already running.
-            If pollingTimerID = 0 Then
-                ' this has a callback routine that it jumps to on each interval completion
-                pollingTimerID = SetTimer(0, 1, pollingIntervalMillisecs, AddressOf pollingTimer_CodeTimer)
-                debugLog "STARTING startPollingTimer using API timer, ID = " & pollingTimerID & " at interval of " & pollingIntervalMillisecs & "ms", False
+    #Else ' VB6 timers in the IDE or at runtime
+    
+        If fInIDE Then
+            
+            ' VB6 timers cannot exceed 65 seconds (65535 ms) so only use at design/debugging time
+            If Val(FCWRefreshIntervalSecs) > 65 Then
+    '            lngSecs = 65
+    '            lngThousand = 1000
+                ' when multiplying two integer values and assigning to a long in the IDE it causes a failure as the IDE is handling the two numbers as integers
+                ' pollingIntervalMillisecs = 65 * 1000 '  < this fails
+                pollingIntervalMillisecs = lngSecs * lngThousand ' works!
+            Else
+                pollingIntervalMillisecs = Val(FCWRefreshIntervalSecs) * 1000
             End If
-        Else ' only needs to be stated once
-            MsgBox "Please note: Timers in code will not run in the IDE, defaulting to VB6 timers <65secs."
+            FireCallMain.pollingTimer.Interval = pollingIntervalMillisecs
+            FireCallMain.pollingTimer.Enabled = True
+            debugLog "STARTING startPollingTimer using VB6 timer, ID = " & pollingTimerID & " at interval of " & pollingIntervalMillisecs & "ms", False
+    
+        Else
+            ' start the polling timer in code that can exceed 65536 millisecs
+            
+            ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
+            ' and if you want a longer timer you have to roll your own.
+            ' in addition, unfortunately the custom code timer method does not work in the IDE
+                    
+            ' stop any possible running timer first
+            Call stopPollingTimer
+            
+            ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
+            pollingIntervalMillisecs = Val(FCWRefreshIntervalSecs) * 1000
+            
+            ' final check to prevent starting this timer when working in the IDE
+            If Not fInIDE Then
+                ' Don't start the timer If it's already running.
+                If pollingTimerID = 0 Then
+                    ' this has a callback routine that it jumps to on each interval completion
+                    pollingTimerID = SetTimer(0, 1, pollingIntervalMillisecs, AddressOf pollingTimer_CodeTimer)
+                    debugLog "STARTING startPollingTimer using API timer, ID = " & pollingTimerID & " at interval of " & pollingIntervalMillisecs & "ms", False
+                End If
+            Else ' only needs to be stated once
+                MsgBox "Please note: Timers in code will not run in the IDE, defaulting to VB6 timers <65secs."
+            End If
+            
         End If
-        
-    End If
-
+    
+    #End If
+    
     On Error GoTo 0
     Exit Sub
 
@@ -753,17 +765,41 @@ End Sub
 ' ie. it doesn't work in the IDE because in the IDE everything works in the main thread. Callback functions operate
 ' in a separate thread and this achieves basic multi threading but may limit some functionality - but basic commands seem to operate correctly
 
+'---------------------------------------------------------------------------------------
+' Procedure : pollingTimer_CodeTimer
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub pollingTimer_CodeTimer()
+   On Error GoTo pollingTimer_CodeTimer_Error
+
     Call pollingTimer_TimerLogic
+
+   On Error GoTo 0
+   Exit Sub
+
+pollingTimer_CodeTimer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure pollingTimer_CodeTimer of Module modCommon"
 End Sub
 
 ' the polling timer logic itself that is used by both the VB6 standard timer in the IDE and the hand-crafted timer at runtime
 ' the logic is in a separate routine as it is called directly by both the VB6 timer and the callback timer
 
+'---------------------------------------------------------------------------------------
+' Procedure : pollingTimer_TimerLogic
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub pollingTimer_TimerLogic()
 
-    Call debugLog("Polled at " & Now, False)
+   On Error GoTo pollingTimer_TimerLogic_Error
 
+    Call debugLog("Polled at " & Now, False)
 
     If Val(FCWRefreshIntervalSecs) = 0 Then Exit Sub
 
@@ -799,59 +835,139 @@ Public Sub pollingTimer_TimerLogic()
     Call debugLog("Completed polling " & Now, False)
     pollingFlag = False
 
+   On Error GoTo 0
+   Exit Sub
+
+pollingTimer_TimerLogic_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure pollingTimer_TimerLogic of Module modCommon"
+
 End Sub
 
 
 
 ' The timer that stops the polling timer
+'---------------------------------------------------------------------------------------
+' Procedure : stopPollingTimer
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub stopPollingTimer()
     ' Don't stop the timer If it isn't running.
+   On Error GoTo stopPollingTimer_Error
+
     If pollingTimerID Then
         KillTimer 0, pollingTimerID
         pollingTimerID = 0
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+stopPollingTimer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure stopPollingTimer of Module modCommon"
 End Sub
 
 
 ' this is the iconising timer initiate routine that both stops and starts the timer
 ' note this timer only runs at runtime and not in the IDE
+'---------------------------------------------------------------------------------------
+' Procedure : initiateIconiseTimerInCode
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub initiateIconiseTimerInCode()
 
     Dim iconiseIntervalMillisecs As Long
     
+    On Error GoTo initiateIconiseTimerInCode_Error
+
     Call stopIconiseTimer
     ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
     iconiseIntervalMillisecs = Val(FCWIconiseDelay) * 1000
-    ' disable this timer when working in the IDE
+    ' FINAL TEST to disable this timer when working in the IDE
     If Not fInIDE Then
         If Val(FCWIconiseDelay) > 0 Then
             'MsgBox "startIconiseTimer " & Val(FCWIconiseDelay)
             startIconiseTimer iconiseIntervalMillisecs
         End If
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+initiateIconiseTimerInCode_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure initiateIconiseTimerInCode of Module modCommon"
 End Sub
 ' The actual iconising timer that starts the timer
+'---------------------------------------------------------------------------------------
+' Procedure : startIconiseTimer
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub startIconiseTimer(ByVal Timeout As Long)
     
+   On Error GoTo startIconiseTimer_Error
+
     Call stopIconiseTimer
     If iconiseTimerID = 0 Then
         iconiseTimerID = SetTimer(0, 2, Timeout, AddressOf iconiseTimer_TimerA)
         'MsgBox "STARTING startIconiseTimer " & iconiseTimerID & " at interval of " & timeout & "ms"
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+startIconiseTimer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure startIconiseTimer of Module modCommon"
 End Sub
 ' The timer that stops the iconising timer
+'---------------------------------------------------------------------------------------
+' Procedure : stopIconiseTimer
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub stopIconiseTimer()
     ' Don't stop the timer If it isn't running.
+   On Error GoTo stopIconiseTimer_Error
+
     If iconiseTimerID Then
         KillTimer 0, iconiseTimerID
         iconiseTimerID = 0
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+stopIconiseTimer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure stopIconiseTimer of Module modCommon"
 End Sub
 
 ' Callback routine called byAddressOf used by the iconising timer. Note: This function only operates at runtime,
 ' ie. it doesn't work in the IDE because in the IDE everything works in the main thread. Callback functions operate
 ' in a separate thread and this achieves basic multi threading but may limit some functionality - but basic commands seem to operate correctly
+'---------------------------------------------------------------------------------------
+' Procedure : iconiseTimer_TimerA
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub iconiseTimer_TimerA()
+
+   On Error GoTo iconiseTimer_TimerA_Error
 
     If Val(FCWIconiseDelay) = 0 Then
         Call stopIconiseTimer
@@ -873,15 +989,38 @@ Public Sub iconiseTimer_TimerA()
         
     End If
 
+   On Error GoTo 0
+   Exit Sub
+
+iconiseTimer_TimerA_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure iconiseTimer_TimerA of Module modCommon"
+
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : getIdleTime
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub getIdleTime()
     Dim lastInputVar As LASTINPUTINFO
     
+   On Error GoTo getIdleTime_Error
+
     lastInputVar.cbSize = Len(lastInputVar)
     Call GetLastInputInfo(lastInputVar)
     
     idleTime = GetTickCount - lastInputVar.dwTime
+
+   On Error GoTo 0
+   Exit Sub
+
+getIdleTime_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure getIdleTime of Module modCommon"
 End Sub
     
 
@@ -918,17 +1057,42 @@ End Sub
  
 
  ' VB6 opacity at form level achieved using APIs
+'---------------------------------------------------------------------------------------
+' Procedure : setOpacity
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
  Public Sub setOpacity(ByVal Opacity As Long)
+   On Error GoTo setOpacity_Error
+
     currentOpacity = Opacity
     Call SetWindowLong(FireCallMain.hwnd, GWL_EXSTYLE, GetWindowLong(FireCallMain.hwnd, GWL_EXSTYLE) Or WS_EX_LAYERED)
     Call SetLayeredWindowAttributes(FireCallMain.hwnd, RGB(255, 0, 255), Opacity, LWA_ALPHA Or LWA_COLORKEY)
+
+   On Error GoTo 0
+   Exit Sub
+
+setOpacity_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setOpacity of Module modCommon"
 End Sub
 
 ' checks the existence of the output file, the local user's file, checks the linecount and reads the data into the array and thence to the listbox
+'---------------------------------------------------------------------------------------
+' Procedure : checkAndReadOutputFile
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub checkAndReadOutputFile()
 
     Dim timeDifferenceInSecs As Long ' max 86 years as a LONG in secs
     
+   On Error GoTo checkAndReadOutputFile_Error
+
     timeDifferenceInSecs = 0
     
     If Not fFExists(FCWSharedOutputFile) Then
@@ -989,6 +1153,15 @@ Private Sub checkAndReadOutputFile()
     'If oldOutputLineCount = outputLineCount Then Exit Sub ' to minimise CPU usage just exit
     
     Call readOutputFileWriteArrayWriteListbox(FCWSharedOutputFile)
+    
+    FireCallMain.lbxOutputTextArea.Refresh
+
+   On Error GoTo 0
+   Exit Sub
+
+checkAndReadOutputFile_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure checkAndReadOutputFile of Module modCommon"
 End Sub
 
 '---------------------------------------------------------------------------------------
@@ -1083,17 +1256,26 @@ l_getInputLineCount: ' continue location
     FireCallMain.picTextChangeBright.Visible = True
     FireCallMain.picTextChangeDull.Visible = False
     
-    Call readInputFileAndWriteArray(FCWSharedInputFile)
+    Call readInputFileWriteArrayAndListbox(FCWSharedInputFile)
 
 
 End Sub
 
 ' if Dropbox is unavailable, the process not running, then say so.
+'---------------------------------------------------------------------------------------
+' Procedure : fCheckDropboxRunning
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Function fCheckDropboxRunning() As Boolean
     Dim alarmFile As String
     Dim answer As VbMsgBoxResult
     
     'initialise the dimensioned variables
+   On Error GoTo fCheckDropboxRunning_Error
+
     answer = vbNo
     
     alarmFile = App.Path & "\Resources\Sounds\" & FCWAlarmSound
@@ -1118,6 +1300,13 @@ Public Function fCheckDropboxRunning() As Boolean
         fCheckDropboxRunning = True
     End If
 
+
+   On Error GoTo 0
+   Exit Function
+
+fCheckDropboxRunning_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fCheckDropboxRunning of Module modCommon"
 
 End Function
 
@@ -1454,6 +1643,7 @@ End Sub
 
 
 
+'---------------------------------------------------------------------------------------
 ' Procedure : fGetstring
 ' Author    : beededea
 ' Date      : 05/07/2019
@@ -1663,14 +1853,14 @@ Public Sub populateInputBox()
     Dim lLength As Long
     
     If FCWOptHandleData = "0" Then
-        ioMethodADO = False
+        gblIoMethodADO = False
         FireCallMain.picFsoLampBright.Visible = True
         FireCallMain.picFsoLampDull.Visible = False
         FireCallMain.picUtf8LampBright.Visible = False
         FireCallMain.picUtf8LampDull.Visible = True
         
     Else
-        ioMethodADO = True
+        gblIoMethodADO = True
         FireCallMain.picFsoLampBright.Visible = False
         FireCallMain.picFsoLampDull.Visible = True
         FireCallMain.picUtf8LampBright.Visible = True
@@ -1678,7 +1868,7 @@ Public Sub populateInputBox()
     End If
 
     ' read the defined input file and write the input array
-    Call readInputFileAndWriteArray(FCWSharedInputFile)
+    Call readInputFileWriteArrayAndListbox(FCWSharedInputFile)
     
     ' the scrollbar config code needs to be here after the reading of the output data
     If FCWEnableScrollbars = 0 Then
@@ -1878,7 +2068,7 @@ Public Function fLineCount(ByRef sFName As String) As Long
 ' timer code ENDS
 
     ' new code to count the lines using ADODB.Stream STARTS ' 3.4ms
-    'If ioMethodADO = True Then
+    'If gblIoMethodADO = True Then
         '3.4ms
 '        Dim Stm As ADODB.Stream
 '        Dim Line As String
@@ -1930,119 +2120,38 @@ End Function
 
 
 
-' read the remote user's file line by line, read it into an interim array and thence into a listbox.
-' called by checkAndReadInputFile during polling & populateInputBox during startup
-Public Sub readInputFileAndWriteArray(ByVal sFName As String)
-
-    Dim lIndex As Long
-    'Dim fileString As String
-    Dim useloop As Long
-    Dim lbxCount As Integer
-    Dim startLoc As Long
-    Dim endLoc As Long
-    Dim stepNo As Integer
-    Dim stringToWrite As String
-    Dim emojiFilenamePos As Integer
-    Dim emojiFilename As String
-    Dim emojiFilePath As String
-    Dim recordingString As String
-    Dim recordingFilenamePos As Integer
-    Dim recordingFilename As String
-    Dim attachmentString As String
-    Dim attachmentFilenamePos As Integer
-    Dim attachmentFilename As String
-    Dim suffix As String
-    Dim suffixNoDot As String
-    Dim emojiString As String
-    Dim pingString As String
-    Dim buzzerString As String
-    Dim awakeString As String
-    Dim buzzerStamp As String
-    'Dim finalStamp As String
-    Dim pingStamp As String
-    Dim awakeStamp As String
-    Dim unixTimeStamp As String
-    Dim shutdownString As String
-    Dim shutdownStamp As String
-    Dim shutDateTime As String
-    Dim folderDisplayed As Boolean
-    Dim soundtoplay As String
-    Dim attachmentTimeDiffInSecs As Long
-    Dim recordingTimeDiffInSecs As Long
-    Dim shutdownTimeDiffInSecs As Currency
+'---------------------------------------------------------------------------------------
+' Procedure : populateInputArrayFromFile
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   : reads from file using either of two methods depending upon the o/s and file type of the system you are communicating with.
+'---------------------------------------------------------------------------------------
+'
+Private Sub populateInputArrayFromFile(ByVal sFName As String)
     Dim thisFile As Object
-    Dim answer As VbMsgBoxResult
-    Dim answer2 As VbMsgBoxResult
+    Dim lIndex As Long
     Dim inStm As ADODB.Stream
-    Dim tmpRead As String
-    Dim findStr As Integer
-    Dim findStartPos As Integer
-    Dim stringWithoutPrefix As String
-        
-    Dim nowInSecs As Long
-    Dim lastShutdownDiff As Long
-        
-    Const ForReading As Integer = 1
-    
-    useloop = 0
-    buzzerString = vbNullString
-    buzzerStamp = vbNullString
-    'finalStamp = vbNullString
-    pingStamp = vbNullString
-    emojiString = vbNullString
-    emojiFilenamePos = 0
-    emojiFilename = vbNullString
-    emojiFilePath = vbNullString
-    attachmentString = vbNullString
-    attachmentFilenamePos = 0
-    attachmentFilename = vbNullString
-    attachmentFilePath = vbNullString
-    suffix = vbNullString
-    pingString = vbNullString
-    awakeString = vbNullString
-    awakeStamp = vbNullString
-    unixTimeStamp = vbNullString
-    shutdownString = vbNullString
-    shutdownStamp = vbNullString
-    shutDateTime = vbNullString
-    folderDisplayed = False
-    attachmentTimeDiffInSecs = 0
-    shutdownTimeDiffInSecs = 0
-    lIndex = 1
-    answer = vbNo
-    answer2 = vbNo
-    findStartPos = 0
-    stringWithoutPrefix = ""
-    
-    ' get the line count
-    inputLineCount = fLineCount(FCWSharedInputFile)
-    
-    If inputLineCount >= 32766 Then
-        debugLog "%Err-I-ErrorNumber 19 - The input file is close to the maximum limit, please split and shorten the input file"
-    End If
-        
-    If inputLineCount >= 32766 Then
-        debugLog "%Err-I-ErrorNumber 20 - The input file is too long at 32,766 lines long, please split and shorten the input file. FCW will not process new messages"
-        Exit Sub
-    End If
-    
-    ' resize the array to the new linecount
-    ReDim inputFileArray(inputLineCount)
-    ' timer code BEGINS - requires QueryPerformanceCounter API declaration to be enabled
-'    Dim lngReturn As Long
-'    Dim curFreq As Currency
-'    Dim curStart As Currency
-'    Dim curEnd As Currency
-'    Dim sngTime As Single
-'
-'    lngReturn = QueryPerformanceFrequency(curFreq)
-'    If lngReturn = 0 Then MsgBox "Your Hardware does not support a high-resolution timer"
-'
-'    lngReturn = QueryPerformanceCounter(curStart)
-    ' timer code ENDS
 
+    Const ForReading As Integer = 1
+
+    On Error GoTo populateInputArrayFromFile_Error
     
-    If ioMethodADO = False Then
+'         timer code BEGINS - requires QueryPerformanceCounter API declaration to be enabled
+'        Dim lngReturn As Long
+'        Dim curFreq As Currency
+'        Dim curStart As Currency
+'        Dim curEnd As Currency
+'        Dim sngTime As Single
+'
+'        lngReturn = QueryPerformanceFrequency(curFreq)
+'        If lngReturn = 0 Then MsgBox "Your Hardware does not support a high-resolution timer"
+'
+'        lngReturn = QueryPerformanceCounter(curStart)
+'         timer code ENDS
+    
+    lIndex = 1
+
+    If gblIoMethodADO = False Then
         ' use of the FileSystemObject as it handles EOL with CrLf whereas INPUT LINE does not.
         ' when working with a linux version of the utility this is vital.
         Set fso = CreateObject("Scripting.FileSystemObject") '11.62ms in the IDE 13ms when compiled
@@ -2056,8 +2165,9 @@ Public Sub readInputFileAndWriteArray(ByVal sFName As String)
             End If
         Loop
         thisFile.Close
-    Else
-    
+        
+    Else ' linux/Mac utf-8 &c
+        
         ' code to replace the usage of the file system object i/o, supposedly the FSO object
         ' is slow, bloated and poor at UTF-8 support. Use of the ADO object requires enabling
         ' of Microsoft ActiveX Data Objects 2.8 Library in References.
@@ -2089,14 +2199,130 @@ Public Sub readInputFileAndWriteArray(ByVal sFName As String)
         End With
     End If
     
-' timer code BEGINS
+'        timer code BEGINS
 '        lngReturn = QueryPerformanceCounter(curEnd)
 '        sngTime = (curEnd - curStart) * 1000 / curFreq
 '        Debug.Print "Execution Time " & sngTime & " mS"
 '        MsgBox "Execution Time " & sngTime & " mS"
 '
-' timer code ENDS
+'        timer code ENDS
 
+   On Error GoTo 0
+   Exit Sub
+
+populateInputArrayFromFile_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateInputArrayFromFile of Module modCommon"
+End Sub
+
+
+
+
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : readInputFileWriteArrayAndListbox
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   : read the remote user's file line by line, read it into an interim array, filter, add tags and thence into a listbox.
+' called by checkAndReadInputFile during polling & populateInputBox during startup
+'---------------------------------------------------------------------------------------
+'
+Public Sub readInputFileWriteArrayAndListbox(ByVal thisInputFile As String)
+
+    On Error GoTo readInputFileWriteArrayAndListbox_Error
+
+    Dim useloop As Long
+    Dim lbxCount As Integer
+    Dim startLoc As Long
+    Dim endLoc As Long
+    Dim stepNo As Integer
+    Dim stringToWrite As String
+    Dim recordingString As String
+    Dim recordingFilenamePos As Integer
+    Dim recordingFilename As String
+    Dim attachmentString As String
+
+'    Dim suffix As String
+'    Dim suffixNoDot As String
+    Dim emojiString As String
+    Dim pingString As String
+    Dim buzzerString As String
+    Dim awakeString As String
+    Dim buzzerStamp As String
+    'Dim finalStamp As String
+    Dim pingStamp As String
+    Dim awakeStamp As String
+    Dim unixTimeStamp As String
+    Dim shutdownString As String
+    Dim shutdownStamp As String
+    Dim shutDateTime As String
+'    Dim folderDisplayed As Boolean
+    Dim soundtoplay As String
+    Dim attachmentTimeDiffInSecs As Long
+    Dim recordingTimeDiffInSecs As Long
+    Dim shutdownTimeDiffInSecs As Currency
+    Dim thisFile As Object
+    Dim answer As VbMsgBoxResult
+    Dim answer2 As VbMsgBoxResult
+    Dim tmpRead As String
+    Dim findStr As Integer
+    Dim findStartPos As Integer
+    Dim stringWithoutPrefix As String
+        
+    Dim nowInSecs As Long
+    Dim lastShutdownDiff As Long
+           
+    useloop = 0
+    buzzerString = vbNullString
+    buzzerStamp = vbNullString
+    'finalStamp = vbNullString
+    pingStamp = vbNullString
+    emojiString = vbNullString
+
+    attachmentString = vbNullString
+    'suffix = vbNullString
+    pingString = vbNullString
+    awakeString = vbNullString
+    awakeStamp = vbNullString
+    unixTimeStamp = vbNullString
+    shutdownString = vbNullString
+    shutdownStamp = vbNullString
+    shutDateTime = vbNullString
+    'folderDisplayed = False
+    attachmentTimeDiffInSecs = 0
+    shutdownTimeDiffInSecs = 0
+
+    answer = vbNo
+    answer2 = vbNo
+    findStartPos = 0
+    stringWithoutPrefix = ""
+    
+    ' get the line count
+    inputLineCount = fLineCount(FCWSharedInputFile)
+    
+    If inputLineCount >= 32766 Then
+        debugLog "%Err-I-ErrorNumber 19 - The input file is close to the maximum limit, please split and shorten the input file using archive facility in the prefs"
+    End If
+        
+    If inputLineCount >= 32766 Then
+        debugLog "%Err-I-ErrorNumber 20 - The input file is too long at 32,766 lines long, please split and shorten the input file using archive facility in the prefs. FCW will not process new messages"
+        Exit Sub
+    End If
+    
+    ' resize the array to the new linecount
+    ReDim inputFileArray(inputLineCount)
+    
+    ' reads from file using either of two methods depending upon the o/s and file type of the system you are communicating with.
+    Call populateInputArrayFromFile(thisInputFile)
+               
+    ' locks the input listbox whilst the listbox is updated from the array to prevent rippling/flickering
+    LockWindowUpdate FireCallMain.lbxInputTextArea.hwnd
+    
+    ' read the array and write the output to the listbox, replacing the known tags with the correct text
+    ' also store timestamps and variables associated with each type of tag
+    ' known tags = <><> <o><o> <p><p> <b><b> <t><t> <z><z>
+        
     lbxCount = 0
         
     ' determine the start point at which we read from the array, beginning or end.
@@ -2109,14 +2335,7 @@ Public Sub readInputFileAndWriteArray(ByVal sFName As String)
             endLoc = inputLineCount
             stepNo = 1
     End If
-        
-    ' locks the input listbox whilst the listbox is updated from the array to prevent rippling/flickering
-    LockWindowUpdate FireCallMain.lbxInputTextArea.hwnd
-    
-    ' read the array and write the output to the listbox, replacing the known tags with the correct text
-    ' also store timestamps and variables associated with each type of tag
-    ' known tags = <><> <o><o> <p><p> <b><b> <t><t> <z><z>
-    '
+
     For useloop = startLoc To endLoc Step stepNo
         stringToWrite = vbNullString
         If inputFileArray(useloop) <> vbNullString Then 'differs from the input file in that we turn the array upside down
@@ -2172,6 +2391,7 @@ Public Sub readInputFileAndWriteArray(ByVal sFName As String)
                 Else
                     stringToWrite = inputFileArray(useloop)
                 End If
+                
                 FireCallMain.lbxInputTextArea.List(lbxCount) = stringToWrite
             End If
             lbxCount = lbxCount + 1
@@ -2179,9 +2399,6 @@ Public Sub readInputFileAndWriteArray(ByVal sFName As String)
         'finalStamp = Left$(inputFileArray(useloop), 22)
     Next useloop
     
-    ' at this point the listbox has been written so we now unlock it after the update
-    LockWindowUpdate 0& '
-
     ' litle fix to prevent potential duplication of content in the listboxes
     Dim listCounter As Long
     listCounter = FireCallMain.lbxInputTextArea.ListCount
@@ -2192,85 +2409,21 @@ Public Sub readInputFileAndWriteArray(ByVal sFName As String)
         Next useloop
     End If
     
+    ' at this point the listbox has been written so we now unlock it after the update
+    LockWindowUpdate 0& '
+
     ' Post processing according to what we found in the file, generally we respond to the last occurrence of each event
     ' hold the event time and compare that with a stored value.
     
     'respond to a ping request and store the time of the last ping so that we do not respond multiple times
-    If pingString <> vbNullString And FCWLastPingResponse <> pingStamp Then
+    If pingString <> vbNullString And FCWLastPingResponse <> pingStamp Then Call respondToPinStamp(pingStamp)
         
-        ' next line caused corruption during the refresh process
-        'Call sendSomething("Ping response. Refresh interval: " & FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) & "  OS:" & WindowsVer & "  Version:" & App.Major & "." & App.Minor & "." & App.Revision)
-        
-        'old method of passing a single command to a timer to run it asynchronously
-        'FireCallMain.sendCommandTimer.Tag = "Ping response. Refresh interval: " & FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) & "  OS:" & WindowsVer & "  Version:" & App.Major & "." & App.Minor & "." & App.Revision
-        
-        'new method of passing a command to a message queue for a timer to run each asynchronously
-        messageQueue.Add "Ping response. Refresh interval: " & FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) & "  OS:" & WindowsVer & "  Version:" & App.Major & "." & App.Minor & "." & App.Revision ' Add to the end of the collection
-        
-        FireCallMain.sendCommandTimer.Enabled = True ' this does a Call sendSomething(stringToSend)
-                                                     ' but it does it ensuring this tranche of current polling is complete
-        FCWLastPingResponse = pingStamp
-        If fFExists(FCWSettingsFile) Then
-            PutINISetting "Software\FireCallWin", "lastPingResponse", FCWLastPingResponse, FCWSettingsFile
-        End If
-    End If
-    
     ' if an emoji code is sent then set the emoji image locally, this is always the last emoji received
-    If emojiString <> vbNullString Then
-        emojiFilenamePos = InStr(emojiString, "<o><o>") + 6
-        emojiFilename = Mid$(emojiString, emojiFilenamePos, Len(emojiString)) & ".jpg"
-        emojiFilePath = App.Path & "\Resources\Emojis\standard\base\" & emojiFilename
-        If fFExists(emojiFilePath) Then
-            FireCallMain.picEmoji.Picture = LoadPicture(emojiFilePath)
-            'If mainBtnLidVisible = False Then Call clickOnPicEmoji
-        End If
-    End If
+    If emojiString <> vbNullString Then Call respondToEmojiStamp(emojiString)
     
     ' if an attachment is sent then attempt to display it always shows the last
-    If attachmentString <> vbNullString Then
-        If InStr(attachmentString, "<><>") > 0 Then
-            attachmentFilenamePos = InStr(attachmentString, "<><>") + 4 ' file
-        Else
-            attachmentFilenamePos = InStr(attachmentString, "<f><f>") + 6 ' folder
-            folderDisplayed = True
-        End If
-        attachmentFilename = Mid$(attachmentString, attachmentFilenamePos, Len(attachmentString))
-        ' next line removes a spurious character (vbCrLf?) that appeared after changing the method of reading to ADO
-        'attachmentFilename = Mid$(attachmentFilename, 1, Len(attachmentFilename))
-        attachmentFilePath = FCWExchangeFolder & "\" & attachmentFilename
-        
-        ' if the current image display, caused by a recent click on an image in the chat happened less than
-        ' three minutes ago, then bypass the display of the last image found. This allows the user to retain
-        ' his recently clicked-upon image even if a repoll for new data happens in that time.
-        
-        If attachmentViewTime <> "00:00:00" Then
-            attachmentTimeDiffInSecs = DateDiff("s", attachmentViewTime, Now)
-        End If
-        
-        If attachmentTimeDiffInSecs = 0 Or attachmentTimeDiffInSecs >= 180 Then
-            If folderDisplayed = False Then
-                ' we store the full file path as the attachmentFilePath variable will be overwritten by subsequent sutomatic clicks
-                ' when setting the input listBox to the last position a click is always generated
-                displayedAttachmentFilePath = attachmentFilePath
-                suffix = fExtractSuffixWithDot(displayedAttachmentFilePath)
-                suffixNoDot = fExtractSuffix(displayedAttachmentFilePath)
-
-                If fInstrSuffix(validImageArrayList, LCase(suffix)) Then
-                    Call displaySelectedImage(displayedAttachmentFilePath)
-                ElseIf fInstrSuffix(invalidImageArrayList, LCase(suffix)) Then
-                    Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-unknown" & ".png")
-                Else
-                    Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-" & suffixNoDot & ".png")
-                End If
-                If FCWEnableTooltips = "1" Then FireCallMain.picImagePrintOut.ToolTipText = attachmentFilename & " - double click to open the file using default app."
-                
-            Else ' folder
-                Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-dir.png")
-                If FCWEnableTooltips = "1" Then FireCallMain.picImagePrintOut.ToolTipText = attachmentFilename & " - double click to open the folder in Explorer."
-            End If
-        End If
-
-    End If
+    If attachmentString <> vbNullString Then Call respondToAttachmentStamp(attachmentString)
+    
     
     ' buzzer code received, stores the last buzz time so we only buzz once
     If buzzerString <> vbNullString And FCWLastSoundPlayed <> buzzerStamp Then
@@ -2376,7 +2529,7 @@ Public Sub readInputFileAndWriteArray(ByVal sFName As String)
                 ' when setting the input listBox to the last position a click is always generated
                 
 
-                displayedAttachmentFilePath = recordingFilePath
+                gblDisplayedAttachmentFilePath = recordingFilePath
 
                 Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-rec" & ".png")
                 If FCWEnableTooltips = "1" Then FireCallMain.picImagePrintOut.ToolTipText = recordingFilename & " - double click to play the recording."
@@ -2386,6 +2539,151 @@ Public Sub readInputFileAndWriteArray(ByVal sFName As String)
     ' now store the file characteristics so that we can use them to compare on the next run
     oldInputFileModificationTime = inputFileModificationTime
 
+   On Error GoTo 0
+   Exit Sub
+
+readInputFileWriteArrayAndListbox_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure readInputFileWriteArrayAndListbox of Module modCommon"
+
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : respondToAttachmentStamp
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub respondToAttachmentStamp(ByVal thisAttachmentString As String)
+    
+    Dim attachmentFilenamePos As Integer: attachmentFilenamePos = 0
+    Dim attachmentFilename As String: attachmentFilename = vbNullString
+    Dim folderDisplayed As Boolean: folderDisplayed = False
+    Dim attachmentTimeDiffInSecs As Long: attachmentTimeDiffInSecs = 0
+    Dim suffix As String
+    Dim suffixNoDot As String
+    
+    'gblAttachmentFilePath = vbNullString
+   
+    On Error GoTo respondToAttachmentStamp_Error
+
+        If InStr(thisAttachmentString, "<><>") > 0 Then
+            attachmentFilenamePos = InStr(thisAttachmentString, "<><>") + 4 ' file
+        Else
+            attachmentFilenamePos = InStr(thisAttachmentString, "<f><f>") + 6 ' folder
+            folderDisplayed = True
+        End If
+        attachmentFilename = Mid$(thisAttachmentString, attachmentFilenamePos, Len(thisAttachmentString))
+        ' next line removes a spurious character (vbCrLf?) that appeared after changing the method of reading to ADO
+        'attachmentFilename = Mid$(attachmentFilename, 1, Len(attachmentFilename))
+        gblAttachmentFilePath = FCWExchangeFolder & "\" & attachmentFilename
+        
+        ' if the current image display, caused by a recent click on an image in the chat happened less than
+        ' three minutes ago, then bypass the display of the last image found. This allows the user to retain
+        ' his recently clicked-upon image even if a repoll for new data happens in that time.
+        
+        If gblAttachmentViewTime <> "00:00:00" Then
+            attachmentTimeDiffInSecs = DateDiff("s", gblAttachmentViewTime, Now)
+        End If
+        
+        If attachmentTimeDiffInSecs = 0 Or attachmentTimeDiffInSecs >= 180 Then
+            If folderDisplayed = False Then
+                ' we store the full file path as the gblAttachmentFilePath variable will be overwritten by subsequent sutomatic clicks
+                ' when setting the input listBox to the last position a click is always generated
+                gblDisplayedAttachmentFilePath = gblAttachmentFilePath
+                suffix = fExtractSuffixWithDot(gblDisplayedAttachmentFilePath)
+                suffixNoDot = fExtractSuffix(gblDisplayedAttachmentFilePath)
+
+                If fInstrSuffix(validImageArrayList, LCase(suffix)) Then
+                    Call displaySelectedImage(gblDisplayedAttachmentFilePath)
+                ElseIf fInstrSuffix(invalidImageArrayList, LCase(suffix)) Then
+                    Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-unknown" & ".png")
+                Else
+                    Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-" & suffixNoDot & ".png")
+                End If
+                If FCWEnableTooltips = "1" Then FireCallMain.picImagePrintOut.ToolTipText = attachmentFilename & " - double click to open the file using default app."
+                
+            Else ' folder
+                Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-dir.png")
+                If FCWEnableTooltips = "1" Then FireCallMain.picImagePrintOut.ToolTipText = attachmentFilename & " - double click to open the folder in Explorer."
+            End If
+        End If
+
+   On Error GoTo 0
+   Exit Sub
+
+respondToAttachmentStamp_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure respondToAttachmentStamp of Module modCommon"
+
+End Sub
+
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : respondToEmojiStamp
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   : if an emoji code is sent then set the emoji image locally, this is always the last emoji received
+'---------------------------------------------------------------------------------------
+'
+Private Sub respondToEmojiStamp(ByVal thisEmojiString As String)
+    Dim emojiFilenamePos As Integer: emojiFilenamePos = 0
+    Dim emojiFilename As String: emojiFilename = vbNullString
+    Dim emojiFilePath As String: emojiFilePath = vbNullString
+    
+    On Error GoTo respondToEmojiStamp_Error
+        
+    emojiFilenamePos = InStr(thisEmojiString, "<o><o>") + 6
+    emojiFilename = Mid$(thisEmojiString, emojiFilenamePos, Len(thisEmojiString)) & ".jpg"
+    emojiFilePath = App.Path & "\Resources\Emojis\standard\base\" & emojiFilename
+    If fFExists(emojiFilePath) Then
+        FireCallMain.picEmoji.Picture = LoadPicture(emojiFilePath)
+        'If mainBtnLidVisible = False Then Call clickOnPicEmoji
+    End If
+
+   On Error GoTo 0
+   Exit Sub
+
+respondToEmojiStamp_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure respondToEmojiStamp of Module modCommon"
+End Sub
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : respondToPinStamp
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub respondToPinStamp(ByVal thisPingStamp As String)
+    ' next line caused corruption during the refresh process
+    'Call sendSomething("Ping response. Refresh interval: " & FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) & "  OS:" & WindowsVer & "  Version:" & App.Major & "." & App.Minor & "." & App.Revision)
+    
+    'old method of passing a single command to a timer to run it asynchronously
+    'FireCallMain.sendCommandTimer.Tag = "Ping response. Refresh interval: " & FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) & "  OS:" & WindowsVer & "  Version:" & App.Major & "." & App.Minor & "." & App.Revision
+    
+    'new method of passing a command to a message queue for a timer to run each asynchronously
+    On Error GoTo respondToPinStamp_Error
+
+    messageQueue.Add "Ping response. Refresh interval: " & FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) & "  OS:" & WindowsVer & "  Version:" & App.Major & "." & App.Minor & "." & App.Revision ' Add to the end of the collection
+    
+    FireCallMain.sendCommandTimer.Enabled = True ' this does a Call sendSomething(stringToSend)
+                                                 ' but it does it ensuring this tranche of current polling is complete
+    FCWLastPingResponse = thisPingStamp
+    If fFExists(FCWSettingsFile) Then
+        PutINISetting "Software\FireCallWin", "lastPingResponse", FCWLastPingResponse, FCWSettingsFile
+    End If
+
+   On Error GoTo 0
+   Exit Sub
+
+respondToPinStamp_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure respondToPinStamp of Module modCommon"
 End Sub
 '
 '---------------------------------------------------------------------------------------
@@ -2795,7 +3093,7 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     
 
     
-    If ioMethodADO = False Then
+    If gblIoMethodADO = False Then
     '     we use the FSO method rather than VB6 input as it is more friendly to unix crlf EOLs
         Set fso = CreateObject("Scripting.FileSystemObject")
         Set outfile = fso.OpenTextFile(sFName, ForReading, False, 0)
@@ -4069,12 +4367,21 @@ End Function
 
 
 ' Omit plngLeft & plngRight; they are used internally during recursion
+'---------------------------------------------------------------------------------------
+' Procedure : QuickSort
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub QuickSort(ByRef pvarArray As Variant, Optional ByVal plngLeft As Long, Optional ByVal plngRight As Long)
     Dim lngFirst As Long
     Dim lngLast As Long
     Dim varMid As Variant
     Dim varSwap As Variant
     
+   On Error GoTo QuickSort_Error
+
     If plngRight = 0 Then
         plngLeft = LBound(pvarArray)
         plngRight = UBound(pvarArray)
@@ -4099,15 +4406,31 @@ Public Sub QuickSort(ByRef pvarArray As Variant, Optional ByVal plngLeft As Long
     Loop Until lngFirst > lngLast
     If plngLeft < lngLast Then QuickSort pvarArray, plngLeft, lngLast
     If lngFirst < plngRight Then QuickSort pvarArray, lngFirst, plngRight
+
+   On Error GoTo 0
+   Exit Sub
+
+QuickSort_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure QuickSort of Module modCommon"
 End Sub
 
 
 ' credit Matthew Gates
+'---------------------------------------------------------------------------------------
+' Procedure : fIsFileAlreadyOpen
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Function fIsFileAlreadyOpen(FileName As String) As Boolean
  Dim hFile As Long
  Dim lastErr As Long
 
  ' Initialize file handle and error variable.
+   On Error GoTo fIsFileAlreadyOpen_Error
+
  hFile = -1
  lastErr = 0
 
@@ -4128,6 +4451,13 @@ Function fIsFileAlreadyOpen(FileName As String) As Boolean
     Else
     fIsFileAlreadyOpen = False
  End If
+
+   On Error GoTo 0
+   Exit Function
+
+fIsFileAlreadyOpen_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fIsFileAlreadyOpen of Module modCommon"
 End Function
 
 
@@ -4701,7 +5031,7 @@ Private Sub writeOutputFile(ByVal fileToUpdate As String, ByVal thisLineCount As
 
     ' nowBeingModifiedFlag = True
     
-    If ioMethodADO = False Then
+    If gblIoMethodADO = False Then
         ' using the FileSystemObject as it handles EOL with CrLf whereas INPUT LINE does not.
         Set fso = CreateObject("Scripting.FileSystemObject")
         Set outfile = fso.OpenTextFile(fileToUpdate, ForWriting, 0)
@@ -4851,7 +5181,7 @@ Private Function updateArchiveFile(ByRef thisArray() As String, ByVal fileToUpda
     ' nowBeingModifiedFlag = True
 
     
-    If ioMethodADO = False Then
+    If gblIoMethodADO = False Then
         ' using the FileSystemObject as it handles EOL with CrLf whereas INPUT LINE does not.
         Set fso = CreateObject("Scripting.FileSystemObject")
         Set outfile = fso.OpenTextFile(fileToUpdate, ForWriting, 0)
@@ -4962,13 +5292,29 @@ updateArchiveFile_Error:
     End With
     
 End Function
-' Olaf Schmidt
+'
+'---------------------------------------------------------------------------------------
+' Procedure : Epoch2Date
+' Author    : Olaf Schmidt
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Function Epoch2Date(ByVal E As Currency, Optional msFrac) As Date
 Const Estart As Double = #1/1/1970#
    
+   On Error GoTo Epoch2Date_Error
+
   msFrac = 0
   If E > 10000000000@ Then E = E * 0.001: msFrac = E - Int(E)
   Epoch2Date = Estart + (E - msFrac) / 86400
+
+   On Error GoTo 0
+   Exit Function
+
+Epoch2Date_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Epoch2Date of Module modCommon"
 End Function
 
 '---------------------------------------------------------------------------------------
@@ -5023,10 +5369,19 @@ End Function
 'End Function
 
 ' qvb6   https://www.vbforums.com/member.php?291519-qvb6
+'---------------------------------------------------------------------------------------
+' Procedure : fVb6DateFromEpoch
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Function fVb6DateFromEpoch(ByVal iEpoch As Long, Optional ByRef bias As Long) As Date
     Dim C As Currency
     Dim u As TIME_ZONE_INFORMATION
     Dim ret As Long
+
+   On Error GoTo fVb6DateFromEpoch_Error
 
     GetMem4 iEpoch, C
     ' 86400 is the number of seconds in a day.
@@ -5038,15 +5393,31 @@ Public Function fVb6DateFromEpoch(ByVal iEpoch As Long, Optional ByRef bias As L
         bias = u.bias
     End If
     fVb6DateFromEpoch = CDbl(C * 10000@) / 86400# + 25569# - (CDbl(bias) / 1440#)
+
+   On Error GoTo 0
+   Exit Function
+
+fVb6DateFromEpoch_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fVb6DateFromEpoch of Module modCommon"
 End Function
 
 ' Format a date string from a unix time stamp     ' Wed, 30 Jun 2021 14:55:27 GMT
+'---------------------------------------------------------------------------------------
+' Procedure : fConvertEpochToTimeString
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Function fConvertEpochToTimeString(unixTimeStamp As String) As String
      Dim stampMinusSubSecond As Long
      Dim vb6DateTime As Date
      Dim formattedString As String
      Dim bias As Long
      
+   On Error GoTo fConvertEpochToTimeString_Error
+
      stampMinusSubSecond = Val(unixTimeStamp) / 1000
      vb6DateTime = fVb6DateFromEpoch(stampMinusSubSecond, bias)
      
@@ -5073,6 +5444,13 @@ Private Function fConvertEpochToTimeString(unixTimeStamp As String) As String
      End Select
      
      fConvertEpochToTimeString = dayOfWeek & ", " & formattedString & " GMT" ' & biasString
+
+   On Error GoTo 0
+   Exit Function
+
+fConvertEpochToTimeString_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fConvertEpochToTimeString of Module modCommon"
      
 End Function
 
@@ -5081,6 +5459,13 @@ End Function
 ' universal time format is required for unix systems that we may be chatting with
 'fnGetDateInUniversalFormat Austin Hickl http://computer-programming-forum.com/66-vb-controls/6dff1bae05df0a6e.htm
 '- formats date in form "1998.12.31 23:59:59.456
+'---------------------------------------------------------------------------------------
+' Procedure : fGetDateInUniversalFormat
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Function fGetDateInUniversalFormat() As String
   Dim TimeZoneInfo As TIME_ZONE_INFORMATION
   'Dim currentBias As Long
@@ -5093,13 +5478,29 @@ Public Function fGetDateInUniversalFormat() As String
 '    currentBias = -(TimeZoneInfo.bias + TimeZoneInfo.StandardBias)
 '  End If
 
+   On Error GoTo fGetDateInUniversalFormat_Error
+
   GetSystemTime currentLocaltime
   
 
   With currentLocaltime
     fGetDateInUniversalFormat = Format$(.wYear, "0000") & "-" & Format(.wMonth, "00") & "-" & Format(.wDay, "00") & " " & Format$(.wHour, "00") & ":" & Format(.wMinute, "00") & ":" & Format(.wSecond, "00") & "." & Right$(Format(.wMilliseconds, "000"), 3) '& " " & FormatTimezoneOffset(currentBias)
   End With
+
+   On Error GoTo 0
+   Exit Function
+
+fGetDateInUniversalFormat_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fGetDateInUniversalFormat of Module modCommon"
 End Function 'fnGetDateInUniversalFormat
+'---------------------------------------------------------------------------------------
+' Procedure : fGetDateNoChars
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Function fGetDateNoChars() As String
   Dim TimeZoneInfo As TIME_ZONE_INFORMATION
   'Dim currentBias As Long
@@ -5112,12 +5513,21 @@ Public Function fGetDateNoChars() As String
 '    currentBias = -(TimeZoneInfo.bias + TimeZoneInfo.StandardBias)
 '  End If
 
+   On Error GoTo fGetDateNoChars_Error
+
   GetSystemTime currentLocaltime
   
 
   With currentLocaltime
     fGetDateNoChars = Format$(.wYear, "0000") & "" & Format(.wMonth, "00") & "" & Format(.wDay, "00") & "" & Format$(.wHour, "00") & "" & Format(.wMinute, "00") & "" & Format(.wSecond, "00") & "" & Right$(Format(.wMilliseconds, "000"), 3) '& "" & FormatTimezoneOffset(currentBias)
   End With
+
+   On Error GoTo 0
+   Exit Function
+
+fGetDateNoChars_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fGetDateNoChars of Module modCommon"
 End Function 'fnGetDateInUniversalFormat
 
 'need to converge the above
@@ -5231,20 +5641,38 @@ Public Function fSpecialFolder(pfe As FolderEnum) As String
     Dim strPath As String
     Dim strBuffer As String
     
+   On Error GoTo fSpecialFolder_Error
+
     strBuffer = Space$(MAX_PATH)
     If SHGetFolderPath(0, pfe, 0, 0, strBuffer) = 0 Then strPath = Left$(strBuffer, InStr(strBuffer, vbNullChar) - 1)
     If Right$(strPath, 1) = "\" Then strPath = Left$(strPath, Len(strPath) - 1)
     fSpecialFolder = strPath
+
+   On Error GoTo 0
+   Exit Function
+
+fSpecialFolder_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fSpecialFolder of Module modCommon"
 End Function
 
 '-----------------------------------------------------------
 'perform multiple instr on a string. returns true if ANY or ALL instr passes
 '-----------------------------------------------------------
+'---------------------------------------------------------------------------------------
+' Procedure : fMultiInstr
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Function fMultiInstr(sToInspect As String, searchType As String, ParamArray sArrConditions()) As Integer
     Dim i As Integer
     Dim iUpp As Integer
     Dim strLoc As Integer
     
+   On Error GoTo fMultiInstr_Error
+
     fMultiInstr = 0
     iUpp = UBound(sArrConditions) 'instr conditions
     
@@ -5260,53 +5688,88 @@ Public Function fMultiInstr(sToInspect As String, searchType As String, ParamArr
             End If
     Next i
     If searchType = "ALL" Then fMultiInstr = strLoc
+
+   On Error GoTo 0
+   Exit Function
+
+fMultiInstr_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fMultiInstr of Module modCommon"
 End Function
 
 
 ' routine called at startup to create or run the two email timers
+'---------------------------------------------------------------------------------------
+' Procedure : startTheEmailTimers
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub startTheEmailTimers()
     
     Dim emailIntervalMillisecs As Long
 
     Const lngSecs As Long = 65 ' just used to avoid multiplying two integers
     Const lngThousand As Long = 1000
+    
+    On Error GoTo startTheEmailTimers_Error
 
-    ' start the email timer in code
-    If fInIDE Then
-        ' VB6 timers cannot exceed 65 seconds (65535 ms)
-'        lngSecs = 65
-'        lngThousand = 1000
-        ' when multiplying two integer values and assigning to a long in the IDE it causes a failure as the IDE is handling the two numbers as integers
-        ' emailIntervalMillisecs = 65 * 1000 '  < this fails
+    #If TWINBASIC Then
+        ' TwinBasic timers are any length and can exceed 65 seconds (65535 ms)
+
         emailIntervalMillisecs = lngSecs * lngThousand ' works!
         FireCallMain.emailTimer.Interval = emailIntervalMillisecs
         FireCallMain.emailTimer.Enabled = True
         debugLog "Starting startEmailTimer using VB6 timer at interval of " & emailIntervalMillisecs & "ms", False
-    Else
-        ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
-        ' and if you want a longer timer you have to roll your own.
-        ' in addition, unfortunately this code timer method does not work in the IDE
         
-        ' stop any possible running timer first
-        Call stopEmailTimer
-        
-        ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
-        emailIntervalMillisecs = FCWAdviceIntervalSecs * lngThousand
-        
-        'MsgBox "FCWAdviceIntervalSecs " & FCWAdviceIntervalSecs
-        
-        ' final check to prevent starting this timer when working in the IDE, should never get this far
-        If Not fInIDE Then
-            ' Don't start the timer If it's already running.
-            If emailTimerID = 0 Then
-                ' this has a callback routine that it jumps to on each interval completion
-                emailTimerID = SetTimer(0, 3, emailIntervalMillisecs, AddressOf emailTimer_CodeTimer)
-                debugLog "Starting startEmailTimer using API timer, ID = " & emailTimerID & " at interval of " & emailIntervalMillisecs & "ms", False
-            End If
+    #Else ' VB6 timers in the IDE or at runtime
+
+        ' start the email timer in code
+        If fInIDE Then
+            ' VB6 timers cannot exceed 65 seconds (65535 ms)
+    '        lngSecs = 65
+    '        lngThousand = 1000
+            ' when multiplying two integer values and assigning to a long in the IDE it causes a failure as the IDE is handling the two numbers as integers
+            ' emailIntervalMillisecs = 65 * 1000 '  < this fails
+            emailIntervalMillisecs = lngSecs * lngThousand ' works!
+            FireCallMain.emailTimer.Interval = emailIntervalMillisecs
+            FireCallMain.emailTimer.Enabled = True
+            debugLog "Starting startEmailTimer using VB6 timer at interval of " & emailIntervalMillisecs & "ms", False
         Else
-            MsgBox "Please note: Timers in code will not run in the IDE, defaulting to VB6 timers <65secs."
+            ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
+            ' and if you want a longer timer you have to roll your own.
+            ' in addition, unfortunately this code timer method does not work in the IDE
+            
+            ' stop any possible running timer first
+            Call stopEmailTimer
+            
+            ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
+            emailIntervalMillisecs = FCWAdviceIntervalSecs * lngThousand
+            
+            'MsgBox "FCWAdviceIntervalSecs " & FCWAdviceIntervalSecs
+            
+            ' final check to prevent starting this timer when working in the IDE, should never get this far
+            If Not fInIDE Then
+                ' Don't start the timer If it's already running.
+                If emailTimerID = 0 Then
+                    ' this has a callback routine that it jumps to on each interval completion
+                    emailTimerID = SetTimer(0, 3, emailIntervalMillisecs, AddressOf emailTimer_CodeTimer)
+                    debugLog "Starting startEmailTimer using API timer, ID = " & emailTimerID & " at interval of " & emailIntervalMillisecs & "ms", False
+                End If
+            Else
+                MsgBox "Please note: Timers in code will not run in the IDE, defaulting to VB6 timers <65secs."
+            End If
         End If
-    End If
+    #End If
+
+   On Error GoTo 0
+   Exit Sub
+
+startTheEmailTimers_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure startTheEmailTimers of Module modCommon"
+    
 End Sub
 
 
@@ -5508,12 +5971,28 @@ End Sub
 
 
 ' The timer that stops the email timer
+'---------------------------------------------------------------------------------------
+' Procedure : stopEmailTimer
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub stopEmailTimer()
     ' Don't stop the timer If it isn't running.
+   On Error GoTo stopEmailTimer_Error
+
     If emailTimerID Then
         KillTimer 0, emailTimerID
         emailTimerID = 0
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+stopEmailTimer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure stopEmailTimer of Module modCommon"
 End Sub
 
 
@@ -5521,8 +6000,24 @@ End Sub
 ' ie. it doesn't work in the IDE because in the IDE everything works in the main thread. Callback functions operate
 ' in a separate thread and this achieves basic multi threading but may limit some functionality - but basic commands seem to operate correctly
 
+'---------------------------------------------------------------------------------------
+' Procedure : emailTimer_CodeTimer
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub emailTimer_CodeTimer()
+   On Error GoTo emailTimer_CodeTimer_Error
+
     Call emailTimer_TimerLogic
+
+   On Error GoTo 0
+   Exit Sub
+
+emailTimer_CodeTimer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure emailTimer_CodeTimer of Module modCommon"
 End Sub
 
 
@@ -5531,8 +6026,24 @@ End Sub
 ' ie. it doesn't work in the IDE because in the IDE everything works in the main thread. Callback functions operate
 ' in a separate thread and this achieves basic multi threading but may limit some functionality - but basic commands seem to operate correctly
 
+'---------------------------------------------------------------------------------------
+' Procedure : houseKeepingTimer_CodeTimer
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub houseKeepingTimer_CodeTimer()
+   On Error GoTo houseKeepingTimer_CodeTimer_Error
+
     Call houseKeepingTimerLogic(False)
+
+   On Error GoTo 0
+   Exit Sub
+
+houseKeepingTimer_CodeTimer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure houseKeepingTimer_CodeTimer of Module modCommon"
 End Sub
 
 ' The housekeeping timer runs regularly
@@ -5757,43 +6268,54 @@ Public Sub startTheHouseKeepingTimers()
     Const lngThousand As Long = 1000
 
     ' start the HouseKeeping timer in code
-   On Error GoTo startTheHouseKeepingTimers_Error
+    On Error GoTo startTheHouseKeepingTimers_Error
+    
+    #If TWINBASIC Then
+        ' TwinBasic timers are any length and can exceed 65 seconds (65535 ms)
 
-    If fInIDE Then
-        ' VB6 timers cannot exceed 65 seconds (65535 ms)
-'        lngSecs = 65
-'        lngThousand = 1000
-        ' when multiplying two integer values and assigning to a long in the IDE it causes a failure as the IDE is handling the two numbers as integers
-        ' HouseKeepingIntervalMillisecs = 65 * 1000 '  < this fails
         HouseKeepingIntervalMillisecs = lngSecs * lngThousand ' works!
         FireCallMain.houseKeepingTimer.Interval = HouseKeepingIntervalMillisecs
         FireCallMain.houseKeepingTimer.Enabled = True
         debugLog "Starting startHouseKeepingTimer using VB6 timer, at interval of " & HouseKeepingIntervalMillisecs & "ms", False
-    Else
-        ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
-        ' and if you want a longer timer you have to roll your own.
-        ' in addition, unfortunately this code timer method does not work in the IDE
         
-        ' stop any possible running timer first
-        Call stopHouseKeepingTimer
+    #Else ' VB6 timers in the IDE or at runtime
         
-        ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
-        HouseKeepingIntervalMillisecs = 3600 * lngThousand ' every hour
-        
-        'MsgBox "FCWAdviceIntervalSecs " & FCWAdviceIntervalSecs
-        
-        ' final check to prevent starting this timer when working in the IDE, should never get this far
-        If Not fInIDE Then
-            ' Don't start the timer If it's already running.
-            If houseKeepingTimerID = 0 Then
-                ' this has a callback routine that it jumps to on each interval completion
-                houseKeepingTimerID = SetTimer(0, 4, HouseKeepingIntervalMillisecs, AddressOf houseKeepingTimer_CodeTimer)
-                debugLog "Starting startHouseKeepingTimer using API timer, ID = " & houseKeepingTimerID & " at interval of " & HouseKeepingIntervalMillisecs & "ms", False
-            End If
+        If fInIDE Then
+            ' VB6 timers cannot exceed 65 seconds (65535 ms)
+    '        lngSecs = 65
+    '        lngThousand = 1000
+            ' when multiplying two integer values and assigning to a long in the IDE it causes a failure as the IDE is handling the two numbers as integers
+            ' HouseKeepingIntervalMillisecs = 65 * 1000 '  < this fails
+            HouseKeepingIntervalMillisecs = lngSecs * lngThousand ' works!
+            FireCallMain.houseKeepingTimer.Interval = HouseKeepingIntervalMillisecs
+            FireCallMain.houseKeepingTimer.Enabled = True
+            debugLog "Starting startHouseKeepingTimer using VB6 timer, at interval of " & HouseKeepingIntervalMillisecs & "ms", False
         Else
-            debugLog "Please note: Timers in code will not run in the IDE, defaulting to VB6 timers <65secs."
+            ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
+            ' and if you want a longer timer you have to roll your own.
+            ' in addition, unfortunately this code timer method does not work in the IDE
+            
+            ' stop any possible running timer first
+            Call stopHouseKeepingTimer
+            
+            ' using a timer in code rather than a VB6 timer as VB6 timers cannot exceed 65 seconds (65535 ms)
+            HouseKeepingIntervalMillisecs = 3600 * lngThousand ' every hour
+            
+            'MsgBox "FCWAdviceIntervalSecs " & FCWAdviceIntervalSecs
+            
+            ' final check to prevent starting this timer when working in the IDE, should never get this far
+            If Not fInIDE Then
+                ' Don't start the timer If it's already running.
+                If houseKeepingTimerID = 0 Then
+                    ' this has a callback routine that it jumps to on each interval completion
+                    houseKeepingTimerID = SetTimer(0, 4, HouseKeepingIntervalMillisecs, AddressOf houseKeepingTimer_CodeTimer)
+                    debugLog "Starting startHouseKeepingTimer using API timer, ID = " & houseKeepingTimerID & " at interval of " & HouseKeepingIntervalMillisecs & "ms", False
+                End If
+            Else
+                debugLog "Please note: Timers in code will not run in the IDE, defaulting to VB6 timers <65secs."
+            End If
         End If
-    End If
+    #End If
 
    On Error GoTo 0
    Exit Sub

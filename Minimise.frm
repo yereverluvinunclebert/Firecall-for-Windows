@@ -57,9 +57,18 @@ Private Sub Form_MouseUp(ByRef Button As Integer, ByRef Shift As Integer, ByRef 
 
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : pulseTimer_Timer
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub pulseTimer_Timer()
     Dim fullPath As String
     
+   On Error GoTo pulseTimer_Timer_Error
+
     If MinimiseForm.Visible = True Then
         If inputDataChangedFlag = True Then
             imageCounter = imageCounter + 1
@@ -80,6 +89,13 @@ Private Sub pulseTimer_Timer()
             pulseTimer.Enabled = False
         End If
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+pulseTimer_Timer_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure pulseTimer_Timer of Form MinimiseForm"
     
 End Sub
 
@@ -92,9 +108,18 @@ End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : FormDblClickSub
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub FormDblClickSub()
 
     ' if the program is minimised, maximise it
+   On Error GoTo FormDblClickSub_Error
+
     FireCallMain.opacityFadeInTimer.Enabled = True
     'If FireCallMain.Visible = False Then
     If FireCallMain.WindowState = vbMinimized Then
@@ -103,11 +128,20 @@ Public Sub FormDblClickSub()
         
         
         If Val(FCWIconiseDelay) > 0 Then
+        
+            #If TWINBASIC Then
+            
+                FireCallMain.iconiseTimer.Enabled = True 'restart the VB6 timer to iconise the program when needed
+                
+            #Else
+            
                 If fInIDE Then
                     FireCallMain.iconiseTimer.Enabled = True 'restart the VB6 timer to iconise the program when needed
                 Else
                     Call initiateIconiseTimerInCode 'restart the code timer to iconise the program when needed
                 End If
+                
+            #End If
         End If
     End If
 
@@ -118,10 +152,26 @@ Public Sub FormDblClickSub()
     inputDataChangedFlag = False
     
     
+
+   On Error GoTo 0
+   Exit Sub
+
+FormDblClickSub_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure FormDblClickSub of Form MinimiseForm"
     
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : Form_Load
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub Form_Load()
+   On Error GoTo Form_Load_Error
+
     imageCounter = 0
 
     pulseTimer.Enabled = False
@@ -137,10 +187,26 @@ Private Sub Form_Load()
     Else
         MinimiseForm.Top = Val(FCWMinimiseFormY)
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+Form_Load_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Form_Load of Form MinimiseForm"
     
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : Form_MouseDown
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub Form_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+   On Error GoTo Form_MouseDown_Error
+
     minFormPositionX = x
     minFormPositionY = y
     
@@ -148,9 +214,25 @@ Private Sub Form_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRe
         ' use the menu from the specialised menu form to avoid generating a title bar
         PopupMenu MinimiseMenuForm.minMenuPopUp, vbPopupMenuRightButton
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+Form_MouseDown_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Form_MouseDown of Form MinimiseForm"
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : Form_MouseMove
+' Author    : beededea
+' Date      : 18/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Sub Form_MouseMove(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
+   On Error GoTo Form_MouseMove_Error
+
     If Button = 1 Then
         With Me
             .Left = .Left - (minFormPositionX - x)
@@ -158,4 +240,11 @@ Private Sub Form_MouseMove(ByRef Button As Integer, ByRef Shift As Integer, ByRe
 
         End With
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+Form_MouseMove_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure Form_MouseMove of Form MinimiseForm"
 End Sub
