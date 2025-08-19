@@ -2225,78 +2225,37 @@ End Sub
 ' Author    : beededea
 ' Date      : 18/08/2025
 ' Purpose   : read the remote user's file line by line, read it into an interim array, filter, add tags and thence into a listbox.
-' called by checkAndReadInputFile during polling & populateInputBox during startup
+'             called by checkAndReadInputFile during polling & populateInputBox during startup
 '---------------------------------------------------------------------------------------
 '
 Public Sub readInputFileWriteArrayAndListbox(ByVal thisInputFile As String)
 
     On Error GoTo readInputFileWriteArrayAndListbox_Error
 
-    Dim useloop As Long
-    Dim lbxCount As Integer
-    Dim startLoc As Long
-    Dim endLoc As Long
-    Dim stepNo As Integer
-    Dim stringToWrite As String
-    Dim recordingString As String
-    Dim recordingFilenamePos As Integer
-    Dim recordingFilename As String
-    Dim attachmentString As String
-
-'    Dim suffix As String
-'    Dim suffixNoDot As String
-    Dim emojiString As String
-    Dim pingString As String
-    Dim buzzerString As String
-    Dim awakeString As String
-    Dim buzzerStamp As String
-    'Dim finalStamp As String
-    Dim pingStamp As String
-    Dim awakeStamp As String
-    Dim unixTimeStamp As String
-    Dim shutdownString As String
-    Dim shutdownStamp As String
-    Dim shutDateTime As String
-'    Dim folderDisplayed As Boolean
-    Dim soundtoplay As String
-    Dim attachmentTimeDiffInSecs As Long
-    Dim recordingTimeDiffInSecs As Long
-    Dim shutdownTimeDiffInSecs As Currency
-    Dim thisFile As Object
-    Dim answer As VbMsgBoxResult
-    Dim answer2 As VbMsgBoxResult
-    Dim tmpRead As String
-    Dim findStr As Integer
-    Dim findStartPos As Integer
-    Dim stringWithoutPrefix As String
-        
-    Dim nowInSecs As Long
-    Dim lastShutdownDiff As Long
-           
-    useloop = 0
-    buzzerString = vbNullString
-    buzzerStamp = vbNullString
-    'finalStamp = vbNullString
-    pingStamp = vbNullString
-    emojiString = vbNullString
-
-    attachmentString = vbNullString
-    'suffix = vbNullString
-    pingString = vbNullString
-    awakeString = vbNullString
-    awakeStamp = vbNullString
-    unixTimeStamp = vbNullString
-    shutdownString = vbNullString
-    shutdownStamp = vbNullString
-    shutDateTime = vbNullString
-    'folderDisplayed = False
-    attachmentTimeDiffInSecs = 0
-    shutdownTimeDiffInSecs = 0
-
-    answer = vbNo
-    answer2 = vbNo
-    findStartPos = 0
-    stringWithoutPrefix = ""
+    Dim useloop As Long: useloop = 0
+    Dim lbxCount As Integer: lbxCount = 0
+    Dim startLoc As Long: startLoc = 0
+    Dim endLoc As Long: endLoc = 0
+    Dim stepNo As Integer: stepNo = 0
+    Dim stringToWrite As String: stringToWrite = vbNullString
+    Dim recordingString As String: recordingString = vbNullString
+    Dim attachmentString As String: attachmentString = vbNullString
+    Dim emojiString As String: emojiString = vbNullString
+    Dim pingString As String: pingString = vbNullString
+    Dim buzzerString As String: buzzerString = vbNullString
+    Dim awakeString As String: awakeString = vbNullString
+    Dim buzzerStamp As String: buzzerStamp = vbNullString
+    Dim pingStamp As String: pingStamp = vbNullString
+    Dim awakeStamp As String: awakeStamp = vbNullString
+    Dim unixTimeStamp As String: unixTimeStamp = vbNullString
+    Dim shutdownString As String: shutdownString = vbNullString
+    Dim shutdownStamp As String: shutdownStamp = vbNullString
+    Dim shutDateTime As String: shutDateTime = vbNullString
+    Dim attachmentTimeDiffInSecs As Long: attachmentTimeDiffInSecs
+    Dim findStr As Integer: findStr = 0
+    Dim findStartPos As Integer: findStartPos = 0
+    Dim stringWithoutPrefix As String: stringWithoutPrefix = vbNullString
+    Dim listCounter As Long: listCounter = 0
     
     ' get the line count
     inputLineCount = fLineCount(FCWSharedInputFile)
@@ -2400,7 +2359,6 @@ Public Sub readInputFileWriteArrayAndListbox(ByVal thisInputFile As String)
     Next useloop
     
     ' litle fix to prevent potential duplication of content in the listboxes
-    Dim listCounter As Long
     listCounter = FireCallMain.lbxInputTextArea.ListCount
     If listCounter > inputLineCount Then
         Call debugLog("This message pops up to prevent a duplication occurring in the INPUT. Please report if this occurs.")
@@ -2412,7 +2370,7 @@ Public Sub readInputFileWriteArrayAndListbox(ByVal thisInputFile As String)
     ' at this point the listbox has been written so we now unlock it after the update
     LockWindowUpdate 0& '
 
-    ' Post processing according to what we found in the file, generally we respond to the last occurrence of each event
+    ' Post processing according to what we found in the file, generally we respond to the last occurrence of each event,
     ' hold the event time and compare that with a stored value.
     
     'respond to a ping request and store the time of the last ping so that we do not respond multiple times
@@ -2424,118 +2382,18 @@ Public Sub readInputFileWriteArrayAndListbox(ByVal thisInputFile As String)
     ' if an attachment is sent then attempt to display it always shows the last
     If attachmentString <> vbNullString Then Call respondToAttachmentStamp(attachmentString)
     
-    
     ' buzzer code received, stores the last buzz time so we only buzz once
-    If buzzerString <> vbNullString And FCWLastSoundPlayed <> buzzerStamp Then
-        
-        If FCWPlayVolume = "1" Then
-            soundtoplay = App.Path & "\Resources\Sounds\" & "buzzer.wav"
-        Else
-            soundtoplay = App.Path & "\Resources\Sounds\" & "buzzerQuiet.wav"
-        End If
-        
-        If fFExists(soundtoplay) Then
-             PlaySound soundtoplay, ByVal 0&, SND_FILENAME Or SND_ASYNC
-        End If
-        FCWLastSoundPlayed = buzzerStamp
+    If buzzerString <> vbNullString And FCWLastSoundPlayed <> buzzerStamp Then Call respondToBuzzerStamp(buzzerStamp)
 
-        FireCallMain.picBuzzerDullLamp.Visible = False
-        FireCallMain.picBuzzerBrightLamp.Visible = True
-        
-        If fFExists(FCWSettingsFile) Then
-            PutINISetting "Software\FireCallWin", "lastSoundPlayed", FCWLastSoundPlayed, FCWSettingsFile
-        End If
-    End If
-    
     ' we received an awake string, store the time so we respond only once
-    If awakeString <> vbNullString And FCWLastAwakeString <> awakeStamp Then
-        ' respond to an awake request by interpreting the unix epoch date and time string
-        ' rather than using the timestamp at the beginning of the incoming string
-        ' probably overkill as I could have just reformatted the date stamp at the beginning of the string
-        ' but I wanted to have the code to read unix timestamps, and it is more elegant.
-        '
-        'FireCallMain.sendCommandTimer.Tag = "Awake response. Request time: " & fConvertEpochToTimeString(unixTimeStamp)
-        
-        messageQueue.Add "Awake response. Request time: " & fConvertEpochToTimeString(unixTimeStamp)
-
-        FireCallMain.sendCommandTimer.Enabled = True ' this does a Call sendSomething(stringToSend)
-                                                     ' but it does it ensuring the current polling is complete
-        FCWLastAwakeString = awakeStamp
-        
-        If fFExists(FCWSettingsFile) Then
-            PutINISetting "Software\FireCallWin", "lastAwakeString", FCWLastAwakeString, FCWSettingsFile
-        End If
-    End If
-    
+    If awakeString <> vbNullString And FCWLastAwakeString <> awakeStamp Then Call respondToAwakeStamp(awakeStamp, unixTimeStamp)
 
     ' remote shutdown code received, stores the last shutdown time so we only respond to the last shutdown request
-    If shutdownString <> vbNullString And FCWLastShutdown <> shutdownStamp Then
+    If shutdownString <> vbNullString And FCWLastShutdown <> shutdownStamp Then Call respondToShutdownStamp(shutdownStamp)
     
-        FCWLastShutdown = shutdownStamp
-        If fFExists(FCWSettingsFile) Then
-            PutINISetting "Software\FireCallWin", "lastShutdown", FCWLastShutdown, FCWSettingsFile
-        End If
-        
-        ' if the shutdown time is old > 5 mins then ignore it (this assumes it arrived when FCW was either asleep or not running)
-        shutdownTimeDiffInSecs = fSecondsFromDateString(shutdownStamp)
-        nowInSecs = fSecondsFromDateString(Now)
-        lastShutdownDiff = nowInSecs - shutdownTimeDiffInSecs
-    
-        If lastShutdownDiff <= 300 Then
-            If FCWAllowShutdowns = "1" Then
- 
-                answer = MsgBox("The remote chat partner has requested a temporary FCW shutdown, whilst maintenance takes place. " & vbCrLf & _
-                        "OK to shutdown?", vbExclamation + vbYesNo)
-                        
-                If answer = vbYes Then
-                    messageQueue.Add "Positive shutdown response to shutdown request at " & shutdownStamp & " GO AHEAD."
-                    FireCallMain.sendCommandTimer.Enabled = True ' this does a Call sendSomething(stringToSend)
-                                                          ' but it does it ensuring the current polling is complete
-                    FireCallMain.shutdownTimer.Enabled = True ' we call a timer to shut it down after 5 secs.
-                Else
-                    messageQueue.Add "Negative shutdown response to shutdown request at " & shutdownStamp
-                    FireCallMain.sendCommandTimer.Enabled = True ' this does a Call sendSomething(stringToSend)
-                End If
-            Else
-                messageQueue.Add "Negative shutdown response to shutdown request at " & shutdownStamp
-                FireCallMain.sendCommandTimer.Enabled = True ' this does a Call sendSomething(stringToSend)
-            End If
-        End If
+    ' if an recording is sent then attempt to display it always shows the last
+    If recordingString <> vbNullString Then Call respondToRecordingString(recordingString)
 
-    End If
-    
-    
-        ' if an attachment is sent then attempt to display it always shows the last
-    If recordingString <> vbNullString Then
-        If InStr(recordingString, "<r><r>") > 0 Then
-            recordingFilenamePos = InStr(recordingString, "<r><r>") + 6 ' folder
-        End If
-        recordingFilename = Mid$(recordingString, recordingFilenamePos, 23)
-        
-        ' next line removes a spurious character (vbCrLf?) that appeared after changing the method of reading to ADO
-        'recordingFilename = Mid$(recordingFilename, 1, Len(recordingFilename))
-        recordingFilePath = FCWExchangeFolder & "\" & recordingFilename
-        
-        ' if the current image display, caused by a recent click on an image in the chat happened less than
-        ' three minutes ago, then bypass the display of the last image found. This allows the user to retain
-        ' his recently clicked-upon image even if a repoll for new data happens in that time.
-        
-        If recordingViewTime <> "00:00:00" Then
-            recordingTimeDiffInSecs = DateDiff("s", recordingViewTime, Now)
-        End If
-        
-        If recordingTimeDiffInSecs = 0 Or recordingTimeDiffInSecs >= 180 Then
-                ' we store the full file path as the recordingFilePath variable will be overwritten by subsequent sutomatic clicks
-                ' when setting the input listBox to the last position a click is always generated
-                
-
-                gblDisplayedAttachmentFilePath = recordingFilePath
-
-                Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-rec" & ".png")
-                If FCWEnableTooltips = "1" Then FireCallMain.picImagePrintOut.ToolTipText = recordingFilename & " - double click to play the recording."
-        End If
-
-    End If
     ' now store the file characteristics so that we can use them to compare on the next run
     oldInputFileModificationTime = inputFileModificationTime
 
@@ -2548,11 +2406,191 @@ readInputFileWriteArrayAndListbox_Error:
 
 End Sub
 
+    
+'---------------------------------------------------------------------------------------
+' Procedure : respondToRecordingString
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   : if an recording is sent then attempt to display it always shows the last
+'---------------------------------------------------------------------------------------
+'
+Private Sub respondToRecordingString(ByVal thisRecordingString As String)
+    Dim recordingFilenamePos As Integer: recordingFilenamePos = 0
+    Dim recordingFilename As String: recordingFilename = 0
+    Dim recordingTimeDiffInSecs As Long: recordingTimeDiffInSecs = 0
+
+    On Error GoTo respondToRecordingString_Error
+
+    If InStr(thisRecordingString, "<r><r>") > 0 Then
+        recordingFilenamePos = InStr(thisRecordingString, "<r><r>") + 6 ' folder
+    End If
+    recordingFilename = Mid$(thisRecordingString, recordingFilenamePos, 23)
+    
+    ' next line removes a spurious character (vbCrLf?) that appeared after changing the method of reading to ADO
+    'recordingFilename = Mid$(recordingFilename, 1, Len(recordingFilename))
+    recordingFilePath = FCWExchangeFolder & "\" & recordingFilename
+    
+    ' if the current image display, caused by a recent click on an image in the chat happened less than
+    ' three minutes ago, then bypass the display of the last image found. This allows the user to retain
+    ' his recently clicked-upon image even if a repoll for new data happens in that time.
+    
+    If recordingViewTime <> "00:00:00" Then
+        recordingTimeDiffInSecs = DateDiff("s", recordingViewTime, Now)
+    End If
+    
+    If recordingTimeDiffInSecs = 0 Or recordingTimeDiffInSecs >= 180 Then
+        ' we store the full file path as the recordingFilePath variable will be overwritten by subsequent sutomatic clicks
+        ' when setting the input listBox to the last position a click is always generated
+
+        gblDisplayedAttachmentFilePath = recordingFilePath
+
+        Call displaySelectedImage(App.Path & "\resources\images\documentIcons\document-rec" & ".png")
+        If FCWEnableTooltips = "1" Then FireCallMain.picImagePrintOut.ToolTipText = recordingFilename & " - double click to play the recording."
+    End If
+
+   On Error GoTo 0
+   Exit Sub
+
+respondToRecordingString_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure respondToRecordingString of Module modCommon"
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : respondToShutdownStamp
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub respondToShutdownStamp(ByVal thisShutdownStamp As String)
+    Dim shutdownTimeDiffInSecs As Currency: shutdownTimeDiffInSecs = 0
+    Dim nowInSecs As Long: nowInSecs = 0
+    Dim stampDiffInSecs As Long: stampDiffInSecs = 0
+    Dim lastShutdownDiff As Long: lastShutdownDiff = 0
+    Dim answer As VbMsgBoxResult: answer = vbNo
+
+    On Error GoTo respondToShutdownStamp_Error
+
+    FCWLastShutdown = thisShutdownStamp
+    If fFExists(FCWSettingsFile) Then
+        PutINISetting "Software\FireCallWin", "lastShutdown", FCWLastShutdown, FCWSettingsFile
+    End If
+    
+    ' if the shutdown time is old > 5 mins then ignore it (this assumes it arrived when FCW was either asleep or not running)
+    shutdownTimeDiffInSecs = fSecondsFromDateString(thisShutdownStamp)
+    nowInSecs = fSecondsFromDateString(Now)
+    lastShutdownDiff = nowInSecs - shutdownTimeDiffInSecs
+
+    If lastShutdownDiff <= 300 Then
+        If FCWAllowShutdowns = "1" Then
+
+            answer = MsgBox("The remote chat partner has requested a temporary FCW shutdown, whilst maintenance takes place. " & vbCrLf & _
+                    "OK to shutdown?", vbExclamation + vbYesNo)
+                    
+            If answer = vbYes Then
+                messageQueue.Add "Positive shutdown response to shutdown request at " & thisShutdownStamp & " GO AHEAD."
+                FireCallMain.sendCommandTimer.Enabled = True ' this does a Call sendSomething(stringToSend)
+                                                      ' but it does it ensuring the current polling is complete
+                FireCallMain.shutdownTimer.Enabled = True ' we call a timer to shut it down after 5 secs.
+            Else
+                messageQueue.Add "Negative shutdown response to shutdown request at " & thisShutdownStamp
+                FireCallMain.sendCommandTimer.Enabled = True ' this does a Call sendSomething(stringToSend)
+            End If
+        Else
+            messageQueue.Add "Negative shutdown response to shutdown request at " & thisShutdownStamp
+            FireCallMain.sendCommandTimer.Enabled = True ' this does a Call sendSomething(stringToSend)
+        End If
+    End If
+
+   On Error GoTo 0
+   Exit Sub
+
+respondToShutdownStamp_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure respondToShutdownStamp of Module modCommon"
+End Sub
+
+
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : respondToAwakeStamp
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   : We received an awake string, store the time so we respond only once.
+'             respond to an awake request by interpreting the unix epoch date and time string
+'             rather than using the timestamp at the beginning of the incoming string
+'             probably overkill as I could have just reformatted the date stamp at the beginning of the string
+'             but I wanted to have the code to read unix timestamps, and it is more elegant.
+'---------------------------------------------------------------------------------------
+'
+Private Sub respondToAwakeStamp(ByVal thisAwakeStamp As String, ByVal thisUnixTimeStamp As String)
+    
+    On Error GoTo respondToAwakeStamp_Error
+
+    messageQueue.Add "Awake response. Request time: " & fConvertEpochToTimeString(thisUnixTimeStamp)
+
+    FireCallMain.sendCommandTimer.Enabled = True ' this does a Call sendSomething(stringToSend)
+                                                 ' but it does it ensuring the current polling is complete
+    FCWLastAwakeString = thisAwakeStamp
+    
+    If fFExists(FCWSettingsFile) Then
+        PutINISetting "Software\FireCallWin", "lastAwakeString", FCWLastAwakeString, FCWSettingsFile
+    End If
+
+   On Error GoTo 0
+   Exit Sub
+
+respondToAwakeStamp_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure respondToAwakeStamp of Module modCommon"
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : respondToBuzzerStamp
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   : buzzer code received, stores the last buzz time so we only buzz once
+'---------------------------------------------------------------------------------------
+'
+Private Sub respondToBuzzerStamp(ByVal thisBuzzerStamp As String)
+    Dim soundtoplay As String: soundtoplay = vbNullString
+     
+    On Error GoTo respondToBuzzerStamp_Error
+
+        If FCWPlayVolume = "1" Then
+            soundtoplay = App.Path & "\Resources\Sounds\" & "buzzer.wav"
+        Else
+            soundtoplay = App.Path & "\Resources\Sounds\" & "buzzerQuiet.wav"
+        End If
+        
+        If fFExists(soundtoplay) Then
+             PlaySound soundtoplay, ByVal 0&, SND_FILENAME Or SND_ASYNC
+        End If
+        FCWLastSoundPlayed = thisBuzzerStamp
+
+        FireCallMain.picBuzzerDullLamp.Visible = False
+        FireCallMain.picBuzzerBrightLamp.Visible = True
+        
+        If fFExists(FCWSettingsFile) Then
+            PutINISetting "Software\FireCallWin", "lastSoundPlayed", FCWLastSoundPlayed, FCWSettingsFile
+        End If
+
+   On Error GoTo 0
+   Exit Sub
+
+respondToBuzzerStamp_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure respondToBuzzerStamp of Module modCommon"
+End Sub
+
+
 '---------------------------------------------------------------------------------------
 ' Procedure : respondToAttachmentStamp
 ' Author    : beededea
 ' Date      : 19/08/2025
-' Purpose   :
+' Purpose   : if an attachment is sent then attempt to display it always shows the last
 '---------------------------------------------------------------------------------------
 '
 Private Sub respondToAttachmentStamp(ByVal thisAttachmentString As String)
@@ -2660,14 +2698,18 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub respondToPinStamp(ByVal thisPingStamp As String)
+
+    On Error GoTo respondToPinStamp_Error
+    
+    'history - do not remove
+    
     ' next line caused corruption during the refresh process
     'Call sendSomething("Ping response. Refresh interval: " & FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) & "  OS:" & WindowsVer & "  Version:" & App.Major & "." & App.Minor & "." & App.Revision)
     
-    'old method of passing a single command to a timer to run it asynchronously
+     'old method of passing a single command to a timer to run it asynchronously
     'FireCallMain.sendCommandTimer.Tag = "Ping response. Refresh interval: " & FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) & "  OS:" & WindowsVer & "  Version:" & App.Major & "." & App.Minor & "." & App.Revision
     
     'new method of passing a command to a message queue for a timer to run each asynchronously
-    On Error GoTo respondToPinStamp_Error
 
     messageQueue.Add "Ping response. Refresh interval: " & FireCallPrefs.cmbRefreshInterval.ItemData(Val(FCWRefreshIntervalIndex)) & "  OS:" & WindowsVer & "  Version:" & App.Major & "." & App.Minor & "." & App.Revision ' Add to the end of the collection
     
