@@ -1798,15 +1798,22 @@ Attribute VB_Exposed = False
 ' then filters the contents, adding tags that are recognised by the program to indicate URLs, images, file attachments &c.
 ' writes these to multiline listbox controls that are indexed.
 
-' the files are stored onto a shared dropbox area, only dropbox supported at the moment but others will be available later.
+' The files are stored onto a shared dropbox area, only dropbox supported at the moment but others will be available later.
 
-' messagequeue
+' A messagequeue is used to process messages from the user typed or attached input to the output file
 
-' LaVolpe 's image reading code
+' Timers are used to process the data, there are several that require a longer interval than 1 minute and 5 seconds.
+' such as the start the polling timer in code that must exceed 65536 millisecs, unfortunately VB6 timers cannot exceed 65 seconds (65535 ms)
+' and if you want a longer timer you have to roll your own. In addition, the custom code timer method does not work in the IDE
+' So, we have two timer types, native timers used for short duration timers and for operation during debugging within the IDE.
+' TwinBasic has no such limitations so you will find the custom timers bypassed or commented out using conditional compiler statements.
 
-'
-'TwinBasic
 
+' TwinBasic has an error compiling this code when referring to a single line in readInputFileWriteArrayAndListbox
+                FireCallMain.lbxInputTextArea.List(lbxCount) = stringToWrite
+                
+' LaVolpe's image reading code is used to allow VB6 to read non-native image types that were non-existent when VB6 was created.
+' This leads to a large number of class modules that are not utilised when compiling in TwinBasic
 '
 ' The VB6 non native images (PNGs &c) are displayed using Lavolpe's transparent DIB image code,
 ' except for the .ico files which use his earlier StdPictureEx class.

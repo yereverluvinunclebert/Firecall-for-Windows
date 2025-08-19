@@ -2251,7 +2251,7 @@ Public Sub readInputFileWriteArrayAndListbox(ByVal thisInputFile As String)
     Dim shutdownString As String: shutdownString = vbNullString
     Dim shutdownStamp As String: shutdownStamp = vbNullString
     Dim shutDateTime As String: shutDateTime = vbNullString
-    Dim attachmentTimeDiffInSecs As Long: attachmentTimeDiffInSecs
+    Dim attachmentTimeDiffInSecs As Long: attachmentTimeDiffInSecs = 0
     Dim findStr As Integer: findStr = 0
     Dim findStartPos As Integer: findStartPos = 0
     Dim stringWithoutPrefix As String: stringWithoutPrefix = vbNullString
@@ -2920,13 +2920,13 @@ ValidFileName_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure ValidFileName of Module modCommon"
 End Function
-' credit jcis https://www.vbforums.com/member.php?40893-jcis
-' resize image types known to VB6
+'
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : resizeNative
-' Author    : beededea
+' Author    : credit jcis https://www.vbforums.com/member.php?40893-jcis
 ' Date      : 23/10/2024
-' Purpose   :
+' Purpose   : resize image types known to VB6
 '---------------------------------------------------------------------------------------
 '
 Private Sub resizeNative(ByRef pBox As PictureBox, ByRef pPic As Picture)
@@ -2979,12 +2979,12 @@ resizeNative_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure resizeNative of Module modCommon"
 End Sub
 
-' Calculate new dimensions of the picturebox
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : resizeNonNative
 ' Author    : beededea
 ' Date      : 23/10/2024
-' Purpose   :
+' Purpose   : Calculate new dimensions of the picturebox
 '---------------------------------------------------------------------------------------
 '
 Private Sub resizeNonNative(ByRef pBox As PictureBox, ByRef lWidth As Long, ByRef lHeight As Long)
