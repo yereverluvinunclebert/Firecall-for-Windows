@@ -15,259 +15,306 @@ Begin VB.Form FireCallPrefs
    ScaleWidth      =   8910
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
-   Begin VB.Frame fraHousekeeping 
-      Caption         =   "Housekeeping"
-      Height          =   7755
-      Left            =   690
-      TabIndex        =   184
-      Top             =   1215
-      Width           =   8655
-      Begin VB.Frame fraHiddenHousekeeping 
+   Begin VB.CommandButton btnSave 
+      Caption         =   "&Save"
+      Enabled         =   0   'False
+      Height          =   360
+      Left            =   6105
+      Style           =   1  'Graphical
+      TabIndex        =   19
+      ToolTipText     =   "Save the changes you have made to the preferences"
+      Top             =   10140
+      Width           =   1320
+   End
+   Begin VB.Frame fraHousekeepingButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   6840
+      TabIndex        =   181
+      ToolTipText     =   "Opens the Housekeeping tab"
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picHousekeeping 
+         AutoSize        =   -1  'True
          BorderStyle     =   0  'None
-         Height          =   7230
-         Left            =   600
-         TabIndex        =   185
-         Top             =   255
-         Width           =   7245
-         Begin VB.CommandButton btnArchiveNow 
-            Caption         =   "Archive Now"
-            Height          =   525
-            Left            =   5205
-            TabIndex        =   285
-            Top             =   2040
-            Width           =   1320
-         End
-         Begin VB.Frame fraHouseKeepingBackups 
-            BorderStyle     =   0  'None
-            Height          =   4125
-            Left            =   165
-            TabIndex        =   253
-            Top             =   3015
-            Width           =   6855
-            Begin VB.CommandButton btnBackupNow 
-               Caption         =   "Backup Now"
-               Height          =   525
-               Left            =   5145
-               TabIndex        =   284
-               Top             =   3285
-               Width           =   1320
-            End
-            Begin VB.CheckBox chkAutomaticBackups 
-               Caption         =   "  Automatic Backups"
-               Height          =   225
-               Left            =   1800
-               TabIndex        =   256
-               ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
-               Top             =   1185
-               Width           =   1950
-            End
-            Begin VB.CommandButton btnBackupLocation 
-               Caption         =   "..."
-               Height          =   300
-               Left            =   1800
-               Style           =   1  'Graphical
-               TabIndex        =   255
-               ToolTipText     =   "Open a file explorer at the Backup folder location."
-               Top             =   3345
-               Width           =   315
-            End
-            Begin VB.CheckBox chkBackupOnStart 
-               Caption         =   "  Backup on Start"
-               Height          =   225
-               Left            =   1785
-               TabIndex        =   254
-               ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
-               Top             =   315
-               Width           =   1725
-            End
-            Begin vb6projectCCRSlider.Slider sliAutomaticBackupInterval 
-               Height          =   390
-               Left            =   1680
-               TabIndex        =   257
-               ToolTipText     =   "Set the hourly interval "
-               Top             =   1935
-               Width           =   3870
-               _ExtentX        =   6826
-               _ExtentY        =   688
-               Min             =   1
-               Max             =   24
-               Value           =   24
-               SelStart        =   20
-            End
-            Begin VB.Label lblHousekeepingDesc 
-               Caption         =   "Check this box to enable automatic hourly backups"
-               Height          =   450
-               Index           =   3
-               Left            =   1800
-               TabIndex        =   266
-               Tag             =   "lblAutomaticBackupsDesc"
-               ToolTipText     =   "Check this box to enable automatic hourly backups"
-               Top             =   1530
-               Width           =   4335
-            End
-            Begin VB.Label lblHousekeepingDesc 
-               Caption         =   "Set the automatic backup interval in hours."
-               Height          =   330
-               Index           =   4
-               Left            =   1770
-               TabIndex        =   265
-               Tag             =   "lblIntervalDesc"
-               Top             =   2760
-               Width           =   3810
-            End
-            Begin VB.Label lblHousekeepingTab 
-               Caption         =   "Interval:"
-               Height          =   315
-               Index           =   1
-               Left            =   990
-               TabIndex        =   264
-               Tag             =   "lblInterval"
-               Top             =   1995
-               Width           =   780
-            End
-            Begin VB.Label lblIntervalMid 
-               Caption         =   "12"
-               Height          =   315
-               Left            =   3435
-               TabIndex        =   263
-               Top             =   2430
-               Width           =   840
-            End
-            Begin VB.Label lblIntervalMax 
-               Caption         =   "24"
-               Height          =   315
-               Left            =   5250
-               TabIndex        =   262
-               Top             =   2445
-               Width           =   405
-            End
-            Begin VB.Label lblIntervalMin 
-               Caption         =   "1"
-               Height          =   315
-               Left            =   1770
-               TabIndex        =   261
-               Top             =   2445
-               Width           =   345
-            End
-            Begin VB.Label lblHousekeepingTab 
-               Caption         =   "Backup Location:"
-               Height          =   375
-               Index           =   2
-               Left            =   420
-               TabIndex        =   260
-               Tag             =   "lblBackupLocation"
-               Top             =   3345
-               Width           =   1425
-            End
-            Begin VB.Label lblHousekeepingDesc 
-               Caption         =   "Open file explorer at the backup folder location. This will allow you to select a backup file for restoring if required."
-               Height          =   675
-               Index           =   5
-               Left            =   2265
-               TabIndex        =   259
-               Tag             =   "lblBackupLocationDesc"
-               Top             =   3345
-               Width           =   2895
-            End
-            Begin VB.Label lblHousekeepingDesc 
-               Caption         =   "Check this box to enable automatic backups on each startup"
-               Height          =   450
-               Index           =   2
-               Left            =   1785
-               TabIndex        =   258
-               Tag             =   "lblBackupOnStartDesc"
-               ToolTipText     =   "Check this box to enable automatic backups on each startup"
-               Top             =   660
-               Width           =   4335
-            End
-         End
-         Begin VB.ComboBox cmbArchiveDays 
-            Height          =   315
-            Left            =   1920
-            Style           =   2  'Dropdown List
-            TabIndex        =   251
-            Top             =   945
-            Width           =   1665
-         End
-         Begin VB.CommandButton Command1 
-            Caption         =   "..."
-            Height          =   300
-            Left            =   1905
-            Style           =   1  'Graphical
-            TabIndex        =   194
-            ToolTipText     =   "Open a file explorer at the Archive folder location."
-            Top             =   2070
-            Width           =   315
-         End
-         Begin VB.CheckBox chkAutomaticHousekeeping 
-            Caption         =   "Send Emails"
-            Height          =   225
-            Left            =   1935
-            TabIndex        =   186
-            ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
-            Top             =   150
-            Width           =   225
-         End
-         Begin VB.Label lblHousekeepingTab 
-            Caption         =   "-oOo-"
-            Height          =   375
-            Index           =   3
-            Left            =   2820
-            TabIndex        =   286
-            Tag             =   "lblArchiveLocation"
-            Top             =   2820
-            Width           =   1425
-         End
-         Begin VB.Label lblHousekeepingDesc 
-            Caption         =   "Select the number of days after which all old chats will be archived from your selected files."
-            Height          =   450
-            Index           =   6
-            Left            =   1935
-            TabIndex        =   252
-            Tag             =   "lblAutomaticHousekeepingDesc"
-            ToolTipText     =   "Check this box to enable automatic housekeeping"
-            Top             =   1410
-            Width           =   3525
-         End
-         Begin VB.Label lblHousekeepingTab 
-            Caption         =   "Archive Location:"
-            Height          =   375
-            Index           =   0
-            Left            =   525
-            TabIndex        =   196
-            Tag             =   "lblArchiveLocation"
-            Top             =   2070
-            Width           =   1425
-         End
-         Begin VB.Label lblHousekeepingDesc 
-            Caption         =   "Open file explorer at the archive folder location. This will allow you to view archive files."
-            Height          =   675
-            Index           =   1
-            Left            =   2370
-            TabIndex        =   195
-            Top             =   2070
-            Width           =   2895
-         End
-         Begin VB.Label lblHousekeepingDesc 
-            Caption         =   "Check this box to enable automatic housekeeping"
-            Height          =   450
-            Index           =   0
-            Left            =   1920
-            TabIndex        =   188
-            Tag             =   "lblAutomaticHousekeepingDesc"
-            ToolTipText     =   "Check this box to enable automatic housekeeping"
-            Top             =   495
-            Width           =   4335
-         End
-         Begin VB.Label lblAutomaticHousekeeping 
-            Caption         =   "Automatic Housekeeping"
-            Height          =   270
-            Left            =   2280
-            TabIndex        =   187
-            ToolTipText     =   "Check this box to enable automatic housekeeping"
-            Top             =   150
-            Width           =   3120
-         End
+         Height          =   600
+         Left            =   165
+         Picture         =   "Form2.frx":000C
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   182
+         ToolTipText     =   "Opens the Housekeeping tab"
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblHousekeeping 
+         Caption         =   "House"
+         Height          =   225
+         Left            =   210
+         TabIndex        =   183
+         ToolTipText     =   "Opens the Housekeeping tab"
+         Top             =   810
+         Width           =   540
+      End
+   End
+   Begin VB.CommandButton btnHelp 
+      Caption         =   "Help"
+      Height          =   360
+      Left            =   120
+      Style           =   1  'Graphical
+      TabIndex        =   174
+      ToolTipText     =   "Open the help utility"
+      Top             =   10155
+      Width           =   1320
+   End
+   Begin VB.Frame fraSoundsButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   5880
+      TabIndex        =   30
+      Top             =   -105
+      Width           =   930
+      Begin VB.PictureBox picSounds 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   630
+         Left            =   165
+         Picture         =   "Form2.frx":0C2C
+         ScaleHeight     =   630
+         ScaleWidth      =   630
+         TabIndex        =   31
+         ToolTipText     =   "Opens the Window tab"
+         Top             =   210
+         Width           =   630
+      End
+      Begin VB.Label lblSounds 
+         Caption         =   "Sounds"
+         Height          =   240
+         Left            =   210
+         TabIndex        =   32
+         Top             =   825
+         Width           =   615
+      End
+   End
+   Begin VB.Frame fraTextsButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   4920
+      TabIndex        =   27
+      Top             =   -105
+      Width           =   930
+      Begin VB.PictureBox picTexts 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   630
+         Left            =   165
+         Picture         =   "Form2.frx":11EB
+         ScaleHeight     =   630
+         ScaleWidth      =   630
+         TabIndex        =   28
+         ToolTipText     =   "Opens the Window tab"
+         Top             =   225
+         Width           =   630
+      End
+      Begin VB.Label lblTexts 
+         Caption         =   "Texts"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   29
+         Top             =   825
+         Width           =   615
+      End
+   End
+   Begin VB.Timer themeTimer 
+      Enabled         =   0   'False
+      Interval        =   10000
+      Left            =   1440
+      Top             =   10125
+   End
+   Begin VB.CommandButton btnCancel 
+      Caption         =   "&Close"
+      Height          =   360
+      Left            =   7500
+      Style           =   1  'Graphical
+      TabIndex        =   20
+      ToolTipText     =   "Close the utility"
+      Top             =   10155
+      Width           =   1320
+   End
+   Begin VB.Frame fraWindowButton 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   7815
+      TabIndex        =   16
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picWindow 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   165
+         Picture         =   "Form2.frx":17ED
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   17
+         ToolTipText     =   "Opens the Window tab"
+         Top             =   225
+         Width           =   600
+      End
+      Begin VB.Label lblWindow 
+         Caption         =   "Window"
+         Height          =   240
+         Left            =   180
+         TabIndex        =   18
+         Top             =   825
+         Width           =   615
+      End
+   End
+   Begin VB.Frame fraFontsButtons 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   3960
+      TabIndex        =   13
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picFonts 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":2035
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   14
+         ToolTipText     =   "Opens the Fonts tab"
+         Top             =   210
+         Width           =   600
+      End
+      Begin VB.Label lblFonts 
+         Caption         =   "Fonts"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   15
+         Top             =   825
+         Width           =   510
+      End
+   End
+   Begin VB.Frame fraEmojisButtons 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   3000
+      TabIndex        =   10
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picEmojis 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":2821
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   11
+         ToolTipText     =   "Opens the Emojis tab"
+         Top             =   210
+         Width           =   600
+      End
+      Begin VB.Label lblEmojis 
+         Caption         =   "Emojis"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   12
+         Top             =   825
+         Width           =   510
+      End
+   End
+   Begin VB.Frame fraEmailButtons 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   2040
+      TabIndex        =   7
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picEmail 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":2D04
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   8
+         ToolTipText     =   "Opens the email tab"
+         Top             =   210
+         Width           =   600
+      End
+      Begin VB.Label lblEmail 
+         Caption         =   "Email"
+         Height          =   240
+         Left            =   270
+         TabIndex        =   9
+         Top             =   825
+         Width           =   510
+      End
+   End
+   Begin VB.Frame fraConfigurationButtons 
+      BorderStyle     =   0  'None
+      Height          =   1140
+      Left            =   1080
+      TabIndex        =   4
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picConfig 
+         Appearance      =   0  'Flat
+         AutoSize        =   -1  'True
+         BackColor       =   &H80000005&
+         BorderStyle     =   0  'None
+         ForeColor       =   &H80000008&
+         Height          =   600
+         Left            =   180
+         Picture         =   "Form2.frx":32A0
+         ScaleHeight     =   600
+         ScaleWidth      =   600
+         TabIndex        =   5
+         ToolTipText     =   "Opens the configuration tab"
+         Top             =   195
+         Width           =   600
+      End
+      Begin VB.Label lblConfig 
+         Caption         =   "Config."
+         Height          =   240
+         Left            =   195
+         TabIndex        =   6
+         Top             =   825
+         Width           =   630
+      End
+   End
+   Begin VB.Frame fraGeneralButtons 
+      Height          =   1140
+      Left            =   120
+      TabIndex        =   1
+      Top             =   -90
+      Width           =   930
+      Begin VB.PictureBox picGeneral 
+         AutoSize        =   -1  'True
+         BorderStyle     =   0  'None
+         Height          =   405
+         Left            =   240
+         Picture         =   "Form2.frx":3B02
+         ScaleHeight     =   405
+         ScaleWidth      =   420
+         TabIndex        =   2
+         ToolTipText     =   "Opens the general tab"
+         Top             =   300
+         Width           =   420
+      End
+      Begin VB.Label lblGeneral 
+         Caption         =   "General"
+         Height          =   240
+         Left            =   195
+         TabIndex        =   3
+         Top             =   825
+         Width           =   705
       End
    End
    Begin VB.Frame fraGeneral 
@@ -477,9 +524,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbRefreshInterval 
             Height          =   315
-            ItemData        =   "Form2.frx":000C
+            ItemData        =   "Form2.frx":4098
             Left            =   1485
-            List            =   "Form2.frx":000E
+            List            =   "Form2.frx":409A
             Style           =   2  'Dropdown List
             TabIndex        =   79
             ToolTipText     =   "Set the refresh interval"
@@ -568,7 +615,7 @@ Begin VB.Form FireCallPrefs
             Width           =   1350
          End
          Begin VB.Label lblGeneralTab 
-            Caption         =   $"Form2.frx":0010
+            Caption         =   $"Form2.frx":409C
             Height          =   900
             Index           =   7
             Left            =   1545
@@ -635,7 +682,7 @@ Begin VB.Form FireCallPrefs
                Width           =   3960
             End
             Begin VB.Label lblConfigurationTab 
-               Caption         =   $"Form2.frx":00BD
+               Caption         =   $"Form2.frx":4149
                Height          =   660
                Index           =   8
                Left            =   270
@@ -724,9 +771,9 @@ Begin VB.Form FireCallPrefs
          End
          Begin VB.ComboBox cmbMaxLineLength 
             Height          =   315
-            ItemData        =   "Form2.frx":015B
+            ItemData        =   "Form2.frx":41E7
             Left            =   1710
-            List            =   "Form2.frx":015D
+            List            =   "Form2.frx":41E9
             Style           =   2  'Dropdown List
             TabIndex        =   96
             ToolTipText     =   "The program will cut your text to a new line when this limit is reached"
@@ -800,308 +847,6 @@ Begin VB.Form FireCallPrefs
             Top             =   3780
             Width           =   3750
          End
-      End
-   End
-   Begin VB.CommandButton btnSave 
-      Caption         =   "&Save"
-      Enabled         =   0   'False
-      Height          =   360
-      Left            =   6105
-      Style           =   1  'Graphical
-      TabIndex        =   19
-      ToolTipText     =   "Save the changes you have made to the preferences"
-      Top             =   10140
-      Width           =   1320
-   End
-   Begin VB.Frame fraHousekeepingButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   6840
-      TabIndex        =   181
-      ToolTipText     =   "Opens the Housekeeping tab"
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picHousekeeping 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   165
-         Picture         =   "Form2.frx":015F
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   182
-         ToolTipText     =   "Opens the Housekeeping tab"
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Label lblHousekeeping 
-         Caption         =   "House"
-         Height          =   225
-         Left            =   210
-         TabIndex        =   183
-         ToolTipText     =   "Opens the Housekeeping tab"
-         Top             =   810
-         Width           =   540
-      End
-   End
-   Begin VB.CommandButton btnHelp 
-      Caption         =   "Help"
-      Height          =   360
-      Left            =   120
-      Style           =   1  'Graphical
-      TabIndex        =   174
-      ToolTipText     =   "Open the help utility"
-      Top             =   10155
-      Width           =   1320
-   End
-   Begin VB.Frame fraSoundsButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   5880
-      TabIndex        =   30
-      Top             =   -105
-      Width           =   930
-      Begin VB.PictureBox picSounds 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   630
-         Left            =   165
-         Picture         =   "Form2.frx":0D7F
-         ScaleHeight     =   630
-         ScaleWidth      =   630
-         TabIndex        =   31
-         ToolTipText     =   "Opens the Window tab"
-         Top             =   210
-         Width           =   630
-      End
-      Begin VB.Label lblSounds 
-         Caption         =   "Sounds"
-         Height          =   240
-         Left            =   210
-         TabIndex        =   32
-         Top             =   825
-         Width           =   615
-      End
-   End
-   Begin VB.Frame fraTextsButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   4920
-      TabIndex        =   27
-      Top             =   -105
-      Width           =   930
-      Begin VB.PictureBox picTexts 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   630
-         Left            =   165
-         Picture         =   "Form2.frx":133E
-         ScaleHeight     =   630
-         ScaleWidth      =   630
-         TabIndex        =   28
-         ToolTipText     =   "Opens the Window tab"
-         Top             =   225
-         Width           =   630
-      End
-      Begin VB.Label lblTexts 
-         Caption         =   "Texts"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   29
-         Top             =   825
-         Width           =   615
-      End
-   End
-   Begin VB.Timer themeTimer 
-      Enabled         =   0   'False
-      Interval        =   10000
-      Left            =   1440
-      Top             =   10125
-   End
-   Begin VB.CommandButton btnCancel 
-      Caption         =   "&Close"
-      Height          =   360
-      Left            =   7500
-      Style           =   1  'Graphical
-      TabIndex        =   20
-      ToolTipText     =   "Close the utility"
-      Top             =   10155
-      Width           =   1320
-   End
-   Begin VB.Frame fraWindowButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   7815
-      TabIndex        =   16
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picWindow 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   165
-         Picture         =   "Form2.frx":1940
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   17
-         ToolTipText     =   "Opens the Window tab"
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Label lblWindow 
-         Caption         =   "Window"
-         Height          =   240
-         Left            =   180
-         TabIndex        =   18
-         Top             =   825
-         Width           =   615
-      End
-   End
-   Begin VB.Frame fraFontsButtons 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   3960
-      TabIndex        =   13
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picFonts 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":2188
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   14
-         ToolTipText     =   "Opens the Fonts tab"
-         Top             =   210
-         Width           =   600
-      End
-      Begin VB.Label lblFonts 
-         Caption         =   "Fonts"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   15
-         Top             =   825
-         Width           =   510
-      End
-   End
-   Begin VB.Frame fraEmojisButtons 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   3000
-      TabIndex        =   10
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picEmojis 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":2974
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   11
-         ToolTipText     =   "Opens the Emojis tab"
-         Top             =   210
-         Width           =   600
-      End
-      Begin VB.Label lblEmojis 
-         Caption         =   "Emojis"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   12
-         Top             =   825
-         Width           =   510
-      End
-   End
-   Begin VB.Frame fraEmailButtons 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   2040
-      TabIndex        =   7
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picEmail 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":2E57
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   8
-         ToolTipText     =   "Opens the email tab"
-         Top             =   210
-         Width           =   600
-      End
-      Begin VB.Label lblEmail 
-         Caption         =   "Email"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   9
-         Top             =   825
-         Width           =   510
-      End
-   End
-   Begin VB.Frame fraConfigurationButtons 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   1080
-      TabIndex        =   4
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picConfig 
-         Appearance      =   0  'Flat
-         AutoSize        =   -1  'True
-         BackColor       =   &H80000005&
-         BorderStyle     =   0  'None
-         ForeColor       =   &H80000008&
-         Height          =   600
-         Left            =   180
-         Picture         =   "Form2.frx":33F3
-         ScaleHeight     =   600
-         ScaleWidth      =   600
-         TabIndex        =   5
-         ToolTipText     =   "Opens the configuration tab"
-         Top             =   195
-         Width           =   600
-      End
-      Begin VB.Label lblConfig 
-         Caption         =   "Config."
-         Height          =   240
-         Left            =   195
-         TabIndex        =   6
-         Top             =   825
-         Width           =   630
-      End
-   End
-   Begin VB.Frame fraGeneralButtons 
-      Height          =   1140
-      Left            =   120
-      TabIndex        =   1
-      Top             =   -90
-      Width           =   930
-      Begin VB.PictureBox picGeneral 
-         AutoSize        =   -1  'True
-         BorderStyle     =   0  'None
-         Height          =   405
-         Left            =   240
-         Picture         =   "Form2.frx":3C55
-         ScaleHeight     =   405
-         ScaleWidth      =   420
-         TabIndex        =   2
-         ToolTipText     =   "Opens the general tab"
-         Top             =   300
-         Width           =   420
-      End
-      Begin VB.Label lblGeneral 
-         Caption         =   "General"
-         Height          =   240
-         Left            =   195
-         TabIndex        =   3
-         Top             =   825
-         Width           =   705
       End
    End
    Begin VB.Frame fraTexts 
@@ -2771,6 +2516,261 @@ Begin VB.Form FireCallPrefs
             TabIndex        =   40
             Top             =   1590
             Width           =   3810
+         End
+      End
+   End
+   Begin VB.Frame fraHousekeeping 
+      Caption         =   "Housekeeping"
+      Height          =   7755
+      Left            =   690
+      TabIndex        =   184
+      Top             =   1215
+      Width           =   8655
+      Begin VB.Frame fraHiddenHousekeeping 
+         BorderStyle     =   0  'None
+         Height          =   7230
+         Left            =   600
+         TabIndex        =   185
+         Top             =   255
+         Width           =   7245
+         Begin VB.CommandButton btnArchiveNow 
+            Caption         =   "Archive Now"
+            Height          =   525
+            Left            =   5205
+            TabIndex        =   285
+            Top             =   2040
+            Width           =   1320
+         End
+         Begin VB.Frame fraHouseKeepingBackups 
+            BorderStyle     =   0  'None
+            Height          =   4125
+            Left            =   165
+            TabIndex        =   253
+            Top             =   3015
+            Width           =   6855
+            Begin VB.CommandButton btnBackupNow 
+               Caption         =   "Backup Now"
+               Height          =   525
+               Left            =   5145
+               TabIndex        =   284
+               Top             =   3285
+               Width           =   1320
+            End
+            Begin VB.CheckBox chkAutomaticBackups 
+               Caption         =   "  Automatic Backups"
+               Height          =   225
+               Left            =   1800
+               TabIndex        =   256
+               ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
+               Top             =   1185
+               Width           =   1950
+            End
+            Begin VB.CommandButton btnBackupLocation 
+               Caption         =   "..."
+               Height          =   300
+               Left            =   1800
+               Style           =   1  'Graphical
+               TabIndex        =   255
+               ToolTipText     =   "Open a file explorer at the Backup folder location."
+               Top             =   3345
+               Width           =   315
+            End
+            Begin VB.CheckBox chkBackupOnStart 
+               Caption         =   "  Backup on Start"
+               Height          =   225
+               Left            =   1785
+               TabIndex        =   254
+               ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
+               Top             =   315
+               Width           =   1725
+            End
+            Begin vb6projectCCRSlider.Slider sliAutomaticBackupInterval 
+               Height          =   390
+               Left            =   1680
+               TabIndex        =   257
+               ToolTipText     =   "Set the hourly interval "
+               Top             =   1935
+               Width           =   3870
+               _ExtentX        =   6826
+               _ExtentY        =   688
+               Min             =   1
+               Max             =   24
+               Value           =   24
+               SelStart        =   20
+            End
+            Begin VB.Label lblHousekeepingDesc 
+               Caption         =   "Check this box to enable automatic hourly backups"
+               Height          =   450
+               Index           =   3
+               Left            =   1800
+               TabIndex        =   266
+               Tag             =   "lblAutomaticBackupsDesc"
+               ToolTipText     =   "Check this box to enable automatic hourly backups"
+               Top             =   1530
+               Width           =   4335
+            End
+            Begin VB.Label lblHousekeepingDesc 
+               Caption         =   "Set the automatic backup interval in hours."
+               Height          =   330
+               Index           =   4
+               Left            =   1770
+               TabIndex        =   265
+               Tag             =   "lblIntervalDesc"
+               Top             =   2760
+               Width           =   3810
+            End
+            Begin VB.Label lblHousekeepingTab 
+               Caption         =   "Interval:"
+               Height          =   315
+               Index           =   1
+               Left            =   990
+               TabIndex        =   264
+               Tag             =   "lblInterval"
+               Top             =   1995
+               Width           =   780
+            End
+            Begin VB.Label lblIntervalMid 
+               Caption         =   "12"
+               Height          =   315
+               Left            =   3435
+               TabIndex        =   263
+               Top             =   2430
+               Width           =   840
+            End
+            Begin VB.Label lblIntervalMax 
+               Caption         =   "24"
+               Height          =   315
+               Left            =   5250
+               TabIndex        =   262
+               Top             =   2445
+               Width           =   405
+            End
+            Begin VB.Label lblIntervalMin 
+               Caption         =   "1"
+               Height          =   315
+               Left            =   1770
+               TabIndex        =   261
+               Top             =   2445
+               Width           =   345
+            End
+            Begin VB.Label lblHousekeepingTab 
+               Caption         =   "Backup Location:"
+               Height          =   375
+               Index           =   2
+               Left            =   420
+               TabIndex        =   260
+               Tag             =   "lblBackupLocation"
+               Top             =   3345
+               Width           =   1425
+            End
+            Begin VB.Label lblHousekeepingDesc 
+               Caption         =   "Open file explorer at the backup folder location. This will allow you to select a backup file for restoring if required."
+               Height          =   675
+               Index           =   5
+               Left            =   2265
+               TabIndex        =   259
+               Tag             =   "lblBackupLocationDesc"
+               Top             =   3345
+               Width           =   2895
+            End
+            Begin VB.Label lblHousekeepingDesc 
+               Caption         =   "Check this box to enable automatic backups on each startup"
+               Height          =   450
+               Index           =   2
+               Left            =   1785
+               TabIndex        =   258
+               Tag             =   "lblBackupOnStartDesc"
+               ToolTipText     =   "Check this box to enable automatic backups on each startup"
+               Top             =   660
+               Width           =   4335
+            End
+         End
+         Begin VB.ComboBox cmbArchiveDays 
+            Height          =   315
+            Left            =   1920
+            Style           =   2  'Dropdown List
+            TabIndex        =   251
+            Top             =   945
+            Width           =   1665
+         End
+         Begin VB.CommandButton Command1 
+            Caption         =   "..."
+            Height          =   300
+            Left            =   1905
+            Style           =   1  'Graphical
+            TabIndex        =   194
+            ToolTipText     =   "Open a file explorer at the Archive folder location."
+            Top             =   2070
+            Width           =   315
+         End
+         Begin VB.CheckBox chkAutomaticHousekeeping 
+            Caption         =   "Send Emails"
+            Height          =   225
+            Left            =   1935
+            TabIndex        =   186
+            ToolTipText     =   "Check this box to enable advice messages. If enabled, advice messages are sent periodically to this address."
+            Top             =   150
+            Width           =   225
+         End
+         Begin VB.Label lblHousekeepingTab 
+            Caption         =   "-oOo-"
+            Height          =   375
+            Index           =   3
+            Left            =   2820
+            TabIndex        =   286
+            Tag             =   "lblArchiveLocation"
+            Top             =   2820
+            Width           =   1425
+         End
+         Begin VB.Label lblHousekeepingDesc 
+            Caption         =   "Select the number of days after which all old chats will be archived from your selected files."
+            Height          =   450
+            Index           =   6
+            Left            =   1935
+            TabIndex        =   252
+            Tag             =   "lblAutomaticHousekeepingDesc"
+            ToolTipText     =   "Check this box to enable automatic housekeeping"
+            Top             =   1410
+            Width           =   3525
+         End
+         Begin VB.Label lblHousekeepingTab 
+            Caption         =   "Archive Location:"
+            Height          =   375
+            Index           =   0
+            Left            =   525
+            TabIndex        =   196
+            Tag             =   "lblArchiveLocation"
+            Top             =   2070
+            Width           =   1425
+         End
+         Begin VB.Label lblHousekeepingDesc 
+            Caption         =   "Open file explorer at the archive folder location. This will allow you to view archive files."
+            Height          =   675
+            Index           =   1
+            Left            =   2370
+            TabIndex        =   195
+            Top             =   2070
+            Width           =   2895
+         End
+         Begin VB.Label lblHousekeepingDesc 
+            Caption         =   "Check this box to enable automatic housekeeping"
+            Height          =   450
+            Index           =   0
+            Left            =   1920
+            TabIndex        =   188
+            Tag             =   "lblAutomaticHousekeepingDesc"
+            ToolTipText     =   "Check this box to enable automatic housekeeping"
+            Top             =   495
+            Width           =   4335
+         End
+         Begin VB.Label lblAutomaticHousekeeping 
+            Caption         =   "Automatic Housekeeping"
+            Height          =   270
+            Left            =   2280
+            TabIndex        =   187
+            ToolTipText     =   "Check this box to enable automatic housekeeping"
+            Top             =   150
+            Width           =   3120
          End
       End
    End

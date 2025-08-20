@@ -668,6 +668,10 @@ Public msgLogOut As Boolean
 
 Public currentOpacity As Integer
 
+Public gblStartupFlg As Boolean
+
+'Public doNotClick As Boolean
+
 
 ' called during startup to start the polling timers either VB6 or in code
 '---------------------------------------------------------------------------------------
@@ -1079,19 +1083,19 @@ setOpacity_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setOpacity of Module modCommon"
 End Sub
 
-' checks the existence of the output file, the local user's file, checks the linecount and reads the data into the array and thence to the listbox
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : checkAndReadOutputFile
 ' Author    : beededea
 ' Date      : 18/08/2025
-' Purpose   :
+' Purpose   : checks the existence of the output file, the local user's file, checks the linecount and reads the data into the array and thence to the listbox
 '---------------------------------------------------------------------------------------
 '
-Private Sub checkAndReadOutputFile()
+Public Sub checkAndReadOutputFile()
 
     Dim timeDifferenceInSecs As Long ' max 86 years as a LONG in secs
     
-   On Error GoTo checkAndReadOutputFile_Error
+    On Error GoTo checkAndReadOutputFile_Error
 
     timeDifferenceInSecs = 0
     
@@ -1145,16 +1149,21 @@ Private Sub checkAndReadOutputFile()
     
     timeDifferenceInSecs = DateDiff("s", oldOutputFileModificationTime, outputFileModificationTime)
 
-    If timeDifferenceInSecs = 0 Then
+    If gblStartupFlg = False And timeDifferenceInSecs = 0 Then
         Exit Sub  ' to minimise CPU usage just exit
     End If
     
     outputLineCount = fLineCount(FCWSharedOutputFile)
     'If oldOutputLineCount = outputLineCount Then Exit Sub ' to minimise CPU usage just exit
+        
+    If outputLineCount >= 32766 Then
+        debugLog "%Err-I-ErrorNumber 16 - The output file is too long at 32,766 lines long, please split and shorten the output file. FCW will not process new messages."
+        Exit Sub
+    End If
     
-    Call readOutputFileWriteArrayWriteListbox(FCWSharedOutputFile)
+    Call readOutputFileWriteArrayAndListbox(FCWSharedOutputFile)
     
-    FireCallMain.lbxOutputTextArea.Refresh
+    Call setToLastOutputItem
 
    On Error GoTo 0
    Exit Sub
@@ -1172,7 +1181,7 @@ End Sub
 '             time/date stamp and reads the data into the array and thence to the listbox
 '---------------------------------------------------------------------------------------
 '
-Private Sub checkAndReadInputFile()
+Public Sub checkAndReadInputFile()
     
     On Error GoTo l_checkAndReadInputFile_Error ' catch any error
     
@@ -1223,7 +1232,7 @@ Private Sub checkAndReadInputFile()
     
     timeDifferenceInSecs = DateDiff("s", oldInputFileModificationTime, inputFileModificationTime)
 
-    If timeDifferenceInSecs = 0 Then
+    If gblStartupFlg = False And timeDifferenceInSecs = 0 Then
         Exit Sub  ' to minimise CPU usage just exit
     End If
     GoTo l_getInputLineCount ' bypass the error reporting on a normal condition
@@ -1256,17 +1265,20 @@ l_getInputLineCount: ' continue location
     FireCallMain.picTextChangeBright.Visible = True
     FireCallMain.picTextChangeDull.Visible = False
     
+    ' checking all done, now do the reading
     Call readInputFileWriteArrayAndListbox(FCWSharedInputFile)
 
+    ' set the position to the last entry in the listbox
+    Call setToLastInputItem
 
 End Sub
 
-' if Dropbox is unavailable, the process not running, then say so.
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : fCheckDropboxRunning
 ' Author    : beededea
 ' Date      : 18/08/2025
-' Purpose   :
+' Purpose   : if Dropbox is unavailable, the process not running, then say so.
 '---------------------------------------------------------------------------------------
 '
 Public Function fCheckDropboxRunning() As Boolean
@@ -1778,10 +1790,19 @@ TestWinVer_Error:
 End Sub
 
 ' select a font for the fnt form
+'---------------------------------------------------------------------------------------
+' Procedure : changeFont
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub changeFont(ByRef frm As Form, ByRef fntNow As Boolean, ByRef fntFont As String, ByRef fntSize As Integer, ByRef fntWeight As Integer, ByRef fntStyle As Boolean, ByRef fntColour As Long, ByRef fntItalics As Boolean, ByRef fntUnderline As Boolean, ByRef fntFontResult As Boolean)
 
     'initialise the dimensioned variables
     
+   On Error GoTo changeFont_Error
+
     fntWeight = 0
     fntStyle = False
     'fntColour = 0
@@ -1810,6 +1831,13 @@ Public Sub changeFont(ByRef frm As Form, ByRef fntNow As Boolean, ByRef fntFont 
     Else
         'FireCallMain.cmbEmojiSelection.SelLength = 0
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+changeFont_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure changeFont of Module modCommon"
     
 End Sub
 
@@ -1846,91 +1874,50 @@ Public Sub resetComboBoxHighlight()
     
 End Sub
 
-' this populates the input box, ie. the remote user data list box, sets the scrollbars immediately after.
 
+
+'
+'---------------------------------------------------------------------------------------
+' Procedure : populateInputBox
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   : this populates the input box, ie. the remote user data list box, sets the scrollbars immediately after.
+'---------------------------------------------------------------------------------------
+'
 Public Sub populateInputBox()
+    
+    On Error GoTo populateInputBox_Error
 
-    Dim lLength As Long
-    
-    If FCWOptHandleData = "0" Then
-        gblIoMethodADO = False
-        FireCallMain.picFsoLampBright.Visible = True
-        FireCallMain.picFsoLampDull.Visible = False
-        FireCallMain.picUtf8LampBright.Visible = False
-        FireCallMain.picUtf8LampDull.Visible = True
-        
-    Else
-        gblIoMethodADO = True
-        FireCallMain.picFsoLampBright.Visible = False
-        FireCallMain.picFsoLampDull.Visible = True
-        FireCallMain.picUtf8LampBright.Visible = True
-        FireCallMain.picUtf8LampDull.Visible = False
-    End If
 
-    ' read the defined input file and write the input array
-    Call readInputFileWriteArrayAndListbox(FCWSharedInputFile)
-    
-    ' the scrollbar config code needs to be here after the reading of the output data
-    If FCWEnableScrollbars = 0 Then
-        'the next two line must be in this order
-        Call SendMessageByNum(FireCallMain.lbxInputTextArea.hwnd, LB_SETHORIZONTALEXTENT, 0, 0&) ' hides the horizontal scrollbar
-        Call ShowScrollBar(FireCallMain.lbxInputTextArea.hwnd, SB_VERT, False)  ' hides the vertical scrollbar
-    Else
-        Call ShowScrollBar(FireCallMain.lbxInputTextArea.hwnd, SB_VERT, True) ' shows the vertical scrollbar
-        ' add the horizontal scroll bar to the upper listbox
-        lLength = 2 * (FireCallMain.lbxInputTextArea.Width / Screen.TwipsPerPixelX)
-        Call SendMessageByNum(FireCallMain.lbxInputTextArea.hwnd, LB_SETHORIZONTALEXTENT, lLength, 0&)
-    End If
-    
-    ' set the position to the last entry in the listbox
-    If Val(FCWLoadBottom) = 1 Then
-        FireCallMain.lbxInputTextArea.ListIndex = FireCallMain.lbxInputTextArea.ListCount - 1
-    Else
-        FireCallMain.lbxInputTextArea.ListIndex = 0
-    End If
+
+   On Error GoTo 0
+   Exit Sub
+
+populateInputBox_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateInputBox of Module modCommon"
 
 End Sub
 
-' this populates the output box, ie. the local user data list box, sets the scrollbars immediately after.
-
+'
+'---------------------------------------------------------------------------------------
+' Procedure : populateOutputBox
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   : this populates the output box, ie. the local user data list box, sets the scrollbars immediately after.
+'---------------------------------------------------------------------------------------
+'
 Public Sub populateOutputBox()
 
-    Dim lLength As Long
-    
-    'now do the same for the output
-    outputLineCount = fLineCount(FCWSharedOutputFile)
 
-    If outputLineCount >= 32766 Then
-        debugLog "%Err-I-ErrorNumber 15 - The output file is close to the maximum limit, please split and shorten the output file"
-    End If
-        
-    If outputLineCount >= 32766 Then
-        debugLog "%Err-I-ErrorNumber 16 - The output file is too long at 32,766 lines long, please split and shorten the output file. FCW will not process new messages."
-        Exit Sub
-    End If
-    ' read the file chosen as the output file
-    ' write an array the same length as your output file
-    ' write the listbox using the array
-    Call readOutputFileWriteArrayWriteListbox(FCWSharedOutputFile)
-    
-    ' the scrollbar config code must be here after the reading of the output data
-    If FCWEnableScrollbars = 0 Then
-        'the next two line must be in this order
-        Call SendMessageByNum(FireCallMain.lbxOutputTextArea.hwnd, LB_SETHORIZONTALEXTENT, 0, 0&) ' hides the horizontal scrollbar
-        Call ShowScrollBar(FireCallMain.lbxOutputTextArea.hwnd, SB_VERT, False)  ' hides the vertical scrollbar
-    Else
-        Call ShowScrollBar(FireCallMain.lbxOutputTextArea.hwnd, SB_VERT, True) ' shows the vertical scrollbar
-        ' add the horizontal scroll bar to the upper listbox
-        lLength = 2 * (FireCallMain.lbxOutputTextArea.Width / Screen.TwipsPerPixelX)
-        Call SendMessageByNum(FireCallMain.lbxOutputTextArea.hwnd, LB_SETHORIZONTALEXTENT, lLength, 0&)
-    End If
-    
-    'set to the latest item in the listbox
-    If Val(FCWLoadBottom) = 1 Then
-        FireCallMain.lbxOutputTextArea.ListIndex = FireCallMain.lbxOutputTextArea.ListCount - 1
-    Else
-        FireCallMain.lbxOutputTextArea.ListIndex = 0
-    End If
+
+
+   On Error GoTo 0
+   Exit Sub
+
+populateOutputBox_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateOutputBox of Module modCommon"
     
 End Sub
 ' populates a third array for sorting and thence to a listbox containing both the inputs and outputs
@@ -3100,17 +3087,20 @@ renderPicBox_Error:
 
 End Sub
 
-
-
-
-' read the file chosen as the output file
+'
+'---------------------------------------------------------------------------------------
+' Procedure : readOutputFileWriteArrayAndListbox
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   : read the file chosen as the output file
 ' write an array the same length as your output file
 ' write the listbox using the array
 
 ' read the local user's file line by line, read it into an interim array and thence into a listbox.
-' called by checkAndReadOutputFile during polling & populateOutputBox during startup
-
-Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
+' called by checkAndReadOutputFile during polling during startup
+'---------------------------------------------------------------------------------------
+'
+Public Sub readOutputFileWriteArrayAndListbox(ByVal sFName As String)
     Dim lIndex As Long
     'Dim fileString As String
     Dim useloop As Integer
@@ -3124,16 +3114,15 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     Dim findStartPos As Integer
     Dim stringWithoutPrefix As String
 
-    
     Const ForReading As Integer = 1
     
+    On Error GoTo readOutputFileWriteArrayAndListbox_Error
+
     lIndex = outputLineCount 'differs from the input file in that we turn the array upside down
                              ' as we need to write to the first record in the file
     
     ' resize the array to the new linecount
     ReDim outputFileArray(outputLineCount)
-    
-
     
     If gblIoMethodADO = False Then
     '     we use the FSO method rather than VB6 input as it is more friendly to unix crlf EOLs
@@ -3264,15 +3253,31 @@ Public Sub readOutputFileWriteArrayWriteListbox(ByVal sFName As String)
     End If
     
     oldOutputLineCount = outputLineCount
+
+   On Error GoTo 0
+   Exit Sub
+
+readOutputFileWriteArrayAndListbox_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure readOutputFileWriteArrayAndListbox of Module modCommon"
     
  End Sub
 
 ' click on the slim strip of paper that shows an emerging Emoji
+'---------------------------------------------------------------------------------------
+' Procedure : clickOnPicEmoji
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub clickOnPicEmoji()
     Dim soundtoplay As String
     Dim nought As String
     'Dim fullPath As String
     
+   On Error GoTo clickOnPicEmoji_Error
+
     If FireCallMain.picEmoji.Top < 2000 Then
         If FireCallMain.printerTimer.Enabled = True Then
             FireCallMain.printerTimer.Enabled = False
@@ -3323,6 +3328,13 @@ Public Sub clickOnPicEmoji()
         Call FireCallMain.dropTimer_TimerSub
     End If
 
+   On Error GoTo 0
+   Exit Sub
+
+clickOnPicEmoji_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure clickOnPicEmoji of Module modCommon"
+
 End Sub
 '---------------------------------------------------------------------------------------
 ' Procedure : readSettingsFile
@@ -3334,7 +3346,7 @@ End Sub
 Public Sub readSettingsFile(ByVal location As String, ByVal FCWSettingsFile As String)
     
     
-    ' On Error GoTo readSettingsFile_Error
+    On Error GoTo readSettingsFile_Error
     'If debugflg = 1 Then DebugPrint "%readFCWFCWSettingsFile"
 
     If fFExists(FCWSettingsFile) Then
@@ -3464,9 +3476,18 @@ readSettingsFile_Error:
 
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : readSmtpConfigDetails
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub readSmtpConfigDetails(ByVal location As String, smtpConfigVal As Integer)
         Dim b64FCWSMTPPassword As String
         
+   On Error GoTo readSmtpConfigDetails_Error
+
         Set Bas64 = New Base64
         
         FCWSmtpConfigName = fGetINISetting(location, "smtpConfigName" & smtpConfigVal, FCWSettingsFile)
@@ -3497,10 +3518,26 @@ Public Sub readSmtpConfigDetails(ByVal location As String, smtpConfigVal As Inte
         FCWEmailSubject = fGetINISetting(location, "emailSubject" & smtpConfigVal, FCWSettingsFile)
         FCWEmailMessage = fGetINISetting(location, "emailMessage" & smtpConfigVal, FCWSettingsFile)
 
+
+   On Error GoTo 0
+   Exit Sub
+
+readSmtpConfigDetails_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure readSmtpConfigDetails of Module modCommon"
         
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Procedure : validateSmtpInputs
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub validateSmtpInputs()
+
+   On Error GoTo validateSmtpInputs_Error
 
         If FCWSmtpServer = vbNullString Then FCWSmtpServer = ""
         If FCWSmtpUsername = vbNullString Then FCWSmtpUsername = ""
@@ -3508,11 +3545,25 @@ Public Sub validateSmtpInputs()
         If FCWSmtpPort = vbNullString Then FCWSmtpPort = "0"
         If FCWSmtpAuthenticate = vbNullString Then FCWSmtpAuthenticate = "0"
         If FCWSmtpSecurity = vbNullString Then FCWSmtpSecurity = "0"
+
+   On Error GoTo 0
+   Exit Sub
+
+validateSmtpInputs_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure validateSmtpInputs of Module modCommon"
 End Sub
 
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : altGetPrivateProfileString
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Private Function altGetPrivateProfileString(strSection As String, strKey As String, strFilePath As String) As String
     ' we no longer use GetPrivateProfileString in fGetINISetting as it cannot read certain special chars
     ' generated by the encryption routine, tried base64 encoding it to no avail.
@@ -3523,6 +3574,8 @@ Private Function altGetPrivateProfileString(strSection As String, strKey As Stri
     Dim intEqualPos
     Dim objFSO, objIniFile
     Dim strLeftString, strLine
+
+   On Error GoTo altGetPrivateProfileString_Error
 
     Set objFSO = CreateObject("Scripting.FileSystemObject")
 
@@ -3567,6 +3620,13 @@ Private Function altGetPrivateProfileString(strSection As String, strKey As Stri
         Loop
         objIniFile.Close
     End If
+
+   On Error GoTo 0
+   Exit Function
+
+altGetPrivateProfileString_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure altGetPrivateProfileString of Module modCommon"
         
 End Function
 
@@ -4853,17 +4913,13 @@ Public Sub sendSomething(ByVal thingToSend As String)
     ' re-read the file chosen as the output file
     ' re populate the array the same length as your output file
     ' update the listbox using the array
-    Call readOutputFileWriteArrayWriteListbox(FCWSharedOutputFile)
+    Call readOutputFileWriteArrayAndListbox(FCWSharedOutputFile)
     
     CTRL_1 = False ' ensuring that the automatic click caused by the next few commands does not cause any URL to
                    ' automatically show in the browser (Ctrl+click)
                    
     ' this needs to be incremented properly on multi-line addition TBD
-    If Val(FCWLoadBottom) = 1 Then
-        FireCallMain.lbxOutputTextArea.ListIndex = FireCallMain.lbxOutputTextArea.ListCount - 1
-    Else
-        FireCallMain.lbxOutputTextArea.ListIndex = 0
-    End If
+    Call setToLastOutputItem
     
     outputDataChangedFlag = True
     
@@ -4902,17 +4958,13 @@ Public Sub insertSomething(ByVal thingToSend As String, ByVal thisLineNumber As 
     ' re-read the file chosen as the output file
     ' re populate the array the same length as your output file
     ' update the listbox using the array
-    Call readOutputFileWriteArrayWriteListbox(FCWSharedOutputFile)
+    Call readOutputFileWriteArrayAndListbox(FCWSharedOutputFile)
     
     CTRL_1 = False ' ensuring that the automatic click caused by the next few commands does not cause any URL to
                    ' automatically show in the browser (Ctrl+click)
     
     ' this needs to be incremented properly on multi-line addition TBD
-    If Val(FCWLoadBottom) = 1 Then
-        FireCallMain.lbxOutputTextArea.ListIndex = FireCallMain.lbxOutputTextArea.ListCount - 1
-    Else
-        FireCallMain.lbxOutputTextArea.ListIndex = 0
-    End If
+    Call setToLastOutputItem
     
     outputDataChangedFlag = True
     
@@ -4951,15 +5003,12 @@ Public Sub sendMultipleThings()
     ' re-read the file chosen as the output file
     ' re populate the array the same length as your output file
     ' update the listbox using the array
-    Call readOutputFileWriteArrayWriteListbox(FCWSharedOutputFile)
+    Call readOutputFileWriteArrayAndListbox(FCWSharedOutputFile)
     
     CTRL_1 = False ' ensuring that automatic click caused by the next few commands does not cause any URL to
                    ' automatically show in the browser (Ctrl+click)
-    If Val(FCWLoadBottom) = 1 Then
-        FireCallMain.lbxOutputTextArea.ListIndex = FireCallMain.lbxOutputTextArea.ListCount - 1
-    Else
-        FireCallMain.lbxOutputTextArea.ListIndex = 0
-    End If
+
+    Call setToLastOutputItem
     
     outputDataChangedFlag = True
     
@@ -5002,15 +5051,12 @@ Public Sub insertMultipleThings()
     ' re-read the file chosen as the output file
     ' re populate the array the same length as your output file
     ' update the listbox using the array
-    Call readOutputFileWriteArrayWriteListbox(FCWSharedOutputFile)
+    Call readOutputFileWriteArrayAndListbox(FCWSharedOutputFile)
     
     CTRL_1 = False ' ensuring that automatic click caused by the next few commands does not cause any URL to
                    ' automatically show in the browser (Ctrl+click)
-    If Val(FCWLoadBottom) = 1 Then
-        FireCallMain.lbxOutputTextArea.ListIndex = FireCallMain.lbxOutputTextArea.ListCount - 1
-    Else
-        FireCallMain.lbxOutputTextArea.ListIndex = 0
-    End If
+    
+    Call setToLastOutputItem
     
     outputDataChangedFlag = True
     
@@ -6254,20 +6300,17 @@ Public Sub houseKeepingTimerLogic(ByVal bypassIdleCheck As Boolean)
     ' re-read the file chosen as the output file
     ' re populate the array the same length as your output file
     ' update the listbox using the array
-    Call readOutputFileWriteArrayWriteListbox(FCWSharedOutputFile)
+    Call readOutputFileWriteArrayAndListbox(FCWSharedOutputFile)
     
     outputLineCount = fLineCount(FCWSharedOutputFile) ' this might not be required - for testing
         
-    ' this next stuff always appears after a call to readOutputFileWriteArrayWriteListbox - DEAN
+    ' this next stuff always appears after a call to readOutputFileWriteArrayAndListbox - DEAN
     ' I may need to tidy or incorporate this into the routine
     
     CTRL_1 = False ' ensuring that automatic click caused by the next few commands does not cause any URL to
                    ' automatically show in the browser (Ctrl+click)
-    If Val(FCWLoadBottom) = 1 Then
-        FireCallMain.lbxOutputTextArea.ListIndex = FireCallMain.lbxOutputTextArea.ListCount - 1
-    Else
-        FireCallMain.lbxOutputTextArea.ListIndex = 0
-    End If
+
+    Call setToLastOutputItem
     
     outputDataChangedFlag = True
     
@@ -6853,4 +6896,63 @@ backupOutputFile_Error:
 
     debugLog "Error " & err.Number & " (" & err.Description & ") in procedure backupOutputFile of Form FireCallMain"
         
+End Sub
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : setToLastInputItem
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   : set to the latest item in the listbox
+'---------------------------------------------------------------------------------------
+'
+Public Sub setToLastInputItem()
+
+   On Error GoTo setToLastInputItem_Error
+
+    If Val(FCWLoadBottom) = 1 Then
+        FireCallMain.lbxInputTextArea.ListIndex = FireCallMain.lbxInputTextArea.ListCount - 1
+    Else
+        FireCallMain.lbxInputTextArea.ListIndex = 0
+    End If
+    
+   FireCallMain.lbxInputTextArea.Refresh
+
+   On Error GoTo 0
+   Exit Sub
+
+setToLastInputItem_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setToLastInputItem of Form FireCallMain"
+
+End Sub
+
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : setToLastOutputItem
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   : set to the latest item in the listbox
+'---------------------------------------------------------------------------------------
+'
+Public Sub setToLastOutputItem()
+
+   On Error GoTo setToLastOutputItem_Error
+
+    If Val(FCWLoadBottom) = 1 Then
+        FireCallMain.lbxOutputTextArea.ListIndex = FireCallMain.lbxOutputTextArea.ListCount - 1
+    Else
+        FireCallMain.lbxOutputTextArea.ListIndex = 0
+    End If
+    
+   FireCallMain.lbxOutputTextArea.Refresh
+
+   On Error GoTo 0
+   Exit Sub
+
+setToLastOutputItem_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setToLastOutputItem of Form FireCallMain"
+
 End Sub

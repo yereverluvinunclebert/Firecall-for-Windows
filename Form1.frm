@@ -1810,7 +1810,7 @@ Attribute VB_Exposed = False
 
 
 ' TwinBasic has an error compiling this code when referring to a single line in readInputFileWriteArrayAndListbox
-                FireCallMain.lbxInputTextArea.List(lbxCount) = stringToWrite
+'                FireCallMain.lbxInputTextArea.List(lbxCount) = stringToWrite
                 
 ' LaVolpe's image reading code is used to allow VB6 to read non-native image types that were non-existent when VB6 was created.
 ' This leads to a large number of class modules that are not utilised when compiling in TwinBasic
@@ -1969,9 +1969,7 @@ Dim plyIndex    As Long
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
      
-     
 Private Declare Function GetDeviceCaps Lib "gdi32" (ByVal hdc As Long, ByVal nIndex As Long) As Long
-     
 
 Private Const PI As Double = 3.141592654
 Private opacitylevel As Long
@@ -2051,12 +2049,12 @@ End Sub
 
 'Note all new events and procedures are moved to the bottom of this file, top event space is reserved for the main form events.
 
-' set the focus to the text entry field whenever the form itself is clicked. The same done for almost all other controls on the form.
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : Form_Click
 ' Author    : beededea
 ' Date      : 02/05/2025
-' Purpose   :
+' Purpose   : set the focus to the text entry field whenever the form itself is clicked. The same done for almost all other controls on the form.
 '---------------------------------------------------------------------------------------
 '
 Private Sub Form_Click()
@@ -2228,6 +2226,7 @@ Public Sub formLoadTasks()
     recording = False
     playing = False
     
+    gblStartupFlg = True
     
     Call addExecutableSuffixArrayList
 
@@ -2295,12 +2294,24 @@ Public Sub formLoadTasks()
    
     ' set/unset the tooltips for all the form's controls
     Call setTooltips
+    
+    ' light the lamps that indicate the method of file i/o
+    Call lightIOLamps
+    
+    'enable/disable the scrollbars for the input and output listboxes
+    Call handleScrollbars
 
-    ' populate the input listbox
-    Call populateInputBox
+    ' check the input file, read the defined input and write the input array
+    Call checkAndReadInputFile
     
     ' populate the output listbox
-    Call populateOutputBox
+    Call checkAndReadOutputFile
+            
+'    'set to the latest item in the inputlistbox
+'    Call setToLastInputItem
+'
+'    'set to the latest item in the inputlistbox
+'    Call setToLastInputItem
     
     ' populate the combined listbox
     If FCWSingleListBox = "1" Then Call populateCombinedBox
@@ -2311,8 +2322,7 @@ Public Sub formLoadTasks()
         mnuSwitchChatBoxes.Caption = "Switch to Single Chat Box"
     End If
     
-    'enable/disable the scrollbars for the input and output listboxes
-    Call handleScrollbars
+  
        
     ' set the z-ordering of the window
     Call setZOrder(True) ' only runs the z-reordering at certain points controlled by the boolean.
@@ -2354,7 +2364,8 @@ Public Sub formLoadTasks()
     
     ' start the polling timers in code or default types when in the IDE
     Call startThePollingTimers
-
+    
+    gblStartupFlg = False
 
    On Error GoTo 0
    Exit Sub
@@ -2489,14 +2500,7 @@ Private Sub setVisualItems()
     Else
         FireCallMain.Width = Val(FCWFormWidth)
     End If
-    
-'    MsgBox "Harry - send me this please " & vbCrLf _
-'        & "screenTwipsPerPixelX - " & screenTwipsPerPixelX & vbCrLf _
-'        & "Current DPI - " & CurrentDPI & vbCrLf & vbCrLf _
-'        & "Screen Width - " & Screen.Width & " twips or " & Screen.Width / screenTwipsPerPixelX & " pixels " & vbCrLf _
-'        & "Screen Height - " & Screen.Height & " twips or " & Screen.Height / screenTwipsPerPixelY & " pixels " & vbCrLf & vbCrLf _
-'        & "Form Width - " & FCWFormWidth & " twips " & vbCrLf _
-'        & "Form Height - " & FireCallMain.Height & " twips "
+
 
     ' default positions prior to any resizing/shifting
     Call putImageInPlace
@@ -2876,7 +2880,7 @@ Private Sub handleScrollbars()
     Dim lLength As Long
     
     'disable the scrollbars for the input listbox
-   On Error GoTo handleScrollbars_Error
+    On Error GoTo handleScrollbars_Error
 
     If FCWEnableScrollbars = "0" Then
         Call SendMessageByNum(lbxInputTextArea.hwnd, LB_SETHORIZONTALEXTENT, 0, 0&)
@@ -2921,7 +2925,49 @@ handleScrollbars_Error:
 
 End Sub
 
-
+''---------------------------------------------------------------------------------------
+'' Procedure : enableScrollbars
+'' Author    : beededea
+'' Date      : 20/08/2025
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Private Sub enableTheScrollbars()
+'    Dim lLength As Long: lLength = 0
+'
+'    ' the scrollbar config code needs to be here after the reading of the input/output data
+'    On Error GoTo enableTheScrollbars_Error
+'
+'    If FCWEnableScrollbars = 0 Then ' hide the scrollbars
+'        'the next two line must be in this order on the lbxInputTextArea
+'        Call SendMessageByNum(FireCallMain.lbxInputTextArea.hwnd, LB_SETHORIZONTALEXTENT, 0, 0&) ' hides the horizontal scrollbar
+'        Call ShowScrollBar(FireCallMain.lbxInputTextArea.hwnd, SB_VERT, False)  ' hides the vertical scrollbar
+'
+'        'the next two line must be in this order on the lbxOutputTextArea
+'        Call SendMessageByNum(FireCallMain.lbxOutputTextArea.hwnd, LB_SETHORIZONTALEXTENT, 0, 0&) ' hides the horizontal scrollbar
+'        Call ShowScrollBar(FireCallMain.lbxOutputTextArea.hwnd, SB_VERT, False)  ' hides the vertical scrollbar
+'    Else
+'        ' shows the vertical scrollbar on the lbxInputTextArea
+'        Call ShowScrollBar(FireCallMain.lbxInputTextArea.hwnd, SB_VERT, True)
+'        ' add the horizontal scroll bar to the upper listbox, lbxInputTextArea
+'        lLength = 2 * (FireCallMain.lbxInputTextArea.Width / Screen.TwipsPerPixelX)
+'        Call SendMessageByNum(FireCallMain.lbxInputTextArea.hwnd, LB_SETHORIZONTALEXTENT, lLength, 0&)
+'
+'        ' shows the vertical scrollbar on the lbxOutputTextArea
+'        Call ShowScrollBar(FireCallMain.lbxOutputTextArea.hwnd, SB_VERT, True)
+'        ' add the horizontal scroll bar to the upper listbox  on the lbxOutputTextArea
+'        lLength = 2 * (FireCallMain.lbxOutputTextArea.Width / Screen.TwipsPerPixelX)
+'        Call SendMessageByNum(FireCallMain.lbxOutputTextArea.hwnd, LB_SETHORIZONTALEXTENT, lLength, 0&)
+'    End If
+'
+'   On Error GoTo 0
+'   Exit Sub
+'
+'enableTheScrollbars_Error:
+'
+'    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure enableTheScrollbars of Module modCommon"
+'
+'End Sub
 
 
 '
@@ -4127,12 +4173,12 @@ BtnPicWth_Click_Error:
 
 End Sub
 
-' the user pressed the PRG button - demonstrating the use of DO LOOP WHILE for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicPrg_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the PRG button - demonstrating the use of DO LOOP WHILE for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicPrg_Click()
@@ -4173,12 +4219,12 @@ btnPicPrg_Click_Error:
 
 End Sub
 
-' the user pressed the gdn button - demonstrating the use of DO UNTIL LOOP for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicGdn_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the gdn button - demonstrating the use of DO UNTIL LOOP for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicGdn_Click()
@@ -4218,12 +4264,12 @@ btnPicGdn_Click_Error:
 
 End Sub
 
-' the user pressed the BUSY button - demonstrating the use of DO UNTIL LOOP for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicBusy_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the BUSY button - demonstrating the use of DO UNTIL LOOP for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicBusy_Click()
@@ -4262,12 +4308,12 @@ btnPicBusy_Click_Error:
 
 End Sub
 
-' the user pressed the COD button - demonstrating the use of DO UNTIL LOOP for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicCod_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the COD button - demonstrating the use of DO UNTIL LOOP for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicCod_Click()
@@ -4307,12 +4353,12 @@ btnPicCod_Click_Error:
     
 End Sub
 
-' the user pressed the out button - demonstrating the use of WHILE WEND for my young boy
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : btnPicOut_Click
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : the user pressed the out button - demonstrating the use of WHILE WEND for my young boy
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnPicOut_Click()
@@ -4372,8 +4418,12 @@ Private Sub btnRefresh_Click()
     picTimerLampDull.Visible = False
     picTimerLampBright.Refresh
     
-    Call populateInputBox
-    Call populateOutputBox
+    'Call populateInputBox
+    Call checkAndReadInputFile
+    'Call readInputFileWriteArrayAndListbox(FCWSharedInputFile)
+    
+    'Call populateOutputBox
+    Call checkAndReadOutputFile
     If FCWSingleListBox = "1" Then Call populateCombinedBox
     
     lampTimer.Enabled = True
@@ -4652,6 +4702,8 @@ End Function
 Private Sub lbxInputTextArea_Click()
     
    On Error GoTo lbxInputTextArea_Click_Error
+   
+    'If doNotClick = True Then Exit Sub
 
     picTextChangeBright.Visible = False ' set the change lamp to dull
     picTextChangeDull.Visible = True
@@ -5337,12 +5389,12 @@ Form_MouseDown_Error:
 End Sub
 
 
-' show the alternative right click menu and set the bulbs to dull
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxInputTextArea_MouseDown
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : show the alternative right click menu and set the bulbs to dull
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxInputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
@@ -5390,12 +5442,12 @@ lbxInputTextArea_MouseDown_Error:
 End Sub
 
 
-' show the alternative right click menu
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxOutputTextArea_MouseDown
 ' Author    : beededea
 ' Date      : 29/04/2025
-' Purpose   :
+' Purpose   : show the alternative right click menu
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxOutputTextArea_MouseDown(ByRef Button As Integer, ByRef Shift As Integer, ByRef x As Single, ByRef y As Single)
@@ -11864,3 +11916,39 @@ mnuBringToCentre_Click_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure mnuBringToCentre_Click of Form FireCallMain"
     
 End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : lightIOLamps
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub lightIOLamps()
+    On Error GoTo lightIOLamps_Error
+
+    If FCWOptHandleData = "0" Then
+        gblIoMethodADO = False
+        FireCallMain.picFsoLampBright.Visible = True
+        FireCallMain.picFsoLampDull.Visible = False
+        FireCallMain.picUtf8LampBright.Visible = False
+        FireCallMain.picUtf8LampDull.Visible = True
+    Else
+        gblIoMethodADO = True
+        FireCallMain.picFsoLampBright.Visible = False
+        FireCallMain.picFsoLampDull.Visible = True
+        FireCallMain.picUtf8LampBright.Visible = True
+        FireCallMain.picUtf8LampDull.Visible = False
+    End If
+
+   On Error GoTo 0
+   Exit Sub
+
+lightIOLamps_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure lightIOLamps of Module modCommon"
+End Sub
+
+
+
+
