@@ -2262,14 +2262,12 @@ Public Sub formLoadTasks()
     
     ' call the testMissingFields function to check the missing fields related to the input and output filenames
     If fTestMissingFields = False Then '
-        'Call btnConfig_Click
         Call btnPicConfig_Click
         Exit Sub
     End If
     
     ' call the testInputsOutputs function to check the entries related to the input and outputs
     If fTestInputsOutputs = False Then
-        'Call btnConfig_Click
         Call btnPicConfig_Click
         Exit Sub
     End If
@@ -2298,7 +2296,7 @@ Public Sub formLoadTasks()
     ' light the lamps that indicate the method of file i/o
     Call lightIOLamps
     
-    'enable/disable the scrollbars for the input and output listboxes
+    'enable/disable the scrollbars for the input and output listboxes, do this before reading files and writing listboxes
     Call handleScrollbars
 
     ' check the input file, read the defined input and write the input array
@@ -2306,12 +2304,6 @@ Public Sub formLoadTasks()
     
     ' populate the output listbox
     Call checkAndReadOutputFile
-            
-'    'set to the latest item in the inputlistbox
-'    Call setToLastInputItem
-'
-'    'set to the latest item in the inputlistbox
-'    Call setToLastInputItem
     
     ' populate the combined listbox
     If FCWSingleListBox = "1" Then Call populateCombinedBox
@@ -2322,8 +2314,6 @@ Public Sub formLoadTasks()
         mnuSwitchChatBoxes.Caption = "Switch to Single Chat Box"
     End If
     
-  
-       
     ' set the z-ordering of the window
     Call setZOrder(True) ' only runs the z-reordering at certain points controlled by the boolean.
     
@@ -4418,12 +4408,9 @@ Private Sub btnRefresh_Click()
     picTimerLampDull.Visible = False
     picTimerLampBright.Refresh
     
-    'Call populateInputBox
     Call checkAndReadInputFile
-    'Call readInputFileWriteArrayAndListbox(FCWSharedInputFile)
-    
-    'Call populateOutputBox
     Call checkAndReadOutputFile
+    
     If FCWSingleListBox = "1" Then Call populateCombinedBox
     
     lampTimer.Enabled = True
@@ -4942,10 +4929,10 @@ End Sub
 Private Sub mnuRefresh_Click()
    On Error GoTo mnuRefresh_Click_Error
 
-    If lbxOutputTextArea.Visible = True Then lbxOutputTextArea.Clear
-    If lbxInputTextArea.Visible = True Then lbxInputTextArea.Clear
-    If lbxCombinedTextArea.Visible = True Then lbxCombinedTextArea.Clear
+'    If lbxOutputTextArea.Visible = True Then lbxOutputTextArea.Clear
+'    If lbxInputTextArea.Visible = True Then lbxInputTextArea.Clear
     Call btnRefresh_Click
+    'If lbxCombinedTextArea.Visible = True Then lbxCombinedTextArea.Clear
 
    On Error GoTo 0
    Exit Sub
@@ -4964,9 +4951,9 @@ End Sub
 Private Sub mnuLBRefresh_Click()
    On Error GoTo mnuLBRefresh_Click_Error
 
-    If lbxOutputTextArea.Visible = True Then lbxOutputTextArea.Clear
-    If lbxInputTextArea.Visible = True Then lbxInputTextArea.Clear
-    If lbxCombinedTextArea.Visible = True Then lbxCombinedTextArea.Clear
+'    If lbxOutputTextArea.Visible = True Then lbxOutputTextArea.Clear
+'    If lbxInputTextArea.Visible = True Then lbxInputTextArea.Clear
+'    If lbxCombinedTextArea.Visible = True Then lbxCombinedTextArea.Clear
     Call btnRefresh_Click
 
    On Error GoTo 0
@@ -8717,7 +8704,7 @@ Private Sub mnuSwitchChatBoxes_click()
     End If
     
     Call btnRefresh_Click
-
+    
    On Error GoTo 0
    Exit Sub
 

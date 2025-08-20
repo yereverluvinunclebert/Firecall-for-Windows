@@ -699,7 +699,7 @@ Public Sub startThePollingTimers()
         ' TwinBasic timers are any length and can exceed 65 seconds (65535 ms)
 
         pollingIntervalMillisecs = Val(FCWRefreshIntervalSecs) * 1000
-        FireCallMain.pollingTimer.Interval = pollingIntervalMillisecs
+        FireCallMain.pollingTimer.interval = pollingIntervalMillisecs
         FireCallMain.pollingTimer.Enabled = True
         debugLog "STARTING startPollingTimer using VB6 timer, ID = " & pollingTimerID & " at interval of " & pollingIntervalMillisecs & "ms", False
         
@@ -717,7 +717,7 @@ Public Sub startThePollingTimers()
             Else
                 pollingIntervalMillisecs = Val(FCWRefreshIntervalSecs) * 1000
             End If
-            FireCallMain.pollingTimer.Interval = pollingIntervalMillisecs
+            FireCallMain.pollingTimer.interval = pollingIntervalMillisecs
             FireCallMain.pollingTimer.Enabled = True
             debugLog "STARTING startPollingTimer using VB6 timer, ID = " & pollingTimerID & " at interval of " & pollingIntervalMillisecs & "ms", False
     
@@ -1148,9 +1148,14 @@ Public Sub checkAndReadOutputFile()
     End If
     
     timeDifferenceInSecs = DateDiff("s", oldOutputFileModificationTime, outputFileModificationTime)
-
-    If gblStartupFlg = False And timeDifferenceInSecs = 0 Then
-        Exit Sub  ' to minimise CPU usage just exit
+    
+    If gblStartupFlg = False Then
+        If timeDifferenceInSecs = 0 Then
+            Exit Sub  ' to minimise CPU usage just exit
+        Else
+            If FireCallMain.lbxOutputTextArea.Visible = True Then FireCallMain.lbxOutputTextArea.Clear
+            If FireCallMain.lbxCombinedTextArea.Visible = True Then FireCallMain.lbxCombinedTextArea.Clear
+        End If
     End If
     
     outputLineCount = fLineCount(FCWSharedOutputFile)
@@ -1232,8 +1237,13 @@ Public Sub checkAndReadInputFile()
     
     timeDifferenceInSecs = DateDiff("s", oldInputFileModificationTime, inputFileModificationTime)
 
-    If gblStartupFlg = False And timeDifferenceInSecs = 0 Then
-        Exit Sub  ' to minimise CPU usage just exit
+    If gblStartupFlg = False Then
+        If timeDifferenceInSecs = 0 Then
+            Exit Sub  ' to minimise CPU usage just exit
+        Else
+            'If FireCallMain.lbxOutputTextArea.Visible = True Then FireCallMain.lbxOutputTextArea.Clear
+            If FireCallMain.lbxInputTextArea.Visible = True Then FireCallMain.lbxInputTextArea.Clear
+        End If
     End If
     GoTo l_getInputLineCount ' bypass the error reporting on a normal condition
        
@@ -1878,70 +1888,23 @@ End Sub
 
 '
 '---------------------------------------------------------------------------------------
-' Procedure : populateInputBox
+' Procedure : populateCombinedBox
 ' Author    : beededea
 ' Date      : 20/08/2025
-' Purpose   : this populates the input box, ie. the remote user data list box, sets the scrollbars immediately after.
+' Purpose   : populates a third array for sorting and thence to a listbox containing both the inputs and outputs
 '---------------------------------------------------------------------------------------
 '
-Public Sub populateInputBox()
-    
-    On Error GoTo populateInputBox_Error
-
-
-
-   On Error GoTo 0
-   Exit Sub
-
-populateInputBox_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateInputBox of Module modCommon"
-
-End Sub
-
-'
-'---------------------------------------------------------------------------------------
-' Procedure : populateOutputBox
-' Author    : beededea
-' Date      : 20/08/2025
-' Purpose   : this populates the output box, ie. the local user data list box, sets the scrollbars immediately after.
-'---------------------------------------------------------------------------------------
-'
-Public Sub populateOutputBox()
-
-
-
-
-   On Error GoTo 0
-   Exit Sub
-
-populateOutputBox_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateOutputBox of Module modCommon"
-    
-End Sub
-' populates a third array for sorting and thence to a listbox containing both the inputs and outputs
 Public Sub populateCombinedBox()
 
     Dim lLength As Long
 
     'If inputDataChangedFlag = True Or outputDataChangedFlag = True Then
+   On Error GoTo populateCombinedBox_Error
+
     Call readListBoxesAndWriteCombinedArray
     Call performQuickSort
     Call readCombinedArrayAndWriteListbox
 
-    ' the scrollbar config code must be here after the reading of the output data
-    If FCWEnableScrollbars = 0 Then
-        'the next two line must be in this order
-        Call SendMessageByNum(FireCallMain.lbxCombinedTextArea.hwnd, LB_SETHORIZONTALEXTENT, 0, 0&) ' hides the horizontal scrollbar
-        Call ShowScrollBar(FireCallMain.lbxCombinedTextArea.hwnd, SB_VERT, False)  ' hides the vertical scrollbar
-    Else
-        Call ShowScrollBar(FireCallMain.lbxCombinedTextArea.hwnd, SB_VERT, True) ' shows the vertical scrollbar
-        ' add the horizontal scroll bar to the upper listbox
-        lLength = 2 * (FireCallMain.lbxCombinedTextArea.Width / Screen.TwipsPerPixelX)
-        Call SendMessageByNum(FireCallMain.lbxCombinedTextArea.hwnd, LB_SETHORIZONTALEXTENT, lLength, 0&)
-    End If
-    
     'set to the latest item in the listbox
     If Val(FCWLoadBottom) = 1 Then
         FireCallMain.lbxCombinedTextArea.ListIndex = FireCallMain.lbxCombinedTextArea.ListCount - 1
@@ -1949,13 +1912,29 @@ Public Sub populateCombinedBox()
         FireCallMain.lbxCombinedTextArea.ListIndex = 0
     End If
 
+   On Error GoTo 0
+   Exit Sub
+
+populateCombinedBox_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateCombinedBox of Module modCommon"
+
 End Sub
-' reads the two arrays when required to do so, prior to sorting
+'
+'---------------------------------------------------------------------------------------
+' Procedure : readListBoxesAndWriteCombinedArray
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   : reads the two arrays when required to do so, prior to sorting
+'---------------------------------------------------------------------------------------
+'
 Public Sub readListBoxesAndWriteCombinedArray()
     Dim useloop As Integer
     Dim stringToWrite As String
     Dim combinedArrayCount As Long
     
+    On Error GoTo readListBoxesAndWriteCombinedArray_Error
+
     stringToWrite = vbNullString
     combinedArrayCount = outputLineCount + inputLineCount
     
@@ -1969,27 +1948,56 @@ Public Sub readListBoxesAndWriteCombinedArray()
         debugLog "%Err-I-ErrorNumber 18 - The combined chat box is too long at 32,766 lines long, please split and shorten the input/output files or select the two chatbox option. FCW will not process new messages."
         Exit Sub
     End If
-    ' this reads the input listbox (with fully procesed text) and populates the combined array
+    
     For useloop = 1 To inputLineCount
-        stringToWrite = FireCallMain.lbxInputTextArea.List(useloop - 1) 'inputFileArray(useloop)
+        stringToWrite = inputFileArray(useloop)  'inputFileArray(useloop)
         combinedFileArray(useloop) = stringToWrite
     Next useloop
-                    
-    ' this reads the output listbox and populates the combined array
+              
+    ' next task is to change this to read directly from the output array
     For useloop = 1 To outputLineCount
-        stringToWrite = FireCallMain.lbxOutputTextArea.List(useloop - 1) ' outputFileArray(useloop)
+        stringToWrite = outputFileArray(useloop) ' outputFileArray(useloop)
         combinedFileArray(useloop + inputLineCount) = stringToWrite
     Next useloop
-    
+
+   On Error GoTo 0
+   Exit Sub
+
+readListBoxesAndWriteCombinedArray_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure readListBoxesAndWriteCombinedArray of Module modCommon"
 
 End Sub ' sorts the combined array
+'---------------------------------------------------------------------------------------
+' Procedure : performQuickSort
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub performQuickSort()
 
+   On Error GoTo performQuickSort_Error
+
     Call QuickSort(combinedFileArray)
+
+   On Error GoTo 0
+   Exit Sub
+
+performQuickSort_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure performQuickSort of Module modCommon"
     
 End Sub
 
 ' reads the sorted third array and write to the third listbox containing both the inputs and outputs
+'---------------------------------------------------------------------------------------
+' Procedure : readCombinedArrayAndWriteListbox
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
 Public Sub readCombinedArrayAndWriteListbox()
     'Exit Sub ' remove this when code is ready to run
     
@@ -1998,6 +2006,8 @@ Public Sub readCombinedArrayAndWriteListbox()
     Dim stringToWrite As String
     Dim lbxCount As Long
     
+   On Error GoTo readCombinedArrayAndWriteListbox_Error
+
     stringToWrite = vbNullString
     combinedArrayCount = outputLineCount + inputLineCount
     lbxCount = 0
@@ -2033,13 +2043,33 @@ Public Sub readCombinedArrayAndWriteListbox()
     
     ' at this point the listbox has been written so we now unlock it after the update
     LockWindowUpdate 0& '
+
+   On Error GoTo 0
+   Exit Sub
+
+readCombinedArrayAndWriteListbox_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure readCombinedArrayAndWriteListbox of Module modCommon"
     
 End Sub
 
-' counts the number of lines in a file
+'
+'---------------------------------------------------------------------------------------
+' Procedure : fLineCount
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   : counts the number of lines in a file
+'---------------------------------------------------------------------------------------
+'
 Public Function fLineCount(ByRef sFName As String) As Long
 
-
+        Dim Stm As ADODB.Stream
+        Dim Line As String
+        Dim dummyRead As String
+        Const ForReading As Integer = 1
+        
+        On Error GoTo fLineCount_Error
+        
 ' timer code BEGINS - requires QueryPerformanceCounter API declaration to be enabled
 '    Dim lngReturn As Long
 '    Dim curFreq As Currency
@@ -2055,28 +2085,25 @@ Public Function fLineCount(ByRef sFName As String) As Long
 ' timer code ENDS
 
     ' new code to count the lines using ADODB.Stream STARTS ' 3.4ms
-    'If gblIoMethodADO = True Then
+    If gblIoMethodADO = True Then
         '3.4ms
-'        Dim Stm As ADODB.Stream
-'        Dim Line As String
-'
-'        Set Stm = New ADODB.Stream
-'        With Stm
-'            .Open
-'            .LoadFromFile sFName
-'            .Type = 2
-'            .Charset = "utf-8"
-'            .LineSeparator = -1
-'            Do Until .EOS
-'                Line = .ReadText(-2)
-'                fLineCount = fLineCount + 1
-'            Loop
-'            .Close
-'        End With
-'    Else
-        ' old code to count the lines using FileSystemObject STARTS ' 10.99ms
-        Dim dummyRead As String
-        Const ForReading As Integer = 1
+
+        Set Stm = New ADODB.Stream
+        With Stm
+            .Open
+            .LoadFromFile sFName
+            .Type = 2
+            .Charset = "utf-8"
+            .LineSeparator = -1
+            Do Until .EOS
+                Line = .ReadText(-2)
+                fLineCount = fLineCount + 1
+            Loop
+            .Close
+        End With
+    Else
+        ' code to count the lines using FileSystemObject STARTS ' 10.99ms
+
         Set fso = CreateObject("Scripting.FileSystemObject")
         Dim thisFile As Object
         Set thisFile = fso.OpenTextFile(sFName, ForReading, False, 0)
@@ -2092,9 +2119,9 @@ Public Function fLineCount(ByRef sFName As String) As Long
             If Right$(dummyRead, 1) = vbLf Then fLineCount = fLineCount - 1
 
         End If
-        ' old code to count the lines using FileSystemObject ENDS ' 10.99ms
+        ' code to count the lines using FileSystemObject ENDS ' 10.99ms
 
- '   End If
+    End If
     
 ' timer code BEGINS
 '        lngReturn = QueryPerformanceCounter(curEnd)
@@ -2103,295 +2130,18 @@ Public Function fLineCount(ByRef sFName As String) As Long
 '        MsgBox "Execution Time " & sngTime & " mS"
 '    End If
 ' timer code ENDS
+
+   On Error GoTo 0
+   Exit Function
+
+fLineCount_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fLineCount of Module modCommon"
 End Function
 
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : populateInputArrayFromFile
-' Author    : beededea
-' Date      : 19/08/2025
-' Purpose   : reads from file using either of two methods depending upon the o/s and file type of the system you are communicating with.
-'---------------------------------------------------------------------------------------
-'
-Private Sub populateInputArrayFromFile(ByVal sFName As String)
-    Dim thisFile As Object
-    Dim lIndex As Long
-    Dim inStm As ADODB.Stream
 
-    Const ForReading As Integer = 1
-
-    On Error GoTo populateInputArrayFromFile_Error
-    
-'         timer code BEGINS - requires QueryPerformanceCounter API declaration to be enabled
-'        Dim lngReturn As Long
-'        Dim curFreq As Currency
-'        Dim curStart As Currency
-'        Dim curEnd As Currency
-'        Dim sngTime As Single
-'
-'        lngReturn = QueryPerformanceFrequency(curFreq)
-'        If lngReturn = 0 Then MsgBox "Your Hardware does not support a high-resolution timer"
-'
-'        lngReturn = QueryPerformanceCounter(curStart)
-'         timer code ENDS
-    
-    lIndex = 1
-
-    If gblIoMethodADO = False Then
-        ' use of the FileSystemObject as it handles EOL with CrLf whereas INPUT LINE does not.
-        ' when working with a linux version of the utility this is vital.
-        Set fso = CreateObject("Scripting.FileSystemObject") '11.62ms in the IDE 13ms when compiled
-        Set thisFile = fso.OpenTextFile(sFName, ForReading, False, 0)
-    ''    ' read the file into an interim storage array for the input data
-        Do While Not thisFile.AtEndOfStream
-            inputFileArray(lIndex) = thisFile.readLine
-            lIndex = lIndex + 1
-            If lIndex > inputLineCount Then
-                Exit Do
-            End If
-        Loop
-        thisFile.Close
-        
-    Else ' linux/Mac utf-8 &c
-        
-        ' code to replace the usage of the file system object i/o, supposedly the FSO object
-        ' is slow, bloated and poor at UTF-8 support. Use of the ADO object requires enabling
-        ' of Microsoft ActiveX Data Objects 2.8 Library in References.
-        ' required Projects>References>Microsoft ActiveX Data Objects 2.8 Library.
-        ' it can handle Charset = "utf-8" and LineSeparator = -1 properly.
-    
-        Set inStm = New ADODB.Stream ' 27.75ms in the IDE, slower than FSO by factor of 2 but 7-8ms when compiled! 1,400 lines
-        With inStm
-            .Open
-            .LoadFromFile sFName
-            .Type = 2
-            .Charset = "utf-8"
-            .LineSeparator = -1 ' adCRLF 'vbCrLf
-                                '
-                                'adCRLF   -1    Default. Carriage return line feed
-                                'adLF     10    Line feed only
-                                'adCR     13    Carriage return only
-            ' read the file into an interim storage array for the input data
-            .Position = 2
-
-            Do While Not .EOS
-                inputFileArray(lIndex) = .ReadText(-2)    ' -2 Reads the next line from the stream
-                lIndex = lIndex + 1
-                If lIndex > inputLineCount Then
-                    Exit Do
-                End If
-            Loop
-            .Close
-        End With
-    End If
-    
-'        timer code BEGINS
-'        lngReturn = QueryPerformanceCounter(curEnd)
-'        sngTime = (curEnd - curStart) * 1000 / curFreq
-'        Debug.Print "Execution Time " & sngTime & " mS"
-'        MsgBox "Execution Time " & sngTime & " mS"
-'
-'        timer code ENDS
-
-   On Error GoTo 0
-   Exit Sub
-
-populateInputArrayFromFile_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateInputArrayFromFile of Module modCommon"
-End Sub
-
-
-
-
-
-
-'---------------------------------------------------------------------------------------
-' Procedure : readInputFileWriteArrayAndListbox
-' Author    : beededea
-' Date      : 18/08/2025
-' Purpose   : read the remote user's file line by line, read it into an interim array, filter, add tags and thence into a listbox.
-'             called by checkAndReadInputFile during polling & populateInputBox during startup
-'---------------------------------------------------------------------------------------
-'
-Public Sub readInputFileWriteArrayAndListbox(ByVal thisInputFile As String)
-
-    On Error GoTo readInputFileWriteArrayAndListbox_Error
-
-    Dim useloop As Long: useloop = 0
-    Dim lbxCount As Integer: lbxCount = 0
-    Dim startLoc As Long: startLoc = 0
-    Dim endLoc As Long: endLoc = 0
-    Dim stepNo As Integer: stepNo = 0
-    Dim stringToWrite As String: stringToWrite = vbNullString
-    Dim recordingString As String: recordingString = vbNullString
-    Dim attachmentString As String: attachmentString = vbNullString
-    Dim emojiString As String: emojiString = vbNullString
-    Dim pingString As String: pingString = vbNullString
-    Dim buzzerString As String: buzzerString = vbNullString
-    Dim awakeString As String: awakeString = vbNullString
-    Dim buzzerStamp As String: buzzerStamp = vbNullString
-    Dim pingStamp As String: pingStamp = vbNullString
-    Dim awakeStamp As String: awakeStamp = vbNullString
-    Dim unixTimeStamp As String: unixTimeStamp = vbNullString
-    Dim shutdownString As String: shutdownString = vbNullString
-    Dim shutdownStamp As String: shutdownStamp = vbNullString
-    Dim shutDateTime As String: shutDateTime = vbNullString
-    Dim attachmentTimeDiffInSecs As Long: attachmentTimeDiffInSecs = 0
-    Dim findStr As Integer: findStr = 0
-    Dim findStartPos As Integer: findStartPos = 0
-    Dim stringWithoutPrefix As String: stringWithoutPrefix = vbNullString
-    Dim listCounter As Long: listCounter = 0
-    
-    ' get the line count
-    inputLineCount = fLineCount(FCWSharedInputFile)
-    
-    If inputLineCount >= 32766 Then
-        debugLog "%Err-I-ErrorNumber 19 - The input file is close to the maximum limit, please split and shorten the input file using archive facility in the prefs"
-    End If
-        
-    If inputLineCount >= 32766 Then
-        debugLog "%Err-I-ErrorNumber 20 - The input file is too long at 32,766 lines long, please split and shorten the input file using archive facility in the prefs. FCW will not process new messages"
-        Exit Sub
-    End If
-    
-    ' resize the array to the new linecount
-    ReDim inputFileArray(inputLineCount)
-    
-    ' reads from file using either of two methods depending upon the o/s and file type of the system you are communicating with.
-    Call populateInputArrayFromFile(thisInputFile)
-               
-    ' locks the input listbox whilst the listbox is updated from the array to prevent rippling/flickering
-    LockWindowUpdate FireCallMain.lbxInputTextArea.hwnd
-    
-    ' read the array and write the output to the listbox, replacing the known tags with the correct text
-    ' also store timestamps and variables associated with each type of tag
-    ' known tags = <><> <o><o> <p><p> <b><b> <t><t> <z><z>
-        
-    lbxCount = 0
-        
-    ' determine the start point at which we read from the array, beginning or end.
-    If Val(FCWLoadBottom) = 1 Then
-            startLoc = inputLineCount
-            endLoc = 1
-            stepNo = -1
-    Else
-            startLoc = 1
-            endLoc = inputLineCount
-            stepNo = 1
-    End If
-
-    For useloop = startLoc To endLoc Step stepNo
-        stringToWrite = vbNullString
-        If inputFileArray(useloop) <> vbNullString Then 'differs from the input file in that we turn the array upside down
-            If FireCallMain.lbxInputTextArea.List(lbxCount) = inputFileArray(useloop) Then
-                ' we do not clear down the listbox and so a comparison of the array contents to the file is performed
-                ' and if the two lines are the same we make no changes, this avoids the flickering penalty of a full listbox update
-            Else
-                'find the line start point minus the timestamp and prefix:
-                findStartPos = InStr(inputFileArray(useloop), ":    ")
-                stringWithoutPrefix = Mid$(inputFileArray(useloop), findStartPos + 5, Len(inputFileArray(useloop)))
-                
-                ' only update the lines that have changed
-                If InStr(stringWithoutPrefix, "<><>") = 1 Then ' we only allow these tags to be recognised at position 1
-                    ' <><> attachment
-                    attachmentString = inputFileArray(useloop)
-                    stringToWrite = Replace$(inputFileArray(useloop), "<><>", "New File:")
-                ElseIf InStr(stringWithoutPrefix, "<f><f>") = 1 Then
-                    ' <f><f> attachment
-                    attachmentString = inputFileArray(useloop)
-                    stringToWrite = Replace$(inputFileArray(useloop), "<f><f>", "New Folder:")
-                ElseIf InStr(stringWithoutPrefix, "<o><o>") = 1 Then
-                    ' <o><o> emoji
-                    emojiString = inputFileArray(useloop)
-                    stringToWrite = Replace$(inputFileArray(useloop), "<o><o>", "New Emoji:")
-                ElseIf InStr(stringWithoutPrefix, "<p><p>") = 1 Then
-                    ' <p><p> ping
-                    pingString = inputFileArray(useloop)
-                    pingStamp = Left$(inputFileArray(useloop), 22)
-                    stringToWrite = Replace$(inputFileArray(useloop), "<p><p>", "Ping Request.")
-                ElseIf InStr(stringWithoutPrefix, "<b><b>") = 1 Then
-                    ' <b><b> buzzer
-                    buzzerString = inputFileArray(useloop)
-                    buzzerStamp = Left$(inputFileArray(useloop), 22)
-                    stringToWrite = Replace$(inputFileArray(useloop), "<b><b>", "Attention!")
-                ElseIf InStr(stringWithoutPrefix, "<t><t>") = 1 Then
-                    ' <t><t> Awake
-                    awakeString = inputFileArray(useloop)
-                    awakeStamp = Left$(inputFileArray(useloop), 22)
-                    findStr = InStr(inputFileArray(useloop), "<t><t>")
-                    unixTimeStamp = Mid$(inputFileArray(useloop), findStr + 6, Len(inputFileArray(useloop)))
-                    stringToWrite = Replace$(inputFileArray(useloop), "<t><t>", "Awake at:")
-                ElseIf InStr(stringWithoutPrefix, "<z><z>") = 1 Then
-                    ' <z><z> shutdown
-                    shutdownString = inputFileArray(useloop)
-                    shutdownStamp = Left$(inputFileArray(useloop), 22)
-                    findStr = InStr(inputFileArray(useloop), "<z><z>")
-                    unixTimeStamp = Mid$(inputFileArray(useloop), findStr + 6, Len(inputFileArray(useloop)))
-                    stringToWrite = Replace$(inputFileArray(useloop), "<z><z>", "Shutdown at:")
-                ElseIf InStr(stringWithoutPrefix, "<r><r>") = 1 Then
-                    ' <r><r> recording
-                    recordingString = inputFileArray(useloop)
-                    stringToWrite = Replace$(inputFileArray(useloop), "<r><r>", "New Recording:")
-                Else
-                    stringToWrite = inputFileArray(useloop)
-                End If
-                
-                FireCallMain.lbxInputTextArea.List(lbxCount) = stringToWrite
-            End If
-            lbxCount = lbxCount + 1
-        End If
-        'finalStamp = Left$(inputFileArray(useloop), 22)
-    Next useloop
-    
-    ' litle fix to prevent potential duplication of content in the listboxes
-    listCounter = FireCallMain.lbxInputTextArea.ListCount
-    If listCounter > inputLineCount Then
-        Call debugLog("This message pops up to prevent a duplication occurring in the INPUT. Please report if this occurs.")
-        For useloop = (listCounter + 1) To inputLineCount
-            FireCallMain.lbxInputTextArea.List(useloop) = ""
-        Next useloop
-    End If
-    
-    ' at this point the listbox has been written so we now unlock it after the update
-    LockWindowUpdate 0& '
-
-    ' Post processing according to what we found in the file, generally we respond to the last occurrence of each event,
-    ' hold the event time and compare that with a stored value.
-    
-    'respond to a ping request and store the time of the last ping so that we do not respond multiple times
-    If pingString <> vbNullString And FCWLastPingResponse <> pingStamp Then Call respondToPinStamp(pingStamp)
-        
-    ' if an emoji code is sent then set the emoji image locally, this is always the last emoji received
-    If emojiString <> vbNullString Then Call respondToEmojiStamp(emojiString)
-    
-    ' if an attachment is sent then attempt to display it always shows the last
-    If attachmentString <> vbNullString Then Call respondToAttachmentStamp(attachmentString)
-    
-    ' buzzer code received, stores the last buzz time so we only buzz once
-    If buzzerString <> vbNullString And FCWLastSoundPlayed <> buzzerStamp Then Call respondToBuzzerStamp(buzzerStamp)
-
-    ' we received an awake string, store the time so we respond only once
-    If awakeString <> vbNullString And FCWLastAwakeString <> awakeStamp Then Call respondToAwakeStamp(awakeStamp, unixTimeStamp)
-
-    ' remote shutdown code received, stores the last shutdown time so we only respond to the last shutdown request
-    If shutdownString <> vbNullString And FCWLastShutdown <> shutdownStamp Then Call respondToShutdownStamp(shutdownStamp)
-    
-    ' if an recording is sent then attempt to display it always shows the last
-    If recordingString <> vbNullString Then Call respondToRecordingString(recordingString)
-
-    ' now store the file characteristics so that we can use them to compare on the next run
-    oldInputFileModificationTime = inputFileModificationTime
-
-   On Error GoTo 0
-   Exit Sub
-
-readInputFileWriteArrayAndListbox_Error:
-
-    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure readInputFileWriteArrayAndListbox of Module modCommon"
-
-End Sub
 
     
 '---------------------------------------------------------------------------------------
@@ -3087,56 +2837,336 @@ renderPicBox_Error:
 
 End Sub
 
-'
+
+
 '---------------------------------------------------------------------------------------
-' Procedure : readOutputFileWriteArrayAndListbox
+' Procedure : readInputFileWriteArrayAndListbox
 ' Author    : beededea
-' Date      : 20/08/2025
-' Purpose   : read the file chosen as the output file
-' write an array the same length as your output file
-' write the listbox using the array
-
-' read the local user's file line by line, read it into an interim array and thence into a listbox.
-' called by checkAndReadOutputFile during polling during startup
+' Date      : 18/08/2025
+' Purpose   : read the remote user's file line by line, read it into an interim array, filter, add tags and thence into a listbox.
+'             called by checkAndReadInputFile during polling & populateInputBox during startup
 '---------------------------------------------------------------------------------------
 '
-Public Sub readOutputFileWriteArrayAndListbox(ByVal sFName As String)
-    Dim lIndex As Long
-    'Dim fileString As String
-    Dim useloop As Integer
-    Dim lbxCount As Integer
-    Dim startLoc As Long
-    Dim endLoc As Long
-    Dim stepNo As Integer
-    Dim stringToWrite As String
-    Dim outfile As Object
-    Dim outStm As ADODB.Stream
-    Dim findStartPos As Integer
-    Dim stringWithoutPrefix As String
+Public Sub readInputFileWriteArrayAndListbox(ByVal thisInputFile As String)
 
-    Const ForReading As Integer = 1
+    On Error GoTo readInputFileWriteArrayAndListbox_Error
+
+    Dim useloop As Long: useloop = 0
+    Dim lbxCount As Integer: lbxCount = 0
+    Dim startLoc As Long: startLoc = 0
+    Dim endLoc As Long: endLoc = 0
+    Dim stepNo As Integer: stepNo = 0
+    Dim stringToWrite As String: stringToWrite = vbNullString
+    Dim recordingString As String: recordingString = vbNullString
+    Dim attachmentString As String: attachmentString = vbNullString
+    Dim emojiString As String: emojiString = vbNullString
+    Dim pingString As String: pingString = vbNullString
+    Dim buzzerString As String: buzzerString = vbNullString
+    Dim awakeString As String: awakeString = vbNullString
+    Dim buzzerStamp As String: buzzerStamp = vbNullString
+    Dim pingStamp As String: pingStamp = vbNullString
+    Dim awakeStamp As String: awakeStamp = vbNullString
+    Dim unixTimeStamp As String: unixTimeStamp = vbNullString
+    Dim shutdownString As String: shutdownString = vbNullString
+    Dim shutdownStamp As String: shutdownStamp = vbNullString
+    Dim shutDateTime As String: shutDateTime = vbNullString
+    Dim attachmentTimeDiffInSecs As Long: attachmentTimeDiffInSecs = 0
+    Dim findStr As Integer: findStr = 0
+    Dim findStartPos As Integer: findStartPos = 0
+    Dim stringWithoutPrefix As String: stringWithoutPrefix = vbNullString
+    Dim listCounter As Long: listCounter = 0
     
-    On Error GoTo readOutputFileWriteArrayAndListbox_Error
-
-    lIndex = outputLineCount 'differs from the input file in that we turn the array upside down
-                             ' as we need to write to the first record in the file
+    ' get the line count
+    inputLineCount = fLineCount(FCWSharedInputFile)
+    
+    If inputLineCount >= 32766 Then
+        debugLog "%Err-I-ErrorNumber 19 - The input file is close to the maximum limit, please split and shorten the input file using archive facility in the prefs"
+    End If
+        
+    If inputLineCount >= 32766 Then
+        debugLog "%Err-I-ErrorNumber 20 - The input file is too long at 32,766 lines long, please split and shorten the input file using archive facility in the prefs. FCW will not process new messages"
+        Exit Sub
+    End If
     
     ' resize the array to the new linecount
-    ReDim outputFileArray(outputLineCount)
+    ReDim inputFileArray(inputLineCount)
+    
+    ' reads from file using either of two methods depending upon the o/s and file type of the system you are communicating with.
+    Call populateInputArrayFromFile(thisInputFile)
+               
+    ' locks the input listbox whilst the listbox is updated from the array to prevent rippling/flickering
+    LockWindowUpdate FireCallMain.lbxInputTextArea.hwnd
+    
+    ' read the array and write the output to the listbox, replacing the known tags with the correct text
+    ' also store timestamps and variables associated with each type of tag
+    ' known tags = <><> <o><o> <p><p> <b><b> <t><t> <z><z>
+        
+    lbxCount = 0
+        
+    ' determine the start point at which we read from the array, beginning or end.
+    If Val(FCWLoadBottom) = 1 Then
+            startLoc = inputLineCount
+            endLoc = 1
+            stepNo = -1
+    Else
+            startLoc = 1
+            endLoc = inputLineCount
+            stepNo = 1
+    End If
+
+    For useloop = startLoc To endLoc Step stepNo
+        stringToWrite = vbNullString
+        If inputFileArray(useloop) <> vbNullString Then 'differs from the input file in that we turn the array upside down
+            If FireCallMain.lbxInputTextArea.List(lbxCount) = inputFileArray(useloop) Then
+                ' we do not clear down the listbox and so a comparison of the array contents to the file is performed
+                ' and if the two lines are the same we make no changes, this avoids the flickering penalty of a full listbox update
+            Else
+                'find the line start point minus the timestamp and prefix:
+                findStartPos = InStr(inputFileArray(useloop), ":    ")
+                stringWithoutPrefix = Mid$(inputFileArray(useloop), findStartPos + 5, Len(inputFileArray(useloop)))
+                
+                ' only update the lines that have changed
+                If InStr(stringWithoutPrefix, "<><>") = 1 Then ' we only allow these tags to be recognised at position 1
+                    ' <><> attachment
+                    attachmentString = inputFileArray(useloop)
+                    stringToWrite = Replace$(inputFileArray(useloop), "<><>", "New File:")
+                ElseIf InStr(stringWithoutPrefix, "<f><f>") = 1 Then
+                    ' <f><f> attachment
+                    attachmentString = inputFileArray(useloop)
+                    stringToWrite = Replace$(inputFileArray(useloop), "<f><f>", "New Folder:")
+                ElseIf InStr(stringWithoutPrefix, "<o><o>") = 1 Then
+                    ' <o><o> emoji
+                    emojiString = inputFileArray(useloop)
+                    stringToWrite = Replace$(inputFileArray(useloop), "<o><o>", "New Emoji:")
+                ElseIf InStr(stringWithoutPrefix, "<p><p>") = 1 Then
+                    ' <p><p> ping
+                    pingString = inputFileArray(useloop)
+                    pingStamp = Left$(inputFileArray(useloop), 22)
+                    stringToWrite = Replace$(inputFileArray(useloop), "<p><p>", "Ping Request.")
+                ElseIf InStr(stringWithoutPrefix, "<b><b>") = 1 Then
+                    ' <b><b> buzzer
+                    buzzerString = inputFileArray(useloop)
+                    buzzerStamp = Left$(inputFileArray(useloop), 22)
+                    stringToWrite = Replace$(inputFileArray(useloop), "<b><b>", "Attention!")
+                ElseIf InStr(stringWithoutPrefix, "<t><t>") = 1 Then
+                    ' <t><t> Awake
+                    awakeString = inputFileArray(useloop)
+                    awakeStamp = Left$(inputFileArray(useloop), 22)
+                    findStr = InStr(inputFileArray(useloop), "<t><t>")
+                    unixTimeStamp = Mid$(inputFileArray(useloop), findStr + 6, Len(inputFileArray(useloop)))
+                    stringToWrite = Replace$(inputFileArray(useloop), "<t><t>", "Awake at:")
+                ElseIf InStr(stringWithoutPrefix, "<z><z>") = 1 Then
+                    ' <z><z> shutdown
+                    shutdownString = inputFileArray(useloop)
+                    shutdownStamp = Left$(inputFileArray(useloop), 22)
+                    findStr = InStr(inputFileArray(useloop), "<z><z>")
+                    unixTimeStamp = Mid$(inputFileArray(useloop), findStr + 6, Len(inputFileArray(useloop)))
+                    stringToWrite = Replace$(inputFileArray(useloop), "<z><z>", "Shutdown at:")
+                ElseIf InStr(stringWithoutPrefix, "<r><r>") = 1 Then
+                    ' <r><r> recording
+                    recordingString = inputFileArray(useloop)
+                    stringToWrite = Replace$(inputFileArray(useloop), "<r><r>", "New Recording:")
+                Else
+                    stringToWrite = inputFileArray(useloop)
+                End If
+                
+                FireCallMain.lbxInputTextArea.List(lbxCount) = stringToWrite
+            End If
+            lbxCount = lbxCount + 1
+        End If
+        'finalStamp = Left$(inputFileArray(useloop), 22)
+    Next useloop
+    
+    ' litle fix to prevent potential duplication of content in the listboxes
+    listCounter = FireCallMain.lbxInputTextArea.ListCount
+    If listCounter > inputLineCount Then
+        Call debugLog("This message pops up to prevent a duplication occurring in the INPUT. Please report if this occurs.")
+        For useloop = (listCounter + 1) To inputLineCount
+            FireCallMain.lbxInputTextArea.List(useloop) = ""
+        Next useloop
+    End If
+    
+    ' at this point the listbox has been written so we now unlock it after the update
+    LockWindowUpdate 0& '
+
+    ' Post processing according to what we found in the file, generally we respond to the last occurrence of each event,
+    ' hold the event time and compare that with a stored value.
+    
+    'respond to a ping request and store the time of the last ping so that we do not respond multiple times
+    If pingString <> vbNullString And FCWLastPingResponse <> pingStamp Then Call respondToPinStamp(pingStamp)
+        
+    ' if an emoji code is sent then set the emoji image locally, this is always the last emoji received
+    If emojiString <> vbNullString Then Call respondToEmojiStamp(emojiString)
+    
+    ' if an attachment is sent then attempt to display it always shows the last
+    If attachmentString <> vbNullString Then Call respondToAttachmentStamp(attachmentString)
+    
+    ' buzzer code received, stores the last buzz time so we only buzz once
+    If buzzerString <> vbNullString And FCWLastSoundPlayed <> buzzerStamp Then Call respondToBuzzerStamp(buzzerStamp)
+
+    ' we received an awake string, store the time so we respond only once
+    If awakeString <> vbNullString And FCWLastAwakeString <> awakeStamp Then Call respondToAwakeStamp(awakeStamp, unixTimeStamp)
+
+    ' remote shutdown code received, stores the last shutdown time so we only respond to the last shutdown request
+    If shutdownString <> vbNullString And FCWLastShutdown <> shutdownStamp Then Call respondToShutdownStamp(shutdownStamp)
+    
+    ' if an recording is sent then attempt to display it always shows the last
+    If recordingString <> vbNullString Then Call respondToRecordingString(recordingString)
+
+    ' now store the file characteristics so that we can use them to compare on the next run
+    oldInputFileModificationTime = inputFileModificationTime
+
+   On Error GoTo 0
+   Exit Sub
+
+readInputFileWriteArrayAndListbox_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure readInputFileWriteArrayAndListbox of Module modCommon"
+
+End Sub
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : populateInputArrayFromFile
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   : reads from file using either of two methods depending upon the o/s and file type of the system you are communicating with.
+'---------------------------------------------------------------------------------------
+'
+Private Sub populateInputArrayFromFile(ByVal sFName As String)
+    Dim thisFile As Object
+    Dim lIndex As Long
+    Dim inStm As ADODB.Stream
+
+    Const ForReading As Integer = 1
+
+    On Error GoTo populateInputArrayFromFile_Error
+    
+'         timer code BEGINS - requires QueryPerformanceCounter API declaration to be enabled
+'        Dim lngReturn As Long
+'        Dim curFreq As Currency
+'        Dim curStart As Currency
+'        Dim curEnd As Currency
+'        Dim sngTime As Single
+'
+'        lngReturn = QueryPerformanceFrequency(curFreq)
+'        If lngReturn = 0 Then MsgBox "Your Hardware does not support a high-resolution timer"
+'
+'        lngReturn = QueryPerformanceCounter(curStart)
+'         timer code ENDS
+    
+    lIndex = 1
+
+    If gblIoMethodADO = False Then
+        ' use of the FileSystemObject as it handles EOL with CrLf whereas INPUT LINE does not.
+        ' when working with a linux version of the utility this is vital.
+        Set fso = CreateObject("Scripting.FileSystemObject") '11.62ms in the IDE 13ms when compiled
+        Set thisFile = fso.OpenTextFile(sFName, ForReading, False, 0)
+    ''    ' read the file into an interim storage array for the input data
+        Do While Not thisFile.AtEndOfStream
+            inputFileArray(lIndex) = thisFile.readLine
+            lIndex = lIndex + 1
+            If lIndex > inputLineCount Then
+                Exit Do
+            End If
+        Loop
+        thisFile.Close
+        
+    Else ' linux/Mac utf-8 &c
+        
+        ' code to replace the usage of the file system object i/o, supposedly the FSO object
+        ' is slow, bloated and poor at UTF-8 support. Use of the ADO object requires enabling
+        ' of Microsoft ActiveX Data Objects 2.8 Library in References.
+        ' required Projects>References>Microsoft ActiveX Data Objects 2.8 Library.
+        ' it can handle Charset = "utf-8" and LineSeparator = -1 properly.
+    
+        Set inStm = New ADODB.Stream ' 27.75ms in the IDE, slower than FSO by factor of 2 but 7-8ms when compiled! 1,400 lines
+        With inStm
+            .Open
+            .LoadFromFile sFName
+            .Type = 2
+            .Charset = "utf-8"
+            .LineSeparator = -1 ' adCRLF 'vbCrLf
+                                '
+                                'adCRLF   -1    Default. Carriage return line feed
+                                'adLF     10    Line feed only
+                                'adCR     13    Carriage return only
+            ' read the file into an interim storage array for the input data
+            .Position = 2
+
+            Do While Not .EOS
+                inputFileArray(lIndex) = .ReadText(-2)    ' -2 Reads the next line from the stream
+                lIndex = lIndex + 1
+                If lIndex > inputLineCount Then
+                    Exit Do
+                End If
+            Loop
+            .Close
+        End With
+    End If
+    
+'        timer code BEGINS
+'        lngReturn = QueryPerformanceCounter(curEnd)
+'        sngTime = (curEnd - curStart) * 1000 / curFreq
+'        Debug.Print "Execution Time " & sngTime & " mS"
+'        MsgBox "Execution Time " & sngTime & " mS"
+'
+'        timer code ENDS
+
+   On Error GoTo 0
+   Exit Sub
+
+populateInputArrayFromFile_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateInputArrayFromFile of Module modCommon"
+End Sub
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : populateOutputArrayFromFile
+' Author    : beededea
+' Date      : 19/08/2025
+' Purpose   : reads from file using either of two methods depending upon the o/s and file type of the system you are communicating with.
+'---------------------------------------------------------------------------------------
+'
+Private Sub populateOutputArrayFromFile(ByVal sFName As String)
+    Dim thisFile As Object
+    Dim lIndex As Long
+    Dim outStm As ADODB.Stream
+
+    Const ForReading As Integer = 1
+
+    On Error GoTo populateOutputArrayFromFile_Error
+    
+'         timer code BEGINS - requires QueryPerformanceCounter API declaration to be enabled
+'        Dim lngReturn As Long
+'        Dim curFreq As Currency
+'        Dim curStart As Currency
+'        Dim curEnd As Currency
+'        Dim sngTime As Single
+'
+'        lngReturn = QueryPerformanceFrequency(curFreq)
+'        If lngReturn = 0 Then MsgBox "Your Hardware does not support a high-resolution timer"
+'
+'        lngReturn = QueryPerformanceCounter(curStart)
+'         timer code ENDS
+    
+    lIndex = outputLineCount 'differs from the input file in that we turn the array upside down
+                             ' as we need to write to the first record in the file
     
     If gblIoMethodADO = False Then
     '     we use the FSO method rather than VB6 input as it is more friendly to unix crlf EOLs
         Set fso = CreateObject("Scripting.FileSystemObject")
-        Set outfile = fso.OpenTextFile(sFName, ForReading, False, 0)
+        Set thisFile = fso.OpenTextFile(sFName, ForReading, False, 0)
     '    ' this reads the output file and populates the output array
-        Do While Not outfile.AtEndOfStream
-            outputFileArray(lIndex) = outfile.readLine
+        Do While Not thisFile.AtEndOfStream
+            outputFileArray(lIndex) = thisFile.readLine
             lIndex = lIndex - 1 'differs from the input file in that we turn the array upside down
             If lIndex <= 0 Then '
                 Exit Do
             End If
         Loop
-        outfile.Close
+        thisFile.Close
     Else
     
         Set outStm = New ADODB.Stream ' 47ms in the IDE, slower than FSO by factor of 2 but 9-11ms when compiled! 2,400 lines
@@ -3162,39 +3192,75 @@ Public Sub readOutputFileWriteArrayAndListbox(ByVal sFName As String)
         End With
     End If
     
- ' timer code BEGINS
+'        timer code BEGINS
 '        lngReturn = QueryPerformanceCounter(curEnd)
 '        sngTime = (curEnd - curStart) * 1000 / curFreq
 '        Debug.Print "Execution Time " & sngTime & " mS"
 '        MsgBox "Execution Time " & sngTime & " mS"
 '
-' timer code ENDS
-    
+'        timer code ENDS
 
+   On Error GoTo 0
+   Exit Sub
+
+populateOutputArrayFromFile_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure populateOutputArrayFromFile of Module modCommon"
+End Sub
+
+
+
+'
+'---------------------------------------------------------------------------------------
+' Procedure : readOutputFileWriteArrayAndListbox
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   : read the file chosen as the output file
+' write an array the same length as your output file
+' write the listbox using the array
+' read the local user's file line by line, read it into an interim array and thence into a listbox.
+' called by checkAndReadOutputFile during polling during startup
+'---------------------------------------------------------------------------------------
+'
+Public Sub readOutputFileWriteArrayAndListbox(ByVal thisOutputFile As String)
+
+    Dim useloop As Integer
+    Dim lbxCount As Integer
+    Dim startLoc As Long
+    Dim endLoc As Long
+    Dim stepNo As Integer
+    Dim stringToWrite As String
+    Dim findStartPos As Integer
+    Dim stringWithoutPrefix As String
+
+    Const ForReading As Integer = 1
+    
+    On Error GoTo readOutputFileWriteArrayAndListbox_Error
+    
+    ' resize the array to the new linecount
+    ReDim outputFileArray(outputLineCount)
+    
+    ' reads from file using either of two methods depending upon the o/s and file type of the system you are communicating with.
+    Call populateOutputArrayFromFile(thisOutputFile)
 
     lbxCount = 0
     If Val(FCWLoadBottom) = 1 Then
-            startLoc = outputLineCount
-            endLoc = 0
-            stepNo = -1
+        startLoc = outputLineCount
+        endLoc = 0
+        stepNo = -1
     Else
-            startLoc = 0
-            endLoc = outputLineCount
-            stepNo = 1
+        startLoc = 0
+        endLoc = outputLineCount
+        stepNo = 1
     End If
     
     ' locks the input listbox whilst the listbox is updated from the array
     LockWindowUpdate FireCallMain.lbxOutputTextArea.hwnd
-    
-    
-    
         
     ' this reads the output array and populates the listbox
     For useloop = startLoc To endLoc Step stepNo
         stringToWrite = vbNullString
         If outputFileArray(outputLineCount - useloop) <> vbNullString Then 'differs from the input file in that we turn the array upside down
-            'If InStr(outputFileArray(outputLineCount - useloop), "my bloody") Then MsgBox "bloody"
-            
             
             If FireCallMain.lbxOutputTextArea.List(lbxCount) = outputFileArray(outputLineCount - useloop) Then
                 ' we do not clear down the array and so a comparison of the array contents to the file is performed
@@ -3263,12 +3329,12 @@ readOutputFileWriteArrayAndListbox_Error:
     
  End Sub
 
-' click on the slim strip of paper that shows an emerging Emoji
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : clickOnPicEmoji
 ' Author    : beededea
 ' Date      : 20/08/2025
-' Purpose   :
+' Purpose   : click on the slim strip of paper that shows an emerging Emoji
 '---------------------------------------------------------------------------------------
 '
 Public Sub clickOnPicEmoji()
@@ -3561,13 +3627,12 @@ End Sub
 ' Procedure : altGetPrivateProfileString
 ' Author    : beededea
 ' Date      : 20/08/2025
-' Purpose   :
+' Purpose   :  we no longer use GetPrivateProfileString in fGetINISetting as it cannot read certain special chars
+' generated by the encryption routine, tried base64 encoding it to no avail.
 '---------------------------------------------------------------------------------------
 '
 Private Function altGetPrivateProfileString(strSection As String, strKey As String, strFilePath As String) As String
-    ' we no longer use GetPrivateProfileString in fGetINISetting as it cannot read certain special chars
-    ' generated by the encryption routine, tried base64 encoding it to no avail.
-        
+   
     Const ForReading = 1
         
     Dim ReadIni As String
@@ -3630,10 +3695,16 @@ altGetPrivateProfileString_Error:
         
 End Function
 
+'---------------------------------------------------------------------------------------
+' Procedure : altPutPrivateProfileString
+' Author    : beededea
+' Date      : 20/08/2025
+' Purpose   :    ' we no longer use WritePrivateProfileString in PutINISetting as it cannot write certain special chars
+' generated by the encryption routine. This is a lot slower but it works!
+'---------------------------------------------------------------------------------------
+'
 Public Sub altPutPrivateProfileString(strSection As String, strKey As String, stringToWrite As String, strFilePath As String)
-    ' we no longer use WritePrivateProfileString in PutINISetting as it cannot write certain special chars
-    ' generated by the encryption routine. This is a lot slower but it works!
-        
+
     Const ForReading = 1
     Const ForWriting = 2
         
@@ -3644,13 +3715,9 @@ Public Sub altPutPrivateProfileString(strSection As String, strKey As String, st
     Dim temporaryfile As String
     Dim outfile As Object
     Dim foundStr As Boolean
-    
-    
-'    Dim objStream As ADODB.Stream
-'    Set objStream = CreateObject("ADODB.Stream")
-'    objStream.Charset = "utf-8"
-'    objStream.Open
-    
+      
+   On Error GoTo altPutPrivateProfileString_Error
+
     Set objFSO = CreateObject("Scripting.FileSystemObject")
 
     ReadIni = ""
@@ -3712,7 +3779,15 @@ Public Sub altPutPrivateProfileString(strSection As String, strKey As String, st
         FileCopy temporaryfile, strFilePath
         If fFExists(temporaryfile) Then Kill temporaryfile
     End If
+
+   On Error GoTo 0
+   Exit Sub
+
+altPutPrivateProfileString_Error:
+
+    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure altPutPrivateProfileString of Module modCommon"
 End Sub
+
 '---------------------------------------------------------------------------------------
 ' Procedure : displayFontSelector
 ' Author    : beededea
@@ -3826,13 +3901,14 @@ End Sub
 
 
 
-'these callback functions need to be in a BAS module and not a form or the AddressOf does not work.
+
 
 '---------------------------------------------------------------------------------------
 ' Procedure : BrowseCallbackProc
 ' Author    : beededea
 ' Date      : 20/08/2020
 ' Purpose   : create a folder window using APIs, the routine called by the callback in fBrowseFolder
+'these callback functions need to be in a BAS module and not a form or the AddressOf does not work.
 '---------------------------------------------------------------------------------------
 '
 Private Function BrowseCallbackProc(ByVal hwnd As Long, ByVal Msg As Long, ByVal lp As Long, ByVal InitDir As String) As Long
@@ -4424,51 +4500,7 @@ fnIsRunning_Error:
 End Function
 
 
-' show the preferences for the application
-'Public Sub btnConfig_Click()
-'
-'    If FireCallMain.Left + FireCallMain.Width + 200 + FireCallPrefs.Width > fScreenWidth Then
-'        FireCallPrefs.Left = FireCallMain.Left - (FireCallPrefs.Width + 200)
-'    Else
-'        FireCallPrefs.Left = FireCallMain.Left + FireCallMain.Width + 200
-'    End If
-'
-'    FireCallPrefs.Show
-'End Sub
 
-'
-'---------------------------------------------------------------------------------------
-' Procedure : Form_Unload_Sub
-' Author    : beededea
-' Date      : 18/08/2021
-' Purpose   : a sub routine to close all open forms that we can call from other locations
-'---------------------------------------------------------------------------------------
-'
-'Public Sub Form_Unload_Sub()
-'    Dim frm As Form
-'    On Error GoTo Form_Unload_Sub_Error
-'
-'    Call stopPollingTimer
-'    Call stopIconiseTimer
-'
-'    End ' <- naughty!
-'
-'    On Error GoTo 0
-'    Exit Sub
-'
-'Form_Unload_Sub_Error:
-'
-'    With Err
-'         If .Number <> 0 Then
-'            MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Form_Unload_Sub of Module Module1"
-'            Resume Next
-'          End If
-'    End With
-'
-'End Sub
-
-
-' Omit plngLeft & plngRight; they are used internally during recursion
 '---------------------------------------------------------------------------------------
 ' Procedure : QuickSort
 ' Author    : beededea
@@ -4518,10 +4550,9 @@ QuickSort_Error:
 End Sub
 
 
-' credit Matthew Gates
 '---------------------------------------------------------------------------------------
 ' Procedure : fIsFileAlreadyOpen
-' Author    : beededea
+' Author    : Matthew Gates
 ' Date      : 19/08/2025
 ' Purpose   :
 '---------------------------------------------------------------------------------------
@@ -5080,6 +5111,7 @@ insertMultipleThings_Error:
     End With
 
 End Sub
+
 '---------------------------------------------------------------------------------------
 ' Procedure : writeOutputFile
 ' Author    : beededea
@@ -5456,10 +5488,10 @@ End Function
 '     fConvertEpochToVB6String = formattedString
 'End Function
 
-' qvb6   https://www.vbforums.com/member.php?291519-qvb6
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : fVb6DateFromEpoch
-' Author    : beededea
+' Author    : qvb6   https://www.vbforums.com/member.php?291519-qvb6
 ' Date      : 19/08/2025
 ' Purpose   :
 '---------------------------------------------------------------------------------------
@@ -5490,12 +5522,12 @@ fVb6DateFromEpoch_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fVb6DateFromEpoch of Module modCommon"
 End Function
 
-' Format a date string from a unix time stamp     ' Wed, 30 Jun 2021 14:55:27 GMT
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : fConvertEpochToTimeString
 ' Author    : beededea
 ' Date      : 19/08/2025
-' Purpose   :
+' Purpose   : Format a date string from a unix time stamp     ' Wed, 30 Jun 2021 14:55:27 GMT
 '---------------------------------------------------------------------------------------
 '
 Private Function fConvertEpochToTimeString(unixTimeStamp As String) As String
@@ -5543,15 +5575,11 @@ fConvertEpochToTimeString_Error:
 End Function
 
 
-
-' universal time format is required for unix systems that we may be chatting with
-'fnGetDateInUniversalFormat Austin Hickl http://computer-programming-forum.com/66-vb-controls/6dff1bae05df0a6e.htm
-'- formats date in form "1998.12.31 23:59:59.456
 '---------------------------------------------------------------------------------------
 ' Procedure : fGetDateInUniversalFormat
-' Author    : beededea
+' Author    : Austin Hickl http://computer-programming-forum.com/66-vb-controls/6dff1bae05df0a6e.htm
 ' Date      : 19/08/2025
-' Purpose   :
+' Purpose   : universal time format is required for unix systems that we may be chatting with - formats date in form "1998.12.31 23:59:59.456
 '---------------------------------------------------------------------------------------
 '
 Public Function fGetDateInUniversalFormat() As String
@@ -5582,6 +5610,7 @@ fGetDateInUniversalFormat_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fGetDateInUniversalFormat of Module modCommon"
 End Function 'fnGetDateInUniversalFormat
+
 '---------------------------------------------------------------------------------------
 ' Procedure : fGetDateNoChars
 ' Author    : beededea
@@ -5680,43 +5709,7 @@ checkLicenceState_Error:
 
 End Sub
 
-
-'---------------------------------------------------------------------------------------
-' Procedure : fSpecialFolder
-' Author    :  si_the_geek vbforums
-' Date      : 17/10/2019
-' Purpose   : No longer used as the shell object usage causes concern to AV tools
-'---------------------------------------------------------------------------------------
-'
-'Public Function fSpecialFolder(ByRef pFolder As eSpecialFolders) As String
-'
-'  Dim objShell  As Object
-'  Dim objFolder As Object
-'
-'  ' On Error GoTo fSpecialFolder_Error
-'
-'  Set objShell = CreateObject("Shell.Application")
-'  Set objFolder = objShell.NameSpace(CLng(pFolder))
-'
-'  If (Not objFolder Is Nothing) Then fSpecialFolder = objFolder.Self.Path
-'
-'  Set objFolder = Nothing
-'  Set objShell = Nothing
-'
-'  if fSpecialFolder = vbNullString Then err.Raise 513, "fnSpecialFolder", "The folder path could not be detected"
-'
-'   On Error GoTo 0
-'   Exit Function
-'
-'fnSpecialFolder_Error:
-'
-'    MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fSpecialFolder of Module Common"
-'
-'End Function
-
-
-
-     
+    
 '---------------------------------------------------------------------------------------
 ' Procedure : fSpecialFolder
 ' Author    :  si_the_geek vbforums
@@ -5744,14 +5737,11 @@ fSpecialFolder_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure fSpecialFolder of Module modCommon"
 End Function
 
-'-----------------------------------------------------------
-'perform multiple instr on a string. returns true if ANY or ALL instr passes
-'-----------------------------------------------------------
 '---------------------------------------------------------------------------------------
 ' Procedure : fMultiInstr
 ' Author    : beededea
 ' Date      : 19/08/2025
-' Purpose   :
+' Purpose   : perform multiple instr on a string. returns true if ANY or ALL instr passes
 '---------------------------------------------------------------------------------------
 '
 Public Function fMultiInstr(sToInspect As String, searchType As String, ParamArray sArrConditions()) As Integer
@@ -5786,12 +5776,12 @@ fMultiInstr_Error:
 End Function
 
 
-' routine called at startup to create or run the two email timers
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : startTheEmailTimers
 ' Author    : beededea
 ' Date      : 18/08/2025
-' Purpose   :
+' Purpose   : routine called at startup to create or run the two email timers
 '---------------------------------------------------------------------------------------
 '
 Public Sub startTheEmailTimers()
@@ -5807,7 +5797,7 @@ Public Sub startTheEmailTimers()
         ' TwinBasic timers are any length and can exceed 65 seconds (65535 ms)
 
         emailIntervalMillisecs = lngSecs * lngThousand ' works!
-        FireCallMain.emailTimer.Interval = emailIntervalMillisecs
+        FireCallMain.emailTimer.interval = emailIntervalMillisecs
         FireCallMain.emailTimer.Enabled = True
         debugLog "Starting startEmailTimer using VB6 timer at interval of " & emailIntervalMillisecs & "ms", False
         
@@ -5821,7 +5811,7 @@ Public Sub startTheEmailTimers()
             ' when multiplying two integer values and assigning to a long in the IDE it causes a failure as the IDE is handling the two numbers as integers
             ' emailIntervalMillisecs = 65 * 1000 '  < this fails
             emailIntervalMillisecs = lngSecs * lngThousand ' works!
-            FireCallMain.emailTimer.Interval = emailIntervalMillisecs
+            FireCallMain.emailTimer.interval = emailIntervalMillisecs
             FireCallMain.emailTimer.Enabled = True
             debugLog "Starting startEmailTimer using VB6 timer at interval of " & emailIntervalMillisecs & "ms", False
         Else
@@ -5863,23 +5853,21 @@ End Sub
 
 
 
-' The email timer logic itself that is used by both the VB6 standard timer in the IDE and the callback timer during runtime.
-' The logic is in a globally accessible separate routine as it is called directly by both the VB6 timer and the callback timer.
 
-'   forward texts by mail on a regular basis containing all recent texts within the timestamp period
 '---------------------------------------------------------------------------------------
 ' Procedure : emailTimer_TimerLogic
 ' Author    : beededea
 ' Date      : 23/10/2024
-' Purpose   :
+' Purpose   : ' The email timer logic itself that is used by both the VB6 standard timer in the IDE and the callback timer during runtime.
+' The logic is in a globally accessible separate routine as it is called directly by both the VB6 timer and the callback timer.
+
+'   forward texts by mail on a regular basis containing all recent texts within the timestamp period
 '---------------------------------------------------------------------------------------
 '
 Public Sub emailTimer_TimerLogic()
 
     Dim lastInputVar As LASTINPUTINFO
     Dim currentIdleTime As Long
-
-
 
     Dim a As String
     Dim lastEmailTimeInSecs  As Double
@@ -6058,12 +6046,12 @@ End Sub
 
 
 
-' The timer that stops the email timer
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : stopEmailTimer
 ' Author    : beededea
 ' Date      : 19/08/2025
-' Purpose   :
+' Purpose   : The timer that stops the email timer
 '---------------------------------------------------------------------------------------
 '
 Private Sub stopEmailTimer()
@@ -6084,15 +6072,15 @@ stopEmailTimer_Error:
 End Sub
 
 
-' Callback routine called byAddressOf used by the email timer. Note: This function only operates at runtime,
-' ie. it doesn't work in the IDE because in the IDE everything works in the main thread. Callback functions operate
-' in a separate thread and this achieves basic multi threading but may limit some functionality - but basic commands seem to operate correctly
+
 
 '---------------------------------------------------------------------------------------
 ' Procedure : emailTimer_CodeTimer
 ' Author    : beededea
 ' Date      : 19/08/2025
-' Purpose   :
+' Purpose   : ' Callback routine called byAddressOf used by the email timer. Note: This function only operates at runtime,
+' ie. it doesn't work in the IDE because in the IDE everything works in the main thread. Callback functions operate
+' in a separate thread and this achieves basic multi threading but may limit some functionality - but basic commands seem to operate correctly
 '---------------------------------------------------------------------------------------
 '
 Public Sub emailTimer_CodeTimer()
@@ -6110,15 +6098,14 @@ End Sub
 
 
 
-' Callback routine called byAddressOf used by the houseKeeping timer. Note: This function only operates at runtime,
-' ie. it doesn't work in the IDE because in the IDE everything works in the main thread. Callback functions operate
-' in a separate thread and this achieves basic multi threading but may limit some functionality - but basic commands seem to operate correctly
-
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : houseKeepingTimer_CodeTimer
 ' Author    : beededea
 ' Date      : 19/08/2025
-' Purpose   :
+' Purpose   : Callback routine called byAddressOf used by the houseKeeping timer. Note: This function only operates at runtime,
+' ie. it doesn't work in the IDE because in the IDE everything works in the main thread. Callback functions operate
+' in a separate thread and this achieves basic multi threading but may limit some functionality - but basic commands seem to operate correctly
 '---------------------------------------------------------------------------------------
 '
 Public Sub houseKeepingTimer_CodeTimer()
@@ -6134,19 +6121,18 @@ houseKeepingTimer_CodeTimer_Error:
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure houseKeepingTimer_CodeTimer of Module modCommon"
 End Sub
 
-' The housekeeping timer runs regularly
-    
-'       loop through the output file
-'       determine each lines is older than the date
-'       determine the archive location
-'       write the line to an archive file
-'       remove the line from the output file
+
 
 '---------------------------------------------------------------------------------------
 ' Procedure : houseKeepingTimerLogic
 ' Author    : beededea
 ' Date      : 23/10/2024
-' Purpose   :
+' Purpose   : The housekeeping timer runs regularly
+'       loop through the output file
+'       determine each lines is older than the date
+'       determine the archive location
+'       write the line to an archive file
+'       remove the line from the output file
 '---------------------------------------------------------------------------------------
 '
 Public Sub houseKeepingTimerLogic(ByVal bypassIdleCheck As Boolean)
@@ -6337,12 +6323,12 @@ End Sub
 
 
 
-' routine called at startup to create or run the two HouseKeeping timers
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : startTheHouseKeepingTimers
 ' Author    : beededea
 ' Date      : 23/10/2024
-' Purpose   :
+' Purpose   : routine called at startup to create or run the two HouseKeeping timers
 '---------------------------------------------------------------------------------------
 '
 Public Sub startTheHouseKeepingTimers()
@@ -6359,7 +6345,7 @@ Public Sub startTheHouseKeepingTimers()
         ' TwinBasic timers are any length and can exceed 65 seconds (65535 ms)
 
         HouseKeepingIntervalMillisecs = lngSecs * lngThousand ' works!
-        FireCallMain.houseKeepingTimer.Interval = HouseKeepingIntervalMillisecs
+        FireCallMain.houseKeepingTimer.interval = HouseKeepingIntervalMillisecs
         FireCallMain.houseKeepingTimer.Enabled = True
         debugLog "Starting startHouseKeepingTimer using VB6 timer, at interval of " & HouseKeepingIntervalMillisecs & "ms", False
         
@@ -6372,7 +6358,7 @@ Public Sub startTheHouseKeepingTimers()
             ' when multiplying two integer values and assigning to a long in the IDE it causes a failure as the IDE is handling the two numbers as integers
             ' HouseKeepingIntervalMillisecs = 65 * 1000 '  < this fails
             HouseKeepingIntervalMillisecs = lngSecs * lngThousand ' works!
-            FireCallMain.houseKeepingTimer.Interval = HouseKeepingIntervalMillisecs
+            FireCallMain.houseKeepingTimer.interval = HouseKeepingIntervalMillisecs
             FireCallMain.houseKeepingTimer.Enabled = True
             debugLog "Starting startHouseKeepingTimer using VB6 timer, at interval of " & HouseKeepingIntervalMillisecs & "ms", False
         Else
@@ -6412,12 +6398,12 @@ End Sub
 
 
 
-' The timer that stops the houseKeeping timer
+'
 '---------------------------------------------------------------------------------------
 ' Procedure : stopHouseKeepingTimer
 ' Author    : beededea
 ' Date      : 23/10/2024
-' Purpose   :
+' Purpose   : The timer that stops the houseKeeping timer
 '---------------------------------------------------------------------------------------
 '
 Private Sub stopHouseKeepingTimer()
@@ -6635,6 +6621,8 @@ End Function
 '
 'End Function
 ' credit wqweto
+
+
 '---------------------------------------------------------------------------------------
 ' Procedure : IsValidPath
 ' Author    : wqweto
