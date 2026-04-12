@@ -61,6 +61,10 @@ Credits :
 
 Built using: VB6, MZ-TOOLS 3.0, CodeHelp Core IDE Extender Framework 2.2 & Rubberduck 2.4.1
 
+ **Links:**
+
+  External links are provided for reference only. Please verify sources before downloading any third-party software.
+
     MZ-TOOLS https://www.mztools.com/
     vBAdvance
     CodeHelp http://www.planetsourcecode.com/vb/scripts/ShowCode.asp?txtCodeId=62468&lngWId=1
@@ -122,14 +126,18 @@ Project References:
 
 LICENCE AGREEMENTS:
 
-Copyright 2023 Dean Beedell
+ Copyright © 2023 Dean Beedell
 
-In addition to the GNU General Public Licence please be aware that you may use
-any of my own imagery in your own creations but commercially only with my
-permission. In all other non-commercial cases I require a credit to the
-original artist using my name or one of my pseudonyms and a link to my site.
-With regard to the commercial use of incorporated images, permission and a
-licence would need to be obtained from the original owner and creator, ie. me.
+ Code: GNU GPL vX
+
+ Artwork/Images: © Dean Beedell – separate license applies
+ 
+ Please be aware that you may use 
+ any of my own imagery in your own creations but commercially only with my 
+ permission. In all other non-commercial cases I require a credit to the 
+ original artist using my name or one of my pseudonyms and a link to my site. 
+ With regard to the commercial use of incorporated images, permission and a 
+ licence would need to be obtained from the original owner and creator, ie. me.
 
 Program Notes:
 
